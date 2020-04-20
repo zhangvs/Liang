@@ -1,0 +1,485 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>城市选择</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="~/Content/css/iconfont.css" rel="stylesheet" />
+    <link href="~/Content/css/m.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="top-bar top-bar-shade top-bar-small clearfix">
+        <div class="col10"><a href="javascript:void();" class="goback"><i class="icon iconfont icon-jiantou25"></i></a></div>
+        <div class="col80"></div>
+        @*<div class="col10"><a href="nav.aspx"><i class="icon iconfont icon-daohang"></i></a></div>*@
+    </div>
+    @*<div class="tit">热门城市</div>
+        <div class="tag">
+
+            <a href="list.aspx?city=101">北京</a>
+
+            <a href="list.aspx?city=201">天津</a>
+
+            <a href="list.aspx?city=301">石家庄</a>
+
+            <a href="list.aspx?city=306">保定</a>
+
+            <a href="list.aspx?city=310">廊坊</a>
+
+            <a href="list.aspx?city=602">大连</a>
+
+            <a href="list.aspx?city=1508">济宁</a>
+
+            <a href="list.aspx?city=1617">信阳</a>
+
+        </div>*@
+    <div class="tit">全部城市</div>
+    <!--city begin-->
+    <div class="list2 clearfix city">
+        <div class="left">
+            <ul>
+                <li data-provinceid="0" class="cur">全部</li>
+                <li data-provinceid="110000">北京</li>
+                <li data-provinceid="120000">天津</li>
+                <li data-provinceid="130000">河北省</li>
+                <li data-provinceid="140000">山西省</li>
+                <li data-provinceid="150000">内蒙古自治区</li>
+                <li data-provinceid="210000">辽宁省</li>
+                <li data-provinceid="220000">吉林省</li>
+                <li data-provinceid="230000">黑龙江省</li>
+                <li data-provinceid="310000">上海</li>
+                <li data-provinceid="320000">江苏省</li>
+                <li data-provinceid="330000">浙江省</li>
+                <li data-provinceid="340000">安徽省</li>
+                <li data-provinceid="350000">福建省</li>
+                <li data-provinceid="360000">江西省</li>
+                <li data-provinceid="370000">山东省</li>
+                <li data-provinceid="410000">河南省</li>
+                <li data-provinceid="420000">湖北省</li>
+                <li data-provinceid="430000">湖南省</li>
+                <li data-provinceid="440000">广东省</li>
+                <li data-provinceid="450000">广西壮族自治区</li>
+                <li data-provinceid="460000">海南省</li>
+                <li data-provinceid="500000">重庆</li>
+                <li data-provinceid="510000">四川省</li>
+                <li data-provinceid="520000">贵州省</li>
+                <li data-provinceid="530000">云南省</li>
+                <li data-provinceid="540000">西藏自治区</li>
+                <li data-provinceid="610000">陕西省</li>
+                <li data-provinceid="620000">甘肃省</li>
+                <li data-provinceid="630000">青海省</li>
+                <li data-provinceid="640000">宁夏回族自治区</li>
+                <li data-provinceid="650000">新疆维吾尔自治区</li>
+                <li data-provinceid="810000">香港特别行政区</li>
+                <li data-provinceid="820000">澳门特别行政区</li>
+                <li data-provinceid="830000">台湾省</li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li data-cityid="0" data-cityname="" data-provinceid="0" data-provincename="">全部</li>
+                <li class="hide" data-cityid="110100" data-cityname="北京市" data-provinceid="110000" data-provincename="北京">北京市</li>
+                <li class="hide" data-cityid="120100" data-cityname="天津市" data-provinceid="120000" data-provincename="天津">天津市</li>
+                <li class="hide" data-cityid="130100" data-cityname="石家庄市" data-provinceid="130000" data-provincename="河北省">石家庄市</li>
+                <li class="hide" data-cityid="130200" data-cityname="唐山市" data-provinceid="130000" data-provincename="河北省">唐山市</li>
+                <li class="hide" data-cityid="130300" data-cityname="秦皇岛市" data-provinceid="130000" data-provincename="河北省">秦皇岛市</li>
+                <li class="hide" data-cityid="130400" data-cityname="邯郸市" data-provinceid="130000" data-provincename="河北省">邯郸市</li>
+                <li class="hide" data-cityid="130500" data-cityname="邢台市" data-provinceid="130000" data-provincename="河北省">邢台市</li>
+                <li class="hide" data-cityid="130600" data-cityname="保定市" data-provinceid="130000" data-provincename="河北省">保定市</li>
+                <li class="hide" data-cityid="130700" data-cityname="张家口市" data-provinceid="130000" data-provincename="河北省">张家口市</li>
+                <li class="hide" data-cityid="130800" data-cityname="承德市" data-provinceid="130000" data-provincename="河北省">承德市</li>
+                <li class="hide" data-cityid="130900" data-cityname="沧州市" data-provinceid="130000" data-provincename="河北省">沧州市</li>
+                <li class="hide" data-cityid="131000" data-cityname="廊坊市" data-provinceid="130000" data-provincename="河北省">廊坊市</li>
+                <li class="hide" data-cityid="131100" data-cityname="衡水市" data-provinceid="130000" data-provincename="河北省">衡水市</li>
+                <li class="hide" data-cityid="140100" data-cityname="太原市" data-provinceid="140000" data-provincename="山西省">太原市</li>
+                <li class="hide" data-cityid="140200" data-cityname="大同市" data-provinceid="140000" data-provincename="山西省">大同市</li>
+                <li class="hide" data-cityid="140300" data-cityname="阳泉市" data-provinceid="140000" data-provincename="山西省">阳泉市</li>
+                <li class="hide" data-cityid="140400" data-cityname="长治市" data-provinceid="140000" data-provincename="山西省">长治市</li>
+                <li class="hide" data-cityid="140500" data-cityname="晋城市" data-provinceid="140000" data-provincename="山西省">晋城市</li>
+                <li class="hide" data-cityid="140600" data-cityname="朔州市" data-provinceid="140000" data-provincename="山西省">朔州市</li>
+                <li class="hide" data-cityid="140700" data-cityname="晋中市" data-provinceid="140000" data-provincename="山西省">晋中市</li>
+                <li class="hide" data-cityid="140800" data-cityname="运城市" data-provinceid="140000" data-provincename="山西省">运城市</li>
+                <li class="hide" data-cityid="140900" data-cityname="忻州市" data-provinceid="140000" data-provincename="山西省">忻州市</li>
+                <li class="hide" data-cityid="141000" data-cityname="临汾市" data-provinceid="140000" data-provincename="山西省">临汾市</li>
+                <li class="hide" data-cityid="141100" data-cityname="吕梁市" data-provinceid="140000" data-provincename="山西省">吕梁市</li>
+                <li class="hide" data-cityid="150100" data-cityname="呼和浩特市" data-provinceid="150000" data-provincename="内蒙古自治区">呼和浩特市</li>
+                <li class="hide" data-cityid="150200" data-cityname="包头市" data-provinceid="150000" data-provincename="内蒙古自治区">包头市</li>
+                <li class="hide" data-cityid="150300" data-cityname="乌海市" data-provinceid="150000" data-provincename="内蒙古自治区">乌海市</li>
+                <li class="hide" data-cityid="150400" data-cityname="赤峰市" data-provinceid="150000" data-provincename="内蒙古自治区">赤峰市</li>
+                <li class="hide" data-cityid="150500" data-cityname="通辽市" data-provinceid="150000" data-provincename="内蒙古自治区">通辽市</li>
+                <li class="hide" data-cityid="150600" data-cityname="鄂尔多斯市" data-provinceid="150000" data-provincename="内蒙古自治区">鄂尔多斯市</li>
+                <li class="hide" data-cityid="150700" data-cityname="呼伦贝尔市" data-provinceid="150000" data-provincename="内蒙古自治区">呼伦贝尔市</li>
+                <li class="hide" data-cityid="150800" data-cityname="巴彦淖尔市" data-provinceid="150000" data-provincename="内蒙古自治区">巴彦淖尔市</li>
+                <li class="hide" data-cityid="150900" data-cityname="乌兰察布市" data-provinceid="150000" data-provincename="内蒙古自治区">乌兰察布市</li>
+                <li class="hide" data-cityid="152200" data-cityname="兴安盟" data-provinceid="150000" data-provincename="内蒙古自治区">兴安盟</li>
+                <li class="hide" data-cityid="152500" data-cityname="锡林郭勒盟" data-provinceid="150000" data-provincename="内蒙古自治区">锡林郭勒盟</li>
+                <li class="hide" data-cityid="152900" data-cityname="阿拉善盟" data-provinceid="150000" data-provincename="内蒙古自治区">阿拉善盟</li>
+                <li class="hide" data-cityid="210100" data-cityname="沈阳市" data-provinceid="210000" data-provincename="辽宁省">沈阳市</li>
+                <li class="hide" data-cityid="210200" data-cityname="大连市" data-provinceid="210000" data-provincename="辽宁省">大连市</li>
+                <li class="hide" data-cityid="210300" data-cityname="鞍山市" data-provinceid="210000" data-provincename="辽宁省">鞍山市</li>
+                <li class="hide" data-cityid="210400" data-cityname="抚顺市" data-provinceid="210000" data-provincename="辽宁省">抚顺市</li>
+                <li class="hide" data-cityid="210500" data-cityname="本溪市" data-provinceid="210000" data-provincename="辽宁省">本溪市</li>
+                <li class="hide" data-cityid="210600" data-cityname="丹东市" data-provinceid="210000" data-provincename="辽宁省">丹东市</li>
+                <li class="hide" data-cityid="210700" data-cityname="锦州市" data-provinceid="210000" data-provincename="辽宁省">锦州市</li>
+                <li class="hide" data-cityid="210800" data-cityname="营口市" data-provinceid="210000" data-provincename="辽宁省">营口市</li>
+                <li class="hide" data-cityid="210900" data-cityname="阜新市" data-provinceid="210000" data-provincename="辽宁省">阜新市</li>
+                <li class="hide" data-cityid="211000" data-cityname="辽阳市" data-provinceid="210000" data-provincename="辽宁省">辽阳市</li>
+                <li class="hide" data-cityid="211100" data-cityname="盘锦市" data-provinceid="210000" data-provincename="辽宁省">盘锦市</li>
+                <li class="hide" data-cityid="211200" data-cityname="铁岭市" data-provinceid="210000" data-provincename="辽宁省">铁岭市</li>
+                <li class="hide" data-cityid="211300" data-cityname="朝阳市" data-provinceid="210000" data-provincename="辽宁省">朝阳市</li>
+                <li class="hide" data-cityid="211400" data-cityname="葫芦岛市" data-provinceid="210000" data-provincename="辽宁省">葫芦岛市</li>
+                <li class="hide" data-cityid="220100" data-cityname="长春市" data-provinceid="220000" data-provincename="吉林省">长春市</li>
+                <li class="hide" data-cityid="220200" data-cityname="吉林市" data-provinceid="220000" data-provincename="吉林省">吉林市</li>
+                <li class="hide" data-cityid="220300" data-cityname="四平市" data-provinceid="220000" data-provincename="吉林省">四平市</li>
+                <li class="hide" data-cityid="220400" data-cityname="辽源市" data-provinceid="220000" data-provincename="吉林省">辽源市</li>
+                <li class="hide" data-cityid="220500" data-cityname="通化市" data-provinceid="220000" data-provincename="吉林省">通化市</li>
+                <li class="hide" data-cityid="220600" data-cityname="白山市" data-provinceid="220000" data-provincename="吉林省">白山市</li>
+                <li class="hide" data-cityid="220700" data-cityname="松原市" data-provinceid="220000" data-provincename="吉林省">松原市</li>
+                <li class="hide" data-cityid="220800" data-cityname="白城市" data-provinceid="220000" data-provincename="吉林省">白城市</li>
+                <li class="hide" data-cityid="222400" data-cityname="延边朝鲜族自治州" data-provinceid="220000" data-provincename="吉林省">延边朝鲜族自治州</li>
+                <li class="hide" data-cityid="230100" data-cityname="哈尔滨市" data-provinceid="230000" data-provincename="黑龙江省">哈尔滨市</li>
+                <li class="hide" data-cityid="230200" data-cityname="齐齐哈尔市" data-provinceid="230000" data-provincename="黑龙江省">齐齐哈尔市</li>
+                <li class="hide" data-cityid="230300" data-cityname="鸡西市" data-provinceid="230000" data-provincename="黑龙江省">鸡西市</li>
+                <li class="hide" data-cityid="230400" data-cityname="鹤岗市" data-provinceid="230000" data-provincename="黑龙江省">鹤岗市</li>
+                <li class="hide" data-cityid="230500" data-cityname="双鸭山市" data-provinceid="230000" data-provincename="黑龙江省">双鸭山市</li>
+                <li class="hide" data-cityid="230600" data-cityname="大庆市" data-provinceid="230000" data-provincename="黑龙江省">大庆市</li>
+                <li class="hide" data-cityid="230700" data-cityname="伊春市" data-provinceid="230000" data-provincename="黑龙江省">伊春市</li>
+                <li class="hide" data-cityid="230800" data-cityname="佳木斯市" data-provinceid="230000" data-provincename="黑龙江省">佳木斯市</li>
+                <li class="hide" data-cityid="230900" data-cityname="七台河市" data-provinceid="230000" data-provincename="黑龙江省">七台河市</li>
+                <li class="hide" data-cityid="231000" data-cityname="牡丹江市" data-provinceid="230000" data-provincename="黑龙江省">牡丹江市</li>
+                <li class="hide" data-cityid="231100" data-cityname="黑河市" data-provinceid="230000" data-provincename="黑龙江省">黑河市</li>
+                <li class="hide" data-cityid="231200" data-cityname="绥化市" data-provinceid="230000" data-provincename="黑龙江省">绥化市</li>
+                <li class="hide" data-cityid="232700" data-cityname="大兴安岭地区" data-provinceid="230000" data-provincename="黑龙江省">大兴安岭地区</li>
+                <li class="hide" data-cityid="310100" data-cityname="上海市" data-provinceid="310000" data-provincename="上海">上海市</li>
+                <li class="hide" data-cityid="320100" data-cityname="南京市" data-provinceid="320000" data-provincename="江苏省">南京市</li>
+                <li class="hide" data-cityid="320200" data-cityname="无锡市" data-provinceid="320000" data-provincename="江苏省">无锡市</li>
+                <li class="hide" data-cityid="320300" data-cityname="徐州市" data-provinceid="320000" data-provincename="江苏省">徐州市</li>
+                <li class="hide" data-cityid="320400" data-cityname="常州市" data-provinceid="320000" data-provincename="江苏省">常州市</li>
+                <li class="hide" data-cityid="320500" data-cityname="苏州市" data-provinceid="320000" data-provincename="江苏省">苏州市</li>
+                <li class="hide" data-cityid="320600" data-cityname="南通市" data-provinceid="320000" data-provincename="江苏省">南通市</li>
+                <li class="hide" data-cityid="320700" data-cityname="连云港市" data-provinceid="320000" data-provincename="江苏省">连云港市</li>
+                <li class="hide" data-cityid="320800" data-cityname="淮安市" data-provinceid="320000" data-provincename="江苏省">淮安市</li>
+                <li class="hide" data-cityid="320900" data-cityname="盐城市" data-provinceid="320000" data-provincename="江苏省">盐城市</li>
+                <li class="hide" data-cityid="321000" data-cityname="扬州市" data-provinceid="320000" data-provincename="江苏省">扬州市</li>
+                <li class="hide" data-cityid="321100" data-cityname="镇江市" data-provinceid="320000" data-provincename="江苏省">镇江市</li>
+                <li class="hide" data-cityid="321200" data-cityname="泰州市" data-provinceid="320000" data-provincename="江苏省">泰州市</li>
+                <li class="hide" data-cityid="321300" data-cityname="宿迁市" data-provinceid="320000" data-provincename="江苏省">宿迁市</li>
+                <li class="hide" data-cityid="330100" data-cityname="杭州市" data-provinceid="330000" data-provincename="浙江省">杭州市</li>
+                <li class="hide" data-cityid="330200" data-cityname="宁波市" data-provinceid="330000" data-provincename="浙江省">宁波市</li>
+                <li class="hide" data-cityid="330300" data-cityname="温州市" data-provinceid="330000" data-provincename="浙江省">温州市</li>
+                <li class="hide" data-cityid="330400" data-cityname="嘉兴市" data-provinceid="330000" data-provincename="浙江省">嘉兴市</li>
+                <li class="hide" data-cityid="330500" data-cityname="湖州市" data-provinceid="330000" data-provincename="浙江省">湖州市</li>
+                <li class="hide" data-cityid="330600" data-cityname="绍兴市" data-provinceid="330000" data-provincename="浙江省">绍兴市</li>
+                <li class="hide" data-cityid="330700" data-cityname="金华市" data-provinceid="330000" data-provincename="浙江省">金华市</li>
+                <li class="hide" data-cityid="330800" data-cityname="衢州市" data-provinceid="330000" data-provincename="浙江省">衢州市</li>
+                <li class="hide" data-cityid="330900" data-cityname="舟山市" data-provinceid="330000" data-provincename="浙江省">舟山市</li>
+                <li class="hide" data-cityid="331000" data-cityname="台州市" data-provinceid="330000" data-provincename="浙江省">台州市</li>
+                <li class="hide" data-cityid="331100" data-cityname="丽水市" data-provinceid="330000" data-provincename="浙江省">丽水市</li>
+                <li class="hide" data-cityid="340100" data-cityname="合肥市" data-provinceid="340000" data-provincename="安徽省">合肥市</li>
+                <li class="hide" data-cityid="340200" data-cityname="芜湖市" data-provinceid="340000" data-provincename="安徽省">芜湖市</li>
+                <li class="hide" data-cityid="340300" data-cityname="蚌埠市" data-provinceid="340000" data-provincename="安徽省">蚌埠市</li>
+                <li class="hide" data-cityid="340400" data-cityname="淮南市" data-provinceid="340000" data-provincename="安徽省">淮南市</li>
+                <li class="hide" data-cityid="340500" data-cityname="马鞍山市" data-provinceid="340000" data-provincename="安徽省">马鞍山市</li>
+                <li class="hide" data-cityid="340600" data-cityname="淮北市" data-provinceid="340000" data-provincename="安徽省">淮北市</li>
+                <li class="hide" data-cityid="340700" data-cityname="铜陵市" data-provinceid="340000" data-provincename="安徽省">铜陵市</li>
+                <li class="hide" data-cityid="340800" data-cityname="安庆市" data-provinceid="340000" data-provincename="安徽省">安庆市</li>
+                <li class="hide" data-cityid="341000" data-cityname="黄山市" data-provinceid="340000" data-provincename="安徽省">黄山市</li>
+                <li class="hide" data-cityid="341100" data-cityname="滁州市" data-provinceid="340000" data-provincename="安徽省">滁州市</li>
+                <li class="hide" data-cityid="341200" data-cityname="阜阳市" data-provinceid="340000" data-provincename="安徽省">阜阳市</li>
+                <li class="hide" data-cityid="341300" data-cityname="宿州市" data-provinceid="340000" data-provincename="安徽省">宿州市</li>
+                <li class="hide" data-cityid="341500" data-cityname="六安市" data-provinceid="340000" data-provincename="安徽省">六安市</li>
+                <li class="hide" data-cityid="341600" data-cityname="亳州市" data-provinceid="340000" data-provincename="安徽省">亳州市</li>
+                <li class="hide" data-cityid="341700" data-cityname="池州市" data-provinceid="340000" data-provincename="安徽省">池州市</li>
+                <li class="hide" data-cityid="341800" data-cityname="宣城市" data-provinceid="340000" data-provincename="安徽省">宣城市</li>
+                <li class="hide" data-cityid="350100" data-cityname="福州市" data-provinceid="350000" data-provincename="福建省">福州市</li>
+                <li class="hide" data-cityid="350200" data-cityname="厦门市" data-provinceid="350000" data-provincename="福建省">厦门市</li>
+                <li class="hide" data-cityid="350300" data-cityname="莆田市" data-provinceid="350000" data-provincename="福建省">莆田市</li>
+                <li class="hide" data-cityid="350400" data-cityname="三明市" data-provinceid="350000" data-provincename="福建省">三明市</li>
+                <li class="hide" data-cityid="350500" data-cityname="泉州市" data-provinceid="350000" data-provincename="福建省">泉州市</li>
+                <li class="hide" data-cityid="350600" data-cityname="漳州市" data-provinceid="350000" data-provincename="福建省">漳州市</li>
+                <li class="hide" data-cityid="350700" data-cityname="南平市" data-provinceid="350000" data-provincename="福建省">南平市</li>
+                <li class="hide" data-cityid="350800" data-cityname="龙岩市" data-provinceid="350000" data-provincename="福建省">龙岩市</li>
+                <li class="hide" data-cityid="350900" data-cityname="宁德市" data-provinceid="350000" data-provincename="福建省">宁德市</li>
+                <li class="hide" data-cityid="360100" data-cityname="南昌市" data-provinceid="360000" data-provincename="江西省">南昌市</li>
+                <li class="hide" data-cityid="360200" data-cityname="景德镇市" data-provinceid="360000" data-provincename="江西省">景德镇市</li>
+                <li class="hide" data-cityid="360300" data-cityname="萍乡市" data-provinceid="360000" data-provincename="江西省">萍乡市</li>
+                <li class="hide" data-cityid="360400" data-cityname="九江市" data-provinceid="360000" data-provincename="江西省">九江市</li>
+                <li class="hide" data-cityid="360500" data-cityname="新余市" data-provinceid="360000" data-provincename="江西省">新余市</li>
+                <li class="hide" data-cityid="360600" data-cityname="鹰潭市" data-provinceid="360000" data-provincename="江西省">鹰潭市</li>
+                <li class="hide" data-cityid="360700" data-cityname="赣州市" data-provinceid="360000" data-provincename="江西省">赣州市</li>
+                <li class="hide" data-cityid="360800" data-cityname="吉安市" data-provinceid="360000" data-provincename="江西省">吉安市</li>
+                <li class="hide" data-cityid="360900" data-cityname="宜春市" data-provinceid="360000" data-provincename="江西省">宜春市</li>
+                <li class="hide" data-cityid="361000" data-cityname="抚州市" data-provinceid="360000" data-provincename="江西省">抚州市</li>
+                <li class="hide" data-cityid="361100" data-cityname="上饶市" data-provinceid="360000" data-provincename="江西省">上饶市</li>
+                <li class="hide" data-cityid="370100" data-cityname="济南市" data-provinceid="370000" data-provincename="山东省">济南市</li>
+                <li class="hide" data-cityid="370200" data-cityname="青岛市" data-provinceid="370000" data-provincename="山东省">青岛市</li>
+                <li class="hide" data-cityid="370300" data-cityname="淄博市" data-provinceid="370000" data-provincename="山东省">淄博市</li>
+                <li class="hide" data-cityid="370400" data-cityname="枣庄市" data-provinceid="370000" data-provincename="山东省">枣庄市</li>
+                <li class="hide" data-cityid="370500" data-cityname="东营市" data-provinceid="370000" data-provincename="山东省">东营市</li>
+                <li class="hide" data-cityid="370600" data-cityname="烟台市" data-provinceid="370000" data-provincename="山东省">烟台市</li>
+                <li class="hide" data-cityid="370700" data-cityname="潍坊市" data-provinceid="370000" data-provincename="山东省">潍坊市</li>
+                <li class="hide" data-cityid="370800" data-cityname="济宁市" data-provinceid="370000" data-provincename="山东省">济宁市</li>
+                <li class="hide" data-cityid="370900" data-cityname="泰安市" data-provinceid="370000" data-provincename="山东省">泰安市</li>
+                <li class="hide" data-cityid="371000" data-cityname="威海市" data-provinceid="370000" data-provincename="山东省">威海市</li>
+                <li class="hide" data-cityid="371100" data-cityname="日照市" data-provinceid="370000" data-provincename="山东省">日照市</li>
+                <li class="hide" data-cityid="371200" data-cityname="莱芜市" data-provinceid="370000" data-provincename="山东省">莱芜市</li>
+                <li class="hide" data-cityid="371300" data-cityname="临沂市" data-provinceid="370000" data-provincename="山东省">临沂市</li>
+                <li class="hide" data-cityid="371400" data-cityname="德州市" data-provinceid="370000" data-provincename="山东省">德州市</li>
+                <li class="hide" data-cityid="371500" data-cityname="聊城市" data-provinceid="370000" data-provincename="山东省">聊城市</li>
+                <li class="hide" data-cityid="371600" data-cityname="滨州市" data-provinceid="370000" data-provincename="山东省">滨州市</li>
+                <li class="hide" data-cityid="371700" data-cityname="菏泽市" data-provinceid="370000" data-provincename="山东省">菏泽市</li>
+                <li class="hide" data-cityid="410100" data-cityname="郑州市" data-provinceid="410000" data-provincename="河南省">郑州市</li>
+                <li class="hide" data-cityid="410200" data-cityname="开封市" data-provinceid="410000" data-provincename="河南省">开封市</li>
+                <li class="hide" data-cityid="410300" data-cityname="洛阳市" data-provinceid="410000" data-provincename="河南省">洛阳市</li>
+                <li class="hide" data-cityid="410400" data-cityname="平顶山市" data-provinceid="410000" data-provincename="河南省">平顶山市</li>
+                <li class="hide" data-cityid="410500" data-cityname="安阳市" data-provinceid="410000" data-provincename="河南省">安阳市</li>
+                <li class="hide" data-cityid="410600" data-cityname="鹤壁市" data-provinceid="410000" data-provincename="河南省">鹤壁市</li>
+                <li class="hide" data-cityid="410700" data-cityname="新乡市" data-provinceid="410000" data-provincename="河南省">新乡市</li>
+                <li class="hide" data-cityid="410800" data-cityname="焦作市" data-provinceid="410000" data-provincename="河南省">焦作市</li>
+                <li class="hide" data-cityid="410881" data-cityname="济源市" data-provinceid="410000" data-provincename="河南省">济源市</li>
+                <li class="hide" data-cityid="410900" data-cityname="濮阳市" data-provinceid="410000" data-provincename="河南省">濮阳市</li>
+                <li class="hide" data-cityid="411000" data-cityname="许昌市" data-provinceid="410000" data-provincename="河南省">许昌市</li>
+                <li class="hide" data-cityid="411100" data-cityname="漯河市" data-provinceid="410000" data-provincename="河南省">漯河市</li>
+                <li class="hide" data-cityid="411200" data-cityname="三门峡市" data-provinceid="410000" data-provincename="河南省">三门峡市</li>
+                <li class="hide" data-cityid="411300" data-cityname="南阳市" data-provinceid="410000" data-provincename="河南省">南阳市</li>
+                <li class="hide" data-cityid="411400" data-cityname="商丘市" data-provinceid="410000" data-provincename="河南省">商丘市</li>
+                <li class="hide" data-cityid="411500" data-cityname="信阳市" data-provinceid="410000" data-provincename="河南省">信阳市</li>
+                <li class="hide" data-cityid="411600" data-cityname="周口市" data-provinceid="410000" data-provincename="河南省">周口市</li>
+                <li class="hide" data-cityid="411700" data-cityname="驻马店市" data-provinceid="410000" data-provincename="河南省">驻马店市</li>
+                <li class="hide" data-cityid="420100" data-cityname="武汉市" data-provinceid="420000" data-provincename="湖北省">武汉市</li>
+                <li class="hide" data-cityid="420200" data-cityname="黄石市" data-provinceid="420000" data-provincename="湖北省">黄石市</li>
+                <li class="hide" data-cityid="420300" data-cityname="十堰市" data-provinceid="420000" data-provincename="湖北省">十堰市</li>
+                <li class="hide" data-cityid="420500" data-cityname="宜昌市" data-provinceid="420000" data-provincename="湖北省">宜昌市</li>
+                <li class="hide" data-cityid="420600" data-cityname="襄阳市" data-provinceid="420000" data-provincename="湖北省">襄阳市</li>
+                <li class="hide" data-cityid="420700" data-cityname="鄂州市" data-provinceid="420000" data-provincename="湖北省">鄂州市</li>
+                <li class="hide" data-cityid="420800" data-cityname="荆门市" data-provinceid="420000" data-provincename="湖北省">荆门市</li>
+                <li class="hide" data-cityid="420900" data-cityname="孝感市" data-provinceid="420000" data-provincename="湖北省">孝感市</li>
+                <li class="hide" data-cityid="421000" data-cityname="荆州市" data-provinceid="420000" data-provincename="湖北省">荆州市</li>
+                <li class="hide" data-cityid="421100" data-cityname="黄冈市" data-provinceid="420000" data-provincename="湖北省">黄冈市</li>
+                <li class="hide" data-cityid="421200" data-cityname="咸宁市" data-provinceid="420000" data-provincename="湖北省">咸宁市</li>
+                <li class="hide" data-cityid="421300" data-cityname="随州市" data-provinceid="420000" data-provincename="湖北省">随州市</li>
+                <li class="hide" data-cityid="422800" data-cityname="恩施土家族苗族自治州" data-provinceid="420000" data-provincename="湖北省">恩施土家族苗族自治州</li>
+                <li class="hide" data-cityid="430100" data-cityname="长沙市" data-provinceid="430000" data-provincename="湖南省">长沙市</li>
+                <li class="hide" data-cityid="430200" data-cityname="株洲市" data-provinceid="430000" data-provincename="湖南省">株洲市</li>
+                <li class="hide" data-cityid="430300" data-cityname="湘潭市" data-provinceid="430000" data-provincename="湖南省">湘潭市</li>
+                <li class="hide" data-cityid="430400" data-cityname="衡阳市" data-provinceid="430000" data-provincename="湖南省">衡阳市</li>
+                <li class="hide" data-cityid="430500" data-cityname="邵阳市" data-provinceid="430000" data-provincename="湖南省">邵阳市</li>
+                <li class="hide" data-cityid="430600" data-cityname="岳阳市" data-provinceid="430000" data-provincename="湖南省">岳阳市</li>
+                <li class="hide" data-cityid="430700" data-cityname="常德市" data-provinceid="430000" data-provincename="湖南省">常德市</li>
+                <li class="hide" data-cityid="430800" data-cityname="张家界市" data-provinceid="430000" data-provincename="湖南省">张家界市</li>
+                <li class="hide" data-cityid="430900" data-cityname="益阳市" data-provinceid="430000" data-provincename="湖南省">益阳市</li>
+                <li class="hide" data-cityid="431000" data-cityname="郴州市" data-provinceid="430000" data-provincename="湖南省">郴州市</li>
+                <li class="hide" data-cityid="431100" data-cityname="永州市" data-provinceid="430000" data-provincename="湖南省">永州市</li>
+                <li class="hide" data-cityid="431200" data-cityname="怀化市" data-provinceid="430000" data-provincename="湖南省">怀化市</li>
+                <li class="hide" data-cityid="431300" data-cityname="娄底市" data-provinceid="430000" data-provincename="湖南省">娄底市</li>
+                <li class="hide" data-cityid="433100" data-cityname="湘西土家族苗族自治州" data-provinceid="430000" data-provincename="湖南省">湘西土家族苗族自治州</li>
+                <li class="hide" data-cityid="440100" data-cityname="广州市" data-provinceid="440000" data-provincename="广东省">广州市</li>
+                <li class="hide" data-cityid="440200" data-cityname="韶关市" data-provinceid="440000" data-provincename="广东省">韶关市</li>
+                <li class="hide" data-cityid="440300" data-cityname="深圳市" data-provinceid="440000" data-provincename="广东省">深圳市</li>
+                <li class="hide" data-cityid="440400" data-cityname="珠海市" data-provinceid="440000" data-provincename="广东省">珠海市</li>
+                <li class="hide" data-cityid="440500" data-cityname="汕头市" data-provinceid="440000" data-provincename="广东省">汕头市</li>
+                <li class="hide" data-cityid="440600" data-cityname="佛山市" data-provinceid="440000" data-provincename="广东省">佛山市</li>
+                <li class="hide" data-cityid="440700" data-cityname="江门市" data-provinceid="440000" data-provincename="广东省">江门市</li>
+                <li class="hide" data-cityid="440800" data-cityname="湛江市" data-provinceid="440000" data-provincename="广东省">湛江市</li>
+                <li class="hide" data-cityid="440900" data-cityname="茂名市" data-provinceid="440000" data-provincename="广东省">茂名市</li>
+                <li class="hide" data-cityid="441200" data-cityname="肇庆市" data-provinceid="440000" data-provincename="广东省">肇庆市</li>
+                <li class="hide" data-cityid="441300" data-cityname="惠州市" data-provinceid="440000" data-provincename="广东省">惠州市</li>
+                <li class="hide" data-cityid="441400" data-cityname="梅州市" data-provinceid="440000" data-provincename="广东省">梅州市</li>
+                <li class="hide" data-cityid="441500" data-cityname="汕尾市" data-provinceid="440000" data-provincename="广东省">汕尾市</li>
+                <li class="hide" data-cityid="441600" data-cityname="河源市" data-provinceid="440000" data-provincename="广东省">河源市</li>
+                <li class="hide" data-cityid="441700" data-cityname="阳江市" data-provinceid="440000" data-provincename="广东省">阳江市</li>
+                <li class="hide" data-cityid="441800" data-cityname="清远市" data-provinceid="440000" data-provincename="广东省">清远市</li>
+                <li class="hide" data-cityid="445100" data-cityname="潮州市" data-provinceid="440000" data-provincename="广东省">潮州市</li>
+                <li class="hide" data-cityid="445200" data-cityname="揭阳市" data-provinceid="440000" data-provincename="广东省">揭阳市</li>
+                <li class="hide" data-cityid="445300" data-cityname="云浮市" data-provinceid="440000" data-provincename="广东省">云浮市</li>
+                <li class="hide" data-cityid="441900" data-cityname="东莞市" data-provinceid="440000" data-provincename="广东省">东莞市</li>
+                <li class="hide" data-cityid="442000" data-cityname="中山市" data-provinceid="440000" data-provincename="广东省">中山市</li>
+                <li class="hide" data-cityid="450100" data-cityname="南宁市" data-provinceid="450000" data-provincename="广西壮族自治区">南宁市</li>
+                <li class="hide" data-cityid="450200" data-cityname="柳州市" data-provinceid="450000" data-provincename="广西壮族自治区">柳州市</li>
+                <li class="hide" data-cityid="450300" data-cityname="桂林市" data-provinceid="450000" data-provincename="广西壮族自治区">桂林市</li>
+                <li class="hide" data-cityid="450400" data-cityname="梧州市" data-provinceid="450000" data-provincename="广西壮族自治区">梧州市</li>
+                <li class="hide" data-cityid="450500" data-cityname="北海市" data-provinceid="450000" data-provincename="广西壮族自治区">北海市</li>
+                <li class="hide" data-cityid="450600" data-cityname="防城港市" data-provinceid="450000" data-provincename="广西壮族自治区">防城港市</li>
+                <li class="hide" data-cityid="450700" data-cityname="钦州市" data-provinceid="450000" data-provincename="广西壮族自治区">钦州市</li>
+                <li class="hide" data-cityid="450800" data-cityname="贵港市" data-provinceid="450000" data-provincename="广西壮族自治区">贵港市</li>
+                <li class="hide" data-cityid="450900" data-cityname="玉林市" data-provinceid="450000" data-provincename="广西壮族自治区">玉林市</li>
+                <li class="hide" data-cityid="451000" data-cityname="百色市" data-provinceid="450000" data-provincename="广西壮族自治区">百色市</li>
+                <li class="hide" data-cityid="451100" data-cityname="贺州市" data-provinceid="450000" data-provincename="广西壮族自治区">贺州市</li>
+                <li class="hide" data-cityid="451200" data-cityname="河池市" data-provinceid="450000" data-provincename="广西壮族自治区">河池市</li>
+                <li class="hide" data-cityid="451300" data-cityname="来宾市" data-provinceid="450000" data-provincename="广西壮族自治区">来宾市</li>
+                <li class="hide" data-cityid="451400" data-cityname="崇左市" data-provinceid="450000" data-provincename="广西壮族自治区">崇左市</li>
+                <li class="hide" data-cityid="460100" data-cityname="海口市" data-provinceid="460000" data-provincename="海南省">海南省</li>
+                <li class="hide" data-cityid="500100" data-cityname="重庆市" data-provinceid="500000" data-provincename="重庆">重庆市</li>
+                <li class="hide" data-cityid="510100" data-cityname="成都市" data-provinceid="510000" data-provincename="四川省">成都市</li>
+                <li class="hide" data-cityid="510300" data-cityname="自贡市" data-provinceid="510000" data-provincename="四川省">自贡市</li>
+                <li class="hide" data-cityid="510400" data-cityname="攀枝花市" data-provinceid="510000" data-provincename="四川省">攀枝花市</li>
+                <li class="hide" data-cityid="510500" data-cityname="泸州市" data-provinceid="510000" data-provincename="四川省">泸州市</li>
+                <li class="hide" data-cityid="510600" data-cityname="德阳市" data-provinceid="510000" data-provincename="四川省">德阳市</li>
+                <li class="hide" data-cityid="510700" data-cityname="绵阳市" data-provinceid="510000" data-provincename="四川省">绵阳市</li>
+                <li class="hide" data-cityid="510800" data-cityname="广元市" data-provinceid="510000" data-provincename="四川省">广元市</li>
+                <li class="hide" data-cityid="510900" data-cityname="遂宁市" data-provinceid="510000" data-provincename="四川省">遂宁市</li>
+                <li class="hide" data-cityid="511000" data-cityname="内江市" data-provinceid="510000" data-provincename="四川省">内江市</li>
+                <li class="hide" data-cityid="511100" data-cityname="乐山市" data-provinceid="510000" data-provincename="四川省">乐山市</li>
+                <li class="hide" data-cityid="511300" data-cityname="南充市" data-provinceid="510000" data-provincename="四川省">南充市</li>
+                <li class="hide" data-cityid="511400" data-cityname="眉山市" data-provinceid="510000" data-provincename="四川省">眉山市</li>
+                <li class="hide" data-cityid="511500" data-cityname="宜宾市" data-provinceid="510000" data-provincename="四川省">宜宾市</li>
+                <li class="hide" data-cityid="511600" data-cityname="广安市" data-provinceid="510000" data-provincename="四川省">广安市</li>
+                <li class="hide" data-cityid="511700" data-cityname="达州市" data-provinceid="510000" data-provincename="四川省">达州市</li>
+                <li class="hide" data-cityid="511800" data-cityname="雅安市" data-provinceid="510000" data-provincename="四川省">雅安市</li>
+                <li class="hide" data-cityid="511900" data-cityname="巴中市" data-provinceid="510000" data-provincename="四川省">巴中市</li>
+                <li class="hide" data-cityid="512000" data-cityname="资阳市" data-provinceid="510000" data-provincename="四川省">资阳市</li>
+                <li class="hide" data-cityid="513200" data-cityname="阿坝藏族羌族自治州" data-provinceid="510000" data-provincename="四川省">阿坝藏族羌族自治州</li>
+                <li class="hide" data-cityid="513300" data-cityname="甘孜藏族自治州" data-provinceid="510000" data-provincename="四川省">甘孜藏族自治州</li>
+                <li class="hide" data-cityid="513400" data-cityname="凉山彝族自治州" data-provinceid="510000" data-provincename="四川省">凉山彝族自治州</li>
+                <li class="hide" data-cityid="520100" data-cityname="贵阳市" data-provinceid="520000" data-provincename="贵州省">贵阳市</li>
+                <li class="hide" data-cityid="520200" data-cityname="六盘水市" data-provinceid="520000" data-provincename="贵州省">六盘水市</li>
+                <li class="hide" data-cityid="520300" data-cityname="遵义市" data-provinceid="520000" data-provincename="贵州省">遵义市</li>
+                <li class="hide" data-cityid="520400" data-cityname="安顺市" data-provinceid="520000" data-provincename="贵州省">安顺市</li>
+                <li class="hide" data-cityid="522200" data-cityname="铜仁市" data-provinceid="520000" data-provincename="贵州省">铜仁市</li>
+                <li class="hide" data-cityid="522300" data-cityname="黔西南布依族苗族自治州" data-provinceid="520000" data-provincename="贵州省">黔西南布依族苗族自治州</li>
+                <li class="hide" data-cityid="522400" data-cityname="毕节市" data-provinceid="520000" data-provincename="贵州省">毕节市</li>
+                <li class="hide" data-cityid="522600" data-cityname="黔东南苗族侗族自治州" data-provinceid="520000" data-provincename="贵州省">黔东南苗族侗族自治州</li>
+                <li class="hide" data-cityid="522700" data-cityname="黔南布依族苗族自治州" data-provinceid="520000" data-provincename="贵州省">黔南布依族苗族自治州</li>
+                <li class="hide" data-cityid="530100" data-cityname="昆明市" data-provinceid="530000" data-provincename="云南省">昆明市</li>
+                <li class="hide" data-cityid="530300" data-cityname="曲靖市" data-provinceid="530000" data-provincename="云南省">曲靖市</li>
+                <li class="hide" data-cityid="530400" data-cityname="玉溪市" data-provinceid="530000" data-provincename="云南省">玉溪市</li>
+                <li class="hide" data-cityid="530500" data-cityname="保山市" data-provinceid="530000" data-provincename="云南省">保山市</li>
+                <li class="hide" data-cityid="530600" data-cityname="昭通市" data-provinceid="530000" data-provincename="云南省">昭通市</li>
+                <li class="hide" data-cityid="530700" data-cityname="丽江市" data-provinceid="530000" data-provincename="云南省">丽江市</li>
+                <li class="hide" data-cityid="530800" data-cityname="普洱市" data-provinceid="530000" data-provincename="云南省">普洱市</li>
+                <li class="hide" data-cityid="530900" data-cityname="临沧市" data-provinceid="530000" data-provincename="云南省">临沧市</li>
+                <li class="hide" data-cityid="532300" data-cityname="楚雄彝族自治州" data-provinceid="530000" data-provincename="云南省">楚雄彝族自治州</li>
+                <li class="hide" data-cityid="532500" data-cityname="红河哈尼族彝族自治州" data-provinceid="530000" data-provincename="云南省">红河哈尼族彝族自治州</li>
+                <li class="hide" data-cityid="532600" data-cityname="文山壮族苗族自治州" data-provinceid="530000" data-provincename="云南省">文山壮族苗族自治州</li>
+                <li class="hide" data-cityid="532800" data-cityname="西双版纳傣族自治州" data-provinceid="530000" data-provincename="云南省">西双版纳傣族自治州</li>
+                <li class="hide" data-cityid="532900" data-cityname="大理白族自治州" data-provinceid="530000" data-provincename="云南省">大理白族自治州</li>
+                <li class="hide" data-cityid="533100" data-cityname="德宏傣族景颇族自治州" data-provinceid="530000" data-provincename="云南省">德宏傣族景颇族自治州</li>
+                <li class="hide" data-cityid="533300" data-cityname="怒江傈僳族自治州" data-provinceid="530000" data-provincename="云南省">怒江傈僳族自治州</li>
+                <li class="hide" data-cityid="533400" data-cityname="迪庆藏族自治州" data-provinceid="530000" data-provincename="云南省">迪庆藏族自治州</li>
+                <li class="hide" data-cityid="540100" data-cityname="拉萨市" data-provinceid="540000" data-provincename="西藏自治区">拉萨市</li>
+                <li class="hide" data-cityid="542100" data-cityname="昌都地区" data-provinceid="540000" data-provincename="西藏自治区">昌都地区</li>
+                <li class="hide" data-cityid="542200" data-cityname="山南地区" data-provinceid="540000" data-provincename="西藏自治区">山南地区</li>
+                <li class="hide" data-cityid="542300" data-cityname="日喀则地区" data-provinceid="540000" data-provincename="西藏自治区">日喀则地区</li>
+                <li class="hide" data-cityid="542400" data-cityname="那曲地区" data-provinceid="540000" data-provincename="西藏自治区">那曲地区</li>
+                <li class="hide" data-cityid="542500" data-cityname="阿里地区" data-provinceid="540000" data-provincename="西藏自治区">阿里地区</li>
+                <li class="hide" data-cityid="542600" data-cityname="林芝地区" data-provinceid="540000" data-provincename="西藏自治区">林芝地区</li>
+                <li class="hide" data-cityid="610100" data-cityname="西安市" data-provinceid="610000" data-provincename="陕西省">西安市</li>
+                <li class="hide" data-cityid="610200" data-cityname="铜川市" data-provinceid="610000" data-provincename="陕西省">铜川市</li>
+                <li class="hide" data-cityid="610300" data-cityname="宝鸡市" data-provinceid="610000" data-provincename="陕西省">宝鸡市</li>
+                <li class="hide" data-cityid="610400" data-cityname="咸阳市" data-provinceid="610000" data-provincename="陕西省">咸阳市</li>
+                <li class="hide" data-cityid="610500" data-cityname="渭南市" data-provinceid="610000" data-provincename="陕西省">渭南市</li>
+                <li class="hide" data-cityid="610600" data-cityname="延安市" data-provinceid="610000" data-provincename="陕西省">延安市</li>
+                <li class="hide" data-cityid="610700" data-cityname="汉中市" data-provinceid="610000" data-provincename="陕西省">汉中市</li>
+                <li class="hide" data-cityid="610800" data-cityname="榆林市" data-provinceid="610000" data-provincename="陕西省">榆林市</li>
+                <li class="hide" data-cityid="610900" data-cityname="安康市" data-provinceid="610000" data-provincename="陕西省">安康市</li>
+                <li class="hide" data-cityid="611000" data-cityname="商洛市" data-provinceid="610000" data-provincename="陕西省">商洛市</li>
+                <li class="hide" data-cityid="620100" data-cityname="兰州市" data-provinceid="620000" data-provincename="甘肃省">兰州市</li>
+                <li class="hide" data-cityid="620200" data-cityname="嘉峪关市" data-provinceid="620000" data-provincename="甘肃省">嘉峪关市</li>
+                <li class="hide" data-cityid="620300" data-cityname="金昌市" data-provinceid="620000" data-provincename="甘肃省">金昌市</li>
+                <li class="hide" data-cityid="620400" data-cityname="白银市" data-provinceid="620000" data-provincename="甘肃省">白银市</li>
+                <li class="hide" data-cityid="620500" data-cityname="天水市" data-provinceid="620000" data-provincename="甘肃省">天水市</li>
+                <li class="hide" data-cityid="620600" data-cityname="武威市" data-provinceid="620000" data-provincename="甘肃省">武威市</li>
+                <li class="hide" data-cityid="620700" data-cityname="张掖市" data-provinceid="620000" data-provincename="甘肃省">张掖市</li>
+                <li class="hide" data-cityid="620800" data-cityname="平凉市" data-provinceid="620000" data-provincename="甘肃省">平凉市</li>
+                <li class="hide" data-cityid="620900" data-cityname="酒泉市" data-provinceid="620000" data-provincename="甘肃省">酒泉市</li>
+                <li class="hide" data-cityid="621000" data-cityname="庆阳市" data-provinceid="620000" data-provincename="甘肃省">庆阳市</li>
+                <li class="hide" data-cityid="621100" data-cityname="定西市" data-provinceid="620000" data-provincename="甘肃省">定西市</li>
+                <li class="hide" data-cityid="621200" data-cityname="陇南市" data-provinceid="620000" data-provincename="甘肃省">陇南市</li>
+                <li class="hide" data-cityid="622900" data-cityname="临夏回族自治州" data-provinceid="620000" data-provincename="甘肃省">临夏回族自治州</li>
+                <li class="hide" data-cityid="623000" data-cityname="甘南藏族自治州" data-provinceid="620000" data-provincename="甘肃省">甘南藏族自治州</li>
+                <li class="hide" data-cityid="630100" data-cityname="西宁市" data-provinceid="630000" data-provincename="青海省">西宁市</li>
+                <li class="hide" data-cityid="632100" data-cityname="海东市" data-provinceid="630000" data-provincename="青海省">海东市</li>
+                <li class="hide" data-cityid="632200" data-cityname="海北藏族自治州" data-provinceid="630000" data-provincename="青海省">海北藏族自治州</li>
+                <li class="hide" data-cityid="632300" data-cityname="黄南藏族自治州" data-provinceid="630000" data-provincename="青海省">黄南藏族自治州</li>
+                <li class="hide" data-cityid="632500" data-cityname="海南藏族自治州" data-provinceid="630000" data-provincename="青海省">海南藏族自治州</li>
+                <li class="hide" data-cityid="632600" data-cityname="果洛藏族自治州" data-provinceid="630000" data-provincename="青海省">果洛藏族自治州</li>
+                <li class="hide" data-cityid="632700" data-cityname="玉树藏族自治州" data-provinceid="630000" data-provincename="青海省">玉树藏族自治州</li>
+                <li class="hide" data-cityid="632800" data-cityname="海西蒙古族藏族自治州" data-provinceid="630000" data-provincename="青海省">海西蒙古族藏族自治州</li>
+                <li class="hide" data-cityid="640100" data-cityname="银川市" data-provinceid="640000" data-provincename="宁夏回族自治区">银川市</li>
+                <li class="hide" data-cityid="640200" data-cityname="石嘴山市" data-provinceid="640000" data-provincename="宁夏回族自治区">石嘴山市</li>
+                <li class="hide" data-cityid="640300" data-cityname="吴忠市" data-provinceid="640000" data-provincename="宁夏回族自治区">吴忠市</li>
+                <li class="hide" data-cityid="640400" data-cityname="固原市" data-provinceid="640000" data-provincename="宁夏回族自治区">固原市</li>
+                <li class="hide" data-cityid="640500" data-cityname="中卫市" data-provinceid="640000" data-provincename="宁夏回族自治区">中卫市</li>
+                <li class="hide" data-cityid="650100" data-cityname="乌鲁木齐市" data-provinceid="650000" data-provincename="新疆维吾尔自治区">乌鲁木齐市</li>
+                <li class="hide" data-cityid="650200" data-cityname="克拉玛依市" data-provinceid="650000" data-provincename="新疆维吾尔自治区">克拉玛依市</li>
+                <li class="hide" data-cityid="652100" data-cityname="吐鲁番地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">吐鲁番地区</li>
+                <li class="hide" data-cityid="652200" data-cityname="哈密地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">哈密地区</li>
+                <li class="hide" data-cityid="652300" data-cityname="昌吉回族自治州" data-provinceid="650000" data-provincename="新疆维吾尔自治区">昌吉回族自治州</li>
+                <li class="hide" data-cityid="652700" data-cityname="博尔塔拉蒙古自治州" data-provinceid="650000" data-provincename="新疆维吾尔自治区">博尔塔拉蒙古自治州</li>
+                <li class="hide" data-cityid="652800" data-cityname="巴音郭楞蒙古自治州" data-provinceid="650000" data-provincename="新疆维吾尔自治区">巴音郭楞蒙古自治州</li>
+                <li class="hide" data-cityid="652900" data-cityname="阿克苏地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">阿克苏地区</li>
+                <li class="hide" data-cityid="653000" data-cityname="克孜勒苏柯尔克孜自治州" data-provinceid="650000" data-provincename="新疆维吾尔自治区">克孜勒苏柯尔克孜自治州</li>
+                <li class="hide" data-cityid="653100" data-cityname="喀什地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">喀什地区</li>
+                <li class="hide" data-cityid="653200" data-cityname="和田地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">和田地区</li>
+                <li class="hide" data-cityid="654000" data-cityname="伊犁哈萨克自治州" data-provinceid="650000" data-provincename="新疆维吾尔自治区">伊犁哈萨克自治州</li>
+                <li class="hide" data-cityid="654200" data-cityname="塔城地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">塔城地区</li>
+                <li class="hide" data-cityid="654300" data-cityname="阿勒泰地区" data-provinceid="650000" data-provincename="新疆维吾尔自治区">阿勒泰地区</li>
+                <li class="hide" data-cityid="810100" data-cityname="香港岛" data-provinceid="810000" data-provincename="香港特别行政区">香港岛</li>
+                <li class="hide" data-cityid="810200" data-cityname="九龙" data-provinceid="810000" data-provincename="香港特别行政区">九龙</li>
+                <li class="hide" data-cityid="810300" data-cityname="新界" data-provinceid="810000" data-provincename="香港特别行政区">新界</li>
+                <li class="hide" data-cityid="820100" data-cityname="澳门半岛" data-provinceid="820000" data-provincename="澳门特别行政区">澳门半岛</li>
+                <li class="hide" data-cityid="820300" data-cityname="路环岛" data-provinceid="820000" data-provincename="澳门特别行政区">路环岛</li>
+                <li class="hide" data-cityid="820400" data-cityname="凼仔岛" data-provinceid="820000" data-provincename="澳门特别行政区">凼仔岛</li>
+                <li class="hide" data-cityid="830100" data-cityname="台北市" data-provinceid="830000" data-provincename="台湾省">台北市</li>
+                <li class="hide" data-cityid="830200" data-cityname="高雄市" data-provinceid="830000" data-provincename="台湾省">高雄市</li>
+                <li class="hide" data-cityid="830300" data-cityname="台南市" data-provinceid="830000" data-provincename="台湾省">台南市</li>
+                <li class="hide" data-cityid="830400" data-cityname="台中市" data-provinceid="830000" data-provincename="台湾省">台中市</li>
+                <li class="hide" data-cityid="830500" data-cityname="南投县" data-provinceid="830000" data-provincename="台湾省">南投县</li>
+                <li class="hide" data-cityid="830600" data-cityname="基隆市" data-provinceid="830000" data-provincename="台湾省">基隆市</li>
+                <li class="hide" data-cityid="830700" data-cityname="新竹市" data-provinceid="830000" data-provincename="台湾省">新竹市</li>
+                <li class="hide" data-cityid="830800" data-cityname="嘉义市" data-provinceid="830000" data-provincename="台湾省">嘉义市</li>
+                <li class="hide" data-cityid="830900" data-cityname="宜兰县" data-provinceid="830000" data-provincename="台湾省">宜兰县</li>
+                <li class="hide" data-cityid="831000" data-cityname="新竹县" data-provinceid="830000" data-provincename="台湾省">新竹县</li>
+                <li class="hide" data-cityid="831100" data-cityname="桃园县" data-provinceid="830000" data-provincename="台湾省">桃园县</li>
+                <li class="hide" data-cityid="831200" data-cityname="苗栗县" data-provinceid="830000" data-provincename="台湾省">苗栗县</li>
+                <li class="hide" data-cityid="831300" data-cityname="彰化县" data-provinceid="830000" data-provincename="台湾省">彰化县</li>
+                <li class="hide" data-cityid="831400" data-cityname="嘉义县" data-provinceid="830000" data-provincename="台湾省">嘉义县</li>
+                <li class="hide" data-cityid="831500" data-cityname="云林县" data-provinceid="830000" data-provincename="台湾省">云林县</li>
+                <li class="hide" data-cityid="831600" data-cityname="屏东县" data-provinceid="830000" data-provincename="台湾省">屏东县</li>
+                <li class="hide" data-cityid="831700" data-cityname="台东县" data-provinceid="830000" data-provincename="台湾省">台东县</li>
+                <li class="hide" data-cityid="831800" data-cityname="花莲县" data-provinceid="830000" data-provincename="台湾省">花莲县</li>
+                <li class="hide" data-cityid="831900" data-cityname="澎湖县" data-provinceid="830000" data-provincename="台湾省">澎湖县</li>
+                <li class="hide" data-cityid="832000" data-cityname="新北市" data-provinceid="830000" data-provincename="台湾省">新北市</li>
+                <li class="hide" data-cityid="832100" data-cityname="台中县" data-provinceid="830000" data-provincename="台湾省">台中县</li>
+                <li class="hide" data-cityid="832200" data-cityname="连江县" data-provinceid="830000" data-provincename="台湾省">连江县</li>
+            </ul>
+        </div>
+    </div>
+    <!--city end-->
+</body>
+</html>
+<script src="~/Content/statics/js/jquery.js"></script>
+<script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var organizeId = request('organizeId');
+    //归属地
+    $(".city .left li").click(function () {
+        $(this).siblings().removeClass("cur");
+        $(this).addClass("cur");
+        $(".city .right li[data-provinceid='" + $(this).data("provinceid") + "']").show();
+        $(".city .right li[data-provinceid!='" + $(this).data("provinceid") + "']").hide();
+        $(".city .right li[data-cityid='0']").show();
+    })
+    $(".city .right li").click(function () {
+        city = $(this).data("cityid");
+        if (city == '0') {
+            city = $(".city .left .cur").data("provinceid");
+        }
+        //do search
+        location.href = "List?organizeId=" + organizeId + "&city=" + city;
+    })
+
+    $(".goback").click(function () {
+        location.href = "Index?organizeId=" + organizeId;
+    })
+
+    $(document).ready(function () {
+        $(".list2").height($(window).height() - $(".tag").height() - 35 - 35 - 40);
+        $(".city .left li:first-child").click();
+    })
+
+</script>

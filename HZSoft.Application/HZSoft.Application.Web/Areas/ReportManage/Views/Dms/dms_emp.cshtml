@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "报表预览";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<!--第三方统计图start-->
+<script src="~/Content/Scripts/echarts/echarts.min.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/dark.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/macarons.js" type="text/javascript"></script>
+<!--第三方统计图end-->
+<!--jqgrid表格组件start-->
+<link href="~/Content/scripts/plugins/jqgrid/jqgrid.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="~/Content/scripts/plugins/jqgrid/jqgrid.min.js"></script>
+<!--表格组件end-->
+<link href="~/Content/styles/hzsoft-report.css" rel="stylesheet" />
+<script src="~/Content/Scripts/dms/dms_date.js" type="text/javascript"></script>
+<style type="text/css">
+    table.dataView {
+        border-collapse: collapse;
+    }
+
+    table.dataView th, table.dataView td {
+        border: 1px solid #000;
+        padding: 2px;
+    }
+</style>
+
+   
+ 
+<script>
+    $(function () {
+        //点击时间范围
+        $("#time_horizon a.btn-default").click(function () {
+            $("#time_horizon a.btn-default").removeClass("active");
+            $(this).addClass("active");
+            switch ($(this).attr('data-value')) {
+                case "1"://今天
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "2"://本周
+                    $("#StartTime").val("@DateTime.Now.AddDays(1 - ((int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek)).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "3"://本月
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-01")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "4"://全部
+                    $("#StartTime").val("");
+                    $("#EndTime").val("");
+                    break;
+                default:
+                    break;
+            }
+            doserch();
+        });
+
+        doserch();
+    });
+
+    function doserch() {
+        clearData();
+        var queryJson = {
+            StartTime: $("#StartTime").val(),
+            EndTime: $("#EndTime").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/ReportManage/Dms/GetDateOrder_emp",
+            data: { queryJson: JSON.stringify(queryJson), rnd: Math.random() },
+            success: function (data) {
+                if (data) {
+                    var result = JSON.parse(data);
+
+                    DrawEChartEmp();
+                    var optionEmp = myChartEmp.getOption();
+                    for (var j = 0; j < result.length; j++) {
+                        var emp_name = j + 1 + '.' + result[j].name;
+                        var emp_amount = parseFloat((result[j].emp_amount).toFixed());
+                        var emp_count = result[j].emp_count;
+
+                        sum_amounts += emp_amount;
+                        sum_counts += emp_count;
+
+                        emp_names.push(emp_name);
+                        emp_amounts.push(emp_amount);
+                        emp_counts.push(emp_count);
+                    }
+
+                    optionEmp.series[0].data = emp_amounts;
+                    optionEmp.series[1].data = emp_counts;
+                    optionEmp.xAxis[0].data = emp_names;
+                    optionEmp.title[0].subtext = '订单金额：' + sum_amounts + '    订单数量：' + sum_counts;
+
+                    myChartEmp.setOption(optionEmp);
+                }
+            },
+            error: function () {
+                layer.alert('错误', {
+                    skin: 'layui-layer-molv', closeBtn: 0
+                });
+            }
+        });
+    }
+</script>
+<div id="formAreas" style="padding: 30px; margin: 25px;border-radius:5px; border: 1px solid rgb(204, 204, 204); box-shadow: rgb(189, 189, 189) 0px 0px 10px; background: #fff;">
+    <div class="title-search">
+        <table>
+            <tr>
+                <td style="padding-left: 2px;">
+                    起始日期
+                </td>
+                <td style="padding-left: 2px;">
+                    <input id="StartTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" 
+                           value="@DateTime.Now.AddDays(1 - ((int)DateTime.Now.DayOfWeek== 0 ? 7 : (int)DateTime.Now.DayOfWeek)).ToString("yyyy-MM-dd")" />
+                </td>
+                <td style="padding-left: 2px;">
+                    结束日期
+                </td>
+                <td style="padding-left: 2px;">
+                    <input id="EndTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" 
+                           value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                </td>
+                <td style="padding-left: 5px;">
+                    <a id="btn_Search" class="btn btn-primary" onclick="doserch()"><i class="fa fa-search"></i>&nbsp;查询</a>
+                </td>
+                <td style="padding-left: 10px;">
+                    <div id="time_horizon" class="btn-group">
+                        <div id="time_horizon" class="btn-group">
+                            <a class="btn btn-default" data-value="1">今天</a>
+                            <a class="btn btn-default active" data-value="2">本周</a>
+                            <a class="btn btn-default" data-value="3">本月</a>
+                            <a class="btn btn-default" data-value="4">全部</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a id="lr-replace" class="btn btn-default" onclick="reload()"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+        </div>
+    </div>
+    <div id="mainEmp"></div>
+</div>

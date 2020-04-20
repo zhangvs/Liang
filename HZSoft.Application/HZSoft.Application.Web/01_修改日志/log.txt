@@ -1,0 +1,46 @@
+﻿20160812   1.关闭了第三方账户验证
+             LoginController.cs  
+20160815   1.修改点击左侧新闻分类时右侧内容显示不对的bug
+             NewsController.cs   Index.cshtml 
+20160816   1.登录页页面调整，去掉标记
+             Login/Index.cshtml  
+           2.增加对Redis的支持
+		     CacheFactory.cs     
+		     <!-- 服务器缓存类型:WebCache、Redis-->
+		     <add key="CacheType" value="Redis" />
+		   3.修改角色页面视图验证，$gridTable.authorizeColModel();
+		     Role/Index.cshtml
+		   4.用户登出时，清除登录者cookie信息
+		     LoginController.cs
+		   5.******目前发现在cookie模式下，登录者角色设置自定义数据权限时，会导致无法登录（提示登录已超时,请重新登录）********
+20160817   1.修改im里Chats.cs，控制台显示姓名和是否上线汉字
+           2.增加表单类别、流程类别按钮
+		   3、数据字典页面增加按钮身份验证
+		     SystemManage/DataItemList/Index.cshtml
+20160818   1.表单设计、流程设计、流程监控、流程指派
+             数据库增加按钮配置，页面增加权限认证
+             /FlowManage/FormDesign/Index
+			 /FlowManage/FlowDesign/Index
+			 /FlowManage/FlowProcess/MonitoringIndex
+			 /FlowManage/FlowProcess/DesignationIndex
+		   2. 工作委托
+		      修改编辑后grid无刷新问题
+			  增加按钮配置，页面增加权限认证
+			  /FlowManage/FlowDelegate/Index
+		   3.客户开票
+		     页面增加按钮权限认证
+			 /CustomerManage/Invoice/Index.cshtml
+		   4.日程安排
+		     根据官网修改js代码，日程前显示具体时间段
+			 修改添加保存后页面不刷新显示问题
+			 PublicInfoManage/Schedule/Index
+		   5.邮件中心
+		     修改我的文件夹不显示问题
+			 /PublicInfoManage/Email/Index
+		   6.Redis
+		     将redis默认过期时间设置为10分钟，与web cache相同
+			 Redis/Cache.cs
+20160918   1.修改在cookie模式下，设置数据权限过多时无法登陆异常
+             改为数据权限存cache方式
+			 /Operator/OperatorProvider.cs
+20161008   1.增加多皮肤支持

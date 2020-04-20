@@ -1,0 +1,133 @@
+@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //认证结果
+        $("#loadMark").ComboBox({
+            description: "==请选择==",
+        });
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../BaseManage/TelphoneCertification/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    $('#photo_z').attr("src", data.photo_z);
+                    $('#photo_b').attr("src", data.photo_b);
+                    $('#photo_s').attr("src", data.photo_s);
+                    $("#sendMessage").prop("checked", true);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../BaseManage/TelphoneCertification/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+    $("#loadMark").change(function () {
+        var opt =$("#Express")[0].dataset.value;
+        alert(opt);
+    });
+    function gradeChange() {
+        var opt = $("#loadMark")[0].dataset.value;
+        if (opt==-1) {
+            $("#description").attr({
+                "isvalid": "yes",
+                "checkexpession": "NotNull"
+            });
+            $("#failTD").html('失败原因<font face="宋体">*</font>');
+        } else{
+            $("#description").val("");
+            $("#failTD").html('失败原因');
+            $("#description").removeAttr("isvalid").removeAttr("checkexpession");
+        }
+
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">认证手机号</td>
+            <td class="formValue">
+                <input id="mobileNumber" type="text" class="form-control"  />
+            </td>
+            <td class="formTitle">姓名</td>
+            <td class="formValue">
+                <input id="custName" type="text" class="form-control" />
+            </td>
+            <td class="formTitle">身份证</td>
+            <td class="formValue">
+                <input id="custCertCode" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">联系电话</td>
+            <td class="formValue">
+                <input id="custTelphone" type="text" class="form-control" />
+            </td>
+            <td class="formTitle">地址</td>
+            <td class="formValue" colspan="3">
+                <input id="custCertAddress" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">正面照</td>
+            <td class="formValue">
+                <img id="photo_z" src="" alt="" title="" width="200" />
+            </td>
+            <td class="formTitle">反面照</td>
+            <td class="formValue">
+                <img id="photo_b" src="" alt="" title="" width="200" />
+            </td>
+            <td class="formTitle">半身照</td>
+            <td class="formValue">
+                <img id="photo_s" src="" alt="" title="" width="200" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">认证结果<font face="宋体">*</font></td>
+            <td class="formValue">
+                <div id="loadMark" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull" onchange="gradeChange()">
+                    <ul>
+                        <li data-value="0">未处理</li>
+                        <li data-value="1">失败</li>
+                        <li data-value="2">成功</li>
+                    </ul>
+                </div>
+            </td>
+            <td class="formTitle" id="failTD">失败原因</td>
+            <td class="formValue" colspan="2">
+                <input id="description" type="text" class="form-control" />
+            </td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="sendMessage" type="checkbox" />
+                        发送短信
+                    </label>
+                </div>
+            </td>
+        </tr>
+       
+    </table>
+</div>

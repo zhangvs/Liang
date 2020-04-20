@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "商城二维码";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title> @ViewBag.FullName 商城二维码</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Content/scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<p style="text-align:center;margin-top:50px;font-size:16px">推荐一家超喜欢的靓号商城给你</p>
+<div style="float:right;width: 100%;text-align:center;margin-top:50px;margin-bottom:50px">
+    <IFRAME id="ifmSignIn" frameborder="no" scrolling="no" width="150px" height="150px" name="ifmSignIn"
+            src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://hmk.lywenkai.com/WeChatManage/Liang/index?organizeId=@ViewBag.organizeId"></IFRAME>
+</div>
+
+<body>
+    <p style="text-align:center;font-size:16px">长按识别二维码 即可买买买</p>
+</body>
+</html>

@@ -1,0 +1,472 @@
+﻿<title>@ViewBag.FullName  最新最全手机靓号！</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+<!--bootstrap组件start-->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--bootstrap组件end-->
+<link href="/Content/Styles/stylelist.css" rel="stylesheet" type="text/css" />
+
+<script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+<link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+<link href="~/Content/scripts/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+<style>
+    #main_ad > .carousel-inner > .item {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+        #main_ad > .carousel-inner > .item > img {
+            width: 100%;
+        }
+
+    .lhmain {
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .lhrow {
+        margin: 10px auto;
+        height: 80px;
+        width: 300px;
+        left: 100px;
+        overflow: hidden;
+    }
+
+    .lhcell {
+        width: 100px;
+        height: 80px;
+        text-align: center;
+        float: left;
+        overflow: hidden;
+    }
+
+    .lhcelltop {
+        width: 45px;
+        height: 45px;
+        margin: 0 auto;
+    }
+
+        .lhcelltop img {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+    .lhcellbottom {
+        text-align: center;
+        margin: 10px auto;
+    }
+
+        .lhcellbottom p {
+            font-size: 12px;
+            color: #696969;
+            font-weight: bold;
+        }
+</style>
+<script type="text/javascript">
+    var organizeId = request('organizeId');
+    var city = request('city');
+
+    $(function () {
+        if (city != "" ) {
+            $(".input-group-addon a").html('@ViewBag.city');
+        }
+        else {
+            $(".input-group-addon a").html('选择城市');
+        }
+
+        function resize() {
+            //获取屏幕宽度
+            var windowWidth = $(window).width();
+            //判断屏幕的大小
+            var isSmallScreen = windowWidth < 768;
+            //根据大小为界面上的每一张轮播图设置背景
+            $('#main_ad > .carousel-inner > .item').each(function (i, item) {
+                //因为获取的是dom对象，要把DOM对象转换成jquery对象
+                var $item = $(item);
+                //根据屏幕的大小来获取不同的图片 data()函数就是专门获取data属性的
+                var imgSrc =
+                    isSmallScreen ? $item.data('image-xs') : $item.data('image-lg');
+                //获得data属性后，给div设置背景图片
+                $item.css('backgroundImage', 'url("' + imgSrc + '")');
+                // 针对移动端，尺寸需要等比例变化，所以小屏幕使用img方式 ，在div中添加img标签
+                if (isSmallScreen) {
+                    $item.html('<img src="' + imgSrc + '" alt="小图"/>')
+                } else {
+                    // 当屏幕由小到大切换时，清空div中的img标签
+                    $item.empty();
+                }
+            });
+        }
+
+        $(window).on('resize', resize).trigger('resize');
+
+
+        var cache = {};
+        $("#telphone").autocomplete({
+            source: function (request, response) {
+                var term = request.term;
+
+                if (term in cache) {
+                    response(cache[term]);
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/WeChatManage/Liang/TelAuto",
+                    data: { telphone: request.term, organizeId: organizeId, city: city, rnd: Math.random() },
+                    success: function (data) {
+                        var ary = [];
+                        if (data != "") {
+                            // 解析为js对象
+                            var result = JSON.parse(data);
+                            for (var i = 0; i < result.length; i++) {
+                                ary[i] = new Array();
+                                ary[i].label = result[i].Telphone + result[i].City;
+                                ary[i].id = result[i].Telphone;
+                            }
+                        }
+                        response(ary);
+                    },
+                    error: function () {
+                        layer.alert('错误', {
+                            skin: 'layui-layer-molv', closeBtn: 0
+                        });
+                    }
+                });
+
+            },
+            minLength: 1,
+            /*
+             * 选中后的处理
+             * select: function(event, ui) {
+                var url = ui.item.id;
+                if(url != '#') {
+                    location.href = '/blog/' + url;
+                }
+            },*/
+            select: function (event, ui) {
+                var id = ui.item.id;
+                if (id != '') {
+                    $("#telphone").val(id);
+                    f_searchTel();
+                }
+            },
+            html: true, // optional (jquery.ui.autocomplete.html.js required)
+            // optional (if other layers overlap autocomplete list)
+            open: function (event, ui) {
+                $(".ui-autocomplete").css("z-index", 1000).css("line-height", "25px").css("width", "70%");
+            }
+        });
+    });
+
+    function f_searchTel() {
+        var telphone = $("#telphone").val().substring(0, 11);
+        $.ajax({
+            url: "/WeChatManage/Liang/SearchTel",
+            type: "POST",
+            data: { telphone: telphone, organizeId: organizeId, city: city, rnd: Math.random() },
+            success: function (data) {
+                var dataresult = JSON.parse(data);
+                var result = dataresult.entity;
+                if (result == null) {
+                    layer.alert('无此号码', {
+                        skin: 'layui-layer-molv', closeBtn: 0
+                    });
+                }
+                else {
+                    if (dataresult.state == 1) {
+                        //询问框
+                        layer.confirm('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                            '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package + '<br/>是否继续编辑此号码？', {
+                                btn: ['是', '否'] //按钮
+                            }, function () {
+                                window.location = "/WeChatManage/Liang/SearchForm?keyValue=" + result.TelphoneID + "&organizeId=" + organizeId;
+                            });
+                    }
+                    else if (dataresult.state == 2) {
+                        //可看低价不可编辑下架
+                        layer.alert('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                            '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package, {
+                                skin: 'layui-layer-molv'
+                                , closeBtn: 0
+                            });
+                    }
+                    else {
+                        //提示框
+                        layer.alert('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                            '<br/>【价格】：' + result.Price + '<br/>【套餐】：' + result.Package, {
+                                skin: 'layui-layer-molv'
+                                , closeBtn: 0
+                            });
+                    }
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function f_searchOrgTel() {
+        var telphone = $("#telphone").val().substring(0, 11);
+        $.ajax({
+            url: "/WeChatManage/Liang/SearchOrgTel",
+            type: "POST",
+            data: { telphone: telphone, organizeId: organizeId, city: city, rnd: Math.random() },
+            success: function (data) {
+                var dataresult = JSON.parse(data);
+                var result = dataresult.entity;
+                if (result == null) {
+                    layer.alert('无此号码', {
+                        skin: 'layui-layer-molv', closeBtn: 0
+                    });
+                }
+                else {
+                    if (dataresult.state == 1) {
+                        //询问框
+                        layer.confirm('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                            '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package + '<br/>是否继续编辑此号码？', {
+                            btn: ['是', '否'] //按钮
+                        }, function () {
+                            window.location = "/WeChatManage/Liang/SearchForm?keyValue=" + result.TelphoneID + "&organizeId=" + organizeId;
+                        });
+                    }
+                    else if (dataresult.state == 2) {
+                        //可看低价不可编辑下架
+                        layer.alert('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                            '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package, {
+                                skin: 'layui-layer-molv'
+                          , closeBtn: 0
+                            });
+                    }
+                    else {
+                        //提示框
+                        layer.alert('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                            '<br/>【价格】：' + result.Price  + '<br/>【套餐】：' + result.Package, {
+                            skin: 'layui-layer-molv'
+                          , closeBtn: 0
+                        });
+                    }
+                }
+
+            },
+            error: function () {
+
+            }
+        });
+    }
+</script>
+
+<div class="container" style="margin-bottom: 5px;">
+    <div id="filter-form">
+        <div class="input-group">
+            <span class="input-group-addon"><a style="font-weight: bold;color: #000;" href="~/WeChatManage/Liang/@ViewBag.SelectCity?organizeId=@ViewBag.organizeId">选择城市</a></span>
+            <input id="telphone" type="text" class="form-control" placeholder="请输入你喜欢的数字">
+            <span class="input-group-btn">
+                <button class="btn btn-info" type="button" onclick="f_searchOrgTel()">立即查询</button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--广告轮播-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides/Resource/DocumentFile/Liang/dahua/0834ce40-4b78-4c45-8e5f-dec5f2886e56.png -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="@ViewBag.Img1" alt="...">
+        </div>
+        <div class="item">
+            <img src="@ViewBag.Img2" alt="...">
+        </div>
+        <div class="item">
+            <img src="@ViewBag.Img3" alt="...">
+        </div>
+        <div class="item">
+            <img src="@ViewBag.Img4" alt="...">
+        </div>
+    </div>
+    @*<div style="position:absolute;top:0px;right:10px;color:orangered;font-size:20px;font-weight:bolder">电话：@ViewBag.Tel</div>*@
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="lhmain">
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu0?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh1.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>超级精品</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu13?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh2.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>秒杀专区</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu1?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh4.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>6A-5A</p>
+            </div>
+        </div>
+    </div>
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu2?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh3.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>4A</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu3?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh4.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>3A(0-5)</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu4?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh5.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>3A(6-9)</p>
+            </div>
+        </div>
+    </div>
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu5?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh6.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>6顺-4顺</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu6?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh3.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>四(五六)拖一</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu8?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh9.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>AABBCC(DD)</p>
+            </div>
+        </div>
+    </div>
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu9?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh4.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>全国区号专区</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu10?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh5.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>打包专区</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu7?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh8.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>个性号</p>
+            </div>
+        </div>
+    </div>
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu11?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh6.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>ABC</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/LiangMenu/Menu12?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh7.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>其它靓号</p>
+            </div>
+        </div>
+        @{
+            if (ViewBag.TopOrganizeId == "a5a962da-57e1-4ad4-87b2-bbdcd1b7cc92" && ViewBag.VipMark == 0)
+            {
+            }
+            else
+            {
+                <div class="lhcell">
+                    <div class="lhcelltop">
+                        <a href="~/WeChatManage/Liang/SellerRegister?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><img src="~/Content/images/lh2.png" /></a>
+                    </div>
+                    <div class="lhcellbottom">
+                        <p>代理加盟</p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+</div>
+@*<div style="text-align:right;font-size:0.4em; font-family:黑体; color:#898989; padding:2em 0 ">
+    <p>临沂市文楷网络科技有限公司制作 </p>
+</div>*@
+<div style="position: fixed;bottom: 0;width: 100%;">
+    <a href='tel:@ViewBag.Tel'>
+        <img src="~/Content/images/liang/yjbh.png" class="img-responsive center-block" />
+    </a>
+</div>
+@{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName + "  最新最全手机靓号！", Img = "liang0.jpg" });}

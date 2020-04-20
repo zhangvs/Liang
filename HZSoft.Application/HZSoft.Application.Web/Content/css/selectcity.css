@@ -1,0 +1,19 @@
+﻿@charset "utf-8";
+.loan_jm1{width:94%;margin:0 auto;}
+.loan_jm_spa1{width:20%;height:35px;line-height:35px;font-size:1em;color:#666;display:block;float:left;}
+.loan_jm_l1{margin-top:10px;margin-bottom:15px;height:35px;}
+.wbk_srn{width:55%;height:35px;border:1px solid #ccc;background:#FFF;float:left;padding-left:3%;line-height:35px;color:#000;
+font-size:1.1em; background-size:45%;background-position:center;background:#fff;}
+.wbk_srn b{width:30px;height:35px;border:1px solid #ccc;background:#FFF;float:left;padding-left:3%;line-height:35px;color:#000;
+font-size:1.1em; background-size:45%;background-position:center;background:url(../images/liang/xl.png) right 5px no-repeat;}
+
+/*城市弹层*/
+.container{width:100%;position:absolute;top:56px;left:0;background-color:#ffffff;z-index:9999;}
+.letter{width:10%;line-height:32px;font-size:16px;position:fixed;top:80px;right:10px;text-align:center;background-color: #f9d05e;overflow-y: scroll;overflow-x: hidden; max-height:400px;}
+.letter ul{list-style-type:none;}
+.letter ul li a{text-decoration:none;}
+.city{width:90%;overflow:hidden;padding:10px;}
+.city-list{width:100%;overflow:hidden;}
+.city-list .city-letter{color:#6e6e6e;font-size:16px;display:inline-block;padding-top:15px;padding-bottom:5px;border-bottom:1px solid #e8ecf1;width:100%;}
+.city-list p{color:#000;width:95%;height:50px;line-height:50px;border-bottom:1px solid #e8ecf1;cursor:pointer;font-weight: bold;}
+.UISelect{margin-top:5px}

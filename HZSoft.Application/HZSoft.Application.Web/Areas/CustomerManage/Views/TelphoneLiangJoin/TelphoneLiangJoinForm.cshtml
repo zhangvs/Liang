@@ -1,0 +1,135 @@
+@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../CustomerManage/TelphoneLiangJoin/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../CustomerManage/TelphoneLiangJoin/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">公司名称</td>
+            <td class="formValue">
+                <input id="CompanyName" type="text" class="form-control"  />
+            </td>
+            <td class="formTitle">姓名</td>
+            <td class="formValue">
+                <input id="FullName" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">电话</td>
+            <td class="formValue">
+                <input id="Telphone" type="text" class="form-control"  />
+            </td>
+            <td class="formTitle">省</td>
+            <td class="formValue">
+                <input id="Pro" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">市</td>
+            <td class="formValue">
+                <input id="City" type="text" class="form-control"  />
+            </td>
+            <td class="formTitle">区县</td>
+            <td class="formValue">
+                <input id="Area" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">详细地址</td>
+            <td class="formValue" colspan="3">
+                <input id="Address" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">微信昵称</td>
+            <td class="formValue">
+                <input id="NickName" type="text" class="form-control"  />
+            </td>
+            <td class="formTitle">微信性别</td>
+            <td class="formValue">
+                <input id="Sex" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">微信头像</td>
+            <td class="formValue">
+                <input id="HeadimgUrl" type="text" class="form-control"  />
+            </td>
+            <td class="formTitle">微信省</td>
+            <td class="formValue">
+                <input id="WXPro" type="text" class="form-control"  />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">微信市</td>
+            <td class="formValue">
+                <input id="WxCity" type="text" class="form-control"  />
+            </td>
+            <td  class="formTitle"> 机构来源</td>
+            <td class="formValue">
+                <input id="OrganizeId" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="CheckMark" type="checkbox" />
+                        审核标识
+                    </label>
+                </div>
+            </td>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="DeleteMark" type="checkbox" />
+                        删除标记
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" maxlength="200" class="form-control" rows="3"></textarea>
+            </td>
+        </tr>
+            
+    </table>
+</div>

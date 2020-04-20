@@ -1,0 +1,146 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="会员订单 - 济南利新商贸有限公司">
+    <title>会员订单 - 济南利新商贸有限公司</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/user.css?v=6.5" rel="stylesheet">
+    <script type="text/javascript">
+	var baseUrl = '';
+    </script>
+</head>
+<body>
+    <!--主体部分 开始-->
+    <div class="wrapper">
+        <header><a href="/WeChatManage/user_index/index/" class="t_icon"></a>我的订单</header>
+        <div class="mpart">
+            <div class="vision">
+                <div class="s_mide layer" data-depth=".35"></div>
+                <div class="s_botm layer" data-depth-x=".1" data-depth-y=".08"></div>
+                <div class="s_botm layer" data-depth-x=".18" data-depth-y=".15"></div>
+            </div>
+        </div>
+        <div class="order-action-bar" id="actionBar">
+            <div class="weui-row">
+                <div class="weui-col-20"><a class="on" href="/WeChatManage/user_order/index/status-1.html">待付款<span class="weui-badge" style="position: absolute;top:0;right:0;">0</span></a></div>
+                <div class="weui-col-20"><a class="" href="/WeChatManage/user_order/index/status-2.html">待审核<span class="weui-badge" style="position: absolute;top:0;right:0;">0</span></a></div>
+                <div class="weui-col-20"><a class="" href="/WeChatManage/user_order/index/status-3.html">待发货<span class="weui-badge" style="position: absolute;top:0;right:0;">0</span></a></div>
+                <div class="weui-col-20"><a class="" href="/WeChatManage/user_order/index/status-4.html">待开卡<span class="weui-badge" style="position: absolute;top:0;right:0;">0</span></a></div>
+                <div class="weui-col-20"><a class="" href="/WeChatManage/user_order/index/status-5.html">已完成<span class="weui-badge" style="position: absolute;top:0;right:0;">0</span></a></div>
+            </div>
+        </div>
+        <div class="order-action-list">
+            <div id="listbox">
+                <div class="weui-msg">
+                    <div class="weui-msg__icon-area"><i class="weui-icon-info weui-icon_msg"></i></div>
+                    <div class="weui-msg__text-area">
+                        <h2 class="weui-msg__title">没有订单记录信息</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!--主体部分 结束-->
+        <!-- <div class="weui-footer"> -->
+        <!--     <div class="weui-footer__text"><p>Copyright © 2018 All Rights Reserved<br />济宁云联信息科技有限公司 鲁ICP备13024714号</p></div> -->
+        <!-- </div> -->
+        <div class="sstmb"></div>
+        <div class="weui-tabbar">
+            <a href="/WeChatManage/mpg/index" class="weui-tabbar__item">
+                <p class="weui-tabbar__icon"><i class="iconfont">&#xe61a;</i></p>
+                <p class="weui-tabbar__label">靓号</p>
+            </a>
+            <a href="http://www.365webcall.cn/chat/ChatWin3.aspx?settings=mw7mPmXN6P0Nbmz3A7bwI6z3Amw600Pz3AX6mmP6&UserID=-1" target="_blank" class="weui-tabbar__item">
+                <p class="weui-tabbar__icon"><i class="iconfont">&#xe60b;</i></p>
+                <p class="weui-tabbar__label">在线客服</p>
+            </a>
+            <a href="javascript:void(0);" class="weui-tabbar__item open-popup" data-target="#popKefu">
+                <p class="weui-tabbar__icon"><i class="iconfont">&#xe73b;</i></p>
+                <p class="weui-tabbar__label">微信客服</p>
+            </a>
+            <a href="/WeChatManage/user_index/" class="weui-tabbar__item">
+                <p class="weui-tabbar__icon"><i class="iconfont">&#xe60e;</i></p>
+                <p class="weui-tabbar__label">用户中心</p>
+            </a>
+        </div>
+        <div class='weui-popup__container' id="popKefu">
+            <div class="weui-popup__overlay"></div>
+            <div class="weui-popup__modal">
+                <div class="modal-content" style="padding-top:0rem;">
+                    <div class="contact-mod">
+                        <a href="javascript:;" class="close-popup"><i class="weui-icon-cancel"></i></a>
+                        <div class="head">在线客服</div>
+                        <div class="info">
+                            <div class="code">
+                                <img src="/assets/wap/images/qr.jpg">
+                                <p>GDTA4</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/assets/wap/js/jquery-2.1.4.js?v=6.5"></script>
+        <script src="/assets/wap/js/validform.min.js?v=6.5"></script>
+        <script src="/assets/wap/js/countDown.js?v=6.5"></script>
+        <script src="/assets/wap/js/weui.min.js?v=6.5"></script>
+        <script src="/assets/wap/js/fastclick.js?v=6.5"></script>
+        <script src="/assets/wap/js/global.js?v=6.5"></script>
+        <script src="/assets/wap/js/user.js?v=6.5"></script>
+        <script type="text/javascript">
+	//滚动固定
+	var fix = $('#actionBar');	//滚动悬浮块
+	var fixTop = fix.offset().top;	//滚动悬浮块与顶部的距离
+	$(window).scroll(function() {
+		globalObj.scrollFix(fix,fixTop);
+	});
+	$(document.body).infinite().on("infinite", function() {
+		if(loading) return;
+		loading = true;
+		globalObj.loadListMore('/user_order/index/ajaxLoad-1-status-1.html','listbox','countDown');
+	});
+	function countDownInt(){
+		$("input[name='countDown']").each(function () {
+			var orderSn  = $(this).attr('data-ordersn');	//订单号
+			var orderObj = $(this).closest('.orderitem');	//订单元素
+	        var time_end=this.value;
+	        var con=$(this).next("span");
+	        var _=this.dataset;
+	        countDown(con,{
+	            title:_.title,//优先级最高,填充在prefix位置
+	            prefix:_.prefix,//前缀部分
+	            suffix:_.suffix,//后缀部分
+	            time_end:time_end//要到达的时间
+	        }).on("countDownStarted countDownRestarted countDownEnded ",function (arguments) {	//提供3个事件分别为:启动,重启,停止
+	            if( arguments.type == 'countDownEnded' ){
+					//取消订单
+				    $.ajax({ url: '/user_order/cancel/', type: 'post', dataType: 'json',data:'order_sn='+orderSn,success: function(resObj) {
+				    	if( resObj.status ){
+				    		orderObj.remove();
+				    		orderObj.find('.header .status').html('已取消');
+				    		orderObj.find('.footer').remove();
+				    	}else{
+					    	console.log(resObj);
+				    	}
+				    }});
+	            }
+	        });
+	    });
+	}
+	countDownInt();
+        </script>
+</body>
+</html>

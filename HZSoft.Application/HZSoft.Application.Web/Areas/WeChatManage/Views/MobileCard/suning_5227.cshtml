@@ -1,0 +1,238 @@
+﻿
+<title>苏宁互联手机卡免费送啦！</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+<link href="~/Content/scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
+<script src="~/Content/scripts/bootstrap/bootstrap.min.js"></script>
+
+<style>
+    #main_ad > .carousel-inner > .item {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+        #main_ad > .carousel-inner > .item > img {
+            width: 100%;
+        }
+
+    .lhmain {
+        width: 100%;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .lhrow {
+        margin: 10px auto;
+        height: 80px;
+        width: 300px;
+        left: 100px;
+        overflow: hidden;
+    }
+
+    .lhcell {
+        width: 100px;
+        height: 80px;
+        text-align: center;
+        float: left;
+        overflow: hidden;
+    }
+
+    .lhcelltop {
+        width: 45px;
+        height: 45px;
+        margin: 0 auto;
+    }
+
+        .lhcelltop img {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+
+    .lhcellbottom {
+        text-align: center;
+        margin: 10px auto;
+    }
+
+        .lhcellbottom p {
+            font-size: 12px;
+            color: #696969;
+            font-weight: bold;
+        }
+</style>
+<script type="text/javascript">
+    $(function () {
+        function resize() {
+            //获取屏幕宽度
+            var windowWidth = $(window).width();
+            //判断屏幕的大小
+            var isSmallScreen = windowWidth < 768;
+            //根据大小为界面上的每一张轮播图设置背景
+            $('#main_ad > .carousel-inner > .item').each(function (i, item) {
+                //因为获取的是dom对象，要把DOM对象转换成jquery对象
+                var $item = $(item);
+                //根据屏幕的大小来获取不同的图片 data()函数就是专门获取data属性的
+                var imgSrc =
+                    isSmallScreen ? $item.data('image-xs') : $item.data('image-lg');
+                //获得data属性后，给div设置背景图片
+                $item.css('backgroundImage', 'url("' + imgSrc + '")');
+                // 针对移动端，尺寸需要等比例变化，所以小屏幕使用img方式 ，在div中添加img标签
+                if (isSmallScreen) {
+                    $item.html('<img src="' + imgSrc + '" alt="小图"/>')
+                } else {
+                    // 当屏幕由小到大切换时，清空div中的img标签
+                    $item.empty();
+                }
+            });
+        }
+
+        $(window).on('resize', resize).trigger('resize');
+    });
+</script>
+
+<!--广告轮播-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <a href="~/WeChatManage/Liang/contact"><img src="/Content/images/lb0.jpg" alt="..."></a>
+        </div>
+        <div class="item">
+            <a href="~/WeChatManage/Liang/contact"><img src="/Content/images/lb1.jpg" alt="..."></a>
+        </div>
+        <div class="item">
+            <a href="~/WeChatManage/Liang/contact"><img src="/Content/images/lb2.jpg" alt="..."></a>
+        </div>
+        <div class="item">
+            <a href="~/WeChatManage/Liang/contact"><img src="/Content/images/lb3.jpg" alt="..."></a>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+
+<div class="lhmain">
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052270"><img src="~/Content/images/lh7.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>0号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052271"><img src="~/Content/images/lh1.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>1号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052272"><img src="~/Content/images/lh2.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>2号段</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052273"><img src="~/Content/images/lh3.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>3号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052274"><img src="~/Content/images/lh4.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>4号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052275"><img src="~/Content/images/lh5.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>5号段</p>
+            </div>
+        </div>
+    </div>
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052276"><img src="~/Content/images/lh6.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>6号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052277"><img src="~/Content/images/lh7.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>7号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052278"><img src="~/Content/images/lh9.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>8号段</p>
+            </div>
+        </div>
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052279"><img src="~/Content/images/lh9.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>9号段</p>
+            </div>
+        </div>
+    </div>
+    <div class="lhrow">
+        <div class="lhcell">
+            <div class="lhcelltop">
+                <a href="~/WeChatManage/MobileCard/Menu?qian8=17052279"><img src="~/Content/images/lh9.png" /></a>
+            </div>
+            <div class="lhcellbottom">
+                <p>9号段</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="text-align:center;font-size:0.2em; font-family:黑体; color:#898989; padding:3em 0 ">
+    <p>文楷科技制作 </p>
+</div>

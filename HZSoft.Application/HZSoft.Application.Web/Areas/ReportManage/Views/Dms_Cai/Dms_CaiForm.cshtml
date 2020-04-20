@@ -1,0 +1,171 @@
+@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../ReportManage/Dms_Cai/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        $.SaveForm({
+            url: "../../ReportManage/Dms_Cai/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr><td class="formTitle">日期</td><td class="formValue"><input id="id" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_01</td><td class="formValue"><input id="_12_01" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_05</td><td class="formValue"><input id="_12_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_10</td><td class="formValue"><input id="_12_10" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_15</td><td class="formValue"><input id="_12_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_20</td><td class="formValue"><input id="_12_20" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_25</td><td class="formValue"><input id="_12_25" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_30</td><td class="formValue"><input id="_12_30" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_35</td><td class="formValue"><input id="_12_35" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_41</td><td class="formValue"><input id="_12_41" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_46</td><td class="formValue"><input id="_12_46" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_50</td><td class="formValue"><input id="_12_50" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_12_56</td><td class="formValue"><input id="_12_56" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_03</td><td class="formValue"><input id="_13_03" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_06</td><td class="formValue"><input id="_13_06" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_11</td><td class="formValue"><input id="_13_11" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_15</td><td class="formValue"><input id="_13_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_21</td><td class="formValue"><input id="_13_21" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_25</td><td class="formValue"><input id="_13_25" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_31</td><td class="formValue"><input id="_13_31" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_36</td><td class="formValue"><input id="_13_36" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_41</td><td class="formValue"><input id="_13_41" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_47</td><td class="formValue"><input id="_13_47" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_51</td><td class="formValue"><input id="_13_51" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_13_55</td><td class="formValue"><input id="_13_55" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_01</td><td class="formValue"><input id="_14_01" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_05</td><td class="formValue"><input id="_14_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_12</td><td class="formValue"><input id="_14_12" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_17</td><td class="formValue"><input id="_14_17" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_22</td><td class="formValue"><input id="_14_22" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_27</td><td class="formValue"><input id="_14_27" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_31</td><td class="formValue"><input id="_14_31" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_35</td><td class="formValue"><input id="_14_35" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_41</td><td class="formValue"><input id="_14_41" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_46</td><td class="formValue"><input id="_14_46" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_51</td><td class="formValue"><input id="_14_51" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_14_55</td><td class="formValue"><input id="_14_55" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_01</td><td class="formValue"><input id="_15_01" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_06</td><td class="formValue"><input id="_15_06" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_10</td><td class="formValue"><input id="_15_10" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_15</td><td class="formValue"><input id="_15_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_20</td><td class="formValue"><input id="_15_20" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_26</td><td class="formValue"><input id="_15_26" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_30</td><td class="formValue"><input id="_15_30" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_35</td><td class="formValue"><input id="_15_35" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_41</td><td class="formValue"><input id="_15_41" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_45</td><td class="formValue"><input id="_15_45" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_51</td><td class="formValue"><input id="_15_51" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_15_55</td><td class="formValue"><input id="_15_55" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_00</td><td class="formValue"><input id="_16_00" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_05</td><td class="formValue"><input id="_16_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_11</td><td class="formValue"><input id="_16_11" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_15</td><td class="formValue"><input id="_16_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_21</td><td class="formValue"><input id="_16_21" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_26休息</td><td class="formValue"><input id="_16_26" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_31</td><td class="formValue"><input id="_16_31" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_35</td><td class="formValue"><input id="_16_35" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_40</td><td class="formValue"><input id="_16_40" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_45</td><td class="formValue"><input id="_16_45" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_16_50</td><td class="formValue"><input id="_16_50" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_17_30</td><td class="formValue"><input id="_17_30" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_17_36开始</td><td class="formValue"><input id="_17_36" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_17_40</td><td class="formValue"><input id="_17_40" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_17_46</td><td class="formValue"><input id="_17_46" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_17_50</td><td class="formValue"><input id="_17_50" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_17_55</td><td class="formValue"><input id="_17_55" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_00</td><td class="formValue"><input id="_18_00" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_05</td><td class="formValue"><input id="_18_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_12</td><td class="formValue"><input id="_18_12" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_15</td><td class="formValue"><input id="_18_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_20</td><td class="formValue"><input id="_18_20" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_25</td><td class="formValue"><input id="_18_25" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_30</td><td class="formValue"><input id="_18_30" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_35</td><td class="formValue"><input id="_18_35" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_40</td><td class="formValue"><input id="_18_40" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_45</td><td class="formValue"><input id="_18_45" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_50</td><td class="formValue"><input id="_18_50" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_18_56</td><td class="formValue"><input id="_18_56" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_00</td><td class="formValue"><input id="_19_00" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_05</td><td class="formValue"><input id="_19_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_10</td><td class="formValue"><input id="_19_10" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_16</td><td class="formValue"><input id="_19_16" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_21</td><td class="formValue"><input id="_19_21" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_27</td><td class="formValue"><input id="_19_27" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_31</td><td class="formValue"><input id="_19_31" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_37</td><td class="formValue"><input id="_19_37" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_42</td><td class="formValue"><input id="_19_42" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_47</td><td class="formValue"><input id="_19_47" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_51</td><td class="formValue"><input id="_19_51" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_19_57</td><td class="formValue"><input id="_19_57" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_00</td><td class="formValue"><input id="_20_00" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_05</td><td class="formValue"><input id="_20_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_11</td><td class="formValue"><input id="_20_11" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_15</td><td class="formValue"><input id="_20_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_21</td><td class="formValue"><input id="_20_21" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_25休息</td><td class="formValue"><input id="_20_25" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_32</td><td class="formValue"><input id="_20_32" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_36</td><td class="formValue"><input id="_20_36" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_40</td><td class="formValue"><input id="_20_40" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_45</td><td class="formValue"><input id="_20_45" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_51</td><td class="formValue"><input id="_20_51" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_20_56</td><td class="formValue"><input id="_20_56" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_00开始</td><td class="formValue"><input id="_21_00" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_05</td><td class="formValue"><input id="_21_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_11</td><td class="formValue"><input id="_21_11" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_15</td><td class="formValue"><input id="_21_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_21</td><td class="formValue"><input id="_21_21" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_26</td><td class="formValue"><input id="_21_26" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_32</td><td class="formValue"><input id="_21_32" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_36</td><td class="formValue"><input id="_21_36" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_41</td><td class="formValue"><input id="_21_41" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_46</td><td class="formValue"><input id="_21_46" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_50</td><td class="formValue"><input id="_21_50" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_21_55</td><td class="formValue"><input id="_21_55" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_00</td><td class="formValue"><input id="_22_00" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_05</td><td class="formValue"><input id="_22_05" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_10</td><td class="formValue"><input id="_22_10" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_15</td><td class="formValue"><input id="_22_15" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_20</td><td class="formValue"><input id="_22_20" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_25</td><td class="formValue"><input id="_22_25" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_30</td><td class="formValue"><input id="_22_30" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_35</td><td class="formValue"><input id="_22_35" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_40</td><td class="formValue"><input id="_22_40" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_45</td><td class="formValue"><input id="_22_45" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">_22_50</td><td class="formValue"><input id="_22_50" type="text" class="form-control" /></td></tr>
+
+        <tr><td class="formTitle">人</td><td class="formValue"><input id="ren" type="text" class="form-control" /></td></tr>
+        <tr><td class="formTitle">新增</td><td class="formValue"><input id="shu" type="text" class="form-control" /></td></tr>
+
+    </table>
+</div>

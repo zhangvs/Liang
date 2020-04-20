@@ -1,0 +1,151 @@
+/* CSS Document */
+*{ margin:0; padding:0;}
+img { border:none}
+ul,li { list-style:none; list-style-type:none}
+body{  font-size:13px; color:#000; font-family:"宋体"}
+.Fl{ float:left}.Fr{ float:right}
+a{ color:#333; text-decoration:none;}
+a:hover{ color:#f00; text-decoration:underline;}
+i,em{ font-style:normal}
+.w980{ margin:0 auto; width:980px}
+.mar15{ margin-top:15px;}
+.f12px { font-size:12px}.f14px { font-size:14px}.f16px { font-size:16px}.f20px { font-size:20px}
+.bold { font-weight:bold}
+.yd_top { overflow:hidden; height:120px;}
+.cl_org{ color:#f40}
+.cl_blue{ color:#0088cc}
+.cl_green{ color:#0ba341}
+.cl_ray{ color:#666}
+.cl_red { color:#da1f29}
+.top_lt{ width:300px; height:120px; }
+.top_lt a { display:block}
+.top_ri{ margin-top:70px;}
+.top_ri input{ margin:0 10px;vertical-align:middle; border:1px solid #ddd; width:125px; padding:5px 5px 5px 26px}
+.tx_user { background:url(../images/user_ico.jpg) no-repeat 0 0;color:#dcdcdc}
+.tx_sec {background:url(../images/user_ico.jpg) no-repeat 0 -26px;color:#dcdcdc}
+
+.rn_search,.top_ri a { display:inline-block; background:url(../images/yd_login.png); width:72px; height:26px; text-align:center; line-height:28px; color:#fff; font-size:14px; font-weight:bold}
+.stsx_a { display:inline-block; background:url(../images/quebutton.png); width:90px; height:26px; text-align:center; line-height:28px; color:#fff; font-size:14px; font-weight:bold}
+.stsx_a:hover{color:#fff}
+
+.yd_nav { overflow:hidden}
+.show_num {border-radius:3px; font-size:13px;color:#c00;font-weight:bold;position:absolute; top:6px; width:80px; height:26px; line-height:26px; text-align:center; background:url(../images/show_num.png) center 0; right:10px;}
+.show_xz {right:100px}
+
+.nav_wp { position:relative; height:36px;}
+.nav{ border:1px solid #f31900; font-size:14px; background:url(../images/nav_bg.jpg) repeat-x; height:36px;overflow:hidden}
+.nav li { float:left; margin:0 15px;}
+.nav li a { color:#fff; font-weight:bold;line-height:14px; display:block; height:26px; padding-top:10px; width:82px; text-align:center}
+.nav .hover a { color:#d11e0a; background:url(../images/nav_ho.png) no-repeat 0 bottom; }
+.sub_not { line-height:36px; height:36px; border:1px solid #ddd; border-top:none;}
+.tel_num { overflow:hidden; width:960px;}
+.tel_num li { float:left; width:176px; height:92px; background:url(../images/tel_bg.png); margin:8px;}
+.yd_con { overflow:hidden; }
+.d_con_lt { width:220px;}
+.d_con_box { border:1px solid #ddd; border-top:2px solid #ff0000;margin-top:15px;}
+.d_con_box  h3 { height:35px; line-height:35px; background:url(../images/con_line01.jpg) repeat-x; font-size:14px; padding-left:15px}
+.d_acces { overflow:hidden; padding-left:10px;margin:10px 0}
+.d_acces li{display: none; float: left; margin: 5px; text-align: center; width: 86px; height: 26px; line-height: 26px; background: url(../images/btn_line01.jpg); border: 1px solid #abd4ee;  }
+.d_acces li:hover { background:url(../images/btn_line01_ho.jpg);}
+.d_acces li a { display:block; text-decoration:none; font-size:14px; font-weight:bold}
+.da_up { width:186px; height:24px; border:1px solid #abd4ee; background:#f5f5f5; line-height:24px;display:block; text-align:center; line-height:24px;  margin:-5px auto 10px auto}
+.da_up:hover {background:#ddd;}
+.da_down {background:#f5f5f5}
+.da_down:hover {background:#ddd}
+.d_con_ri { margin-top:15px; width:740px; }
+.seach_wp {border:1px solid #ddd; background:#f5f5f5;height:76px; border-top:0 none; width:958px; padding:5px 10px; margin:0 auto }
+.seach_wp table tr td{font-weight:bold; font-size:15px;}
+.rn_text { border:1px solid #ddd; width:100px; padding:3px 5px;}
+.detail_wp { border-top:2px solid #f00; overflow:hidden}
+.detail_wp table tr th { background:url(../images/con_line01.jpg)}
+.detail_wp table tr td {border-bottom:1px solid #ddd; height:46px; font-size:14px;text-align:center; }
+.detail_page { height:70px; padding:0 10px; line-height:70px}
+.detail_page em a { margin:0 3px}
+.yd_footer { text-align:center; line-height:24px; margin:20px auto}
+.det_order { margin:0 3px; width:50px; height:22px; border-radius:3px; background:#f40; display:inline-block; color:#fff; line-height:22px; text-align:center}
+.det_order:hover,.det_share:hover { text-decoration:none;color:#fff; }
+.det_share{ background:#feab29}
+
+#callboard { padding-left:10px;height:36px; line-height:36px; overflow:hidden; font-size:12px; background-color:#fdeec5;}
+#callboard ul { padding:0; }
+#callboard li { padding:0; }
+#callboard ul li a:hover { color:#f00}
+
+#kefu {position: fixed;_position: absolute;_top: expression(documentElement.scrollTop + 100 + "px");top:100px;right:0;z-index:999}
+#kefu .box-content{position:relative;background-color:#fff;width:130px; border:1px solid #ddd}
+#kefu .on span,#kefu .phone,#kefu .qq,#kefu .service,#kefu .title-btn{background:url(../images/kefu.png) no-repeat}
+#kefu .title-btn{width:33px;height:97px;position:absolute;top:0;left:-33px}
+#kefu .title-btn span{display:none}
+#kefu .on span{background-position:-128px 11px;height:20px;display:block}
+#kefu .pad{padding:5px 5px 5px 15px; border-bottom:1px dashed #ddd;overflow:hidden;font-size:12px}
+#kefu .pad a{text-decoration:none}
+#kefu .qq{background-position:10px -112px;display:block;zoom:1;padding-left:26px; height:28px; line-height:28px;}
+#kefu .phone{height:28px;background-position:0 -153px;margin:18px 0}
+#kefu .service{display:inline-block;zoom:1;height:51px;background-position:0 -203px;width:151px;margin-left:3px}
+#kefu .text{background-color:#ededed;padding:5px 10px;text-align:center}
+#kefu .off{width:0}
+#kefu .off .pad,#kefu .off .text{display:none}
+p,p a{font-size:12px;color:#666}
+
+.app_wp { border:1px solid #ddd}
+.app_wp h2 { height:34px; line-height:34px; background:url(../images/con_line01.jpg); font-size:16px; padding-left:15px;}
+.app_con { margin:10px 20px}
+.app_con li{ height:52px;overflow:hidden}
+.app_con_lab { line-height:52px; text-align:right; width:120px; font-size:14px;}
+.app_con_txt { width:800px; display:block;}
+.app_con_txt input{ border:1px solid #ddd; width:260px; height:26px;line-height:26px; margin-top:8px; margin-left:10px;}
+.orcheck_num { background:#f40; border:0 none; color:#fff; border-radius:3px; font-size:14px; font-weight:bold;width:260px; height:26px;line-height:26px; margin-top:8px; margin-left:10px;}
+.app_con_cotu { line-height:46px; color:#666}
+.apply_btn { cursor:pointer;height:36px; background:url(../images/apply_btn.png); width:260px; border:0 none;color:#fff; font-size:20px; margin-left:130px}
+.order_tb { padding:10px 20px; border-bottom:1px solid #ddd}
+.order_tb table tr th { font-size:14px; text-align:right}
+.order_tb table tr td { color:#666}
+.qq {background:url(../images/kefu.png) no-repeat 0 -112px;display:block;zoom:1;padding-left:16px; height:28px; line-height:28px}
+.order_con { overflow:hidden}
+.order_lt ul li label { width:100px;}
+.order_lt{ width:450px;}
+
+.allow_t { height:450px; background:url(../images/allt_bg.png); overflow:hidden}
+.ybdw_scess { width:300px; padding-left:120px; height:120px; background:url(../images/yd_scusee.png) no-repeat 0 5px; margin:130px auto 0}
+.ybdw_scess h2 { font-size: 22px; color: #7ab61e; margin-bottom: 15px; padding-top: 20px; }
+.ybdw_scess p { line-height:28px; font-size:14px;}
+.ybdw_fail {background:url(../images/yd_fail.png) no-repeat 0 5px;}
+
+.top_wel { margin-top:70px;}
+.top_wel a { text-align:center; display:inline-block; margin-left:20px;  width:45px; height:18px; line-height:20px; background:url(../images/wel_ico.jpg); border:1px solid #ddd} 
+
+.det_notice { overflow:hidden}
+.notice_lt { width:210px;}
+.nolt_01 { border:1px solid #ddd; background:url(../images/drop_bg.png) repeat-x 0 0 ; border-radius:5px; padding: 5px 0}
+.nolt_01 li { height:48px; line-height:48px; border-bottom:1px dashed #ddd}
+.nolt_01 li a { display:block; padding:0 10px;  background:url(../images/wt_a.png) no-repeat 190px 18px; height:48px; width:188px;}
+.nolt_01 li a:hover { text-decoration:none;}
+.nolt_01 .hover { background:url(../images/notice_ltho.png); }
+.nolt_01 .hover a {color:#fff;background:url(../images/wt_a.png) no-repeat 190px -11px}
+
+.notice_ri { border:1px solid #ddd; width:752px;}
+.nore_box { padding:15px; min-height:400px;}
+.nore_tit h2 { text-align:center;  font-size:16px;}
+.nore_tit { border-bottom:1px dashed #bbbbbb;margin-bottom:20px; margin-top:20px; overflow:hidden}
+.nore_tit span { font-size:13px; color:#999; display:block; text-align:center; line-height:60px;}
+.nore_con { padding:0 10px 30px; border-bottom:1px dashed #bbbbbb}
+.nore_con p{ color:#333; margin-bottom:15px;}
+.nore_more span { padding: 10px 0; display:block; color:#666}
+.nore_more ul li { overflow:hidden; height:28px; line-height:28px; padding:0 5px;}
+.nore_more ul li em { color:#999}
+.invit { border-radius:3px; padding:5px 10px; display:inline-block; background:#666; color:#fff; margin-left:10px; text-align:center; }
+.invit:hover{ color:#fff; text-decoration:none; background:#999}
+label.error{color:red;margin-left:5px;}
+
+.apply_area { margin-left:10px ;margin-top:10px; border:1px solid #ddd; width:260px}
+
+.contst  {padding-top:5px;}
+	.contst p{ line-height:22px;color:333; overflow: hidden;white-space: nowrap; width:169px; }
+	.detail_wp tr td {}
+	.detail_wp table tr .td01 {font-weight:bold;font-size:19px}
+	.detail_wp table tr .td02 {font-weight:bold;font-size:23px}
+.sind_set{width:110px;height:24px; border:1px solid #ddd}
+	
+	
+	
+	

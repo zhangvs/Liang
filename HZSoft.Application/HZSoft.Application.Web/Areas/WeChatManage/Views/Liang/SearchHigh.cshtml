@@ -1,0 +1,172 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>号码搜索</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="~/Content/css/iconfont.css" rel="stylesheet" />
+    <link href="~/Content/css/m.css" rel="stylesheet" />
+</head>
+<body>
+    <!--kw搜索-->
+    <div class="kw-section">
+        <div class="top-bar top-bar-shade top-bar-small clearfix">
+            <div class="col10"><a href="javascript:void();" class="goback"><i class="icon iconfont icon-jiantou25"></i></a></div>
+            <div class="col80">号码搜索</div>
+            @*<div class="col10"><a href="nav.aspx"><i class="icon iconfont icon-daohang"></i></a></div>*@
+        </div>
+        <div class="alt-tabs">
+            <div class="head">
+                <div class="alt-tabs-head cur" id="kwtit1">模糊搜索</div>
+                <div class="alt-tabs-head" id="kwtit2">按位搜索</div>
+            </div>
+            <div class="content">
+                <div class="alt-tabs-content kw1">
+                    <div><input type="tel" value="" id="kw" maxlength="11" /></div>
+                    <div class="ckb-group">
+                        <input id="cbIsEnd" type="checkbox" /><label for="ckbIsEnd">搜尾号</label>
+                    </div>
+                </div>
+                <div class="alt-tabs-content hide kw2">
+                    <div class="searchNum" id="searchNum">
+                        <input type="tel" maxlength="1" value="1" readonly="readonly" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                        <input type="tel" maxlength="1" value="" />
+                    </div>
+                    <div class="tips">Tips:不确定请留空</div>
+                </div>
+
+            </div>
+            <div class="btn-submit">搜索</div>
+        </div>
+        @*<div class="tit">运营商</div>
+            <div class="tag">
+                <a href="list.aspx?company=19">移动</a>
+                <a href="list.aspx?company=20">联通</a>
+                <a href="list.aspx?company=21">电信</a>
+                <a href="list.aspx?company=22">虚商</a>
+            </div>
+            <div class="tit">热门城市</div>
+            <div class="tag">
+
+                <a href="list.aspx?city=101">北京</a>
+
+                <a href="list.aspx?city=201">天津</a>
+
+                <a href="list.aspx?city=301">石家庄</a>
+
+                <a href="list.aspx?city=306">保定</a>
+
+                <a href="list.aspx?city=1501">济南</a>
+
+                <a href="list.aspx?city=1504">枣庄</a>
+
+                <a href="list.aspx?city=1508">济宁</a>
+
+                <a href="list.aspx?city=1517">菏泽</a>
+
+                <a href="city.aspx">更多</a>
+            </div>
+            <div class="tit">热门规律</div>
+            <div class="tag">
+                <a href="list.aspx?features=AAA">AAA</a>
+                <a href="list.aspx?features=AAAA">AAAA</a>
+                <a href="list.aspx?features=AAAAA">AAAAA</a>
+
+                <a href="list.aspx?features=ABC">ABC</a>
+                <a href="list.aspx?features=ABCD">ABCD</a>
+                <a href="list.aspx?features=ABCDE">ABCDE</a>
+
+                <a href="list.aspx?features=AABB">AABB</a>
+                <a href="list.aspx?features=AABBCC">AABBCC</a>
+                <a href="list.aspx?features=AAABBB">AAABBB</a>
+                <a href="list.aspx?features=ABAB">ABAB</a>
+                <a href="list.aspx?features=ABABAB">ABABAB</a>
+                <a href="list.aspx?features=ABCABC">ABCABC</a>
+            </div>*@
+    </div>
+    <!--kw搜索-->
+
+</body>
+</html>
+<script src="~/Content/statics/js/jquery.js"></script>
+<script src="~/Content/statics/plus/alt_tabs.js"></script>
+<script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var organizeId = request('organizeId');
+    var city = request('city');
+
+    $("#searchNum input").keyup(function (event) {
+        switch (event.which) {
+            case 8: //back
+                $(this).prev().focus(); break;
+            case 37: //left
+                $(this).prev().focus(); break;
+            case 39: //right
+                $(this).next().focus(); break;
+            default:
+                var t = $(this).val();
+                var reg = /[\d]/g;
+                if (reg.test(t)) {
+                    $(this).next().focus();
+                }
+                else {
+                    t = t.replace(/[^\d]/g, '');
+                    $(this).val(t);
+                }
+                break;
+        }
+    });
+
+    function searchBykw() {
+        var _kw = '';
+        if ($("#kwtit1").hasClass('cur')) {
+            _kw = $("#kw").val();
+            if (_kw != '') {
+                if ($("#cbIsEnd").is(':checked')) { _kw += "|"; }
+            }
+        } else {
+            var o = document.getElementById('searchNum').getElementsByTagName('input');
+            for (i = 0; i < o.length; i++) {
+                if (o[i].value == '') {
+                    _kw += '_';
+                }
+                else {
+                    _kw += o[i].value;
+                }
+            }
+        }
+        if (_kw != '' && _kw != '1__________') {
+            //do search
+            //keyword = _kw;
+            location.href = "list?organizeId=" + organizeId + "&keyword=" + _kw + "&city=" + city;
+        }
+        else {
+            //鏈緭鍏ュ叧閿瓧
+        }
+    }
+
+    $(".kw-section .btn-submit").click(function () {
+        searchBykw();
+    })
+
+    $(".kw-section .goback").click(function () {
+        location.href = "Index?organizeId=" + organizeId + "&city=" + city;
+    })
+
+    $(document).ready(function () {
+        $('.alt-tabs').alt_tabs({ action: 'click' });
+    });
+</script>

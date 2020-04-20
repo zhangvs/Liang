@@ -1,0 +1,80 @@
+﻿
+header {
+    height: 4rem;
+    line-height: 4rem;
+    background: #24ade4;
+    position: relative;
+}
+
+header .return {
+    overflow: hidden;
+    width: 10%;
+    height: 4rem;
+    line-height: 4rem;
+    background: url(/Content/images/btn_return.png) no-repeat center center;
+}
+
+.fl {
+    float: left;
+}
+
+.kuang {
+    background-image: url(/Content/images/kuang.jpg);
+    background-size: contain;
+    background-position: 50% 0px;
+    background-repeat: repeat;
+    border-radius: 1em;
+    word-wrap: break-word !important;
+    box-sizing: border-box !important;
+}
+
+.kuangdiv {
+    padding: 15px 10px 20px;
+    box-sizing: border-box;
+    background-color: #d9edf7;
+    border-radius: 1em;
+    text-align: center;
+}
+
+.des {
+    color: darkred;
+    margin-bottom: 50px;
+}
+
+.minclass {
+    margin-bottom: 50px;
+}
+.minclass_txt {
+    font-size: 20px;
+    font-weight: bolder;
+}
+.minclass_des {
+    font-weight: bolder;
+}
+
+    p .telphone {
+        color: #e40825;
+        font-size: 17px;
+        font-weight: bold;
+        font-family: 微软雅黑;
+        text-decoration: underline;
+    }
+p .price {
+    font-size: 15px;
+    font-weight: bolder;
+    color: #e21d92;
+}
+
+
+.kuai {
+    font-size: 14px;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    font-family: 微软雅黑;
+    color: #337ab7;
+}
+
+.title-menu {
+    font-size: 18px;
+    font-weight: bold;
+}

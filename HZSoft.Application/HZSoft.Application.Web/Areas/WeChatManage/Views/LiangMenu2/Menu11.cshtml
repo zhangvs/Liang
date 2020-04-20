@@ -1,0 +1,367 @@
+﻿@using HZSoft.Application.Entity.WeChatManage;
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>申请合作加盟</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name='apple-touch-fullscreen' content='yes' />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no" />
+    <link href="~/Content/css/stylelist.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+
+    <link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+
+    <script src="~/Content/scripts/plugins/valide.js" type="text/javascript"></script>
+    <!--bootstrap组件start-->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="~/Content/scripts/utils/address.js"></script>
+    <script src="~/Content/scripts/utils/js" type="text/javascript"></script>
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .lunbo {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        ul {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: auto;
+        }
+
+            ul li {
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                font-size: 16px;
+                color: #333;
+                text-align: center;
+            }
+    </style>
+    <script>
+        var organizeId = request('organizeId');
+
+        $(function () {
+            var html = "";
+            $("#City").append(html); $("#Area").append(html);
+            $.each(pdata, function (idx, item) {
+                if (parseInt(item.level) == 0) {
+                    html += "<option value='" + item.names + "' exid='" + item.code + "'>" + item.names + "</option>";
+                }
+            });
+            $("#Pro").append(html);
+            $("#Pro").change(function () {
+                if ($(this).val() == "") return;
+                $("#City option").remove(); $("#Area option").remove();
+                var code = $(this).find("option:selected").attr("exid"); code = code.substring(0, 2);
+                var html = "<option value=''>--请选择--</option>"; $("#Area").append(html);
+                $.each(pdata, function (idx, item) {
+                    if (parseInt(item.level) == 1 && code == item.code.substring(0, 2)) {
+                        html += "<option value='" + item.names + "' exid='" + item.code + "'>" + item.names + "</option>";
+                    }
+                });
+                $("#City").append(html);
+            });
+            $("#City").change(function () {
+                if ($(this).val() == "") return;
+                $("#Area option").remove();
+                var code = $(this).find("option:selected").attr("exid"); code = code.substring(0, 4);
+                var html = "<option value=''>--请选择--</option>";
+                $.each(pdata, function (idx, item) {
+                    if (parseInt(item.level) == 2 && code == item.code.substring(0, 4)) {
+                        html += "<option value='" + item.names + "' exid='" + item.code + "'>" + item.names + "</option>";
+                    }
+                });
+                $("#Area").append(html);
+            });
+        });
+
+        layui.use('upload', function () {
+            var $ = layui.jquery
+            , upload = layui.upload;
+            //拖拽上传
+            upload.render({
+                elem: ".upload"
+              , url: '/WeChatManage/Certification/Upload'
+              , done: function (data) {
+                  console.log(data);
+                  if (data.Success) {
+                      var path = data.Message;
+                      $("#" + this.item.context.id).html("<img src='" + data.Message + "' style='height:20em;' />").next().next().val(path);
+                  } else {
+                      layer.alert('上传失败:' + data.Message, {
+                          skin: 'layui-layer-molv', closeBtn: 0
+                      });
+                  }
+              }
+              , error: function () {
+                  layer.alert('上传异常', {
+                      skin: 'layui-layer-molv', closeBtn: 0
+                  });
+              }
+            });
+        });
+
+        function valiCode() {
+            $("#ErrorMessage").html("");
+            var CompanyName = trim($("#CompanyName").val());
+            var FullName = trim($("#FullName").val());
+            var WxAccount = trim($("#WxAccount").val());
+            var Telphone = trim($("#Telphone").val());
+            var smsCode = trim($("#smsCode").val());
+            var Address = $("#Address").val();
+            var WxQRcode = $("#WxQRcode").val();
+
+
+            if (CompanyName == "" || CompanyName.length == 0) {
+                $("#ErrorMessage").html("商城名称不能为空!");
+                return;
+            } else if (CompanyName.length < 2) {
+                $("#ErrorMessage").html("商城名称不能少于2个汉字!");
+                return;
+            }
+
+            if ($("#Pro").val() == "") {
+                $("#ErrorMessage").html("省份不能为空!");
+                return;
+            }
+            if ($("#City").val() == "") {
+                $("#ErrorMessage").html("城市不能为空!");
+                return;
+            } if ($("#Area").val() == "") {
+                $("#ErrorMessage").html("区县不能为空!");
+                return;
+            }
+
+            if (Telphone == "" || Telphone.length == 0) {
+                $("#ErrorMessage").html("手机号码不能为空!");
+                return;
+            }
+            if (smsCode == "" || smsCode.length == 0) {
+                $("#ErrorMessage").html("验证码不能为空!");
+                return;
+            }
+            
+            if (!valiMobileNumber(Telphone)) {
+                $("#ErrorMessage").html("手机号码格式有误!");
+                return;
+            }
+
+            if (FullName == "" || FullName.length == 0) {
+                $("#ErrorMessage").html("客户名称不能为空!");
+                return;
+            } else if (FullName.length < 2) {
+                $("#ErrorMessage").html("客户名称不能少于2个汉字!");
+                return;
+            }
+
+            if (WxAccount == "" || WxAccount.length == 0) {
+                $("#ErrorMessage").html("微信账号不能为空!");
+                return;
+            } else if (WxAccount.length < 2) {
+                $("#ErrorMessage").html("微信账号不能少于2个汉字!");
+                return;
+            }
+
+            if (typeof (WxQRcode) == "undefined") {
+                $("#ErrorMessage").html("二维码照片必须一起上传!");
+                return;
+            }
+
+            if (Address == "" || Address.length == 0) {
+                $("#ErrorMessage").html("地址不能为空!");
+                return;
+            } else {
+                if (Address.length < 5 || Address.length > 256) {
+                    $("#ErrorMessage").html("地址不能少于5个字符或大于200个字符!");
+                    return;
+                }
+            }
+
+            if (valiMobileNumber(Telphone)) {
+                var index = layer.load(0, { shade: false });
+                var postData = $("#filter-form").GetWebControls();
+                postData["OrganizeId"] = organizeId;
+                $.ajax({
+                    url: "/WeChatManage/LiangMenu2/SaveSellerRegister2",
+                    type: "POST",
+                    data: postData,
+                    success: function (responseText) {
+                        layer.close(index);
+                        layer.alert(responseText, {
+                            icon: 1, skin: 'layui-layer-lan', closeBtn: 0
+                        }, function () {
+                            window.location.href = window.location;
+                        });
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            }
+            else {
+                $("#ErrorMessage").html("待认证手机号有误!");
+                return;
+            }
+        }
+
+        function checkTelphone() {
+            var Telphone = trim($("#Telphone").val());
+            if (!valiMobileNumber(Telphone)) {
+                $("#TelphoneErrorMessage").html("联系电话格式有误!");
+				alert("联系电话格式有误!", "错误！");
+                return;
+            }
+            else {
+                $("#TelphoneErrorMessage").html("");
+                return;
+            }
+        }
+    </script>
+    <style>
+        #protable tr td.trdel {
+            font-size: 12px;
+            color: #24ADE4;
+        }
+
+        #protable tr td input {
+            font-size: 14px;
+            border: 1px solid #B3D8E6;
+            height: 25px;
+            width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+@{Html.RenderAction("_PartialShare", "Liang", new { title = "免费定制一个属于自己的靓号商城！", Img = "liang4.jpg" });}
+<body bgcolor="#eee">
+    <header class="headerbg2" style="height:4rem;line-height:4rem">
+        <a href="~/WeChatManage/Liang/Main?organizeId=@ViewBag.organizeId">
+            <div style="float:left;color:white;font-size:1.5em;">
+                <img src="/Content/images/btn_return.png" style="float:left;height: 35px; margin-bottom: 5px;" />
+            </div>
+        </a>
+        <div class="header_tit" style="font-size:1.5em;color:#fff;text-align:center">申请靓号商城</div>
+    </header>
+    <div class="container">
+        <div id="filter-form">
+            <p>1.合作加盟，即可送您一个一模一样的靓号商城</p>
+            <p>2.您的名称，您的联系方式</p>
+            <p>3.所有靓号实时更新，转发就可以赚钱</p>
+            <p>4.提成丰厚，欢迎咨询</p>
+            <br />
+            <label for="CompanyName">起一个您的靓号商城名称 <font style="color:red">*</font></label>
+            <input type="text" class="form-control" id="CompanyName" placeholder="请输入靓号商城名称" />
+            <label for="FullName">经营者姓名 <font style="color:red">*</font></label>
+            <input type="text" class="form-control" id="FullName" placeholder="请输入经营者姓名" />
+            <label for="Telphone">留一个您的商城联系电话 <font style="color:red">*</font></label>
+            <input type="text" class="form-control" id="Telphone" placeholder="请输入联系电话" onblur="checkTelphone()" />
+            <p class="text-danger" id="TelphoneErrorMessage"></p>
+
+            <label for="WxAccount">微信账号 <font style="color:red">*</font></label>
+            <input type="text" class="form-control" id="WxAccount" placeholder="请输入经营者姓名" />
+            <label for="WxQRcode">微信二维码 <font style="color:red">*</font></label>
+            <div class="layui-upload-drag upload" id="Ma">
+                <i class="layui-icon"></i>
+                <p>点击上传微信二维码</p>
+            </div>
+            <input type="hidden" id="WxQRcode" />
+            <br />
+
+            <label>地址<font style="color:red">*</font></label>
+            <table>
+                <tbody>
+                    <tr>
+                        <td width="30%">
+                            <select name="Pro" id="Pro" class="form-control">
+                                <option value="">---省份---</option>
+                            </select>
+                        </td>
+                        <td width="30%">
+                            <select name="City" id="City" class="form-control">
+                                <option value="">---城市---</option>
+                            </select>
+                        </td>
+                        <td width="30%">
+                            <select name="Area" id="Area" class="form-control">
+                                <option value="">---区县---</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <textarea class="form-control" id="Address" rows="3" placeholder="请输入详细地址"></textarea>
+            <label>备注</label>
+            <textarea class="form-control" id="Description" rows="3" placeholder="请输入备注"></textarea>
+            <br />
+            <div class="input-group">
+                <input id="smsCode" name="smsCode" type="text" maxlength="6" class="form-control" placeholder="请输入验证码" />
+                <span class="input-group-btn">
+                    <button class="btn btn-default sms_code" type="button">获取验证码</button>
+                </span>
+            </div>
+
+            <p class="text-danger" id="ErrorMessage"></p>
+
+            <br />
+            <p style="text-align:center;margin-bottom:10px">
+                <button type="button" class="btn btn-danger btn-lg" style="border-radius:0.107rem;background-color:#f85959 !important;color:#FFF;width:100%;" onclick="valiCode()">立即提交</button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        //倒计时60秒
+        var wait = 60;
+        function Countdown(o) {
+            if (wait == 0) {
+                o.removeAttr("disabled");
+                o.text("获取验证码");
+                wait = 60;
+            } else {
+                o.attr("disabled", true);
+                o.text("重新发送(" + wait + ")");
+                wait--;
+                setTimeout(function () {
+                    Countdown(o);
+                }, 1000)
+            }
+        }
+
+        //获得短信
+        $(".sms_code").click(function () {
+			checkTelphone();
+            var $this = $(this);
+            var tel = $("#Telphone").val();
+            $.post("@Url.Action("SendJoin", "Sms")", {tel: tel }, function (result) {
+                if (result.success) {
+                    Countdown($this);
+                } else {
+                    $.alert(result.message, "错误！");
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

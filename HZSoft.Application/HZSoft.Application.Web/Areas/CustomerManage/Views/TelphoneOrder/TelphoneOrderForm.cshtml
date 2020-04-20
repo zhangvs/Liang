@@ -1,0 +1,255 @@
+@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = request('keyValue');
+    $(function () {
+        initControl();
+    });
+
+    //初始化控件
+    function initControl() {
+        //配送方式
+        $("#Express").ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "psfs" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "250px"
+        })
+        //.ComboBoxSetValue("UC")
+        //    .bind("change", function () {
+        //        var value = $(this).attr('data-value');
+        //        if (value == 0) {
+        //            $("#Numbers").removeAttr('isvalid').removeAttr('checkexpession');
+        //            $("#kddh").html("快递单号");
+        //            $("#Numbers").val("");
+        //        }
+        //    });
+        //物流状态
+        $("#Sign").ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "wlzt" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "200px"
+        });
+
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../CustomerManage/TelphoneOrder/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                }
+            })
+        }
+    }
+    //保存表单;
+    function AcceptClick() {
+        if ($("#SendMark").prop("checked")) {
+            checkExpress();
+            if ($("#Numbers").val() == "") {
+                dialogMsg('快递单号不能为空！', 0);
+                return;
+            }
+        }
+        //checkDate();
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+
+
+        var postData = $("#form1").GetWebControls();//带(keyValue)//null-->&nbsp;
+        $.SaveForm({
+            url: "../../CustomerManage/TelphoneOrder/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+
+    function checkExpress() {
+        var exp = $("#Express")[0].textContent;
+        if (exp == "==请选择==") {
+            dialogMsg('请先选择配送方式！', 0);
+            return;
+        }
+    }
+    ////检查到账时间是否必填
+    //function checkDate() {
+    //    var Paid = toDecimal($("#Paid").val());
+    //    if (Paid != "0.00") {
+    //        $("#PaidDate").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+    //    }
+    //    else {
+    //        $("#PaidDate").removeAttr('isvalid').removeAttr('checkexpession');
+    //        removeMessage($("#PaidDate"));
+    //    }
+
+    //    var ToPay = toDecimal($("#ToPay").val());
+    //    var Amount = toDecimal($("#Amount").val());
+    //    if (ToPay == Amount) {
+    //        $("#ToPayDate").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+    //    }
+    //    else {
+    //        $("#ToPayDate").removeAttr('isvalid').removeAttr('checkexpession');
+    //        removeMessage($("#ToPayDate"));
+    //    }
+    //}
+    function getToPay() {
+        var Amount = toDecimal($("#Amount").val());
+        var Paid = toDecimal($("#Paid").val());
+        if (Paid != "") {
+            var ToPay = toDecimal(Amount - Paid);
+            $("#ToPay").val(ToPay);
+        }
+    }
+
+    //function getToPayCharge() {
+    //    var ToPay = toDecimal($("#ToPay").val());
+    //    if (ToPay != "") {
+    //        var exp=$("#Express")[0].dataset.value;
+    //        if (exp == "shunfeng") {
+    //            var Amount = toDecimal($("#Amount").val());
+    //            if (ToPay == Amount) {
+    //                $("#ToPayCharge").val("0.00");
+    //            }
+    //            else {
+    //                $("#ToPayCharge").val(toDecimal(ToPay * 0.05));
+    //            }
+    //        }
+    //        else if (exp == "2" || exp == "3") {
+    //            $("#ToPayCharge").val("0.00");
+    //        }
+    //    }
+    //    else {
+    //        $("#ToPayCharge").val("0.00");
+    //    }
+    //}
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">订单编号<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="OrderCode" type="text" value="@ViewBag.OrderCode" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <td class="formTitle">售出号码<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Telphone" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">收货人<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Consignee" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <td class="formTitle">联系方式<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Contact" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <th class="formTitle">收货地址</th>
+            <td class="formValue" colspan="3">
+                <input id="Pro" type="text" class="form-control" style="float: left; width: 84px; margin-right: 1px;" />
+                <input id="City" type="text" class="form-control" style="float: left; width: 84px; margin-right: 1px;" />
+                <input id="Area" type="text" class="form-control" style="float: left; width: 84px; margin-right: 1px;" />
+
+                <div style="margin: 0 auto; width: 100%;">
+                    <input id="Address" type="text" class="form-control" style="float: left; width: 365px;" />
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">售出金额<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Amount" type="text" class="form-control" isvalid="yes" checkexpession="Double" />
+            </td>
+            <td class="formTitle">定金</td>
+            <td class="formValue">
+                <input id="Paid" type="text" class="form-control" value="0.00" onblur="getToPay()" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">尾款</td>
+            <td class="formValue">
+                <input id="ToPay" type="text" class="form-control" value="0.00" />
+            </td>
+            <td class="formTitle">到账时间</td>
+            <td class="formValue">
+                <input id="ToPayDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="SendMark" type="checkbox" />
+                        是否发货
+                    </label>
+                </div>
+            </td>
+            <th class="formTitle">配送方式</th>
+            <td class="formValue">
+                <div id="Express" type="select" class="ui-select"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">快递单号</td>
+            <td class="formValue">
+                <input id="Numbers" type="text" class="form-control" />
+            </td>
+            <td class="formTitle">到付服务费</td>
+            <td class="formValue">
+                <input id="ToPayCharge" type="text" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">物流状态</td>
+            <td class="formValue">
+                <div id="Sign" type="select" class="ui-select" readonly="readonly"></div>
+            </td>
+            <td class="formTitle">物流更新时间</td>
+            <td class="formValue">
+                <input id="AcceptTime" type="text" class="form-control" readonly="readonly" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">物流追踪</td>
+            <td class="formValue" colspan="3">
+                <textarea id="AcceptStation" maxlength="200" class="form-control" readonly="readonly"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="ActivationMark" type="checkbox" />
+                        是否激活
+                    </label>
+                </div>
+            </td>
+            <td class="formTitle"></td>
+            <td class="formValue"></td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" maxlength="200" class="form-control" rows="3"></textarea>
+            </td>
+        </tr>
+
+
+    </table>
+</div>

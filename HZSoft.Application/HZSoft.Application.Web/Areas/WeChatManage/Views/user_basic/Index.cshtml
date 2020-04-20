@@ -1,0 +1,142 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="会员资料 - 济南利新商贸有限公司">
+    <title>会员资料 - 济南利新商贸有限公司</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/user.css?v=7.4" rel="stylesheet">
+    <script type="text/javascript">
+	var baseUrl = '';
+    </script>
+</head>
+<body>
+    <!--主体部分 开始-->
+    <div class="wrapper">
+        <header><a href="/WeChatManage/user_index/index" class="t_icon"></a>修改资料</header>
+        <div class="mpart">
+            <div class="vision">
+                <div class="s_mide layer" data-depth=".35"></div>
+                <div class="s_botm layer" data-depth-x=".1" data-depth-y=".08"></div>
+                <div class="s_botm layer" data-depth-x=".18" data-depth-y=".15"></div>
+            </div>
+        </div>
+        <form method="post" action="/user_basic/index/cmd-basicDo.html" class="Validform">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">用户账号：</label></div>
+                    <div class="weui-cell__bd">kNiWGjwR(不可更改)</div>
+                </div>
+                <div class="weui-cells__title">基本资料</div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">用户姓名：</label></div>
+                    <div class="weui-cell__bd">
+                        <input type="text" name="basic[user_nickname]" value="阿斯蒂芬" class="weui-input" placeholder="姓名">
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd"><label class="weui-label">用户性别：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <select name="basic[user_sex]" class="weui-select"><option value="0" selected="selected">男</option><option value="1">女</option></select>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_select weui-cell_select-after">
+                    <div class="weui-cell__hd"><label class="weui-label">电话：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input type="text" name="basic[user_mobile]" value="18777777777" class="weui-input" placeholder="电话">
+                        <input type="hidden" name="user_mobile" value="18777777777">
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a href="javascript:" class="weui-btn weui-btn_warn" id="formSubmit">确认修改</a>
+            </div>
+        </form>
+    </div>
+    <!--主体部分 结束-->
+    <!-- <div class="weui-footer"> -->
+    <!--     <div class="weui-footer__text"><p>Copyright © 2018 All Rights Reserved<br />济宁云联信息科技有限公司 鲁ICP备13024714号</p></div> -->
+    <!-- </div> -->        
+    <div class="sstmb"></div>
+    <div class="weui-tabbar">
+        <a href="/WeChatManage/mpg/index" class="weui-tabbar__item">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe61a;</i></p>
+            <p class="weui-tabbar__label">靓号</p>
+        </a>
+        <a href="http://www.365webcall.cn/chat/ChatWin3.aspx?settings=mw7mPmXN6P0Nbmz3A7bwI6z3Amw600Pz3AX6mmP6&UserID=-1" target="_blank" class="weui-tabbar__item">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe60b;</i></p>
+            <p class="weui-tabbar__label">在线客服</p>
+        </a>
+        <a href="javascript:void(0);" class="weui-tabbar__item open-popup" data-target="#popKefu">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe73b;</i></p>
+            <p class="weui-tabbar__label">微信客服</p>
+        </a>
+        <a href="/WeChatManage/user_index/" class="weui-tabbar__item">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe60e;</i></p>
+            <p class="weui-tabbar__label">用户中心</p>
+        </a>
+    </div>
+    <div class='weui-popup__container' id="popKefu">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="modal-content" style="padding-top:0rem;">
+                <div class="contact-mod">
+                    <a href="javascript:;" class="close-popup"><i class="weui-icon-cancel"></i></a>
+                    <div class="head">在线客服</div>
+                    <div class="info">
+                        <div class="code">
+                            <img src="/assets/wap/images/qr.jpg">
+                            <p>GDTA4</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/wap/js/jquery-2.1.4.js?v=6.5"></script>
+    <script src="/assets/wap/js/validform.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/countDown.js?v=6.5"></script>
+    <script src="/assets/wap/js/weui.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/fastclick.js?v=6.5"></script>
+    <script src="/assets/wap/js/global.js?v=6.5"></script>
+    <script src="/assets/wap/js/user.js?v=6.5"></script>
+    <script type="text/javascript">
+        //初始化上传文件
+        if ($('.uploadFile').length > 0) {
+            var uploadOption = {
+                urlUpl: '/user_basic/index/cmd-uploadFile.html',
+                urlDel: '/user_basic/index/cmd-delFile.html'
+            };
+            $('.uploadFile').on('change', function (event) {
+                globalObj.fileUpload(event, uploadOption);
+            });
+            /*删除上传图片*/
+            $(document).on("click", ".weui-uploader__file .close", function () {
+                //容器对象
+                var itemObj = $(this).parent('li');
+                var filedir = itemObj.find("input").val();
+                //删除已存储
+                $.ajax({
+                    type: "post", url: uploadOption.urlDel, dataType: 'json', data: "ajax=1&filedir=" + filedir, success: function (dataObj) {
+                        $.toptip(dataObj.msg, dataObj.status ? 'success' : 'error');
+                        //移除
+                        if (dataObj.status) { itemObj.remove(); }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>

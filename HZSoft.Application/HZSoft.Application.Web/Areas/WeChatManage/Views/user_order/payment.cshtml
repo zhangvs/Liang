@@ -1,0 +1,106 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="支付订单 - 济南利新商贸有限公司">
+    <title>支付订单 - 济南利新商贸有限公司</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/user.css?v=6.5" rel="stylesheet">
+    <script src="/assets/wap/js/track_out.js?v=6.5"></script>
+    <script type="text/javascript">
+        var baseUrl = '';
+        //头条
+        var trackToutiaoPara = trackObj.codeToutiao('dLJp5x');
+        if (typeof (trackToutiaoPara.scriptId) != 'undefined') {
+            (function (r, d, s, l) {
+                var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                    return function () {
+                        var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                    }
+                }; for (var i = 0; i < meteor.methods.length; i++) {
+                    var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+                } meteor.load = function () {
+                    var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                    js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+                }; meteor.load(); if (meteor.invoked) { return }
+                meteor.invoked = true; meteor.track("pageview")
+            })(window, document, "script", trackToutiaoPara.scriptId);
+        }
+        //广点通
+        var tracktGdtPara = trackObj.codeGdt('dLJp5x');
+        if (typeof (tracktGdtPara.init) != 'undefined') {
+            !function (g, d, t, e, v, n, s) { if (g.gdt) return; v = g.gdt = function () { v.tk ? v.tk.apply(v, arguments) : v.queue.push(arguments) }; v.sv = '1.0'; v.bt = 0; v.queue = []; n = d.createElement(t); n.async = !0; n.src = e; s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(n, s); }(window, document, 'script', '//qzonestyle.gtimg.cn/qzone/biz/gdt/dmp/user-action/gdtevent.min.js');
+            gdt('init', tracktGdtPara.init);
+        }
+        //快手
+        var tracktKsPara = trackObj.codeKs('dLJp5x');
+        if (typeof (tracktKsPara.trackId) != 'undefined') {
+            (function (root) { var ksscript = document.createElement('script'); ksscript.setAttribute('charset', 'utf-8'); ksscript.src = 'https://static.yximgs.com/udata/pkg/ks-ad-trace-sdk/ks-trace.2.0.1.beta.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ksscript, s); })(window);
+        }
+    </script>
+</head>
+<body>
+    <!--主体部分 开始-->
+    <div class="wrapper">
+        <header><a href="javascript:history.go(-1);" class="t_icon"></a>支付订单</header>
+        <div class="mpart">
+            <div class="vision">
+                <div class="s_mide layer" data-depth=".35"></div>
+                <div class="s_botm layer" data-depth-x=".1" data-depth-y=".08"></div>
+                <div class="s_botm layer" data-depth-x=".18" data-depth-y=".15"></div>
+            </div>
+        </div>
+        <div class="weui-cells__title">支付金额</div>
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">支付全款</label>
+                    <em class="weui-form-preview__value"><font class="f-orange">@ViewBag.Price</font></em>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">支付信息</label>
+                    <span class="weui-form-preview__value">@ViewBag.Tel</span>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">支付方式</div>
+        <form method="post" action="/user_order/paymentProcess/@ViewBag.Id" class="Validform">
+            <div class="weui-cells weui-cells_radio">
+                <label class="weui-cell weui-check__label payType on" for="x11">
+                    <div class="weui-cell__bd"><p><i class="iconfont">&#xe65b;</i>微信支付</p></div>
+                    <div class="weui-cell__ft"><input type="radio" class="weui-check payType" name="pay_type" value="wechat" checked id="x11" datatype="*" errormsg="请选择支付方式！"><span class="weui-icon-checked"></span></div>
+                </label>
+                <label class="weui-cell weui-check__label payType" for="x12"  style="display:none">
+                    <div class="weui-cell__bd"><p><i class="iconfont">&#xe63c;</i>支付宝支付</p></div>
+                    <div class="weui-cell__ft"><input type="radio" class="weui-check" name="pay_type" value="alipay" id="x12"><span class="weui-icon-checked"></span></div>
+                </label>
+            </div>
+            <div class="weui-btn-area plr5">
+                <a href="javascript:;" class="weui-btn weui-btn_warn" id="paySubmit" data-place="mpg">立即支付</a>
+            </div>
+        </form>
+    </div>
+    <!--主体部分 结束-->
+    <script src="/assets/wap/js/jquery-2.1.4.js?v=6.5"></script>
+    <script src="/assets/wap/js/validform.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/weui.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/fastclick.js?v=6.5"></script>
+    <script src="/assets/wap/js/global.js?v=6.5"></script>
+    <script src="/assets/wap/js/user.js?v=6.5"></script>
+    <script type="text/javascript">
+                //$("#paySubmit").trigger("click");
+    </script>
+</body>
+</html>

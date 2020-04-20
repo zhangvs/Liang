@@ -1,0 +1,181 @@
+﻿@{
+    ViewBag.Title = "报表预览";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<!--第三方统计图start-->
+<script src="~/Content/Scripts/echarts/echarts.min.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/dark.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/macarons.js" type="text/javascript"></script>
+<!--第三方统计图end-->
+<!--jqgrid表格组件start-->
+<link href="~/Content/scripts/plugins/jqgrid/jqgrid.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="~/Content/scripts/plugins/jqgrid/jqgrid.min.js"></script>
+<!--表格组件end-->
+<link href="~/Content/styles/hzsoft-report.css" rel="stylesheet" />
+<script src="~/Content/Scripts/dms/dms_calllog.js" type="text/javascript"></script>
+<style type="text/css">
+    table.dataView {
+        border-collapse: collapse;
+    }
+
+    table.dataView th, table.dataView td {
+        border: 1px solid #000;
+        padding: 2px;
+    }
+</style>
+
+   
+ 
+<script>
+    $(function () {
+        //点击时间范围
+        $("#time_horizon a.btn-default").click(function () {
+            $("#time_horizon a.btn-default").removeClass("active");
+            $(this).addClass("active");
+            switch ($(this).attr('data-value')) {
+                case "1"://今天
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "2"://昨天
+                    $("#StartTime").val("@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd")");
+                    break;
+                case "3"://本周
+                    $("#StartTime").val("@DateTime.Now.AddDays(1 - ((int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek)).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "4"://本月
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-01")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "5"://全部
+                    $("#StartTime").val("");
+                    $("#EndTime").val("");
+                    break;
+                default:
+                    break;
+            }
+            doserch();
+        });
+
+        doserch();
+    });
+
+    function doserch() {
+        clearData();
+        var queryJson = {
+            StartTime: $("#StartTime").val(),
+            EndTime: $("#EndTime").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/ReportManage/Dms/GetCallLog",
+            data: { queryJson: JSON.stringify(queryJson), rnd: Math.random() },
+            success: function (data) {
+                if (data) {
+                    var result = JSON.parse(data);
+
+                    DrawEChartCallLog();
+                    var optionCallLog = myChartCallLog.getOption();
+                    for (var j = 0; j < result.length; j++) {
+                        var calllog_name = j + 1 + '.' + result[j].workername;
+                        var calllog_minute = parseFloat((result[j].minute).toFixed());
+                        var calllog_callcount = parseFloat((result[j].callcount).toFixed());
+                        var calllog_yescallcount = parseFloat((result[j].yescallcount).toFixed());
+                        var calllog_nocallcount = parseFloat((result[j].nocallcount).toFixed());
+                        var calllog_jtl = result[j].jtl;
+                        var wash_getcount = parseFloat((result[j].getcount).toFixed());
+                        var wash_surpluscount = parseFloat((result[j].surpluscount).toFixed());
+
+                        sum_minutes += calllog_minute;
+                        sum_callcounts += calllog_callcount;
+                        sum_yescallcounts += calllog_yescallcount;
+                        sum_nocallcounts += calllog_nocallcount;
+                        sum_getcounts += wash_getcount;
+                        sum_surpluscounts += wash_surpluscount;
+
+                        calllog_names.push(calllog_name);
+                        calllog_minutes.push(calllog_minute);
+                        calllog_callcounts.push(calllog_callcount);
+                        calllog_yescallcounts.push(calllog_yescallcount);
+                        calllog_nocallcounts.push(calllog_nocallcount);
+                        calllog_jtls.push(calllog_jtl);
+                        wash_getcounts.push(wash_getcount);
+                        wash_surpluscounts.push(wash_surpluscount);
+                    }
+
+                    optionCallLog.xAxis[0].data = calllog_names;
+                    optionCallLog.series[0].data = calllog_minutes;
+                    optionCallLog.series[1].data = calllog_callcounts;
+                    optionCallLog.series[2].data = calllog_yescallcounts;
+                    optionCallLog.series[3].data = calllog_nocallcounts;
+                    optionCallLog.series[4].data = calllog_jtls;
+                    optionCallLog.series[5].data = wash_getcounts;
+                    optionCallLog.series[6].data = wash_surpluscounts;
+                    if (sum_callcounts==0) {
+                        sum_jtls = 0;
+                    }
+                    else {
+                        sum_jtls = parseFloat((sum_yescallcounts / sum_callcounts * 100).toFixed());
+                    }
+
+                    optionCallLog.title[0].subtext = '总通话时长：' + sum_minutes + '\n总通话数：' + sum_callcounts + '\n总接通数：' + sum_yescallcounts + '\n总未接通数：' + sum_nocallcounts + '\n总接通率：' + sum_jtls + '%' + '\n总获取数：' + sum_getcounts + '\n总剩余数：' + sum_surpluscounts;
+
+                    myChartCallLog.setOption(optionCallLog);
+                }
+            },
+            error: function () {
+                layer.alert('错误', {
+                    skin: 'layui-layer-molv', closeBtn: 0
+                });
+            }
+        });
+    }
+</script>
+<div id="formAreas" style="padding: 30px; margin: 25px;border-radius:5px; border: 1px solid rgb(204, 204, 204); box-shadow: rgb(189, 189, 189) 0px 0px 10px; background: #fff;">
+
+    <div class="titlePanel" style="border:none">
+        <div class="title-search">
+            <table>
+                <tr>
+                    <td style="padding-left: 2px;">
+                        起始日期
+                    </td>
+                    <td style="padding-left: 2px;">
+                        <input id="StartTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"
+                               value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </td>
+                    <td style="padding-left: 2px;">
+                        结束日期
+                    </td>
+                    <td style="padding-left: 2px;">
+                        <input id="EndTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"
+                               value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    </td>
+                    <td style="padding-left: 5px;">
+                        <a id="btn_Search" class="btn btn-primary" onclick="doserch()"><i class="fa fa-search"></i>&nbsp;查询</a>
+                    </td>
+                    <td style="padding-left: 10px;">
+                        <div id="time_horizon" class="btn-group">
+                            <div id="time_horizon" class="btn-group">
+                                <a class="btn btn-default active" data-value="1">今天</a>
+                                <a class="btn btn-default" data-value="2">昨天</a>
+                                <a class="btn btn-default" data-value="3">本周</a>
+                                <a class="btn btn-default" data-value="4">本月</a>
+                                <a class="btn btn-default" data-value="5">全部</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="toolbar">
+            <div class="btn-group">
+                <a id="lr-replace" class="btn btn-default" onclick="reload()"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+            </div>
+        </div>
+    </div> 
+        <div id="mainCallLog"></div>
+</div>

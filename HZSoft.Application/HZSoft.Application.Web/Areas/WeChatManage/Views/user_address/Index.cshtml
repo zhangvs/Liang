@@ -1,0 +1,127 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="配送地址 - 济南利新商贸有限公司">
+    <title>配送地址 - 济南利新商贸有限公司</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/user.css?v=7.4" rel="stylesheet">
+    <script type="text/javascript">
+	var baseUrl = '';
+    </script>
+</head>
+<body>
+    <!--主体部分 开始-->
+    <div class="wrapper">
+        <header><a href="/WeChatManage/user_index/index" class="t_icon"></a>配送地址</header>
+        <div class="mpart">
+            <div class="vision">
+                <div class="s_mide layer" data-depth=".35"></div>
+                <div class="s_botm layer" data-depth-x=".1" data-depth-y=".08"></div>
+                <div class="s_botm layer" data-depth-x=".18" data-depth-y=".15"></div>
+            </div>
+        </div>
+        <ul class="weui-cells user-address">
+            <li class="weui-cell id="myaddress_147787" data-id="147787">
+                <a class="weui-cell__hd mark" href="javascript:;"><i class="weui-icon-success"></i></a>
+                <a class="weui-cell__bd" href="/WeChatManage/user_address/edit/id-147787.html">
+                    <h4>阿斯蒂芬 18777777777</h4><p>天津市 天津市 河东区 阿斯顿发大水发顺丰</p>
+                </a>
+                <a href="javascript:;" class="delete"><i class="weui-icon-cancel"></i></a>
+            </li>
+        </ul>
+        <div class="weui-msg__opr-area">
+            <p class="weui-btn-area"><a href="/WeChatManage/user_address/add" class="weui-btn weui-btn_warn">添加收货地址</a></p>
+        </div>
+    </div>
+    <!--主体部分 结束-->
+    <!-- <div class="weui-footer"> -->
+    <!--     <div class="weui-footer__text"><p>Copyright © 2018 All Rights Reserved<br />济宁云联信息科技有限公司 鲁ICP备13024714号</p></div> -->
+    <!-- </div> -->
+    <div class="sstmb"></div>
+    <div class="weui-tabbar">
+        <a href="/WeChatManage/mpg/index" class="weui-tabbar__item">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe61a;</i></p>
+            <p class="weui-tabbar__label">靓号</p>
+        </a>
+        <a href="http://www.365webcall.cn/chat/ChatWin3.aspx?settings=mw7mPmXN6P0Nbmz3A7bwI6z3Amw600Pz3AX6mmP6&UserID=-1" target="_blank" class="weui-tabbar__item">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe60b;</i></p>
+            <p class="weui-tabbar__label">在线客服</p>
+        </a>
+        <a href="javascript:void(0);" class="weui-tabbar__item open-popup" data-target="#popKefu">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe73b;</i></p>
+            <p class="weui-tabbar__label">微信客服</p>
+        </a>
+        <a href="/WeChatManage/user_index/" class="weui-tabbar__item">
+            <p class="weui-tabbar__icon"><i class="iconfont">&#xe60e;</i></p>
+            <p class="weui-tabbar__label">用户中心</p>
+        </a>
+    </div>
+    <div class='weui-popup__container' id="popKefu">
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="modal-content" style="padding-top:0rem;">
+                <div class="contact-mod">
+                    <a href="javascript:;" class="close-popup"><i class="weui-icon-cancel"></i></a>
+                    <div class="head">在线客服</div>
+                    <div class="info">
+                        <div class="code">
+                            <img src="/assets/wap/images/qr.jpg">
+                            <p>GDTA4</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/wap/js/jquery-2.1.4.js?v=6.5"></script>
+    <script src="/assets/wap/js/validform.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/countDown.js?v=6.5"></script>
+    <script src="/assets/wap/js/weui.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/fastclick.js?v=6.5"></script>
+    <script src="/assets/wap/js/global.js?v=6.5"></script>
+    <script src="/assets/wap/js/user.js?v=6.5"></script>
+    <script type="text/javascript">
+        $(document).on("click", ".user-address .delete", function (e) {
+            var currObj = $(this).closest('li');
+            $.confirm("确认删除吗？", function () {
+                $.ajax({
+                    url: '/user_address/delete/', type: 'post', dataType: 'json', data: 'id=' + currObj.attr('data-id'), success: function (resObj) {
+                        $.toptip(resObj.msg, resObj.status ? 'success' : 'error');
+                        if (resObj.status) {
+                            currObj.remove();
+                        }
+                    }
+                });
+            });
+            return false;
+        });
+        $(document).on("click", ".user-address .mark", function (e) {
+            var currObj = $(this).closest('li');
+            var allsObj = $(".user-address li");
+            $.ajax({
+                url: '/user_address/setMark/', type: 'post', dataType: 'json', data: 'id=' + currObj.attr('data-id'), success: function (resObj) {
+                    $.toptip(resObj.msg, resObj.status ? 'success' : 'error');
+                    if (resObj.status) {
+                        allsObj.find(".mark i").attr('class', 'weui-icon-circle')
+                        currObj.find(".mark i").attr('class', 'weui-icon-success');
+                    }
+                }
+            });
+            return false;
+        });
+    </script>
+</body>
+</html>

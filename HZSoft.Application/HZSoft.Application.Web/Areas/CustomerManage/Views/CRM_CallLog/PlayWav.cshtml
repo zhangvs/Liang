@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "播放录音";
+}
+
+<meta name="viewport" content="width=device-width" />
+<script src="~/Content/scripts/jquery/jquery-1.8.3.min.js"></script>
+
+<style type="text/css">
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .body-bg {
+        width: 100%;
+        height: 100%;
+        background: url(/Content/playwav/model-bg.jpg) center top no-repeat;
+        background-size: 100% 100%;
+    }
+
+    .model-midcon {
+        width: 68%;
+        padding: 10px;
+        margin: 0px auto;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background: url(/Content/playwav/flogin-midbg.png) center center repeat;
+    }
+
+        .model-midcon li {
+            padding: 10px 0px 5px 0px;
+            color: #c2c2c5;
+        }
+
+        .model-midcon label, .model-midcon span {
+            display: inline-block;
+        }
+
+        .model-midcon label {
+            width: 75px;
+            text-align: left;
+        }
+
+        .model-midcon span {
+            padding-left: 5px;
+            color: #fff;
+        }
+</style>
+<div class="body-bg">
+    <h1 style="height:80px;"></h1>
+    <div class="model-midcon">
+        <ul>
+            <li>
+                <label>工号:</label>
+                <span>@ViewBag.WorkerName</span>
+            </li>
+            <li>
+                <label>姓名:</label>
+                <span>@ViewBag.WorkerUserName</span>
+            </li>
+            <li>
+                <label>客户号码:</label>
+                <span>@ViewBag.CallNumber</span>
+            </li>
+            <li>
+                <label>通话时长:</label>
+                <span>@ViewBag.CallDuration</span>
+            </li>
+        </ul>
+
+
+        <div class="NotIE" style="padding-top:15px;">
+
+            <audio id="audio1" autoplay="autoplay" src='http://192.168.1.141:8080/RecFileServer/FileDownload?file=@ViewBag.RecordingFile' controls='controls' style='width: 100%;'></audio>
+
+        </div>
+        <div class="IE" style="padding-top: 10px; text-align:center;">
+            <object width="320" height="100"
+                    type="video/x-ms-asf" url="http://192.168.1.141:8080/RecFileServer/FileDownload?file=@ViewBag.RecordingFile"
+                    classid="CLSID:6BF52A52-394A-11d3-B153-00C04F79FAA6">
+                <param name="url" value="http://192.168.1.141:8080/RecFileServer/FileDownload?file=@ViewBag.RecordingFile">
+                <param name="filename" value="http://192.168.1.141:8080/RecFileServer/FileDownload?file=@ViewBag.RecordingFile">
+                <param name="autostart" value="1">
+            </object>
+        </div>
+    </div>
+    <div style="padding:15px 5px;text-align:center; color: #c2c2c5;">
+        如果您有需求，也可以<a style="color: #f5d73c;" href="http://192.168.1.141:8080/RecFileServer/FileDownload?file=@ViewBag.RecordingFile">点击此处</a>进行下载
+    </div>
+</div>
+<script language="JavaScript">
+    $(function () {
+        if (navigator.userAgent.indexOf("MSIE") > 0
+            || isIE()) { //判断IE11
+            $(".NotIE").remove();
+            if (navigator.plugins) {
+                for (i = 0; i < navigator.plugins.length; i++) {
+                    if (navigator.plugins[i].name.indexOf("MediaPlayer") = 0) {
+                        $top.messager.alert("提示", "没有合适的播放方式,请更换新版本浏览器或下载！", "info");
+                    }
+                }
+            }
+        } else {
+            $(".IE").remove();
+        }
+    });
+    function isIE() { //ie?
+        if (!!window.ActiveXObject || "ActiveXObject" in window)
+            return true;
+        else
+            return false;
+    };
+</script>
+

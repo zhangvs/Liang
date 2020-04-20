@@ -1,0 +1,548 @@
+@{;
+    ViewBag.Title = "列表页面";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+    ;
+    $(function () {
+        InitialPage();
+        GetGrid();
+    });
+    //初始化页面
+    function InitialPage() {
+        //resize重设布局;
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $('#gridTable').setGridHeight($(window).height() - 108.5);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+    //加载表格
+    function GetGrid() {
+        var selectedRowIndex = 0;
+        var $gridTable = $('#gridTable');
+        $gridTable.jqGrid({
+            autowidth: true,
+            height: $(window).height() - 136.5,
+            url: "../../ReportManage/Dms_Cai/GetListJson",
+            datatype: "json",
+            colModel: [
+                { label: 'Id', name: 'Id', index: 'Id', width: 60, align: 'center', sortable: true },
+                { label: '_12_01', name: '_12_01', index: '_12_01', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >= 8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_12_05', name: '_12_05', index: '_12_05', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_10', name: '_12_10', index: '_12_10', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_15', name: '_12_15', index: '_12_15', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_20', name: '_12_20', index: '_12_20', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_25', name: '_12_25', index: '_12_25', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_30', name: '_12_30', index: '_12_30', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_35', name: '_12_35', index: '_12_35', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_41', name: '_12_41', index: '_12_41', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_46', name: '_12_46', index: '_12_46', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_50', name: '_12_50', index: '_12_50', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_12_56', name: '_12_56', index: '_12_56', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_03', name: '_13_03', index: '_13_03', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_06', name: '_13_06', index: '_13_06', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_11', name: '_13_11', index: '_13_11', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_15', name: '_13_15', index: '_13_15', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_21', name: '_13_21', index: '_13_21', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_25', name: '_13_25', index: '_13_25', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_31', name: '_13_31', index: '_13_31', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_36', name: '_13_36', index: '_13_36', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_41', name: '_13_41', index: '_13_41', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_47', name: '_13_47', index: '_13_47', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_51', name: '_13_51', index: '_13_51', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_13_55', name: '_13_55', index: '_13_55', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_01', name: '_14_01', index: '_14_01', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_05', name: '_14_05', index: '_14_05', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_12', name: '_14_12', index: '_14_12', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_17', name: '_14_17', index: '_14_17', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_22', name: '_14_22', index: '_14_22', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_27', name: '_14_27', index: '_14_27', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_31', name: '_14_31', index: '_14_31', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_35', name: '_14_35', index: '_14_35', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_41', name: '_14_41', index: '_14_41', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_46', name: '_14_46', index: '_14_46', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_51', name: '_14_51', index: '_14_51', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_14_55', name: '_14_55', index: '_14_55', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_01', name: '_15_01', index: '_15_01', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_06', name: '_15_06', index: '_15_06', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_10', name: '_15_10', index: '_15_10', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_15', name: '_15_15', index: '_15_15', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_20', name: '_15_20', index: '_15_20', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_26', name: '_15_26', index: '_15_26', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_30', name: '_15_30', index: '_15_30', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_35', name: '_15_35', index: '_15_35', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_41', name: '_15_41', index: '_15_41', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_45', name: '_15_45', index: '_15_45', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_51', name: '_15_51', index: '_15_51', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_15_55', name: '_15_55', index: '_15_55', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_16_00', name: '_16_00', index: '_16_00', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_16_05', name: '_16_05', index: '_16_05', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_16_11', name: '_16_11', index: '_16_11', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_16_15', name: '_16_15', index: '_16_15', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_16_21', name: '_16_21', index: '_16_21', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_16_26', name: '_16_26', index: '_16_26', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >=8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_16_31', name: '_16_31', index: '_16_31', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >=8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_16_35', name: '_16_35', index: '_16_35', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >=8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_16_40', name: '_16_40', index: '_16_40', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >=8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_16_45', name: '_16_45', index: '_16_45', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >= 8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_16_50', name: '_16_50', index: '_16_50', width: 60, align: 'center', sortable: true, formatter: function (cellvalue, options, rowObject) { if (cellvalue >= 310) { return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>"; } else if (cellvalue >= 8) { return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>"; } else { return cellvalue; } } },
+                { label: '_17_30', name: '_17_30', index: '_17_30', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_17_36', name: '_17_36', index: '_17_36', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_17_40', name: '_17_40', index: '_17_40', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_17_46', name: '_17_46', index: '_17_46', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_17_50', name: '_17_50', index: '_17_50', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_17_55', name: '_17_55', index: '_17_55', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_00', name: '_18_00', index: '_18_00', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_05', name: '_18_05', index: '_18_05', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_12', name: '_18_12', index: '_18_12', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_15', name: '_18_15', index: '_18_15', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_20', name: '_18_20', index: '_18_20', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_25', name: '_18_25', index: '_18_25', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_30', name: '_18_30', index: '_18_30', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_35', name: '_18_35', index: '_18_35', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_40', name: '_18_40', index: '_18_40', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_45', name: '_18_45', index: '_18_45', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_50', name: '_18_50', index: '_18_50', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_18_56', name: '_18_56', index: '_18_56', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_00', name: '_19_00', index: '_19_00', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_05', name: '_19_05', index: '_19_05', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_10', name: '_19_10', index: '_19_10', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_16', name: '_19_16', index: '_19_16', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_21', name: '_19_21', index: '_19_21', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_27', name: '_19_27', index: '_19_27', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_31', name: '_19_31', index: '_19_31', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_37', name: '_19_37', index: '_19_37', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_42', name: '_19_42', index: '_19_42', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_47', name: '_19_47', index: '_19_47', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_51', name: '_19_51', index: '_19_51', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_19_57', name: '_19_57', index: '_19_57', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_00', name: '_20_00', index: '_20_00', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_05', name: '_20_05', index: '_20_05', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_11', name: '_20_11', index: '_20_11', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_15', name: '_20_15', index: '_20_15', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_21', name: '_20_21', index: '_20_21', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_25', name: '_20_25', index: '_20_25', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_32', name: '_20_32', index: '_20_32', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                { label: '_20_36', name: '_20_36', index: '_20_36', width: 60, align: 'center', sortable: true ,formatter: function (cellvalue, options, rowObject) {if (cellvalue >=310) {return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";} else if (cellvalue >=8) {return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";} else {return cellvalue;}}},
+                {
+                    label: '_20_40', name: '_20_40', index: '_20_40', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >=310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue+"</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_20_45', name: '_20_45', index: '_20_45', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_20_51', name: '_20_51', index: '_20_51', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_20_56', name: '_20_56', index: '_20_56', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_00', name: '_21_00', index: '_21_00', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_05', name: '_21_05', index: '_21_05', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_11', name: '_21_11', index: '_21_11', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_15', name: '_21_15', index: '_21_15', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_21', name: '_21_21', index: '_21_21', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_26', name: '_21_26', index: '_21_26', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_32', name: '_21_32', index: '_21_32', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_36', name: '_21_36', index: '_21_36', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_41', name: '_21_41', index: '_21_41', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_46', name: '_21_46', index: '_21_46', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }},
+                {
+                    label: '_21_50', name: '_21_50', index: '_21_50', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_21_55', name: '_21_55', index: '_21_55', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_00', name: '_22_00', index: '_22_00', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_05', name: '_22_05', index: '_22_05', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_10', name: '_22_10', index: '_22_10', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >=8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_15', name: '_22_15', index: '_22_15', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_20', name: '_22_20', index: '_22_20', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_25', name: '_22_25', index: '_22_25', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_30', name: '_22_30', index: '_22_30', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_35', name: '_22_35', index: '_22_35', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_40', name: '_22_40', index: '_22_40', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_45', name: '_22_45', index: '_22_45', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+                {
+                    label: '_22_50', name: '_22_50', index: '_22_50', width: 60, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue >= 310) {
+                            return "<span style='color:#FFF;background-color:#FF0000'>" + cellvalue + "</span>";
+                        } else if (cellvalue >= 8) {
+                            return "<span style='color:#FFF;background-color:#FF34B3'>" + cellvalue + "</span>";
+                        } else {
+                            return cellvalue;
+                        }
+                    }
+                },
+
+                { label: 'ren', name: 'ren', index: 'ren', width: 60, align: 'center', sortable: true },
+                { label: 'shu', name: 'shu', index: 'shu', width: 60, align: 'center', sortable: true },
+            ],
+            viewrecords: true,
+            rowNum: 30,
+            rowList: [30, 50, 100, 1000, 1000, 10000],
+            pager: "#gridPager",
+            sortname: 'ID',
+            sortorder: 'desc',
+            rownumbers: true,
+            shrinkToFit: false,
+            gridview: true,
+            onSelectRow: function () {
+                selectedRowIndex = $('#' + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $('#' + this.id).setSelection(selectedRowIndex, false);
+            }
+        });
+
+        //查询事件
+        $("#btn_Search").click(function () {
+            var queryJson = {
+                Number7: $("#txt_Keyword").val()
+            }
+            $gridTable.jqGrid('setGridParam', {
+                postData: { queryJson: JSON.stringify(queryJson) }, page: 1
+            }).trigger('reloadGrid');
+        });
+        //查询回车
+        $('#txt_Keyword').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#btn_Search').trigger("click");
+            }
+        });
+    }
+    //新增
+    function btn_add() {
+        dialogOpen({
+            id: 'Form',
+            title: '添加Dms_Cai',
+            url: '/ReportManage/Dms_Cai/Dms_CaiForm',
+            width: '500px',
+            height: 'px',
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick();
+            }
+        });
+    }
+    //编辑
+    function btn_edit() {
+        var keyValue = $('#gridTable').jqGridRowValue('Id');
+        if (checkedRow(keyValue)) {
+            dialogOpen({
+                id: 'Form',
+                title: '编辑Dms_Cai',
+                url: '/ReportManage/Dms_Cai/Dms_CaiForm?keyValue=' + keyValue,
+                width: '500px',
+                height: 'px',
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick();
+                }
+            })
+        }
+    }
+    //删除
+    function btn_delete() {
+        var keyValue = $('#gridTable').jqGridRowValue('Id');
+        if (keyValue) {
+            $.RemoveForm({
+                url: '../../ReportManage/Dms_Cai/RemoveForm',
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $('#gridTable').trigger('reloadGrid');
+                }
+            })
+        } else {
+            dialogMsg('请选择需要删除的Dms_Cai！', 0);
+        }
+    }
+</script>
+
+<div class="titlePanel">
+    <div class="title-search">
+        <table>
+            <tr>
+                <td>
+                    <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入要查询关键字" style="width: 200px;" />
+                </td>
+                <td style="padding-left: 5px;">
+                    <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>查询</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a id="lr-replace" class="btn btn-default" onclick="reload()"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+            <a id="lr-add" class="btn btn-default" onclick="btn_add()"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a id="lr-edit" class="btn btn-default" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+            <a id="lr-delete" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridTable"></table>
+    <div id="gridPager"></div>
+</div>

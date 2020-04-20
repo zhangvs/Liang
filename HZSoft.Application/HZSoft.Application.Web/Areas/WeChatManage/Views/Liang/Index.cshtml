@@ -1,0 +1,1174 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=GBK">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>@ViewBag.FullName  </title>
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <link href="~/ContentNew/css/iconfont.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/ContentNew/css/m.css">
+    <link rel="stylesheet" type="text/css" href="~/ContentNew/css/style.css">
+
+</head>
+
+<body class="page">
+    <!--header begin-->
+    <div class="box search-section">
+        <div class="in-header">
+            <div class="top-bar clearfix">
+                <div class="filter-bar clearfix">
+                    <div class="filter-bar-city"><a style="color: white;" href="@ViewBag.SelectCity?organizeId=@ViewBag.organizeId&city=@ViewBag.city" class="selectCity">@ViewBag.cityName</a></div>
+                </div>
+                <div class="col80">
+                    <input type="text" placeholder="输入关键字" id="topkw" onclick="javascript:showKwSection();">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-line" style="height:64px;"></div>
+    <div class="mask hide"></div>
+    <div class="filter-pop hide in-filter-pop">
+        <!--city begin-->
+        <div class="city hide">
+            <div class="left">
+                <ul>
+                    <li data-provinceid="0" class="cur">全部</li>
+
+                    <li data-provinceid="100">北京</li>
+
+                    <li data-provinceid="200">天津</li>
+
+                    <li data-provinceid="300">河北</li>
+
+                    <li data-provinceid="400">山西</li>
+
+                    <li data-provinceid="500">内蒙古</li>
+
+                    <li data-provinceid="600">辽宁</li>
+
+                    <li data-provinceid="700">吉林</li>
+
+                    <li data-provinceid="800">黑龙江</li>
+
+                    <li data-provinceid="900">上海</li>
+
+                    <li data-provinceid="1000">江苏</li>
+
+                    <li data-provinceid="1100">浙江</li>
+
+                    <li data-provinceid="1200">安徽</li>
+
+                    <li data-provinceid="1300">福建</li>
+
+                    <li data-provinceid="1400">江西</li>
+
+                    <li data-provinceid="1500">山东</li>
+
+                    <li data-provinceid="1600">河南</li>
+
+                    <li data-provinceid="1700">湖北</li>
+
+                    <li data-provinceid="1800">湖南</li>
+
+                    <li data-provinceid="1900">广东</li>
+
+                    <li data-provinceid="2000">广西</li>
+
+                    <li data-provinceid="2100">海南</li>
+
+                    <li data-provinceid="2200">四川</li>
+
+                    <li data-provinceid="2300">贵州</li>
+
+                    <li data-provinceid="2400">云南</li>
+
+                    <li data-provinceid="2500">西藏</li>
+
+                    <li data-provinceid="2600">陕西</li>
+
+                    <li data-provinceid="2700">甘肃</li>
+
+                    <li data-provinceid="2800">青海</li>
+
+                    <li data-provinceid="2900">宁夏</li>
+
+                    <li data-provinceid="3000">新疆</li>
+
+                    <li data-provinceid="3100">重庆</li>
+
+                </ul>
+            </div>
+            <div class="right">
+                <ul>
+                    <li data-cityid="0" data-provinceid="0" data-provincename="">全部</li>
+
+                    <li class="hide" data-cityid="101" data-cityname="北京" data-provinceid="100" data-provincename="北京">北京</li>
+
+                    <li class="hide" data-cityid="201" data-cityname="天津" data-provinceid="200" data-provincename="天津">天津</li>
+
+                    <li class="hide" data-cityid="301" data-cityname="石家庄" data-provinceid="300" data-provincename="河北">石家庄</li>
+
+                    <li class="hide" data-cityid="302" data-cityname="唐山" data-provinceid="300" data-provincename="河北">唐山</li>
+
+                    <li class="hide" data-cityid="303" data-cityname="秦皇岛" data-provinceid="300" data-provincename="河北">秦皇岛</li>
+
+                    <li class="hide" data-cityid="304" data-cityname="邯郸" data-provinceid="300" data-provincename="河北">邯郸</li>
+
+                    <li class="hide" data-cityid="305" data-cityname="邢台" data-provinceid="300" data-provincename="河北">邢台</li>
+
+                    <li class="hide" data-cityid="306" data-cityname="保定" data-provinceid="300" data-provincename="河北">保定</li>
+
+                    <li class="hide" data-cityid="307" data-cityname="张家口" data-provinceid="300" data-provincename="河北">张家口</li>
+
+                    <li class="hide" data-cityid="308" data-cityname="承德" data-provinceid="300" data-provincename="河北">承德</li>
+
+                    <li class="hide" data-cityid="309" data-cityname="沧州" data-provinceid="300" data-provincename="河北">沧州</li>
+
+                    <li class="hide" data-cityid="310" data-cityname="廊坊" data-provinceid="300" data-provincename="河北">廊坊</li>
+
+                    <li class="hide" data-cityid="312" data-cityname="衡水" data-provinceid="300" data-provincename="河北">衡水</li>
+
+                    <li class="hide" data-cityid="401" data-cityname="太原" data-provinceid="400" data-provincename="山西">太原</li>
+
+                    <li class="hide" data-cityid="402" data-cityname="大同" data-provinceid="400" data-provincename="山西">大同</li>
+
+                    <li class="hide" data-cityid="403" data-cityname="阳泉" data-provinceid="400" data-provincename="山西">阳泉</li>
+
+                    <li class="hide" data-cityid="404" data-cityname="长治" data-provinceid="400" data-provincename="山西">长治</li>
+
+                    <li class="hide" data-cityid="405" data-cityname="晋城" data-provinceid="400" data-provincename="山西">晋城</li>
+
+                    <li class="hide" data-cityid="406" data-cityname="朔州" data-provinceid="400" data-provincename="山西">朔州</li>
+
+                    <li class="hide" data-cityid="407" data-cityname="忻州" data-provinceid="400" data-provincename="山西">忻州</li>
+
+                    <li class="hide" data-cityid="408" data-cityname="吕梁" data-provinceid="400" data-provincename="山西">吕梁</li>
+
+                    <li class="hide" data-cityid="409" data-cityname="晋中" data-provinceid="400" data-provincename="山西">晋中</li>
+
+                    <li class="hide" data-cityid="410" data-cityname="临汾" data-provinceid="400" data-provincename="山西">临汾</li>
+
+                    <li class="hide" data-cityid="411" data-cityname="运城" data-provinceid="400" data-provincename="山西">运城</li>
+
+                    <li class="hide" data-cityid="501" data-cityname="呼和浩特" data-provinceid="500" data-provincename="内蒙古">呼和浩特</li>
+
+                    <li class="hide" data-cityid="502" data-cityname="包头" data-provinceid="500" data-provincename="内蒙古">包头</li>
+
+                    <li class="hide" data-cityid="503" data-cityname="乌海" data-provinceid="500" data-provincename="内蒙古">乌海</li>
+
+                    <li class="hide" data-cityid="504" data-cityname="赤峰" data-provinceid="500" data-provincename="内蒙古">赤峰</li>
+
+                    <li class="hide" data-cityid="505" data-cityname="呼伦贝尔" data-provinceid="500" data-provincename="内蒙古">呼伦贝尔</li>
+
+                    <li class="hide" data-cityid="507" data-cityname="通辽" data-provinceid="500" data-provincename="内蒙古">通辽</li>
+
+                    <li class="hide" data-cityid="508" data-cityname="锡林郭勒盟" data-provinceid="500" data-provincename="内蒙古">锡林郭勒盟</li>
+
+                    <li class="hide" data-cityid="509" data-cityname="乌兰察布" data-provinceid="500" data-provincename="内蒙古">乌兰察布</li>
+
+                    <li class="hide" data-cityid="510" data-cityname="鄂尔多斯" data-provinceid="500" data-provincename="内蒙古">鄂尔多斯</li>
+
+                    <li class="hide" data-cityid="511" data-cityname="巴彦淖尔" data-provinceid="500" data-provincename="内蒙古">巴彦淖尔</li>
+
+                    <li class="hide" data-cityid="512" data-cityname="阿拉善盟" data-provinceid="500" data-provincename="内蒙古">阿拉善盟</li>
+
+                    <li class="hide" data-cityid="601" data-cityname="沈阳" data-provinceid="600" data-provincename="辽宁">沈阳</li>
+
+                    <li class="hide" data-cityid="602" data-cityname="大连" data-provinceid="600" data-provincename="辽宁">大连</li>
+
+                    <li class="hide" data-cityid="603" data-cityname="鞍山" data-provinceid="600" data-provincename="辽宁">鞍山</li>
+
+                    <li class="hide" data-cityid="604" data-cityname="抚顺" data-provinceid="600" data-provincename="辽宁">抚顺</li>
+
+                    <li class="hide" data-cityid="605" data-cityname="本溪" data-provinceid="600" data-provincename="辽宁">本溪</li>
+
+                    <li class="hide" data-cityid="606" data-cityname="丹东" data-provinceid="600" data-provincename="辽宁">丹东</li>
+
+                    <li class="hide" data-cityid="607" data-cityname="锦州" data-provinceid="600" data-provincename="辽宁">锦州</li>
+
+                    <li class="hide" data-cityid="608" data-cityname="营口" data-provinceid="600" data-provincename="辽宁">营口</li>
+
+                    <li class="hide" data-cityid="609" data-cityname="阜新" data-provinceid="600" data-provincename="辽宁">阜新</li>
+
+                    <li class="hide" data-cityid="610" data-cityname="辽阳" data-provinceid="600" data-provincename="辽宁">辽阳</li>
+
+                    <li class="hide" data-cityid="611" data-cityname="盘锦" data-provinceid="600" data-provincename="辽宁">盘锦</li>
+
+                    <li class="hide" data-cityid="612" data-cityname="铁岭" data-provinceid="600" data-provincename="辽宁">铁岭</li>
+
+                    <li class="hide" data-cityid="613" data-cityname="朝阳" data-provinceid="600" data-provincename="辽宁">朝阳</li>
+
+                    <li class="hide" data-cityid="614" data-cityname="葫芦岛" data-provinceid="600" data-provincename="辽宁">葫芦岛</li>
+
+                    <li class="hide" data-cityid="701" data-cityname="长春" data-provinceid="700" data-provincename="吉林">长春</li>
+
+                    <li class="hide" data-cityid="702" data-cityname="吉林" data-provinceid="700" data-provincename="吉林">吉林</li>
+
+                    <li class="hide" data-cityid="703" data-cityname="四平" data-provinceid="700" data-provincename="吉林">四平</li>
+
+                    <li class="hide" data-cityid="704" data-cityname="辽源" data-provinceid="700" data-provincename="吉林">辽源</li>
+
+                    <li class="hide" data-cityid="705" data-cityname="通化" data-provinceid="700" data-provincename="吉林">通化</li>
+
+                    <li class="hide" data-cityid="706" data-cityname="松原" data-provinceid="700" data-provincename="吉林">松原</li>
+
+                    <li class="hide" data-cityid="707" data-cityname="白城" data-provinceid="700" data-provincename="吉林">白城</li>
+
+                    <li class="hide" data-cityid="708" data-cityname="延边" data-provinceid="700" data-provincename="吉林">延边</li>
+
+                    <li class="hide" data-cityid="709" data-cityname="白山" data-provinceid="700" data-provincename="吉林">白山</li>
+
+                    <li class="hide" data-cityid="801" data-cityname="哈尔滨" data-provinceid="800" data-provincename="黑龙江">哈尔滨</li>
+
+                    <li class="hide" data-cityid="802" data-cityname="齐齐哈尔" data-provinceid="800" data-provincename="黑龙江">齐齐哈尔</li>
+
+                    <li class="hide" data-cityid="803" data-cityname="鸡西" data-provinceid="800" data-provincename="黑龙江">鸡西</li>
+
+                    <li class="hide" data-cityid="804" data-cityname="鹤岗" data-provinceid="800" data-provincename="黑龙江">鹤岗</li>
+
+                    <li class="hide" data-cityid="805" data-cityname="双鸭山" data-provinceid="800" data-provincename="黑龙江">双鸭山</li>
+
+                    <li class="hide" data-cityid="806" data-cityname="大庆" data-provinceid="800" data-provincename="黑龙江">大庆</li>
+
+                    <li class="hide" data-cityid="807" data-cityname="伊春" data-provinceid="800" data-provincename="黑龙江">伊春</li>
+
+                    <li class="hide" data-cityid="808" data-cityname="佳木斯" data-provinceid="800" data-provincename="黑龙江">佳木斯</li>
+
+                    <li class="hide" data-cityid="809" data-cityname="七台河" data-provinceid="800" data-provincename="黑龙江">七台河</li>
+
+                    <li class="hide" data-cityid="810" data-cityname="牡丹江" data-provinceid="800" data-provincename="黑龙江">牡丹江</li>
+
+                    <li class="hide" data-cityid="811" data-cityname="黑河" data-provinceid="800" data-provincename="黑龙江">黑河</li>
+
+                    <li class="hide" data-cityid="812" data-cityname="绥化" data-provinceid="800" data-provincename="黑龙江">绥化</li>
+
+                    <li class="hide" data-cityid="813" data-cityname="大兴安岭" data-provinceid="800" data-provincename="黑龙江">大兴安岭</li>
+
+                    <li class="hide" data-cityid="901" data-cityname="上海" data-provinceid="900" data-provincename="上海">上海</li>
+
+                    <li class="hide" data-cityid="1001" data-cityname="南京" data-provinceid="1000" data-provincename="江苏">南京</li>
+
+                    <li class="hide" data-cityid="1002" data-cityname="无锡" data-provinceid="1000" data-provincename="江苏">无锡</li>
+
+                    <li class="hide" data-cityid="1003" data-cityname="徐州" data-provinceid="1000" data-provincename="江苏">徐州</li>
+
+                    <li class="hide" data-cityid="1004" data-cityname="常州" data-provinceid="1000" data-provincename="江苏">常州</li>
+
+                    <li class="hide" data-cityid="1005" data-cityname="苏州" data-provinceid="1000" data-provincename="江苏">苏州</li>
+
+                    <li class="hide" data-cityid="1006" data-cityname="南通" data-provinceid="1000" data-provincename="江苏">南通</li>
+
+                    <li class="hide" data-cityid="1007" data-cityname="连云港" data-provinceid="1000" data-provincename="江苏">连云港</li>
+
+                    <li class="hide" data-cityid="1008" data-cityname="淮安" data-provinceid="1000" data-provincename="江苏">淮安</li>
+
+                    <li class="hide" data-cityid="1009" data-cityname="宿迁" data-provinceid="1000" data-provincename="江苏">宿迁</li>
+
+                    <li class="hide" data-cityid="1010" data-cityname="盐城" data-provinceid="1000" data-provincename="江苏">盐城</li>
+
+                    <li class="hide" data-cityid="1011" data-cityname="扬州" data-provinceid="1000" data-provincename="江苏">扬州</li>
+
+                    <li class="hide" data-cityid="1012" data-cityname="泰州" data-provinceid="1000" data-provincename="江苏">泰州</li>
+
+                    <li class="hide" data-cityid="1013" data-cityname="镇江" data-provinceid="1000" data-provincename="江苏">镇江</li>
+
+                    <li class="hide" data-cityid="1101" data-cityname="杭州" data-provinceid="1100" data-provincename="浙江">杭州</li>
+
+                    <li class="hide" data-cityid="1102" data-cityname="宁波" data-provinceid="1100" data-provincename="浙江">宁波</li>
+
+                    <li class="hide" data-cityid="1103" data-cityname="温州" data-provinceid="1100" data-provincename="浙江">温州</li>
+
+                    <li class="hide" data-cityid="1104" data-cityname="嘉兴" data-provinceid="1100" data-provincename="浙江">嘉兴</li>
+
+                    <li class="hide" data-cityid="1105" data-cityname="湖州" data-provinceid="1100" data-provincename="浙江">湖州</li>
+
+                    <li class="hide" data-cityid="1106" data-cityname="绍兴" data-provinceid="1100" data-provincename="浙江">绍兴</li>
+
+                    <li class="hide" data-cityid="1107" data-cityname="金华" data-provinceid="1100" data-provincename="浙江">金华</li>
+
+                    <li class="hide" data-cityid="1108" data-cityname="衢州" data-provinceid="1100" data-provincename="浙江">衢州</li>
+
+                    <li class="hide" data-cityid="1109" data-cityname="舟山" data-provinceid="1100" data-provincename="浙江">舟山</li>
+
+                    <li class="hide" data-cityid="1110" data-cityname="丽水" data-provinceid="1100" data-provincename="浙江">丽水</li>
+
+                    <li class="hide" data-cityid="1111" data-cityname="台州" data-provinceid="1100" data-provincename="浙江">台州</li>
+
+                    <li class="hide" data-cityid="1201" data-cityname="合肥" data-provinceid="1200" data-provincename="安徽">合肥</li>
+
+                    <li class="hide" data-cityid="1202" data-cityname="芜湖" data-provinceid="1200" data-provincename="安徽">芜湖</li>
+
+                    <li class="hide" data-cityid="1203" data-cityname="蚌埠" data-provinceid="1200" data-provincename="安徽">蚌埠</li>
+
+                    <li class="hide" data-cityid="1204" data-cityname="淮南" data-provinceid="1200" data-provincename="安徽">淮南</li>
+
+                    <li class="hide" data-cityid="1205" data-cityname="马鞍山" data-provinceid="1200" data-provincename="安徽">马鞍山</li>
+
+                    <li class="hide" data-cityid="1206" data-cityname="淮北" data-provinceid="1200" data-provincename="安徽">淮北</li>
+
+                    <li class="hide" data-cityid="1207" data-cityname="铜陵" data-provinceid="1200" data-provincename="安徽">铜陵</li>
+
+                    <li class="hide" data-cityid="1208" data-cityname="安庆" data-provinceid="1200" data-provincename="安徽">安庆</li>
+
+                    <li class="hide" data-cityid="1209" data-cityname="黄山" data-provinceid="1200" data-provincename="安徽">黄山</li>
+
+                    <li class="hide" data-cityid="1210" data-cityname="滁州" data-provinceid="1200" data-provincename="安徽">滁州</li>
+
+                    <li class="hide" data-cityid="1211" data-cityname="阜阳" data-provinceid="1200" data-provincename="安徽">阜阳</li>
+
+                    <li class="hide" data-cityid="1212" data-cityname="宿州" data-provinceid="1200" data-provincename="安徽">宿州</li>
+
+                    <li class="hide" data-cityid="1213" data-cityname="六安" data-provinceid="1200" data-provincename="安徽">六安</li>
+
+                    <li class="hide" data-cityid="1214" data-cityname="宣城" data-provinceid="1200" data-provincename="安徽">宣城</li>
+
+                    <li class="hide" data-cityid="1216" data-cityname="池州" data-provinceid="1200" data-provincename="安徽">池州</li>
+
+                    <li class="hide" data-cityid="1217" data-cityname="亳州" data-provinceid="1200" data-provincename="安徽">亳州</li>
+
+                    <li class="hide" data-cityid="1301" data-cityname="福州" data-provinceid="1300" data-provincename="福建">福州</li>
+
+                    <li class="hide" data-cityid="1302" data-cityname="厦门" data-provinceid="1300" data-provincename="福建">厦门</li>
+
+                    <li class="hide" data-cityid="1303" data-cityname="莆田" data-provinceid="1300" data-provincename="福建">莆田</li>
+
+                    <li class="hide" data-cityid="1304" data-cityname="三明" data-provinceid="1300" data-provincename="福建">三明</li>
+
+                    <li class="hide" data-cityid="1305" data-cityname="泉州" data-provinceid="1300" data-provincename="福建">泉州</li>
+
+                    <li class="hide" data-cityid="1306" data-cityname="漳州" data-provinceid="1300" data-provincename="福建">漳州</li>
+
+                    <li class="hide" data-cityid="1307" data-cityname="南平" data-provinceid="1300" data-provincename="福建">南平</li>
+
+                    <li class="hide" data-cityid="1308" data-cityname="宁德" data-provinceid="1300" data-provincename="福建">宁德</li>
+
+                    <li class="hide" data-cityid="1309" data-cityname="龙岩" data-provinceid="1300" data-provincename="福建">龙岩</li>
+
+                    <li class="hide" data-cityid="1401" data-cityname="南昌" data-provinceid="1400" data-provincename="江西">南昌</li>
+
+                    <li class="hide" data-cityid="1402" data-cityname="景德镇" data-provinceid="1400" data-provincename="江西">景德镇</li>
+
+                    <li class="hide" data-cityid="1403" data-cityname="萍乡" data-provinceid="1400" data-provincename="江西">萍乡</li>
+
+                    <li class="hide" data-cityid="1404" data-cityname="九江" data-provinceid="1400" data-provincename="江西">九江</li>
+
+                    <li class="hide" data-cityid="1405" data-cityname="新余" data-provinceid="1400" data-provincename="江西">新余</li>
+
+                    <li class="hide" data-cityid="1406" data-cityname="鹰潭" data-provinceid="1400" data-provincename="江西">鹰潭</li>
+
+                    <li class="hide" data-cityid="1407" data-cityname="赣州" data-provinceid="1400" data-provincename="江西">赣州</li>
+
+                    <li class="hide" data-cityid="1408" data-cityname="宜春" data-provinceid="1400" data-provincename="江西">宜春</li>
+
+                    <li class="hide" data-cityid="1409" data-cityname="上饶" data-provinceid="1400" data-provincename="江西">上饶</li>
+
+                    <li class="hide" data-cityid="1410" data-cityname="吉安" data-provinceid="1400" data-provincename="江西">吉安</li>
+
+                    <li class="hide" data-cityid="1411" data-cityname="抚州" data-provinceid="1400" data-provincename="江西">抚州</li>
+
+                    <li class="hide" data-cityid="1501" data-cityname="济南" data-provinceid="1500" data-provincename="山东">济南</li>
+
+                    <li class="hide" data-cityid="1502" data-cityname="青岛" data-provinceid="1500" data-provincename="山东">青岛</li>
+
+                    <li class="hide" data-cityid="1503" data-cityname="淄博" data-provinceid="1500" data-provincename="山东">淄博</li>
+
+                    <li class="hide" data-cityid="1504" data-cityname="枣庄" data-provinceid="1500" data-provincename="山东">枣庄</li>
+
+                    <li class="hide" data-cityid="1505" data-cityname="东营" data-provinceid="1500" data-provincename="山东">东营</li>
+
+                    <li class="hide" data-cityid="1506" data-cityname="烟台" data-provinceid="1500" data-provincename="山东">烟台</li>
+
+                    <li class="hide" data-cityid="1507" data-cityname="潍坊" data-provinceid="1500" data-provincename="山东">潍坊</li>
+
+                    <li class="hide" data-cityid="1508" data-cityname="济宁" data-provinceid="1500" data-provincename="山东">济宁</li>
+
+                    <li class="hide" data-cityid="1509" data-cityname="泰安" data-provinceid="1500" data-provincename="山东">泰安</li>
+
+                    <li class="hide" data-cityid="1510" data-cityname="威海" data-provinceid="1500" data-provincename="山东">威海</li>
+
+                    <li class="hide" data-cityid="1511" data-cityname="日照" data-provinceid="1500" data-provincename="山东">日照</li>
+
+                    <li class="hide" data-cityid="1512" data-cityname="莱芜" data-provinceid="1500" data-provincename="山东">莱芜</li>
+
+                    <li class="hide" data-cityid="1513" data-cityname="滨州" data-provinceid="1500" data-provincename="山东">滨州</li>
+
+                    <li class="hide" data-cityid="1514" data-cityname="德州" data-provinceid="1500" data-provincename="山东">德州</li>
+
+                    <li class="hide" data-cityid="1515" data-cityname="聊城" data-provinceid="1500" data-provincename="山东">聊城</li>
+
+                    <li class="hide" data-cityid="1516" data-cityname="临沂" data-provinceid="1500" data-provincename="山东">临沂</li>
+
+                    <li class="hide" data-cityid="1517" data-cityname="菏泽" data-provinceid="1500" data-provincename="山东">菏泽</li>
+
+                    <li class="hide" data-cityid="1601" data-cityname="郑州" data-provinceid="1600" data-provincename="河南">郑州</li>
+
+                    <li class="hide" data-cityid="1602" data-cityname="开封" data-provinceid="1600" data-provincename="河南">开封</li>
+
+                    <li class="hide" data-cityid="1603" data-cityname="洛阳" data-provinceid="1600" data-provincename="河南">洛阳</li>
+
+                    <li class="hide" data-cityid="1604" data-cityname="平顶山" data-provinceid="1600" data-provincename="河南">平顶山</li>
+
+                    <li class="hide" data-cityid="1605" data-cityname="安阳" data-provinceid="1600" data-provincename="河南">安阳</li>
+
+                    <li class="hide" data-cityid="1606" data-cityname="鹤壁" data-provinceid="1600" data-provincename="河南">鹤壁</li>
+
+                    <li class="hide" data-cityid="1607" data-cityname="新乡" data-provinceid="1600" data-provincename="河南">新乡</li>
+
+                    <li class="hide" data-cityid="1608" data-cityname="焦作" data-provinceid="1600" data-provincename="河南">焦作</li>
+
+                    <li class="hide" data-cityid="1609" data-cityname="濮阳" data-provinceid="1600" data-provincename="河南">濮阳</li>
+
+                    <li class="hide" data-cityid="1610" data-cityname="许昌" data-provinceid="1600" data-provincename="河南">许昌</li>
+
+                    <li class="hide" data-cityid="1611" data-cityname="漯河" data-provinceid="1600" data-provincename="河南">漯河</li>
+
+                    <li class="hide" data-cityid="1612" data-cityname="三门峡" data-provinceid="1600" data-provincename="河南">三门峡</li>
+
+                    <li class="hide" data-cityid="1613" data-cityname="商丘" data-provinceid="1600" data-provincename="河南">商丘</li>
+
+                    <li class="hide" data-cityid="1614" data-cityname="周口" data-provinceid="1600" data-provincename="河南">周口</li>
+
+                    <li class="hide" data-cityid="1615" data-cityname="驻马店" data-provinceid="1600" data-provincename="河南">驻马店</li>
+
+                    <li class="hide" data-cityid="1616" data-cityname="南阳" data-provinceid="1600" data-provincename="河南">南阳</li>
+
+                    <li class="hide" data-cityid="1617" data-cityname="信阳" data-provinceid="1600" data-provincename="河南">信阳</li>
+
+                    <li class="hide" data-cityid="1701" data-cityname="武汉" data-provinceid="1700" data-provincename="湖北">武汉</li>
+
+                    <li class="hide" data-cityid="1702" data-cityname="黄石" data-provinceid="1700" data-provincename="湖北">黄石</li>
+
+                    <li class="hide" data-cityid="1703" data-cityname="十堰" data-provinceid="1700" data-provincename="湖北">十堰</li>
+
+                    <li class="hide" data-cityid="1705" data-cityname="宜昌" data-provinceid="1700" data-provincename="湖北">宜昌</li>
+
+                    <li class="hide" data-cityid="1706" data-cityname="襄阳" data-provinceid="1700" data-provincename="湖北">襄阳</li>
+
+                    <li class="hide" data-cityid="1707" data-cityname="随州" data-provinceid="1700" data-provincename="湖北">随州</li>
+
+                    <li class="hide" data-cityid="1708" data-cityname="鄂州" data-provinceid="1700" data-provincename="湖北">鄂州</li>
+
+                    <li class="hide" data-cityid="1709" data-cityname="荆门" data-provinceid="1700" data-provincename="湖北">荆门</li>
+
+                    <li class="hide" data-cityid="1710" data-cityname="孝感" data-provinceid="1700" data-provincename="湖北">孝感</li>
+
+                    <li class="hide" data-cityid="1711" data-cityname="黄冈" data-provinceid="1700" data-provincename="湖北">黄冈</li>
+
+                    <li class="hide" data-cityid="1712" data-cityname="咸宁" data-provinceid="1700" data-provincename="湖北">咸宁</li>
+
+                    <li class="hide" data-cityid="1713" data-cityname="荆州" data-provinceid="1700" data-provincename="湖北">荆州</li>
+
+                    <li class="hide" data-cityid="1714" data-cityname="仙桃" data-provinceid="1700" data-provincename="湖北">仙桃</li>
+
+                    <li class="hide" data-cityid="1717" data-cityname="恩施" data-provinceid="1700" data-provincename="湖北">恩施</li>
+
+                    <li class="hide" data-cityid="1801" data-cityname="长沙" data-provinceid="1800" data-provincename="湖南">长沙</li>
+
+                    <li class="hide" data-cityid="1802" data-cityname="株洲" data-provinceid="1800" data-provincename="湖南">株洲</li>
+
+                    <li class="hide" data-cityid="1803" data-cityname="湘潭" data-provinceid="1800" data-provincename="湖南">湘潭</li>
+
+                    <li class="hide" data-cityid="1804" data-cityname="衡阳" data-provinceid="1800" data-provincename="湖南">衡阳</li>
+
+                    <li class="hide" data-cityid="1805" data-cityname="邵阳" data-provinceid="1800" data-provincename="湖南">邵阳</li>
+
+                    <li class="hide" data-cityid="1806" data-cityname="岳阳" data-provinceid="1800" data-provincename="湖南">岳阳</li>
+
+                    <li class="hide" data-cityid="1807" data-cityname="常德" data-provinceid="1800" data-provincename="湖南">常德</li>
+
+                    <li class="hide" data-cityid="1808" data-cityname="张家界" data-provinceid="1800" data-provincename="湖南">张家界</li>
+
+                    <li class="hide" data-cityid="1809" data-cityname="益阳" data-provinceid="1800" data-provincename="湖南">益阳</li>
+
+                    <li class="hide" data-cityid="1810" data-cityname="娄底" data-provinceid="1800" data-provincename="湖南">娄底</li>
+
+                    <li class="hide" data-cityid="1811" data-cityname="郴州" data-provinceid="1800" data-provincename="湖南">郴州</li>
+
+                    <li class="hide" data-cityid="1812" data-cityname="永州" data-provinceid="1800" data-provincename="湖南">永州</li>
+
+                    <li class="hide" data-cityid="1813" data-cityname="怀化" data-provinceid="1800" data-provincename="湖南">怀化</li>
+
+                    <li class="hide" data-cityid="1814" data-cityname="海西" data-provinceid="1800" data-provincename="湖南">海西</li>
+
+                    <li class="hide" data-cityid="1901" data-cityname="广州" data-provinceid="1900" data-provincename="广东">广州</li>
+
+                    <li class="hide" data-cityid="1902" data-cityname="韶关" data-provinceid="1900" data-provincename="广东">韶关</li>
+
+                    <li class="hide" data-cityid="1903" data-cityname="深圳" data-provinceid="1900" data-provincename="广东">深圳</li>
+
+                    <li class="hide" data-cityid="1904" data-cityname="珠海" data-provinceid="1900" data-provincename="广东">珠海</li>
+
+                    <li class="hide" data-cityid="1905" data-cityname="汕头" data-provinceid="1900" data-provincename="广东">汕头</li>
+
+                    <li class="hide" data-cityid="1906" data-cityname="佛山" data-provinceid="1900" data-provincename="广东">佛山</li>
+
+                    <li class="hide" data-cityid="1907" data-cityname="江门" data-provinceid="1900" data-provincename="广东">江门</li>
+
+                    <li class="hide" data-cityid="1908" data-cityname="湛江" data-provinceid="1900" data-provincename="广东">湛江</li>
+
+                    <li class="hide" data-cityid="1909" data-cityname="茂名" data-provinceid="1900" data-provincename="广东">茂名</li>
+
+                    <li class="hide" data-cityid="1910" data-cityname="肇庆" data-provinceid="1900" data-provincename="广东">肇庆</li>
+
+                    <li class="hide" data-cityid="1911" data-cityname="云浮" data-provinceid="1900" data-provincename="广东">云浮</li>
+
+                    <li class="hide" data-cityid="1912" data-cityname="惠州" data-provinceid="1900" data-provincename="广东">惠州</li>
+
+                    <li class="hide" data-cityid="1913" data-cityname="梅州" data-provinceid="1900" data-provincename="广东">梅州</li>
+
+                    <li class="hide" data-cityid="1914" data-cityname="汕尾" data-provinceid="1900" data-provincename="广东">汕尾</li>
+
+                    <li class="hide" data-cityid="1915" data-cityname="河源" data-provinceid="1900" data-provincename="广东">河源</li>
+
+                    <li class="hide" data-cityid="1916" data-cityname="阳江" data-provinceid="1900" data-provincename="广东">阳江</li>
+
+                    <li class="hide" data-cityid="1917" data-cityname="清远" data-provinceid="1900" data-provincename="广东">清远</li>
+
+                    <li class="hide" data-cityid="1918" data-cityname="东莞" data-provinceid="1900" data-provincename="广东">东莞</li>
+
+                    <li class="hide" data-cityid="1919" data-cityname="中山" data-provinceid="1900" data-provincename="广东">中山</li>
+
+                    <li class="hide" data-cityid="1920" data-cityname="潮州" data-provinceid="1900" data-provincename="广东">潮州</li>
+
+                    <li class="hide" data-cityid="1921" data-cityname="揭阳" data-provinceid="1900" data-provincename="广东">揭阳</li>
+
+                    <li class="hide" data-cityid="2001" data-cityname="南宁" data-provinceid="2000" data-provincename="广西">南宁</li>
+
+                    <li class="hide" data-cityid="2002" data-cityname="柳州" data-provinceid="2000" data-provincename="广西">柳州</li>
+
+                    <li class="hide" data-cityid="2003" data-cityname="桂林" data-provinceid="2000" data-provincename="广西">桂林</li>
+
+                    <li class="hide" data-cityid="2004" data-cityname="梧州" data-provinceid="2000" data-provincename="广西">梧州</li>
+
+                    <li class="hide" data-cityid="2005" data-cityname="北海" data-provinceid="2000" data-provincename="广西">北海</li>
+
+                    <li class="hide" data-cityid="2006" data-cityname="防城港" data-provinceid="2000" data-provincename="广西">防城港</li>
+
+                    <li class="hide" data-cityid="2011" data-cityname="玉林" data-provinceid="2000" data-provincename="广西">玉林</li>
+
+                    <li class="hide" data-cityid="2012" data-cityname="百色" data-provinceid="2000" data-provincename="广西">百色</li>
+
+                    <li class="hide" data-cityid="2013" data-cityname="河池" data-provinceid="2000" data-provincename="广西">河池</li>
+
+                    <li class="hide" data-cityid="2014" data-cityname="钦州" data-provinceid="2000" data-provincename="广西">钦州</li>
+
+                    <li class="hide" data-cityid="2101" data-cityname="海口" data-provinceid="2100" data-provincename="海南">海口</li>
+
+                    <li class="hide" data-cityid="2201" data-cityname="资阳" data-provinceid="2200" data-provincename="四川">资阳</li>
+
+                    <li class="hide" data-cityid="2202" data-cityname="眉山" data-provinceid="2200" data-provincename="四川">眉山</li>
+
+                    <li class="hide" data-cityid="2203" data-cityname="广安" data-provinceid="2200" data-provincename="四川">广安</li>
+
+                    <li class="hide" data-cityid="2204" data-cityname="巴中" data-provinceid="2200" data-provincename="四川">巴中</li>
+
+                    <li class="hide" data-cityid="2205" data-cityname="成都" data-provinceid="2200" data-provincename="四川">成都</li>
+
+                    <li class="hide" data-cityid="2206" data-cityname="自贡" data-provinceid="2200" data-provincename="四川">自贡</li>
+
+                    <li class="hide" data-cityid="2207" data-cityname="攀枝花" data-provinceid="2200" data-provincename="四川">攀枝花</li>
+
+                    <li class="hide" data-cityid="2208" data-cityname="泸州" data-provinceid="2200" data-provincename="四川">泸州</li>
+
+                    <li class="hide" data-cityid="2209" data-cityname="德阳" data-provinceid="2200" data-provincename="四川">德阳</li>
+
+                    <li class="hide" data-cityid="2210" data-cityname="绵阳" data-provinceid="2200" data-provincename="四川">绵阳</li>
+
+                    <li class="hide" data-cityid="2211" data-cityname="广元" data-provinceid="2200" data-provincename="四川">广元</li>
+
+                    <li class="hide" data-cityid="2212" data-cityname="遂宁" data-provinceid="2200" data-provincename="四川">遂宁</li>
+
+                    <li class="hide" data-cityid="2213" data-cityname="内江" data-provinceid="2200" data-provincename="四川">内江</li>
+
+                    <li class="hide" data-cityid="2214" data-cityname="乐山" data-provinceid="2200" data-provincename="四川">乐山</li>
+
+                    <li class="hide" data-cityid="2216" data-cityname="南充" data-provinceid="2200" data-provincename="四川">南充</li>
+
+                    <li class="hide" data-cityid="2218" data-cityname="宜宾" data-provinceid="2200" data-provincename="四川">宜宾</li>
+
+                    <li class="hide" data-cityid="2219" data-cityname="达州" data-provinceid="2200" data-provincename="四川">达州</li>
+
+                    <li class="hide" data-cityid="2220" data-cityname="雅安" data-provinceid="2200" data-provincename="四川">雅安</li>
+
+                    <li class="hide" data-cityid="2221" data-cityname="阿坝" data-provinceid="2200" data-provincename="四川">阿坝</li>
+
+                    <li class="hide" data-cityid="2222" data-cityname="甘孜" data-provinceid="2200" data-provincename="四川">甘孜</li>
+
+                    <li class="hide" data-cityid="2223" data-cityname="凉山" data-provinceid="2200" data-provincename="四川">凉山</li>
+
+                    <li class="hide" data-cityid="2301" data-cityname="贵阳" data-provinceid="2300" data-provincename="贵州">贵阳</li>
+
+                    <li class="hide" data-cityid="2302" data-cityname="六盘水" data-provinceid="2300" data-provincename="贵州">六盘水</li>
+
+                    <li class="hide" data-cityid="2303" data-cityname="遵义" data-provinceid="2300" data-provincename="贵州">遵义</li>
+
+                    <li class="hide" data-cityid="2304" data-cityname="铜仁" data-provinceid="2300" data-provincename="贵州">铜仁</li>
+
+                    <li class="hide" data-cityid="2306" data-cityname="毕节" data-provinceid="2300" data-provincename="贵州">毕节</li>
+
+                    <li class="hide" data-cityid="2307" data-cityname="安顺" data-provinceid="2300" data-provincename="贵州">安顺</li>
+
+                    <li class="hide" data-cityid="2308" data-cityname="黔东南" data-provinceid="2300" data-provincename="贵州">黔东南</li>
+
+                    <li class="hide" data-cityid="2310" data-cityname="黔西南" data-provinceid="2300" data-provincename="贵州">黔西南</li>
+
+                    <li class="hide" data-cityid="2311" data-cityname="黔南" data-provinceid="2300" data-provincename="贵州">黔南</li>
+
+                    <li class="hide" data-cityid="2401" data-cityname="昆明" data-provinceid="2400" data-provincename="云南">昆明</li>
+
+                    <li class="hide" data-cityid="2403" data-cityname="昭通" data-provinceid="2400" data-provincename="云南">昭通</li>
+
+                    <li class="hide" data-cityid="2404" data-cityname="曲靖" data-provinceid="2400" data-provincename="云南">曲靖</li>
+
+                    <li class="hide" data-cityid="2405" data-cityname="楚雄" data-provinceid="2400" data-provincename="云南">楚雄</li>
+
+                    <li class="hide" data-cityid="2406" data-cityname="玉溪" data-provinceid="2400" data-provincename="云南">玉溪</li>
+
+                    <li class="hide" data-cityid="2407" data-cityname="红河" data-provinceid="2400" data-provincename="云南">红河</li>
+
+                    <li class="hide" data-cityid="2408" data-cityname="文山" data-provinceid="2400" data-provincename="云南">文山</li>
+
+                    <li class="hide" data-cityid="2409" data-cityname="普洱" data-provinceid="2400" data-provincename="云南">普洱</li>
+
+                    <li class="hide" data-cityid="2410" data-cityname="西双版纳" data-provinceid="2400" data-provincename="云南">西双版纳</li>
+
+                    <li class="hide" data-cityid="2411" data-cityname="大理" data-provinceid="2400" data-provincename="云南">大理</li>
+
+                    <li class="hide" data-cityid="2412" data-cityname="保山" data-provinceid="2400" data-provincename="云南">保山</li>
+
+                    <li class="hide" data-cityid="2413" data-cityname="德宏" data-provinceid="2400" data-provincename="云南">德宏</li>
+
+                    <li class="hide" data-cityid="2414" data-cityname="丽江" data-provinceid="2400" data-provincename="云南">丽江</li>
+
+                    <li class="hide" data-cityid="2415" data-cityname="怒江" data-provinceid="2400" data-provincename="云南">怒江</li>
+
+                    <li class="hide" data-cityid="2417" data-cityname="临沧" data-provinceid="2400" data-provincename="云南">临沧</li>
+
+                    <li class="hide" data-cityid="2504" data-cityname="日喀则" data-provinceid="2500" data-provincename="西藏">日喀则</li>
+
+                    <li class="hide" data-cityid="2601" data-cityname="西安" data-provinceid="2600" data-provincename="陕西">西安</li>
+
+                    <li class="hide" data-cityid="2602" data-cityname="铜川" data-provinceid="2600" data-provincename="陕西">铜川</li>
+
+                    <li class="hide" data-cityid="2603" data-cityname="宝鸡" data-provinceid="2600" data-provincename="陕西">宝鸡</li>
+
+                    <li class="hide" data-cityid="2604" data-cityname="咸阳" data-provinceid="2600" data-provincename="陕西">咸阳</li>
+
+                    <li class="hide" data-cityid="2605" data-cityname="渭南" data-provinceid="2600" data-provincename="陕西">渭南</li>
+
+                    <li class="hide" data-cityid="2606" data-cityname="汉中" data-provinceid="2600" data-provincename="陕西">汉中</li>
+
+                    <li class="hide" data-cityid="2607" data-cityname="安康" data-provinceid="2600" data-provincename="陕西">安康</li>
+
+                    <li class="hide" data-cityid="2608" data-cityname="商洛" data-provinceid="2600" data-provincename="陕西">商洛</li>
+
+                    <li class="hide" data-cityid="2609" data-cityname="延安" data-provinceid="2600" data-provincename="陕西">延安</li>
+
+                    <li class="hide" data-cityid="2610" data-cityname="榆林" data-provinceid="2600" data-provincename="陕西">榆林</li>
+
+                    <li class="hide" data-cityid="2701" data-cityname="兰州" data-provinceid="2700" data-provincename="甘肃">兰州</li>
+
+                    <li class="hide" data-cityid="2702" data-cityname="嘉峪关" data-provinceid="2700" data-provincename="甘肃">嘉峪关</li>
+
+                    <li class="hide" data-cityid="2703" data-cityname="金昌" data-provinceid="2700" data-provincename="甘肃">金昌</li>
+
+                    <li class="hide" data-cityid="2704" data-cityname="白银" data-provinceid="2700" data-provincename="甘肃">白银</li>
+
+                    <li class="hide" data-cityid="2705" data-cityname="天水" data-provinceid="2700" data-provincename="甘肃">天水</li>
+
+                    <li class="hide" data-cityid="2706" data-cityname="酒泉" data-provinceid="2700" data-provincename="甘肃">酒泉</li>
+
+                    <li class="hide" data-cityid="2707" data-cityname="张掖" data-provinceid="2700" data-provincename="甘肃">张掖</li>
+
+                    <li class="hide" data-cityid="2708" data-cityname="武威" data-provinceid="2700" data-provincename="甘肃">武威</li>
+
+                    <li class="hide" data-cityid="2709" data-cityname="定西" data-provinceid="2700" data-provincename="甘肃">定西</li>
+
+                    <li class="hide" data-cityid="2710" data-cityname="陇南" data-provinceid="2700" data-provincename="甘肃">陇南</li>
+
+                    <li class="hide" data-cityid="2711" data-cityname="平凉" data-provinceid="2700" data-provincename="甘肃">平凉</li>
+
+                    <li class="hide" data-cityid="2712" data-cityname="庆阳" data-provinceid="2700" data-provincename="甘肃">庆阳</li>
+
+                    <li class="hide" data-cityid="2713" data-cityname="临夏" data-provinceid="2700" data-provincename="甘肃">临夏</li>
+
+                    <li class="hide" data-cityid="2801" data-cityname="西宁" data-provinceid="2800" data-provincename="青海">西宁</li>
+
+                    <li class="hide" data-cityid="2802" data-cityname="海东" data-provinceid="2800" data-provincename="青海">海东</li>
+
+                    <li class="hide" data-cityid="2805" data-cityname="海南" data-provinceid="2800" data-provincename="青海">海南</li>
+
+                    <li class="hide" data-cityid="2901" data-cityname="银川" data-provinceid="2900" data-provincename="宁夏">银川</li>
+
+                    <li class="hide" data-cityid="2902" data-cityname="石嘴山" data-provinceid="2900" data-provincename="宁夏">石嘴山</li>
+
+                    <li class="hide" data-cityid="2903" data-cityname="吴忠" data-provinceid="2900" data-provincename="宁夏">吴忠</li>
+
+                    <li class="hide" data-cityid="2904" data-cityname="固原" data-provinceid="2900" data-provincename="宁夏">固原</li>
+
+                    <li class="hide" data-cityid="3001" data-cityname="乌鲁木齐" data-provinceid="3000" data-provincename="新疆">乌鲁木齐</li>
+
+                    <li class="hide" data-cityid="3002" data-cityname="克拉玛依" data-provinceid="3000" data-provincename="新疆">克拉玛依</li>
+
+                    <li class="hide" data-cityid="3003" data-cityname="吐鲁番" data-provinceid="3000" data-provincename="新疆">吐鲁番</li>
+
+                    <li class="hide" data-cityid="3004" data-cityname="哈密" data-provinceid="3000" data-provincename="新疆">哈密</li>
+
+                    <li class="hide" data-cityid="3005" data-cityname="昌吉" data-provinceid="3000" data-provincename="新疆">昌吉</li>
+
+                    <li class="hide" data-cityid="3008" data-cityname="阿克苏" data-provinceid="3000" data-provincename="新疆">阿克苏</li>
+
+                    <li class="hide" data-cityid="3009" data-cityname="克孜勒苏" data-provinceid="3000" data-provincename="新疆">克孜勒苏</li>
+
+                    <li class="hide" data-cityid="3013" data-cityname="喀什" data-provinceid="3000" data-provincename="新疆">喀什</li>
+
+                    <li class="hide" data-cityid="3015" data-cityname="伊犁" data-provinceid="3000" data-provincename="新疆">伊犁</li>
+
+                    <li class="hide" data-cityid="3016" data-cityname="石河子" data-provinceid="3000" data-provincename="新疆">石河子</li>
+
+                    <li class="hide" data-cityid="3101" data-cityname="重庆" data-provinceid="3100" data-provincename="重庆">重庆</li>
+
+                    <li class="hide" data-cityid="3512" data-cityname="贵港" data-provinceid="2000" data-provincename="广西">贵港</li>
+
+                    <li class="hide" data-cityid="3514" data-cityname="来宾" data-provinceid="2000" data-provincename="广西">来宾</li>
+
+                    <li class="hide" data-cityid="3516" data-cityname="中卫" data-provinceid="2900" data-provincename="宁夏">中卫</li>
+
+                    <li class="hide" data-cityid="3517" data-cityname="阿勒泰" data-provinceid="3000" data-provincename="新疆">阿勒泰</li>
+
+                    <li class="hide" data-cityid="3518" data-cityname="塔城" data-provinceid="3000" data-provincename="新疆">塔城</li>
+
+                    <li class="hide" data-cityid="2312" data-cityname="都匀" data-provinceid="2300" data-provincename="贵州">都匀</li>
+
+                    <li class="hide" data-cityid="2313" data-cityname="凯里" data-provinceid="2300" data-provincename="贵州">凯里</li>
+
+                    <li class="hide" data-cityid="2314" data-cityname="兴义" data-provinceid="2300" data-provincename="贵州">兴义</li>
+
+                    <li class="hide" data-cityid="1719" data-cityname="江汉" data-provinceid="1700" data-provincename="湖北">江汉</li>
+
+                    <li class="hide" data-cityid="1815" data-cityname="吉首" data-provinceid="1800" data-provincename="湖南">吉首</li>
+
+                    <li class="hide" data-cityid="710" data-cityname="珲春" data-provinceid="700" data-provincename="吉林">珲春</li>
+
+                    <li class="hide" data-cityid="711" data-cityname="梅河口" data-provinceid="700" data-provincename="吉林">梅河口</li>
+
+                    <li class="hide" data-cityid="712" data-cityname="延吉" data-provinceid="700" data-provincename="吉林">延吉</li>
+
+                    <li class="hide" data-cityid="513" data-cityname="海拉尔" data-provinceid="500" data-provincename="内蒙古">海拉尔</li>
+
+                    <li class="hide" data-cityid="514" data-cityname="集宁" data-provinceid="500" data-provincename="内蒙古">集宁</li>
+
+                    <li class="hide" data-cityid="516" data-cityname="乌兰浩特" data-provinceid="500" data-provincename="内蒙古">乌兰浩特</li>
+
+                    <li class="hide" data-cityid="517" data-cityname="锡林浩特" data-provinceid="500" data-provincename="内蒙古">锡林浩特</li>
+
+                    <li class="hide" data-cityid="2809" data-cityname="德令哈" data-provinceid="2800" data-provincename="青海">德令哈</li>
+
+                    <li class="hide" data-cityid="2224" data-cityname="西昌" data-provinceid="2200" data-provincename="四川">西昌</li>
+
+                    <li class="hide" data-cityid="3017" data-cityname="博乐" data-provinceid="3000" data-provincename="新疆">博乐</li>
+
+                    <li class="hide" data-cityid="3018" data-cityname="库尔勒" data-provinceid="3000" data-provincename="新疆">库尔勒</li>
+
+                    <li class="hide" data-cityid="3019" data-cityname="奎屯" data-provinceid="3000" data-provincename="新疆">奎屯</li>
+
+                    <li class="hide" data-cityid="2418" data-cityname="思茅" data-provinceid="2400" data-provincename="云南">思茅</li>
+
+                    <li class="hide" data-cityid="3102" data-cityname="涪陵" data-provinceid="3100" data-provincename="重庆">涪陵</li>
+
+                    <li class="hide" data-cityid="3103" data-cityname="黔江" data-provinceid="3100" data-provincename="重庆">黔江</li>
+
+                    <li class="hide" data-cityid="3104" data-cityname="万州" data-provinceid="3100" data-provincename="重庆">万州</li>
+
+                </ul>
+            </div>
+        </div>
+        <!--city end-->
+    </div>
+
+    <!--号码搜索-->
+    <div class="kw-section hide">
+        <div class="top-bar top-bar-shade top-bar-small clearfix">
+            <div class="col10">
+                <a href="javascript:hideKwSection();">
+                    <i class="icon iconfont icon-jiantou25"></i>
+                </a>
+            </div>
+            <div class="col80">号码搜索</div>
+        </div>
+        <div class="alt-tabs">
+            <div class="head">
+                <div class="alt-tabs-head cur" id="kwtit1" style="cursor: pointer;">模糊搜索</div>
+                <div class="alt-tabs-head" id="kwtit2" style="cursor: pointer;">按位搜索</div>
+            </div>
+            <div class="content">
+                <div class="alt-tabs-content kw1" style="display: block;">
+                    <div>
+                        <input type="tel" id="kw" maxlength="11">
+                    </div>
+                    <div class="ckb-group">
+                        <input id="cbIsEnd" type="checkbox">
+                        <label for="ckbIsEnd">搜尾号</label>
+                    </div>
+                </div>
+                <div class="alt-tabs-content hide kw2" style="display: none;">
+                    <div class="searchNum" id="searchNum">
+                        <input type="tel" maxlength="1" value="1" readonly="readonly">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                        <input type="tel" maxlength="1">
+                    </div>
+                    <div class="tips">Tips:不确定请留空</div>
+                </div>
+
+            </div>
+            <div class="btn-submit">搜索</div>
+        </div>
+    </div>
+    <!--号码搜索-->
+
+    <div class="flexslider">
+        <ul class="slides">
+            <li>
+                <a href="#"><img src="@ViewBag.Img1" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="@ViewBag.Img2" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="@ViewBag.Img3" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="@ViewBag.Img4" alt=""></a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="fixed-box fixed-box1">
+        <ul>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=0&featuresname=JP&ico=1">
+                    <img src="~/ContentNew/images/ico1.png" alt="">
+                    <p>超级精品</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&ExistMark=2&featuresname=MS&ico=2">
+                    <img src="~/ContentNew/images/ico2.png" alt="">
+                    <p>秒杀专区</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=1,2&featuresname=6A-5A&ico=3">
+                    <img src="~/ContentNew/images/ico3.png" alt="">
+                    <p>6A-5A</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=3&featuresname=4A&ico=4">
+                    <img src="~/ContentNew/images/ico4.png" alt="">
+                    <p>4A</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=11&featuresname=3A(0-5)&ico=5">
+                    <img src="~/ContentNew/images/ico5.png" alt="">
+                    <p>3A(0-5)</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=12&featuresname=3A(6-9)&ico=6">
+                    <img src="~/ContentNew/images/ico6.png" alt="">
+                    <p>3A(6-9)</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=9,5,6&featuresname=6S-4S&ico=7">
+                    <img src="~/ContentNew/images/ico7.png" alt="">
+                    <p>6顺-4顺</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=18,15,14&featuresname=4(56)T1&ico=8">
+                    <img src="~/ContentNew/images/ico8.png" alt="">
+                    <p>4(56)拖一</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=19&featuresname=AABBCC&ico=9">
+                    <img src="~/ContentNew/images/ico9.png" alt="">
+                    <p>AABBCC</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=7&featuresname=ABC&ico=10">
+                    <img src="~/ContentNew/images/ico10.png" alt="">
+                    <p>ABC</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=901,902,903,904,905,906,907,908,909,910,911,912,913,914,915,916,917&featuresname=QH&ico=11">
+                    <img src="~/ContentNew/images/ico11.png" alt="">
+                    <p>区号专区</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=1001,1002,1003,1004,1005,1006,1007,1008,1009&featuresname=DB&ico=12">
+                    <img src="~/ContentNew/images/ico12.png" alt="">
+                    <p>打包专区</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=17,13,16&featuresname=GX&ico=13">
+                    <img src="~/ContentNew/images/ico13.png" alt="">
+                    <p>个性号</p>
+                </a>
+            </li>
+            <li>
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211&featuresname=ELSE&ico=14">
+                    <img src="~/ContentNew/images/ico14.png" alt="">
+                    <p>其他靓号</p>
+                </a>
+            </li>
+            @{
+                if (ViewBag.TopOrganizeId == "a5a962da-57e1-4ad4-87b2-bbdcd1b7cc92" && ViewBag.VipMark == 0)
+                {
+                }
+                else
+                {
+                    <li>
+                        <a href="~/WeChatManage/Liang/Join?organizeId=@ViewBag.organizeId&city=@ViewBag.city">
+                            <img src="/ContentNew/images/ico15.png" alt="">
+                            <p>加盟代理</p>
+                        </a>
+                    </li>
+                }
+            }
+
+        </ul>
+    </div>
+    <div class="cl">
+    </div>
+    <div class="fixed-box fixed-box2">
+        <div class="title">
+            <h3><a href="#">精品推荐</a></h3>
+            <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&features=0" class="more">更多精品&nbsp;&gt;&gt;</a>
+        </div>
+        <div class="fixed-box2-main">
+            <ul>
+                @{
+                    List<TelphoneLiangEntity> list0 = ViewBag.list0;
+                    if (list0 != null)
+                    {
+                        if (list0.Count > 0)
+                        {
+                            foreach (var bl in list0)
+                            {
+                                string qian = bl.Telphone.Substring(0, 3);
+                                string zhong = bl.Telphone.Substring(3, 4);
+                                string hou = bl.Telphone.Substring(7, 4);
+                                <li>
+                                    <a onclick='f_search(@bl.TelphoneID)'>
+                                        <p class="p1"><font color="#E33F23">@qian</font><font color="#3A78F3">@zhong</font><font color="#E33F23">@hou</font></p>
+                                        <p class="p2">@bl.City@bl.Operator</p>
+                                        <p class="p3">￥<i class="big">@bl.Price</i>@bl.Description</p>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="cl"></div>
+    <div class="fixed-box fixed-box2">
+        <div class="title">
+            <h3><a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&ExistMark=2">秒杀专区</a></h3>
+            <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city&ExistMark=2" class="more">更多秒杀&nbsp;&gt;&gt;</a>
+        </div>
+        <div class="fixed-box2-main">
+            <ul>
+                @{
+                    List<TelphoneLiangEntity> listMS = ViewBag.listMS;
+                    if (listMS != null)
+                    {
+                        if (listMS.Count > 0)
+                        {
+                            foreach (var bl in listMS)
+                            {
+                                string qian = bl.Telphone.Substring(0, 3);
+                                string zhong = bl.Telphone.Substring(3, 4);
+                                string hou = bl.Telphone.Substring(7, 4);
+                                <li>
+                                    <a onclick='f_search(@bl.TelphoneID)'>
+                                        <p class="p1"><font color="#E33F23">@qian</font><font color="#3A78F3">@zhong</font><font color="#E33F23">@hou</font></p>
+                                        <p class="p2">@bl.City@bl.Operator</p>
+                                        <p class="p3">￥<i class="big">@bl.Price</i>@bl.Description</p>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="footer-line cl"></div>
+    <footer>
+        <ul>
+            <li class="cur" style="width: 25%;">
+                <a href="#">
+                    <img src="/ContentNew/images/footer-ico1-cur.png" alt="">
+                    <p>首页</p>
+                </a>
+            </li>
+            <li style="width: 25%;">
+                <a href="tel:@ViewBag.Tel">
+                    <img src="/ContentNew/images/footer-ico2.png" alt="">
+                    <p>电话咨询</p>
+                </a>
+            </li>
+            <li style="width: 25%;">
+                <a href="List?organizeId=@ViewBag.organizeId&city=@ViewBag.city">
+                    <img src="/ContentNew/images/footer-ico3.png" alt="">
+                    <p>选号</p>
+                </a>
+            </li>
+            <li style="width: 25%;">
+                <a href="QrCode?organizeId=@ViewBag.organizeId">
+                    <img src="~/Content/images/er.png" />
+                    <p>二维码</p>
+                </a>
+            </li>
+        </ul>
+    </footer>
+    @{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName , Img = "liang.png" });}
+    
+
+    <script src="~/Content/statics/js/jquery.js"></script>
+    <script src="~/Content/statics/js/jquery.cookie.js"></script>
+    <script src="~/Content/statics/js/changestyle.js"></script>
+    <script src="~/Content/statics/plus/alt_tabs.js"></script>
+    <script src="~/Content/statics/plus/swiper/swiper.min.js"></script>
+    <script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var organizeId = request('organizeId');
+        var city = request('city');
+
+        //$(".selectCity").click(function () {
+        //    location.href = "City?organizeId=" + organizeId + "&city=" + city;
+        //})
+
+        $("#topkw").click(function () {
+            location.href = "SearchHigh?organizeId=" + organizeId + "&city=" + city;
+        })
+
+        var swiper = new Swiper('.slide-box', {
+            pagination: '.dottedNav',
+            spaceBetween: 0,
+            centeredSlides: true,
+            autoplay: 3500,
+            loop: true,
+            autoplayDisableOnInteraction: false
+        });
+
+        $(".tab-bar a[href='index2']").parent().addClass("cur");
+
+        var IpCityName = jQuery.cookie('IpCityName');
+        if (typeof (IpCityName) != "undefined" && IpCityName != null && IpCityName != "") {
+            $("#curCity").html(IpCityName);
+        }
+        $(document).ready(function () {
+            $('.alt-tabs').alt_tabs({ action: 'click' });
+            $(".btns .wx").click(function () {
+                $(".btns .wxqr").show();
+            });
+            $(".btns .close").click(function () {
+                $(".btns .wxqr").hide();
+            });
+
+            SetMobileStyle(1);
+
+        });
+
+
+        function f_search(telphoneId) {
+            $.ajax({
+                url: "/WeChatManage/Liang/SearchTelId",
+                type: "POST",
+                data: { telphoneId: telphoneId, organizeId: organizeId, city: city, rnd: Math.random() },
+                success: function (data) {
+                    var dataresult = JSON.parse(data);
+                    var result = dataresult.entity;
+                    if (result == null) {
+                        layer.alert('无此号码', {
+                            skin: 'layui-layer-molv', closeBtn: 0
+                        });
+                    }
+                    else {
+                        if (dataresult.state == 0) {
+                            //本机构0,1，可看核算价，可编辑下架
+                            layer.confirm('存在此号码：' + result.Telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【核算价】：' + result.CheckPrice + '<br/>【套餐】：' + result.Package + '<br/>是否继续编辑此号码？', {
+                                    btn: ['是', '否'] //按钮
+                                }, function () {
+                                    window.location = "/WeChatManage/Liang/SearchForm?keyValue=" + result.TelphoneID + "&organizeId=" + organizeId;
+                                });
+                        }
+                        else if (dataresult.state == 1) {
+                            //其它共享平台机构0级，可看核算价，不可编辑
+                            layer.alert('存在此号码：' + result.Telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【核算价】：' + result.CheckPrice + '<br/>【套餐】：' + result.Package, {
+                                    skin: 'layui-layer-molv'
+                                    , closeBtn: 0
+                                });
+                        }
+                        else if (dataresult.state == 2) {
+                            //2级，可看成本价，不可编辑下架
+                            layer.alert('存在此号码：' + result.Telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package, {
+                                    skin: 'layui-layer-molv'
+                                    , closeBtn: 0
+                                });
+                        }
+                        else {
+                            //3级不能查看低价
+                            layer.confirm('存在此号码：' + result.Telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【价格】：' + result.Price + '<br/>【套餐】：' + result.Package + '<br/>是否电话咨询？', {
+                                    btn: ['是', '否'] //按钮
+                                }, function () {
+                                    window.location = "tel:" + dataresult.tel;
+                                });
+                        }
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript" src="~/ContentNew/js/jquery_002.js"></script>
+    <script type="text/javascript" src="~/ContentNew/js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.flexslider').flexslider({
+                directionNav: true,
+                pauseOnAction: false
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+
+.ht01 { height:90px; overflow:hidden}
+.ht01_lt { margin-top:10px;}
+.ht01_ri { margin-left:40px; margin-top:50px}
+.ht01_ri a,.ht01_ri a:hover{ color:#fff; font-size:16px; font-family:"微软雅黑"; margin:0 20px;}
+
+
+.leftmenu {  width:110px; padding-left:10px;}
+.ht_wrap { border:1px solid #ddd; overflow:hidden; padding:20px; margin-top:20px; width:980px; margin-left:auto; margin-right:auto}
+.leftmenu dt {  font-size:14px; color:#D90909;height:32px; line-height:32px; background:url(../images/hyzx.jpg) no-repeat 0 center; padding-left:20px;}
+.leftmenu dd { height:28px; line-height:28px; padding-left:20px;}
+.zj_hylb{ text-align:right}
+.zj_hylb select { margin:0 10px;}
+.serch_tbn { height:20px; line-height:20px;}
+.serch_xet { padding:0 3px; margin-left:5px;}
+.serch_goto { height:18px; width:40px; line-height:18px;}
+
+
+.Zy_r_con { width: 820px;border-left:1px solid #ddd; padding-left:20px;  }
+.Zy_r_con h2 { font-size:14px; border-bottom:1px solid #ddd; line-height:32px;}
+.Zy_r_con h2 span { width:100px; text-align:center;height:32px; display:block}
+
+.Mar12{margin-top:12px;}
+.zj_cktj { margin-top: 12px; }
+.zj_cktj01 { background-image: url(../images/zjmx_ling01.jpg); background-repeat: repeat-x; border: 1px solid #d5d5d5; display: block; height: 20px; padding-top: 4px; }
+
+.Rec span i { padding-left: 20px; }
+.Lsh_table tr th { background-color: #e1e8f2; }
+
+.Jlts01 { color: #f46e11; font-size: 14px;margin-top: 14px; }
+.Jlts01 a {  margin-right:10px; font-size:12px}
+.Go_Number a { margin-right: 5px; margin-left: 5px; border: 1px solid #e2e2e2; display: inline-block; padding-top: 5px; padding-right: 10px; padding-bottom: 5px; padding-left: 10px; margin-top: 20px; }
+.Go_Number a:hover { background-color: #FFF7E6;color:#ed7908  }
+.Go_Number a.cur { background-color: #FFF7E6; color:#ed7908 }.Send_mey { background-image: url(../images/zjmx_ling01.jpg); background-repeat: repeat-x; background-position: 0px center; height: 26px; border: 1px solid #c7ccd0; cursor: pointer; }
+
+.ht_delet,.ht_delet:hover { height:20px; line-height:20px; background:#D90909; display:inline-block; color:#fff; padding:0 10px; border-radius:3px; text-align:center}
+
+.zj_secret { margin-top:40px;margin-bottom:40px; margin-left:200px;}
+.zj_secret tr td { font-size:14px;}
+.xg_text { border:1px solid #ccc; padding:3px; width:160px;}
+.sea_btn { width:160px; height:32px; line-height:32px; background:#1188D2; display:block; text-align:center; border-radius:5px; color:#fff}
+.sea_btn:hover { text-decoration:none; color:#fff; background:#149ef4}
+.tel_num li a {text-decoration:none; display:block; width:176px; height:92px;cursor:pointer}
+
+

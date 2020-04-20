@@ -1,0 +1,198 @@
+﻿@{
+    ViewBag.Title = "报表预览";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<!--第三方统计图start-->
+<script src="~/Content/Scripts/echarts/echarts.min.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/dark.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/macarons.js" type="text/javascript"></script>
+<!--第三方统计图end-->
+<!--jqgrid表格组件start-->
+<link href="~/Content/scripts/plugins/jqgrid/jqgrid.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="~/Content/scripts/plugins/jqgrid/jqgrid.min.js"></script>
+<!--表格组件end-->
+<link href="~/Content/styles/hzsoft-report.css" rel="stylesheet" />
+<script src="~/Content/Scripts/dms/dms_cai.js" type="text/javascript"></script>
+<style type="text/css">
+    table.dataView {
+        border-collapse: collapse;
+    }
+
+        table.dataView th, table.dataView td {
+            border: 1px solid #000;
+            padding: 2px;
+        }
+</style>
+
+
+
+<script>
+    $(function () {
+        doserch();
+    });
+
+    function doserch() {
+        clearData();
+        var queryJson = {
+            Id: $("#Id").val(),
+            Max: $("#Max").val()
+        }
+        $.ajax({
+            type: "POST",
+            url: "/ReportManage/Dms/GetDateDms_Cai",
+            data: { queryJson: JSON.stringify(queryJson), rnd: Math.random() },
+            success: function (data) {
+                if (data) {
+                    var result = JSON.parse(data);
+                    DrawEChartSee();
+                    var optionSee = myChartSee.getOption();
+                    //x轴
+                    for (var j = 0; j < 1; j++) {
+                        // 遍历json对象，获取键集合
+                        var keyAry = [];
+                        var jsonObj = result[j];
+                        for (var key in jsonObj) {
+                            keyAry.push(key);
+                        }
+                        optionSee.xAxis[0].data = keyAry;
+                    }
+                    //
+                    var seriesAry = [];
+                    var legendAry = [];
+                    //var legendSelectedAry = {};
+                    var subTitle = "1	3	8	24	50	125	310	775	1600	3500	8000	20000	50000\n\n";
+                    for (var j = 0; j < result.length; j++) {
+                        var subItem = [1, 3, 8, 24, 50, 125, 310, 775, 1600, 3500, 8000, 20000, 50000];
+                        var subCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        var langCount = 0;
+                        var allCount = 0;
+                        var zhaCount = 0;
+                        var maxVal = 0;
+                        // 遍历json对象，获取值集合
+                        var valueAry = [];
+                        var jsonObj = result[j];
+                        var leg = jsonObj.id;
+                        legendAry.push(leg);//添加项
+                        //var row1 = {};
+                        //row1[leg] = true;
+                        //legendSelectedAry.push(row1);//添加项选择
+                        var proKey;
+                        var nowKey;
+                        for (var key in jsonObj) {
+                            nowKey = jsonObj[key];
+                            if (nowKey != null) {
+                                allCount++;
+                            }
+                            if (!Number(nowKey) || key == "shu") {
+                                nowKey = null;
+                            }
+                            if (nowKey <= proKey) {
+                                var index = subItem.indexOf(proKey)
+                                if (index > -1) {
+                                    subCount[index]++;
+                                    langCount++;
+                                }
+                                if (proKey >= 310) {
+                                    zhaCount++;
+                                }
+                            }
+                            if (nowKey > maxVal) {
+                                maxVal = nowKey;
+                            }
+                            valueAry.push(nowKey);
+                            proKey = nowKey;
+
+                        }
+                        var _138Count = subCount[0] + subCount[1] + subCount[2];
+                        var _138CountVal = subCount[0] * 1 + subCount[1] * 3 + subCount[2] * 8;//命中1和3的金额
+                        var _fan8 = subCount[3] * -8 + subCount[4] * 0 + subCount[5] * 8 + subCount[6] * 8 * 2 + subCount[7] * 8 * 3 + subCount[8] * 8 * 4 + subCount[9] * 8 * 5 + subCount[10] * 8 * 6 + subCount[11] * 8 * 6 + subCount[12] * 8 * 7;
+                        var _daCount = langCount - _138Count;//超过3不中的金额
+                        var jl = "";
+                        for (var i = 0; i < subCount.length; i++) {
+                            if (i < 2) {
+                                jl += PrefixZero(subCount[i], 2) + "|";
+                            }
+                            else {
+                                jl += subCount[i] + "|";
+                            }
+                        }
+                        //大于3的/小于3的--几浪/总共==
+                        //11/46--57/107==28--1/310
+                        subTitle += PrefixZero(leg, 4) + "-|" + jl + "\n\t"
+                            + _138Count + "/" + PrefixZero(_daCount, 2) + "--" + langCount + "/" + allCount + "--" + zhaCount + "/" + maxVal + "==" + (_138CountVal - _daCount * 12 + _fan8) + "\n\n";
+                        getSeriesData(seriesAry, jsonObj.id, valueAry);
+                    }
+                    optionSee.title[0].subtext = subTitle;
+                    console.log(subTitle);
+                    optionSee.series = seriesAry;
+                    optionSee.legend[0].data = legendAry;
+                    //optionSee.legend[0].selected = JSON.stringify(legendSelectedAry);
+                    myChartSee.setOption(optionSee);
+                }
+            },
+            error: function () {
+                layer.alert('错误', {
+                    skin: 'layui-layer-molv', closeBtn: 0
+                });
+            }
+        });
+    }
+
+    //按位补0
+    function PrefixZero(num, n) {
+        return (Array(n).join(0) + num).slice(-n);
+    }
+
+    function getSeriesData(array, name, data) {
+        var val = {
+            type: 'line',
+            name: name,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'top'
+                    }
+                }
+            },
+            markLine: {
+                data: [
+                    { type: 'average', name: '平均值' }
+                ]
+            },
+            data: data
+        };
+        array.push(val);
+    }
+</script>
+
+<div class="titlePanel" style="border:none">
+    <div class="title-search">
+        <table>
+            <tr>
+                <td style="padding-left: 2px;">
+                    Id
+                </td>
+                <td style="padding-left: 2px;">
+                    <input id="Id" type="text" class="form-control" value="" />
+                </td>
+                @*<td style="padding-left: 2px;">
+                        最大值
+                    </td>
+                    <td style="padding-left: 2px;">
+                        <input id="Max" type="text" class="form-control" value="" />
+                    </td>*@
+                <td style="padding-left: 5px;">
+                    <a id="btn_Search" class="btn btn-primary" onclick="doserch()"><i class="fa fa-search"></i>&nbsp;查询</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a id="lr-replace" class="btn btn-default" onclick="reload()"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+        </div>
+    </div>
+</div>
+<div id="mainSee"></div>

@@ -1,0 +1,404 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="全国精品靓号">
+    <title>全国精品靓号</title>
+    <meta content="【全国精品】手机靓号六连、五连、四连、三连99999、88888、77777、66666、55555、33333、22222、11111" name="keyword">
+    <meta content="专业做靓号，全国各地手机靓号应有尽有，中国移动、中国联通、中国电信靓号最新靓号发布平台" name="description">
+    <meta content="http://vip.u0537.com/shareMobileDl.png" name=shareimg>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=6.5" rel="stylesheet">
+    <link href="/assets/wap/css/style.css?v=6.5" rel="stylesheet">
+    <script src="/assets/wap/js/track_out.js?v=6.5"></script>
+    <script type="text/javascript">
+        var baseUrl = '';
+        var trackToutiaoPara = trackObj.codeToutiao('dLJp5x');
+        if (typeof (trackToutiaoPara.scriptId) != 'undefined') {
+            (function (r, d, s, l) {
+                var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                    return function () {
+                        var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                    }
+                }; for (var i = 0; i < meteor.methods.length; i++) {
+                    var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+                } meteor.load = function () {
+                    var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                    js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+                }; meteor.load(); if (meteor.invoked) { return }
+                meteor.invoked = true; meteor.track("pageview")
+            })(window, document, "script", trackToutiaoPara.scriptId);
+        }
+        var tracktGdtPara = trackObj.codeGdt('dLJp5x');
+        if (typeof (tracktGdtPara.init) != 'undefined') {
+            !function (g, d, t, e, v, n, s) { if (g.gdt) return; v = g.gdt = function () { v.tk ? v.tk.apply(v, arguments) : v.queue.push(arguments) }; v.sv = '1.0'; v.bt = 0; v.queue = []; n = d.createElement(t); n.async = !0; n.src = e; s = d.getElementsByTagName(t)[0]; s.parentNode.insertBefore(n, s); }(window, document, 'script', '//qzonestyle.gtimg.cn/qzone/biz/gdt/dmp/user-action/gdtevent.min.js');
+            gdt('init', tracktGdtPara.init);
+        }
+    </script>
+</head>
+<body class="mpd">
+    <div class="wrapper">
+        <div class="wrapper-flash">
+            <img src="~/assets/image/1585294223_SxcUpg.png" />
+            <div class="quick-tool">
+                <a href="javascript:;" class="huodong open-popup" data-target="#cardGonglue">活动攻略</a>
+                <a href="/WeChatManage/user_index/login2/" class="user">订单查询</a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div class="filter-list">
+                <ul>
+                    <li>
+                        <span>
+                            号码特征：
+                        </span>
+                        <a class="curr" href="./?keyword=&city=&features=&orderType=">全部</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=0">超级精品号</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=1">6A</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=2">5A</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=3">4A</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=11">3A(0-5)</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=12">3A(6-9)</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=4">双豹子(0-5)</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=5">ABCDE</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=6">ABCD</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=7">ABC</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=9">ABCDEF</a>
+                        | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=13">大循环</a>
+                    </li>
+                    <li>
+                        <span>
+                            号码价格：
+                        </span>
+                        <a class="curr" href="./?keyword=&features=&city=&orderType=">全部</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" -300">300以下</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 301-500">301-500</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 501-1000">501-1000</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 1001-2000">1001-2000</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 2001-5000">2001-5000</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 5001-10000">5001-10000</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 10001-20000">1-2万</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 20001-30000">2-3万</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 30001-50000">3-5万</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 50001-70000">5-7万</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 70001-100000">7-10万</a>
+                        | <a class="" href="./?keyword=&features=&city=&orderType=&price=" 100000-">10万以上</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="search-section">
+                <form action="./" method="GET">
+                    <div class="input-mod"><i class="iconfont">&#xe611;</i><input type="text" name="keyword" class="keyword" value="" placeholder="请输入您喜欢的号码" autocomplete="off"></div>
+                    <input type="hidden" name="city" value="" />
+                    <input type="hidden" name="type" value="" />
+                    <input type="hidden" name="sort" value="" />
+                    <input type="hidden" name="referer" value="" />
+                    <a href="javascript:;" class="btn-search" onclick="$(this).parents('form').submit();">搜索</a>
+                </form>
+            </div>
+            <div class="index-scroll">
+                <div class="index-note">已有 6492 人申请</div>
+                <div class="scroll-div" id="scrollDiv">
+                    <ul>
+                        <li class="text-over">袁**&nbsp;获得 171****8666</li>
+                        <li class="text-over">杨**&nbsp;获得 162****1964</li>
+                        <li class="text-over">霍**&nbsp;获得 170****3437</li>
+                        <li class="text-over">温**&nbsp;获得 170****4999</li>
+                        <li class="text-over">付**&nbsp;获得 170****2666</li>
+                        <li class="text-over">陈**&nbsp;获得 170****4333</li>
+                        <li class="text-over">史**&nbsp;获得 171****9222</li>
+                        <li class="text-over">滕**&nbsp;获得 162****6777</li>
+                        <li class="text-over">罗**&nbsp;获得 170****7555</li>
+                        <li class="text-over">王**&nbsp;获得 165****3555</li>
+                        <li class="text-over">张**&nbsp;获得 170****5338</li>
+                        <li class="text-over">赵**&nbsp;获得 162****1373</li>
+                        <li class="text-over">朱**&nbsp;获得 162****8882</li>
+                        <li class="text-over">张**&nbsp;获得 170****1555</li>
+                        <li class="text-over">苏**&nbsp;获得 162****1997</li>
+                        <li class="text-over">郑**&nbsp;获得 162****8185</li>
+                        <li class="text-over">高**&nbsp;获得 162****5558</li>
+                        <li class="text-over">周**&nbsp;获得 162****5111</li>
+                        <li class="text-over">陈**&nbsp;获得 165****8876</li>
+                        <li class="text-over">陈**&nbsp;获得 186****8333</li>
+                        <li class="text-over">李**&nbsp;获得 132****7899</li>
+                        <li class="text-over">彭**&nbsp;获得 171****7706</li>
+                        <li class="text-over">梅**&nbsp;获得 171****9933</li>
+                        <li class="text-over">曹**&nbsp;获得 170****6555</li>
+                        <li class="text-over">李**&nbsp;获得 170****5557</li>
+                        <li class="text-over">柴**&nbsp;获得 162****4555</li>
+                        <li class="text-over">张**&nbsp;获得 171****6786</li>
+                        <li class="text-over">李**&nbsp;获得 162****9995</li>
+                        <li class="text-over">赵**&nbsp;获得 171****8868</li>
+                        <li class="text-over">周**&nbsp;获得 171****8111</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter-screen" id="listFilter">
+                <div class="weui-row weui-no-gutter screen-card">
+                    <div class="weui-col-100">
+                        <div class="weui-row weui-no-gutter">
+                            <div class="weui-col-33 card"><a href="javascript:void(0);">号码归属地<i class="iconfont">&#xe62a;</i></a></div>
+                            <div class="weui-col-33 card"><a href="javascript:void(0);">号码类型<i class="iconfont">&#xe62a;</i></a></div>
+                            <div class="weui-col-33 card"><a href="javascript:void(0);">价格 <i class="iconfont">&#xe62a;</i></a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="screen-cont">
+                    <!--归属地-->
+                    <div class="cont" style="position: relative;">
+                        <ul class="grade grade-w" id="gradew">
+                            <li><a href="./?keyword=&features=&city=&orderType=&referer=&price=">全部</a></li>
+                        </ul>
+                        <ul class="grade grade-t" id="gradet"></ul>
+                    </div>
+                    <!--号码类型-->
+                    <ul class="cont">
+                        <li><a href="./?keyword=&city=&features=&orderType=&referer=">全部</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=0">超级精品号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1">6A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=2">5A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=3">4A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=11">3A(0-5)</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=12">3A(6-9)</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=4">双豹子(0-5)</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=5">ABCDE</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=6">ABCD</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=7">ABC</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=9">ABCDEF</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=13">大循环</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=14">四拖一</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=15">五拖一</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=16">步步高升</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=17">ABABAB(AB)</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=18">六拖一</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=19">AABBCC（DD）</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=20">双豹子(6-9)</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=21">超级精品其他</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=22">超级精品7-8A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=23">超级精品7顺-9顺</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=24">超级精品6A-4A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=903">经典区号3A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=902">经典区号4A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=901">经典区号5（6）A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=904">经典区号ABCD（EF）</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=905">经典区号四（五六）拖一</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=906">经典区号个性号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1004">打包3A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1003">打包4A</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1005">打包ABCD</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1001">打包108</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1002">打包118</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1006">打包AABB（CCDD）</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1008">打包ABC</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1007">打包三（四五）拖一</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1009">打包ABAB（ABAB）</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=50">其他靓号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=907">经典区号官号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=908">经典区号情侣号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=909">经典区号DCBA</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=910">经典区号AABB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=911">经典区号ABC</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=912">经典区号AAAB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=913">经典区号ABAB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=914">经典区号年份（生日）号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=915">经典区号双对子（6789）</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=916">经典区号ABBA</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=917">经典区号其他</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1211">各地区号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1201">倒顺子</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1202">三拖一</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1203">170(171、165)组合</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1204">AABB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1205">ABAB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1206">个性号码</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1207">表白号码</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1208">年份(生日）号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1209">精品AA</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1210">拖二</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1301">秒杀专区AAA</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1302">秒杀专区AAAA</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1303">秒杀专区AAAAA</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1304">秒杀专区ABCD</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1305">秒杀专区ABAB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1306">秒杀专区AAAB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1307">秒杀专区AABB</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1308">秒杀专区ABC</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1309">秒杀专区-个性号</a></li>
+                        <li class=""><a href="./?keyword=&city=&orderType=&referer=&price=&features=1310">秒杀专区-其他靓号</a></li>
+                    </ul>
+                    <!--价格-->
+                    <ul class="cont">
+                        <li><a href="./?keyword=&city=&features=&orderType=&referer=">默认排序</a></li>
+                        <li class=""><a href="./?keyword=&city=&features=&orderType=1&referer=&price=">价格从低到高</a></li>
+                        <li class=""><a href="./?keyword=&city=&features=&orderType=2&referer=&price=">价格从高到低</a></li>
+                        <li class="priceLimit">
+                            <form action="./" method="GET">
+                                <div class="weui-flex">
+                                    <div>
+                                        <input type="text" name="pricef" class="input" value="" placeholder="价格" autocomplete="off">
+                                        <span class="spli">~</span>
+                                        <input type="text" name="pricet" class="input" value="" placeholder="价格" autocomplete="off">
+                                    </div>
+                                    <div class="weui-flex__item">
+                                        <a href="javascript:;" class="weui-btn weui-btn_default" onclick="$(this).parents('form').submit();">搜索</a>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="keyword" value="" />
+                                <input type="hidden" name="city" value="" />
+                                <input type="hidden" name="type" value="" />
+                                <input type="hidden" name="sort" value="" />
+                                <input type="hidden" name="referer" value="" />
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mobile-list">
+                <div class="weui-row weui-no-gutter" id="mobileList">
+                    @{
+                        List<TelphoneLiangEntity> list = ViewBag.list;
+                        if (list != null)
+                        {
+                            if (list.Count > 0)
+                            {
+                                foreach (var bl in list)
+                                {
+                                    <div class="weui-col-50">
+                                        <a class="mobile-item" href="/WeChatManage/mpg/detail/@bl.TelphoneID">
+                                            <p class="tit">
+                                                <font class="f-orange">@bl.Telphone.Substring(0, 3)</font><font class="f-green">@bl.Telphone.Substring(3, 4)</font><font class="f-red">@bl.Telphone.Substring(7, 4)</font>
+                                                <font class="f-orange pri">¥@bl.Price</font>
+                                                @*<font class="money-market">¥@bl.Price</font>*@
+                                                <font class="money-market" style="text-decoration:none">@bl.Description</font>
+                                            </p>
+                                            <p class="txt"><span>@bl.City@bl.Operator </span></p>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+                </div>
+                <div class="weui-loadmore">- 我是有底线的 -</div>
+            </div>
+        </div>
+    </div>
+    <!--主体部分 结束-->
+    <div id="cardGonglue" class='weui-popup__container popup-bottom'>
+        <div class="weui-popup__overlay"></div>
+        <div class="weui-popup__modal">
+            <div class="toolbar">
+                <div class="toolbar-inner">
+                    <a href="javascript:;" class="picker-button close-popup">关闭</a>
+                    <h1 class="title">温馨提醒</h1>
+                </div>
+            </div>
+            <div class="modal-content">
+                <ul class="ask-list">
+                    <li><em>NO1. </em>所有订单成功，次日下午7点发货，会有短信和语音通知，请留意。<br></li>
+                    <li><em>NO2. </em>查询快递单号，请登录快递官方网站查询。</li>
+                    <li><em>NO3. </em>快递均为到付件。<br></li>
+                    <li style="color:#f00"><em>NO4. </em>收到快递后：实名认证☞ 充值缴费☞ 正常使用。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/wap/js/jquery-2.1.4.js?v=6.5"></script>
+    <script src="/assets/wap/js/jweixin-1.4.0.js?v=6.5"></script>
+    <script src="/assets/wap/js/validform.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/weui.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/fastclick.js?v=6.5"></script>
+    <script src="/assets/wap/js/city-picker.min.js?v=6.5"></script>
+    <script src="/assets/wap/js/swiper.min.js"></script>
+    <script src="/assets/wap/js/global.js?v=6.5"></script>
+    <script src="/assets/wap/js/user.js?v=6.5"></script>
+    <script type="text/javascript">
+        //幻灯片
+        //$(".swiper-container").swiper({loop: false,autoHeight: true});
+
+        //筛选属性
+        globalObj.listFilter('listFilter');
+        /*归属地选择效果*****************************************/
+        var rawData = $.rawCitiesData;
+        var temp = '';
+        var curr_city = '';
+        for (var i = 0; i < rawData.length; i++) {
+            var curr_pro_class = '';
+            var curr_cities = [];
+            var cities = rawData[i].sub;
+            //默认城市
+            for (var j = 0; j < cities.length; j++) {
+                if (cities[j].name == curr_city) {
+                    curr_pro_class = "curr";
+                    curr_cities = rawData[i].sub;
+                    var href = './?keyword=&city=' + encodeURI(encodeURI(cities[j].name)) + '&features=&orderType=&referer=&price=';
+                    $("#gradet").append('<li><a href="' + href + '">' + cities[j].name + '</a></li>')
+                }
+            }
+            $("#gradew").append('<li class="pro ' + curr_pro_class + '" data-code="' + rawData[i].code + '">' + rawData[i].name + '</li>');
+            if (curr_pro_class != '') {
+                $("#gradet").html("");
+                for (var k = 0; k < curr_cities.length; k++) {
+                    var href = './?keyword=&city=' + encodeURI(encodeURI(curr_cities[k].name)) + '&features=&orderType=&referer=&price=';
+                    if (curr_cities[k].name == curr_city) {
+                        $("#gradet").append('<li class="curr"><a href="' + href + '">' + curr_cities[k].name + '</a></li>')
+                    } else {
+                        $("#gradet").append('<li><a href="' + href + '">' + curr_cities[k].name + '</a></li>')
+                    }
+                }
+                $('#gradet').addClass('selected');
+            }
+        }
+        $('#gradew').find('.pro').click(function () {
+            $(this).siblings().removeClass('curr');
+            $(this).addClass('curr');
+            $('#gradet').addClass('selected');
+            var code = $(this).attr('data-code');
+            var cities = [];
+            for (var i = 0; i < rawData.length; i++) {
+                if (rawData[i].code === code || rawData[i].name === code) {
+                    cities = rawData[i].sub;
+                    break;
+                }
+            }
+            $("#gradet").html("");
+            for (var i = 0; i < cities.length; i++) {
+                var href = './?keyword=&city=' + encodeURI(encodeURI(cities[i].name)) + '&features=&orderType=&referer=&price=';
+                $("#gradet").append('<li><a href="' + href + '">' + cities[i].name + '</a></li>')
+            }
+        });
+        /********************************************************/
+        //滚动固定
+        var fix = $('#listFilter');		//滚动悬浮块
+        var fixTop = fix.offset().top;	//滚动悬浮块与顶部的距离
+        $(window).scroll(function () {
+            globalObj.scrollFix(fix, fixTop);
+        });
+        //加载下页
+        $(document.body).infinite().on("infinite", function () {
+            if (loading) return;
+            loading = true;
+            globalObj.loadListMore(window.location.href, 'mobileList');//'/WeChatManage/mpg/index/ajaxLoad-1.html'
+        });
+        function AutoScroll(obj) {
+            $(obj).find("ul:first").animate({
+                marginTop: "-2rem"
+            }, 400, function () {
+                $(this).css({ marginTop: "0px" }).find("li:first").appendTo(this);
+            });
+        }
+        setInterval('AutoScroll("#scrollDiv")', 3000)
+    </script>
+    <script src="/assets/res/js/visit.js"></script>
+</body>
+</html>

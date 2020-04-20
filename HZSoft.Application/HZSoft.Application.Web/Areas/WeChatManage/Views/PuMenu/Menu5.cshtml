@@ -1,0 +1,142 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.FullName 【ABC 选号单】</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Content/scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+    <link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+    <script src="~/Content/scripts/utils/hzsoft-ui.js"></script>
+    <link href="~/Content/css/menu.css" rel="stylesheet" />
+    <script>
+        var organizeId = request('organizeId');
+        var css = { fontSize: '2em' };
+        var city = request('city');
+
+        setInterval(function () {
+            $('.animate').animate(css, 3000, rowBack);
+        }, 3000);
+        function rowBack() {
+            if (css.fontSize === '1em')
+                css.fontSize = '2em';
+            else if (css.fontSize === '2em')
+                css.fontSize = '1em';
+        }
+        function f_search(telphone) {
+            $.ajax({
+                url: "/WeChatManage/PuMenu/SearchTel",
+                type: "POST",
+                data: { telphone: telphone, organizeId: organizeId, city: city, rnd: Math.random() },
+                success: function (data) {
+                    var dataresult = JSON.parse(data);
+                    var result = dataresult.entity;
+                    if (result == null) {
+                        layer.alert('无此号码', {
+                            skin: 'layui-layer-molv', closeBtn: 0
+                        });
+                    }
+                    else {
+                        if (dataresult.state == 1) {
+                            //询问框
+                            layer.confirm('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package + '<br/>是否继续编辑此号码？', {
+                                    btn: ['是', '否'] //按钮
+                                }, function () {
+                                    window.location = "/WeChatManage/PuMenu/SearchForm?keyValue=" + result.TelphoneID + "&organizeId=" + organizeId;
+                                });
+                        }
+                        else if (dataresult.state == 2) {
+                            //可看低价不可编辑下架
+                            layer.alert('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【售价】：' + result.Price + '<br/>【成本】：' + result.MinPrice + '<br/>【利润】：' + result.ChaPrice + '<br/>【套餐】：' + result.Package, {
+                                    skin: 'layui-layer-molv'
+                                    , closeBtn: 0
+                                });
+                        }
+                        else {
+                            //提示框
+                            layer.alert('存在此号码：' + telphone + '(' + result.Description + ')' + '<br/>【归属地】：' + result.City + result.Operator +
+                                '<br/>【价格】：' + result.Price + '<br/>【套餐】：' + result.Package, {
+                                    skin: 'layui-layer-molv'
+                                    , closeBtn: 0
+                                });
+                        }
+                    }
+
+                },
+                error: function () {
+
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <a href="~/WeChatManage/PuMenu/Main?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><div class="return fl"></div></a>
+        <div class="title-menu">
+            ABC    选号单
+        </div>
+    </header>
+    <div>
+        <div style="width: 100%;margin-left: auto;margin-right: auto;">
+            <div style="margin: 5px auto;">
+                <div class="kuang">
+                    <div style="box-sizing:border-box;padding:10px;color:inherit;">
+                        <div class="kuangdiv">
+
+                            <div class="des">
+                                <p>★★★★★</p>
+                                <h4>@ViewBag.FullName</h4>
+                                <p>一家专门做靓号的公司</p>
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphonePuEntity> listABC = ViewBag.listABC;
+                                    if (listABC.Count > 0)
+                                    {
+                                        <p><span class="minclass_txt">ABC</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                        foreach (var bl in listABC)
+                                        {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                        }
+
+                                    }
+                                }
+                            </div>
+
+                            <div class="des">
+                                <p>★★★★★</p>
+                                <h4>@ViewBag.FullName</h4>
+                                <p>精于专业 力求卓越</p>
+                                <p>▼</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align:center;"><img src="~/Content/images/0tan.gif" /></p>
+        <br />
+        <div style="height:50px" class="animate">总有一个号码适合您</div>
+        <img src="~/Content/images/0.gif" class="img-responsive center-block">
+        <br />
+        <span class="kuai">各位亲们！赶快来抢购吧，来晚了可能就买不到啦！~</span>
+        <br />
+        <br />
+        <br />
+    </div>    <!--分享-->
+    @*@{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName + " 【ABC 选号单】", Img = "liang3.jpg" });}*@
+    <!--end分享-->
+</body>
+</html>

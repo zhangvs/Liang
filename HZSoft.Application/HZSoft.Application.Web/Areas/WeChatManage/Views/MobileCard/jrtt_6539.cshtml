@@ -1,0 +1,405 @@
+﻿<html class="wf-iconfont-n4-active wf-active" style="font-size: 55px;">
+<head>
+    <meta charset="utf-8">
+    <meta name="pathname" content="bytecom_tetris">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <link rel="icon" href="https://ad.toutiao.com/favicon.ico" type="image/x-icon">
+    <style type="text/css">
+        html {
+            height: 100%;
+            color: #000;
+            overflow-y: scroll;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            font-family: Arial,Helvetica,'Hiragino Sans GB','Microsoft YaHei',sans-serif;
+            background-color: #FFF;
+        }
+
+            html * {
+                outline: 0;
+                -webkit-text-size-adjust: none;
+                -webkit-tap-highlight-color: rgba(0,0,0,0);
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html input {
+                font-family: Arial,Helvetica,'Hiragino Sans GB','Microsoft YaHei',sans-serif;
+            }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        address, caption, cite, code, dfn, em, th, var {
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        caption, th {
+            text-align: left;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ins, a {
+            text-decoration: none;
+        }
+
+        html, body {
+            width: 100%;
+        }
+
+        body {
+            min-height: 100%;
+            line-height: 1.5;
+        }
+
+        #content {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .piece {
+            width: 100%;
+            background-color: transparent;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+            .piece.fbottom, .piece.ftop {
+                position: fixed !important;
+                width: 100% !important;
+                z-index: 10 !important;
+            }
+
+        .create-left-content {
+            width: 1.867rem;
+            height: auto;
+            text-align: center;
+            z-index: 9999;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .create-right-content {
+            width: 1.867rem;
+            height: auto;
+            text-align: center;
+            z-index: 9999;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+        }
+
+        .piece.fbottom {
+            top: auto !important;
+            bottom: 0 !important;
+        }
+
+        .piece.ftop {
+            top: 0 !important;
+            bottom: auto !important;
+        }
+
+        #content {
+            min-height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #MEIQIA-PANEL-HOLDER {
+            right: 0 !important;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide {
+            display: none !important;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/swiper_302abfc.css">
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/ledfont_ccb326d.css">
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/daymode_1ae66db.css">
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/notice_7471b49.css">
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/bricks/bricks-common_9481303.css">
+    <script type="text/javascript" async="" src="//s3.pstatp.com/bytecom/resource/tetris/insight/v0.1.4-beta/analytics.js"></script>
+    <script type="text/javascript" async="" src="https://s3.pstatp.com/bytecom/resource/track_log/src/toutiao-track-log.js"></script>
+    <script id="globalvar">
+        GLOBAL_VAR = JSON.parse('{"siteId":"1595515321224206","pageIds":[1595515321224206],"pageid_map":{"983301":1595515321224206},"shareTitle":"柚艺家180404","name":"柚艺家180404","shareDesc":"","shareThumb":"","adId":"1600055940414499"}');
+        componentsConfig = {
+            PanoramaList: []
+        }
+    </script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/lib/vendor_41f269e.js"></script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/lib/main_5fdef5d.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/brand_5a9c6d0.css">
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/iconfont_03f5f23.css">
+    <link rel="stylesheet" type="text/css" href="https://s3.pstatp.com/bytecom/resource/vue/lib/brickicon_2e09b13.css">
+    <!-- 替换为Vue模板语法 -->
+
+    <title>柚艺家180404</title>
+
+
+    <script>
+        !function () { "use strict"; !function (t, e) { var r = t.seed = t.seed || []; if (r.start = +new Date, !r.initialize && !r.invoked) { r.invoked = !0, r.methods = ["track", "page", "on", "once"], r.factory = function (t) { return function () { var e = Array.prototype.slice.call(arguments); return e.unshift(t), r.push(e), r } }; for (var n = 0; n < r.methods.length; n++) { var a = r.methods[n]; r[a] = r.factory(a) } r.load = function () { var t = e.createElement("script"); t.type = "text/javascript", t.async = !0, t.src = "//s3.pstatp.com/bytecom/resource/tetris/insight/v0.1.4-beta/analytics.js"; var r = e.getElementsByTagName("script")[0]; r.parentNode.insertBefore(t, r) }, r.SNIPPET_VERSION = "1.1.8", r.load() } }(window, document) }();
+    </script>
+    <style>
+        .clearfix::after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+    </style>
+    <script>
+        !function () { try { window.addEventListener("DOMContentLoaded", function () { document.querySelectorAll(".form-tel-autofillbtn").forEach(function (ele) { ele.parentElement.remove() }) }) } catch (e) { }; }();
+    </script>
+    <script src="//s3.pstatp.com/inapp/toutiao.js"></script>
+</head>
+
+<body id="body" style="font-size: 0.373333rem;">
+    <script type="text/javascript">
+        !function (e) {
+            function t() {
+                var e = d.getBoundingClientRect().width; u = e / 10, d.style.fontSize = u + "px"
+            }
+            function n()
+            { o.body && (o.body.style.fontSize = 14 / (i / 10) + "rem") }
+            var i = 375, o = e.document, d = o.documentElement, c = d.getBoundingClientRect().width, u = (window.devicePixelRatio || 1, c / 10), l = null; e.addEventListener("resize", function () { clearTimeout(l), l = setTimeout(t, 300) }, !1), n(), "complete" === o.readyState ? n() : o.addEventListener("DOMContentLoaded", function () { n() }, !1), t()
+        }(window);</script>
+
+    <div id="csrf"><input type="hidden" name="csrfmiddlewaretoken" value="VLjSIwOeRJYiCmZeh4SWAG3TFPpOk4sW"></div>
+    <main data-server-rendered="true">
+        <span></span>
+        <section id="frame-1" class="brick-frame brick-frame-server" style="padding-top:0;padding-bottom:0;padding-left:0;padding-right:0;">
+            <div class="brick-mask"></div>
+            <div class="brick-content">
+                <div tetris-data-click="" tetris-data-component-type="image" tetris-data-action-type="click" class="piece image-con">
+                    <div class="image-box" style="-webkit-clip-path:none;clip-path:none;">
+                        <a target="_blank" href="javascript:void(0);" class="image-link">
+                            <div class="image-mask" style="background-color:rgba(0, 0, 0, 0);border-radius:0;">
+                            </div>
+                            <img src="https://p3.pstatp.com/origin/71e00002cf018f0669bd" class="image-item" style="border-radius:0;">
+                        </a>
+                        <span class="image-text"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frame-7" class="brick-frame brick-frame-server" style="padding-top:0;padding-bottom:0;padding-left:0;padding-right:0;">
+            <div class="brick-mask">
+            </div>
+            <div class="brick-content">
+                <div tetris-data-click="" tetris-data-component-type="image" tetris-data-action-type="click" class="piece image-con">
+                    <div class="image-box" style="-webkit-clip-path:none;clip-path:none;">
+                        <a target="_blank" href="javascript:void(0);" class="image-link">
+                            <div class="image-mask" style="background-color:rgba(0, 0, 0, 0);border-radius:0;"></div>
+                            <img src="https://p2.pstatp.com/origin/71d90003d9cb3594b6ca" class="image-item" style="border-radius:0;">
+                        </a><span class="image-text"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frame-3" class="brick-frame brick-frame-server" style="padding-top:0;padding-bottom:0;padding-left:0;padding-right:0;">
+            <div class="brick-mask"></div>
+            <div class="brick-content">
+                <div tetris-data-click="" tetris-data-component-type="image" tetris-data-action-type="click" class="piece image-con">
+                    <div class="image-box" style="-webkit-clip-path:none;clip-path:none;">
+                        <a target="_blank" href="javascript:void(0);" class="image-link">
+                            <div class="image-mask" style="background-color:rgba(0, 0, 0, 0);border-radius:0;"></div>
+                            <img src="https://p1.pstatp.com/origin/71c00003ee54422be897" class="image-item" style="border-radius:0;">
+                        </a>
+                        <span class="image-text"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frame-4" class="brick-frame brick-frame-server" style="background-color:rgba(0, 0, 0, 0);">
+            <div class="brick-mask" style="background-color:rgba(0, 0, 0, 0);"></div><div class="brick-content">
+                <div class="piece form-piece">
+                    <div>
+                        <div data-node="topCount" class="form-count">
+                            <span class="split-count"></span>
+                            <span data-node="countTextPre" class="count-text"></span>
+                            <span data-node="countTextNum" class="count-text-num">NaN</span>
+                            <span data-node="countTextPos" class="count-text"></span>
+                            <span class="split-count"></span>
+                        </div>
+
+                        <form id="a4" action_url="/tetris/form/submit/" form_id="1600696696791063" class="form-group-i input-style2">
+                            <input type="hidden" name="site_id" value="1595515321224206">
+                            <input type="hidden" name="ad_id" value="1600055940414499">
+                            <input type="hidden" name="adv_id" value="91831288645">
+                            <span class="csrf-token"><input type="hidden" name="csrfmiddlewaretoken" value="VLjSIwOeRJYiCmZeh4SWAG3TFPpOk4sW"></span><!---->
+                            <div class="form-element">
+                                <input type="hidden" name="label_1600696696790023" value="姓名"><!----><!----><!----><!----><!---->
+                                <div validate="name" class="input-group-i">
+                                    <span id="label" class="input-group-addon-i warn-star" style="color:#808080;">姓名</span>
+                                    <div class="m-input-text">
+                                        <input required="required" type="text" placeholder="" validate="name" eletype="name" uid="15265432652747032811925982423559" name="1600696696790023" class="input-style form-input-i">
+                                        <span class="el-input-clear"></span>
+                                    </div><!----><!---->
+                                </div><!----><!----><!----><!----><!----><!---->
+                            </div><div class="form-element">
+                                <input type="hidden" name="label_1600696696790039" value="电话"><!----><!----><!----><!----><!---->
+                                <div validate="captchav2" class="input-group-i">
+                                    <span id="label" class="input-group-addon-i warn-star" style="color:#808080;">电话</span>
+                                    <div class="m-input-text">
+                                        <input required="required" type="text" placeholder="" validate="captchav2" eletype="telphone" uid="15265432652741155222456737921219" name="1600696696790039" class="input-style form-input-i">
+                                        <span class="el-input-clear"></span>
+                                    </div><!----><!---->
+                                </div><!----><!----><!----><!----><!----><!---->
+                            </div>
+                            <div class="form-element">
+                                <input type="hidden" name="label_1600696696790055" value="地区"><!----><!---->
+                                <div name="1600696696790055" city-data="{&quot;cities&quot;:[&quot;北京|beijing|bj&quot;,&quot;天津|tianjin|tj&quot;,&quot;河北|hebei|hb&quot;,&quot;山西|shanxi|sx&quot;,&quot;内蒙古|neimenggu|nmg&quot;,&quot;辽宁|liaoning|ln&quot;,&quot;吉林省|jilinsheng|jls&quot;,&quot;黑龙江|heilongjiang|hlj&quot;,&quot;上海|shanghai|sh&quot;,&quot;江苏|jiangsu|js&quot;,&quot;浙江|zhejiang|zj&quot;,&quot;安徽|anhui|ah&quot;,&quot;福建|fujian|fj&quot;,&quot;江西|jiangxi|jx&quot;,&quot;山东|shandong|sd&quot;,&quot;河南|henan|hn&quot;,&quot;湖北|hubei|hb&quot;,&quot;湖南|hunan|hn&quot;,&quot;广东|guangdong|gd&quot;,&quot;广西|guangxi|gx&quot;,&quot;海南|hainan|hn&quot;,&quot;重庆|chongqing|cq&quot;,&quot;四川|sichuan|sc&quot;,&quot;贵州|guizhou|gz&quot;,&quot;云南|yunnan|yn&quot;,&quot;西藏|xizang|xz&quot;,&quot;陕西|shanxi|sx&quot;,&quot;甘肃|gansu|gs&quot;,&quot;青海|qinghai|qh&quot;,&quot;宁夏|ningxia|nx&quot;,&quot;新疆|xinjiang|xj&quot;,&quot;台湾|taiwan|tw&quot;,&quot;香港|xianggang|xg&quot;,&quot;澳门|aomen|am&quot;,&quot;石家庄|shijiazhuang|sjz&quot;,&quot;唐山|tangshan|ts&quot;,&quot;秦皇岛|qinhuangdao|qhd&quot;,&quot;邯郸|handan|hd&quot;,&quot;邢台|xingtai|xt&quot;,&quot;保定|baoding|bd&quot;,&quot;张家口|zhangjiakou|zjk&quot;,&quot;承德|chengde|cd&quot;,&quot;沧州|cangzhou|cz&quot;,&quot;廊坊|langfang|lf&quot;,&quot;衡水|hengshui|hs&quot;,&quot;太原|taiyuan|ty&quot;,&quot;大同|datong|dt&quot;,&quot;阳泉|yangquan|yq&quot;,&quot;长治|changzhi|cz&quot;,&quot;晋城|jincheng|jc&quot;,&quot;朔州|shuozhou|sz&quot;,&quot;忻州|xinzhou|xz&quot;,&quot;临汾|linfen|lf&quot;,&quot;运城|yuncheng|yc&quot;,&quot;呼和浩特|huhehaote|hhht&quot;,&quot;包头|baotou|bt&quot;,&quot;乌海|wuhai|wh&quot;,&quot;赤峰|chifeng|cf&quot;,&quot;通辽|tongliao|tl&quot;,&quot;鄂尔多斯|eerduosi|eeds&quot;,&quot;沈阳|shenyang|sy&quot;,&quot;大连|dalian|dl&quot;,&quot;鞍山|anshan|as&quot;,&quot;抚顺|fushun|fs&quot;,&quot;本溪|benxi|bx&quot;,&quot;丹东|dandong|dd&quot;,&quot;锦州|jinzhou|jz&quot;,&quot;营口|yingkou|yk&quot;,&quot;阜新|fuxin|fx&quot;,&quot;辽阳|liaoyang|ly&quot;,&quot;盘锦|panjin|pj&quot;,&quot;铁岭|tieling|tl&quot;,&quot;朝阳|chaoyang|cy&quot;,&quot;葫芦岛|huludao|hld&quot;,&quot;长春|changchun|cc&quot;,&quot;四平|siping|sp&quot;,&quot;辽源|liaoyuan|ly&quot;,&quot;通化|tonghua|th&quot;,&quot;白城|baicheng|bc&quot;,&quot;延边|yanbian|yb&quot;,&quot;哈尔滨|haerbin|heb&quot;,&quot;齐齐哈尔|qiqihaer|qqhe&quot;,&quot;鸡西|jixi|jx&quot;,&quot;鹤岗|hegang|hg&quot;,&quot;双鸭山|shuangyashan|sys&quot;,&quot;大庆|daqing|dq&quot;,&quot;宜春|yichun|yc&quot;,&quot;佳木斯|jiamusi|jms&quot;,&quot;七台河|qitaihe|qth&quot;,&quot;牡丹江|mudanjiang|mdj&quot;,&quot;绥化|suihua|sh&quot;,&quot;黑河|heihe|hh&quot;,&quot;大兴安岭|daxinganling|dxal&quot;,&quot;南京|nanjing|nj&quot;,&quot;无锡|wuxi|wx&quot;,&quot;徐州|xuzhou|xz&quot;,&quot;常州|changzhou|cz&quot;,&quot;苏州|suzhou|sz&quot;,&quot;南通|nantong|nt&quot;,&quot;连云港|lianyungang|lyg&quot;,&quot;盐城|yancheng|yc&quot;,&quot;扬州|yangzhou|yz&quot;,&quot;镇江|zhenjiang|zj&quot;,&quot;泰州|taizhou|tz&quot;,&quot;宿迁|suqian|sq&quot;,&quot;杭州|hangzhou|hz&quot;,&quot;宁波|ningbo|nb&quot;,&quot;温州|wenzhou|wz&quot;,&quot;嘉兴|jiaxing|jx&quot;,&quot;湖州|huzhou|hz&quot;,&quot;绍兴|shaoxing|sx&quot;,&quot;金华|jinhua|jh&quot;,&quot;衢州|quzhou|qz&quot;,&quot;舟山|zhoushan|zs&quot;,&quot;丽水|lishui|ls&quot;,&quot;台州|taizhou|tz&quot;,&quot;合肥|hefei|hf&quot;,&quot;芜湖|wuhu|wh&quot;,&quot;蚌埠|bangbu|bb&quot;,&quot;淮南|huainan|hn&quot;,&quot;马鞍山|maanshan|mas&quot;,&quot;淮北|huaibei|hb&quot;,&quot;铜陵|tongling|tl&quot;,&quot;安庆|anqing|aq&quot;,&quot;阜阳|fuyang|fy&quot;,&quot;宿州|suzhou|sz&quot;,&quot;滁州|chuzhou|cz&quot;,&quot;六安|liuan|la&quot;,&quot;宣城|xuancheng|xc&quot;,&quot;池州|chizhou|cz&quot;,&quot;福州|fuzhou|fz&quot;,&quot;厦门|xiamen|xm&quot;,&quot;莆田|putian|pt&quot;,&quot;三明|sanming|sm&quot;,&quot;泉州|quanzhou|qz&quot;,&quot;漳州|zhangzhou|zz&quot;,&quot;南平|nanping|np&quot;,&quot;宁德|ningde|nd&quot;,&quot;龙岩|longyan|ly&quot;,&quot;陇南|longnan|ln&quot;,&quot;庆阳|qingyang|qy&quot;,&quot;南昌|nanchang|nc&quot;,&quot;景德镇|jingdezhen|jdz&quot;,&quot;萍乡|pingxiang|px&quot;,&quot;九江|jiujiang|jj&quot;,&quot;新余|xinyu|xy&quot;,&quot;鹰潭|yingtan|yt&quot;,&quot;赣州|ganzhou|gz&quot;,&quot;宜春|yichun|yc&quot;,&quot;上饶|shangrao|sr&quot;,&quot;吉安|jian|ja&quot;,&quot;济南|jinan|jn&quot;,&quot;青岛|qingdao|qd&quot;,&quot;淄博|zibo|zb&quot;,&quot;枣庄|zaozhuang|zz&quot;,&quot;东营|dongying|dy&quot;,&quot;烟台|yantai|yt&quot;,&quot;潍坊|weifang|wf&quot;,&quot;济宁|jining|jn&quot;,&quot;泰安|taian|ta&quot;,&quot;威海|weihai|wh&quot;,&quot;日照|rizhao|rz&quot;,&quot;滨州|binzhou|bz&quot;,&quot;德州|dezhou|dz&quot;,&quot;聊城|liaocheng|lc&quot;,&quot;临沂|linyi|ly&quot;,&quot;菏泽|heze|hz&quot;,&quot;莱芜|laiwu|lw&quot;,&quot;郑州|zhengzhou|zz&quot;,&quot;开封|kaifeng|kf&quot;,&quot;洛阳|luoyang|ly&quot;,&quot;平顶山|pingdingshan|pds&quot;,&quot;安阳|anyang|ay&quot;,&quot;鹤壁|hebi|hb&quot;,&quot;新乡|xinxiang|xx&quot;,&quot;焦作|jiaozuo|jz&quot;,&quot;濮阳|puyang|py&quot;,&quot;许昌|xuchang|xc&quot;,&quot;漯河|leihe|lh&quot;,&quot;三门峡|sanmenxia|smx&quot;,&quot;商丘|shangqiu|sq&quot;,&quot;周口|zhoukou|zk&quot;,&quot;驻马店|zhumadian|zmd&quot;,&quot;南阳|nanyang|ny&quot;,&quot;信阳|xinyang|xy&quot;,&quot;武汉|wuhan|wh&quot;,&quot;黄石|huangshi|hs&quot;,&quot;十堰|shiyan|sy&quot;,&quot;随州|suizhou|sz&quot;,&quot;宜昌|yichang|yc&quot;,&quot;襄樊|xiangfan|xf&quot;,&quot;鄂州|ezhou|ez&quot;,&quot;荆门|jingmen|jm&quot;,&quot;黄冈|huanggang|hg&quot;,&quot;孝感|xiaogan|xg&quot;,&quot;咸宁|xianning|xn&quot;,&quot;荆州|jingzhou|jz&quot;,&quot;恩施|enshi|es&quot;,&quot;长沙|changsha|cs&quot;,&quot;株洲|zhuzhou|zz&quot;,&quot;湘潭|xiangtan|xt&quot;,&quot;衡阳|hengyang|hy&quot;,&quot;邵阳|shaoyang|sy&quot;,&quot;岳阳|yueyang|yy&quot;,&quot;常德|changde|cd&quot;,&quot;张家界|zhangjiajie|zjj&quot;,&quot;益阳|yiyang|yy&quot;,&quot;娄底|loudi|ld&quot;,&quot;郴州|chenzhou|cz&quot;,&quot;永州|yongzhou|yz&quot;,&quot;怀化|huaihua|hh&quot;,&quot;广州|guangzhou|gz&quot;,&quot;韶关|shaoguan|sg&quot;,&quot;深圳|shenzhen|sz&quot;,&quot;珠海|zhuhai|zh&quot;,&quot;汕头|shantou|st&quot;,&quot;江门|jiangmen|jm&quot;,&quot;湛江|zhanjiang|zj&quot;,&quot;茂名|maoming|mm&quot;,&quot;肇庆|zhaoqing|zq&quot;,&quot;惠州|huizhou|hz&quot;,&quot;梅州|meizhou|mz&quot;,&quot;汕尾|shanwei|sw&quot;,&quot;河源|heyuan|hy&quot;,&quot;阳江|yangjiang|yj&quot;,&quot;潮州|chaozhou|cz&quot;,&quot;揭阳|jieyang|jy&quot;,&quot;云浮|yunfu|yf&quot;,&quot;清远|qingyuan|qy&quot;,&quot;东莞|dongguan|dg&quot;,&quot;中山|zhongshan|zs&quot;,&quot;南宁|nanning|nn&quot;,&quot;柳州|liuzhou|lz&quot;,&quot;桂林|guilin|gl&quot;,&quot;梧州|wuzhou|wz&quot;,&quot;北海|beihai|bh&quot;,&quot;防城港|fangchenggang|fcg&quot;,&quot;贵港|guigang|gg&quot;,&quot;贺州|hezhou|hz&quot;,&quot;玉林|yulin|yl&quot;,&quot;百色|baise|bs&quot;,&quot;河池|hechi|hc&quot;,&quot;钦州|qinzhou|qz&quot;,&quot;海口|haikou|hk&quot;,&quot;三亚|sanya|sy&quot;,&quot;成都|chengdu|cd&quot;,&quot;自贡|zigong|zg&quot;,&quot;攀枝花|panzhihua|pzh&quot;,&quot;阿坝|aba|ab&quot;,&quot;甘孜|ganzi|gz&quot;,&quot;凉山|liangshan|ls&quot;,&quot;广安|guangan|ga&quot;,&quot;巴中|bazhong|bz&quot;,&quot;泸州|luzhou|lz&quot;,&quot;德阳|deyang|dy&quot;,&quot;绵阳|mianyang|my&quot;,&quot;广元|guangyuan|gy&quot;,&quot;遂宁|suining|sn&quot;,&quot;内江|najiang|nj&quot;,&quot;乐山|leshan|ls&quot;,&quot;宜宾|yibin|yb&quot;,&quot;南充|nanchong|nc&quot;,&quot;达州|dazhou|dz&quot;,&quot;雅安|yaan|ya&quot;,&quot;眉山|meishan|ms&quot;,&quot;资阳|ziyang|zy&quot;,&quot;贵阳|guiyang|gy&quot;,&quot;六盘水|liupanshui|lps&quot;,&quot;遵义|zunyi|zy&quot;,&quot;铜仁|tongren|tr&quot;,&quot;毕节|bijie|bj&quot;,&quot;安顺|anshun|as&quot;,&quot;昆明|kunming|km&quot;,&quot;德宏|dehong|dh&quot;,&quot;昭通|zhaotong|zt&quot;,&quot;曲靖|qujing|qj&quot;,&quot;楚雄|chuxiong|cx&quot;,&quot;玉溪|yuxi|yx&quot;,&quot;红河|honghe|hh&quot;,&quot;文山|wenshan|ws&quot;,&quot;西双版纳|xishuangbanna|xsbn&quot;,&quot;大理|dali|dl&quot;,&quot;保山|baoshan|bs&quot;,&quot;怒江|nujiang|nj&quot;,&quot;丽江|lijiang|lj&quot;,&quot;迪庆|diqing|dq&quot;,&quot;临沧|lincang|lc&quot;,&quot;拉萨|lasa|ls&quot;,&quot;昌都|changdu|cd&quot;,&quot;山南|shannan|sn&quot;,&quot;日喀则|rikaze|rkz&quot;,&quot;那曲|naqu|nq&quot;,&quot;阿里|ali|al&quot;,&quot;林芝|linzhi|lz&quot;,&quot;西安|xian|xa&quot;,&quot;铜川|tongchuan|tc&quot;,&quot;宝鸡|baoji|bj&quot;,&quot;咸阳|xianyang|xy&quot;,&quot;渭南|weinan|wn&quot;,&quot;汉中|hanzhong|hz&quot;,&quot;安康|ankang|ak&quot;,&quot;商洛|shangluo|sl&quot;,&quot;延安|yanan|ya&quot;,&quot;榆林|yulin|yl&quot;,&quot;兰州|lanzhou|lz&quot;,&quot;嘉峪关|jiayuguan|jyg&quot;,&quot;金昌|jinchang|jc&quot;,&quot;白银|baiyin|by&quot;,&quot;天水|tianshui|ts&quot;,&quot;酒泉|jiuquan|jq&quot;,&quot;张掖|zhangye|zy&quot;,&quot;武威|wuwei|ww&quot;,&quot;定西|dingxi|dx&quot;,&quot;平凉|pingliang|pl&quot;,&quot;临夏|linxia|lx&quot;,&quot;西宁|xining|xn&quot;,&quot;果洛|guoluo|gl&quot;,&quot;海西|haixi|hx&quot;,&quot;海东|haidong|hd&quot;,&quot;海北|haibei|hb&quot;,&quot;玉树|yushu|ys&quot;,&quot;黄南|huangnan|hn&quot;,&quot;银川|yinchuan|yc&quot;,&quot;石嘴山|shizuishan|szs&quot;,&quot;吴忠|wuzhong|wz&quot;,&quot;固原|guyuan|gy&quot;,&quot;乌鲁木齐|wulumuqi|wlmq&quot;,&quot;克拉玛依|kelamayi|klmy&quot;,&quot;吐鲁番|tulufan|tlf&quot;,&quot;哈密|hami|hm&quot;,&quot;昌吉|changji|cj&quot;,&quot;阿克苏|akesu|aks&quot;,&quot;喀什|kashi|ks&quot;,&quot;和田|hetian|ht&quot;,&quot;伊犁|yili|yl&quot;,&quot;塔城|tacheng|tc&quot;,&quot;阿勒泰|aletai|alt&quot;,&quot;佛山|foshan|fs&quot;,&quot;松原|songyuan|sy&quot;,&quot;黄山|huangshan|hs&quot;,&quot;吕梁|lvliang|ll&quot;,&quot;晋中|jinzhong|jz&quot;,&quot;抚州|fuzhou|fz&quot;,&quot;来宾|laibin|lb&quot;,&quot;崇左|chongzuo|cz&quot;,&quot;博尔塔拉|boertala|betl&quot;,&quot;巴音郭楞|bayinguoleng|bygl&quot;,&quot;克孜勒苏|kezilesu|kzls&quot;,&quot;白山|baishan|bs&quot;,&quot;吉林市|jilinshi|jls&quot;,&quot;伊春|yichun|yc&quot;,&quot;济源|jiyuan|jy&quot;,&quot;漯河|luohe|lh&quot;,&quot;襄阳|xiangyang|xy&quot;,&quot;呼伦贝尔|hunlunbeier|hlbe&quot;,&quot;巴彦淖尔|bayannaoer|byne&quot;,&quot;乌兰察布|wulanchabu|wlcb&quot;,&quot;淮安|huaian|ha&quot;,&quot;普洱|puer|pe&quot;],&quot;codes&quot;:[11,12,13,14,15,21,22,23,31,32,33,34,35,36,37,41,42,43,44,45,46,50,51,52,53,54,61,62,63,64,65,71,81,82,130100,130200,130300,130400,130500,130600,130700,130800,130900,131000,131100,140100,140200,140300,140400,140500,140600,140900,141000,140800,150100,150200,150300,150400,150500,150600,210100,210200,210300,210400,210500,210600,210700,210800,210900,211000,211100,211200,211300,211400,220100,220300,220400,220500,220800,222400,230100,230200,230300,230400,230500,230600,360900,230800,230900,231000,231200,231100,232700,320100,320200,320300,320400,320500,320600,320700,320900,321000,321100,321200,321300,330100,330200,330300,330400,330500,330600,330700,330800,330900,331100,331000,340100,340200,340300,340400,340500,340600,340700,340800,341200,341300,341100,341500,341800,341700,350100,350200,350300,350400,350500,350600,350700,350900,350800,621200,621000,360100,360200,360300,360400,360500,360600,360700,360900,361100,360800,370100,370200,370300,370400,370500,370600,370700,370800,370900,371000,371100,371600,371400,371500,371300,371700,371200,410100,410200,410300,410400,410500,410600,410700,410800,410900,411000,411100,411200,411400,411600,411700,411300,411500,420100,420200,420300,421300,420500,420600,420700,420800,421100,420900,421200,421000,422800,430100,430200,430300,430400,430500,430600,430700,430800,430900,431300,431000,431100,431200,440100,440200,440300,440400,440500,440700,440800,440900,441200,441300,441400,441500,441600,441700,445100,445200,445300,441800,441900,442000,450100,450200,450300,450400,450500,450600,450800,451100,450900,451000,451200,450700,460100,460200,510100,510300,510400,513200,513300,513400,511600,511900,510500,510600,510700,510800,510900,511000,511100,511500,511300,511700,511800,511400,512000,520100,520200,520300,522200,522400,520400,530100,533100,530600,530300,532300,530400,532500,532600,532800,532900,530500,533300,530700,533400,530900,540100,542100,542200,542300,542400,542500,542600,610100,610200,610300,610400,610500,610700,610900,611000,610600,610800,620100,620200,620300,620400,620500,620900,620700,620600,621100,620800,622900,630100,632600,632800,632100,632200,632700,632300,640100,640200,640300,640400,650100,650200,652100,652200,652300,652900,653100,653200,654000,654200,654300,440600,220700,341000,141100,140700,361000,451300,451400,652700,652800,653000,220600,220200,230700,411800,411100,420600,150700,150800,150900,320800,530800]}" class="city-group need-serialize ui-style4-input">
+                                    <span class="city-addon warn-star" style="color:#808080;">地区</span><div class="city city-box">
+                                        <div class="col-left city-group-province">
+                                            <select id="pro" class="input-style">
+                                                <option>北京</option>
+                                                <option>天津</option>
+                                                <option>河北</option>
+                                                <option>山西</option>
+                                                <option>内蒙古</option>
+                                                <option>辽宁</option>
+                                                <option>吉林省</option>
+                                                <option>黑龙江</option>
+                                                <option>上海</option>
+                                                <option>江苏</option>
+                                                <option>浙江</option>
+                                                <option>安徽</option>
+                                                <option>福建</option>
+                                                <option>江西</option>
+                                                <option>山东</option>
+                                                <option>河南</option>
+                                                <option>湖北</option>
+                                                <option>湖南</option>
+                                                <option>广东</option>
+                                                <option>广西</option>
+                                                <option>海南</option>
+                                                <option>重庆</option>
+                                                <option>四川</option>
+                                                <option>贵州</option>
+                                                <option>云南</option>
+                                                <option>西藏</option>
+                                                <option>陕西</option>
+                                                <option>甘肃</option>
+                                                <option>青海</option>
+                                                <option>宁夏</option>
+                                                <option>新疆</option>
+                                                <option>台湾</option>
+                                                <option>香港</option>
+                                                <option>澳门</option>'
+                                            </select>
+                                        </div><div class="col-right city-group-city"><select id="city" class="input-style"><option>北京</option></select></div>
+                                    </div>
+                                </div><!----><!----><!----><!----><!----><!----><!----><!----><!---->
+                            </div><div class="form-element">
+                                <input type="hidden" name="label_1600696696790071" value="投资额"><!---->
+                                <div class="checkbox-group">
+                                    <span id="label" class="checkbox-addon warn-star" style="color:#808080;">投资额</span>
+                                    <input type="hidden" name="1600696696790071" class="checkbox-select">
+                                    <div class="checkbox-control checkbox-box">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="checkbox-1600696696790071" value="20~30万" class="radio-style">
+                                            <span>20~30万</span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="checkbox-1600696696790071" value="30~50" class="radio-style">
+                                            <span>30~50</span>
+                                        </label>
+                                    </div><!---->
+                                </div>
+                                <!----><!----><!----><!----><!----><!----><!----><!----><!----><!---->
+                            </div>
+                            <div class="form-element">
+                                <input type="hidden" name="label_1600696696791047" value="申请加入柚艺家">
+                                <!----><!----><!----><!----><!----><!----><!----><!----><!---->
+                                <div class="input-group-i">
+                                    <div id="submit-result" class="el-result"></div>
+                                    <button type="submit" class="btn-i" style="border-radius:0.107rem;background-color:#f85959 !important;color:#FFF;height:1.12rem;line-height:1.12rem;width:100%;">
+                                        申请加入柚艺家
+                                    </button>
+                                    <input type="reset" id="reset" style="display:none;"><!---->
+                                </div><!----><!---->
+                            </div>
+                            <input type="hidden" name="export_url" value=""><!---->
+                            <div data-node="recent-submit-content" class="recent-submit-content hide">
+                                <div class="recent-title">最新报名客户</div>
+                                <div class="recent-notification"><i class="icon-notification2"></i></div>
+                                <div class="swiper-container"></div>
+                            </div><!---->
+                        </form><!----><div>
+                            <style>
+                                .nor-btn {
+                                    background-color: #f85959;
+                                }
+
+                                .form-piece .recent-submit-content .recent-title {
+                                    background-color: #f85959;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="frame-8" class="brick-frame brick-frame-server" style="padding-top:0.267rem;padding-bottom:0.267rem;padding-left:0.4rem;padding-right:0.4rem;">
+            <div class="brick-mask"></div>
+            <div class="brick-content">
+                <div class="piece text-piece" style="border-width:0.027rem;border-color:#000;border-style:none;border-radius:0;">
+                    <div class="rich-text">
+                        <div class="inner"><p style="text-align: center;"><strong>投资有风险，加盟需谨慎</strong></p></div>
+                    </div>
+                </div>
+            </div>
+        </section><div class="create-left-content"></div><div class="create-right-content"><button type="button" class="btn btn-jump hide"></button></div>
+    </main>
+
+    <script src="https://s3.pstatp.com/bytecom/resource/track_log/src/tetris-user-action.js"></script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/lib/daymode_c65fed4.js"></script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/lib/base64_68e8d03.js"></script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/lib/swiper_d5340fc.js"></script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/lib/notice_584309a.js"></script>
+    <script src="https://s3.pstatp.com/bytecom/resource/vue/bricks/Form/script.landing_d4e371d.js"></script>
+    <script>
+        (function () {
+            var FORM = require("tetris/parse/Form.js");
+            var _FORM = FORM.init({
+                id: "#a4",
+                showJump: "0",
+                successUrl: "javascript:void(0);",
+                failedUrl: "javascript:void(0);",
+                successmsg: "提交成功！感谢您对柚艺家的关注，我们将及时与您联系！",
+                isShowCount: "true",
+                countKit: {},
+                formId: "1600696696791063",
+                locateBgColor: "#f85959",
+                recentSubmitStyle: 0,
+                caculator: null
+            });
+        })();</script><div class="form-validate-wrapper hide spam-user-validate-wrapper"><div class="validate-dialog spam-user-validate-dialog"><div class="close"><i class="iconeditor-cross"></i></div><div class="title">验证手机</div><div class="spam-info"></div><div class="pic-validate hide"><input type="number" pattern="[0-9]*" name="pic-captcha" placeholder="图片验证码" class="input-style validate-item spam-pic-captcha"><div class="decor-line"></div><img origin-src="" class="validate-img validate-item"><span class="nor-btn validate-item spam-refresh-pic-btn"><i class="iconeditor-refresh"></i><span>刷新</span></span></div><div class="spam-sms-validate"><input type="text" pattern="[0-9]*" name="captcha" placeholder="短信验证码" class="input-style validate-item spam-sms-captcha"><span origin-text="发送短信验证码" class="nor-btn validate-item spam-send-sms "><span class="text">发送短信验证码</span><span class="timer"></span></span></div><div class="nor-btn spam-submit">提交</div></div></div>
+</body>
+</html>

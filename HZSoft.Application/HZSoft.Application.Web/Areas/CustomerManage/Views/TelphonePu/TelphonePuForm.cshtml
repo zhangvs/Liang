@@ -1,0 +1,215 @@
+@{;
+    ViewBag.Title = "表单页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Content/layui/layui.js"></script>
+<script>
+    var keyValue = request('keyValue');
+    var organizeId = request('organizeId');
+    $(function () {
+        initControl();
+    });
+    //初始化控件
+    function initControl() {
+        //销售人员
+        $("#SellerId").ComboBoxTree({
+            url: "../../BaseManage/User/GetTreeJson",
+            description: "==请选择==",
+            height: "300px",
+            width: "280px"
+        }).bind("change", function () {
+            $("#SellerName").val($(this).attr('data-text'));
+        });
+
+        //运营商
+        $("#Operator").ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "yys" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "200px"
+        });
+
+        //类别
+        $("#Grade").ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "lhlb" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "200px"
+        });
+
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../CustomerManage/TelphonePu/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    if (data.CompanyPicture) {
+                        $("#UploadPicture1").attr("imgsrc", data.Img1).html("<img src='" + data.Img1 + "' style='height:13em;' />");
+                        $("#UploadPicture2").attr("imgsrc", data.Img2).html("<img src='" + data.Img2 + "' style='height:13em;' />");
+                        $("#UploadPicture3").attr("imgsrc", data.Img3).html("<img src='" + data.Img3 + "' style='height:13em;' />");
+                        $("#UploadPicture4").attr("imgsrc", data.Img4).html("<img src='" + data.Img4 + "' style='height:13em;' />");
+                    }
+                }
+            })
+        }
+    }
+
+
+    layui.use('upload', function () {
+        var $ = layui.jquery
+        , upload = layui.upload;
+        //拖拽上传
+        upload.render({
+            elem: ".upload"
+          , url: '/CustomerManage/Ku_Company/UploadPicture'
+          , done: function (data) {
+              console.log(data);
+              if (data.Success) {
+                  this.item
+                  $("#" + this.item.context.id).attr("imgsrc", data.Message).html("<img src='" + data.Message + "' style='height:13em;' />");
+              } else {
+                  layer.alert('上传失败:' + data.Message, {
+                      skin: 'layui-layer-molv', closeBtn: 0
+                  });
+              }
+          }
+          , error: function () {
+              layer.alert('上传异常', {
+                  skin: 'layui-layer-molv', closeBtn: 0
+              });
+          }
+        });
+    });
+
+    //保存表单;
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        //图片为空并且上传图不为空
+        if (!!$("#UploadPicture1").attr("imgsrc")) {
+            var img1 = $("#UploadPicture1").attr("imgsrc");
+            postData.Img1 = img1;
+        }
+        if (!!$("#UploadPicture2").attr("imgsrc")) {
+            var img2 = $("#UploadPicture2").attr("imgsrc");
+            postData.Img2 = img2;
+        }
+        if (!!$("#UploadPicture3").attr("imgsrc")) {
+            var img3 = $("#UploadPicture3").attr("imgsrc");
+            postData.Img3 = img3;
+        }
+        if (!!$("#UploadPicture4").attr("imgsrc")) {
+            var img4 = $("#UploadPicture4").attr("imgsrc");
+            postData.Img4 = img4;
+        }
+
+        $.SaveForm({
+            url: "../../CustomerManage/TelphonePu/SaveForm?keyValue=" + keyValue + "&organizeId=" + organizeId,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+    //自动计算利润
+    function getToChaPrice() {
+        var PriceTxt = $("#Price").val();
+        var MinPriceTxt = $("#MinPrice").val();
+
+        if (PriceTxt != "" && MinPriceTxt != "") {
+            var Price = toDecimal(PriceTxt);
+            var MinPrice = toDecimal(MinPriceTxt);
+            $("#ChaPrice").val(Price - MinPrice);
+        }
+        else {
+            $("#ChaPrice").val("0.00");
+        }
+    }
+</script>
+<div style="margin-top: 20px; margin-right: 30px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">手机号<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Telphone" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <td class="formTitle">类别<font face="宋体">*</font></td>
+            <td class="formValue">
+                <div id="Grade" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">城市<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="City" type="text" class="form-control" value="临沂" isvalid="yes" checkexpession="NotNull" />
+            </td>
+            <td class="formTitle">运营商<font face="宋体">*</font></td>
+            <td class="formValue">
+                <div id="Operator" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">售价<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Price" type="text" class="form-control" isvalid="yes" checkexpession="Double" onblur="getToChaPrice()" />
+            </td>
+            <td class="formTitle">成本价</td>
+            <td class="formValue">
+                <input id="MinPrice" type="text" class="form-control" isvalid="yes" checkexpession="Double" onblur="getToChaPrice()" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">利润<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="ChaPrice" type="text" class="form-control" isvalid="yes" checkexpession="Double" />
+            </td>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="ExistMark" type="checkbox" />
+                        现卡
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">套餐<font face="宋体">*</font></td>
+            <td class="formValue" colspan="3">
+                <input id="Package" type="text" class="form-control" value="" isvalid="yes" checkexpession="NotNull" />
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">销售人</td>
+            <td class="formValue">
+                <div id="SellerId" type="select" class="ui-select"></div>
+                <input id="SellerName" type="hidden" />
+            </td>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="SellMark" type="checkbox" />
+                        售出
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注</td>
+            <td class="formValue" colspan="3">
+                <textarea id="Description" maxlength="200" class="form-control" rows="3"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+

@@ -1,0 +1,189 @@
+body {
+    background: #232124 url(../images/bg.jpg) no-repeat center top;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+    padding: 0;
+    margin: 0;
+}
+
+.list-header {
+    background: none;
+    border: none;
+    overflow: hidden;
+}
+
+    .list-header .return a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+.join-box1 {
+    padding: 15% 5% 20%;
+    background: url(../images/bg2.jpg) no-repeat center bottom;
+    -webkit-background-size: 100% auto;
+    background-size: 100% auto;
+}
+
+    .join-box1 img {
+        width: 100%;
+    }
+
+.same-box .title {
+    padding: 0 3%;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    background: url(../images/title.png) no-repeat center center;
+    -webkit-background-size: 90% auto;
+    background-size: 90% auto;
+}
+
+.same-box .main {
+    width: 94%;
+    margin: 0 3% 3%;
+    overflow: hidden;
+    background: #161417;
+    border-radius: 10px;
+    padding: 5%;
+    box-sizing: border-box;
+}
+
+    .same-box .main .row {
+        margin-top: 16px;
+        height: 40px;
+    }
+
+        .same-box .main .row:first-child {
+            margin-top: 0;
+        }
+
+        .same-box .main .row input {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: none;
+            border: 1px solid #adadad;
+            border-radius: 6px;
+            color: #fff;
+            padding: 0 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+            .same-box .main .row input:placeholder {
+                color: #adadad;
+            }
+
+        .same-box .main .row select {
+            float: left;
+            width: 30%;
+            height: 42px;
+            line-height: 40px;
+            background: none;
+            border: 1px solid #adadad;
+            border-radius: 6px;
+            color: #fff;
+            padding: 0 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            margin-left: 5%;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            color: #adadad;
+        }
+
+            .same-box .main .row select:first-child {
+                margin-left: 0;
+            }
+
+        .same-box .main .row:last-child {
+            height: auto;
+        }
+
+        .same-box .main .row textarea {
+            width: 100%;
+            height: 100px;
+            line-height: 40px;
+            background: none;
+            border: 1px solid #adadad;
+            border-radius: 6px;
+            color: #fff;
+            padding: 0 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+            color: #adadad;
+            font-family: "微软雅黑";
+        }
+
+.submit input {
+    width: 94%;
+    height: 50px;
+    line-height: 50px;
+    background: #cb9a62;
+    font-size: 20px;
+    color: #232124;
+    letter-spacing: 5px;
+    border-radius: 6px;
+    margin: 3%;
+    border: none;
+}
+
+.weixin {
+    text-align: center;
+    margin: 5%;
+    font-size: 16px;
+    line-height: 20px;
+    color: #cb9a62;
+}
+
+    .weixin img {
+        width: 30%;
+    }
+
+.join-box1 {
+    text-align: center;
+}
+
+    .join-box1 span {
+        display: inline-block;
+        height: 24px;
+        line-height: 24px;
+        font-size: 12px;
+        color: #fff;
+        background: #cb9a62 url(../images/laba.jpg) no-repeat 5px center;
+        padding: 0 10px 0 25px;
+        -webkit-background-size: auto 16px;
+        background-size: auto 16px;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+.checkbox01{
+    color:#fff;
+}
+/* 第一种解决方案：css3样式改变checkbox默认样式 */
+    .checkbox01 input[type=checkbox] + label::before {
+        content: "\a0"; /* 不换行空格 */
+        display: inline-block;
+        vertical-align: 2px;
+        width: 14px;
+        height: 14px;
+        margin-right: 5px;
+        border-radius: 3px;
+        background-color: #eee;
+        text-indent: 2px;
+        line-height: .65; /* 行高不加单位，子元素将继承数字乘以自身字体尺寸而非父元素行高 */
+    }
+
+.checkbox01 input[type="checkbox"]:checked + label::before {
+    content: "\2713"; /* 对号的 Unicode 编码 */
+    background-color: #f07000; /* 选中的背景颜色 */
+}
+
+.checkbox01 input[type='checkbox'] {
+    /* 隐藏掉原先实际的 checkbox 框，之所以没用 display:none; 这种简单直接的方式，
+       是因为这种方法会把它从键盘 tab 键切换焦点的队列中完全删除 */
+    position: absolute;
+    clip: rect(0,0,0,0); /* 隐藏方式一：裁剪为0 */
+    /* visibility: hidden; */ /* 隐藏方式二：隐藏属性 */
+}

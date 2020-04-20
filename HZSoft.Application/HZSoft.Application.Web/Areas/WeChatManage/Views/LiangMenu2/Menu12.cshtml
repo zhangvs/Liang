@@ -1,0 +1,89 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.FullName 【流量卡】</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Content/scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+    <link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+    <script src="~/Content/scripts/utils/hzsoft-ui.js"></script>
+    <link href="~/Content/css/menu.css" rel="stylesheet" />
+    <script>
+        var organizeId = request('organizeId');
+        var css = { fontSize: '2em' };
+        var city = request('city');
+
+        setInterval(function () {
+            $('.animate').animate(css, 3000, rowBack);
+        }, 3000);
+        function rowBack() {
+            if (css.fontSize === '1em')
+                css.fontSize = '2em';
+            else if (css.fontSize === '2em')
+                css.fontSize = '1em';
+        }
+    </script>
+    <!--分享-->
+    @{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName + " 【流量卡】", Img = "liang4.jpg" });}
+    <!--end分享-->
+
+</head>
+<body>
+    <header>
+        <a href="~/WeChatManage/Liang/Main?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><div class="return fl"></div></a>
+        <div class="title-menu">
+            流量卡
+        </div>
+    </header>
+
+    <div>
+        <div style="width: 100%;margin-left: auto;margin-right: auto;">
+            <div style="margin: 5px auto;">
+                <div class="kuang">
+                    <div style="box-sizing:border-box;padding:10px;color:inherit;">
+                        <div class="kuangdiv">
+
+                            <div class="des">
+                                <p>★★★★★</p>
+                                <h4>小米米粉卡</h4>
+                                <p>流量全国无限量，免费申请中</p>
+                            </div>
+                            <div style="text-align:left">
+                                <img style="width:100%" src="~/Content/images/liang/llk02.jpg" /><br><br>
+                                ①1元/天全国流量无限量，不用不扣费<br>
+                                ②月租9元，全国通话1毛钱，接免费<br>
+                                ③激活后首冲30元赠送20元话费<br>
+                                全国诚招代理，自助激活，大量现卡<br><br>
+                                <img style="width:100%" src="~/Content/images/liang/llk01.png" />
+                            </div>
+
+                            <div class="des">
+                                <p>★★★★★</p>
+                                <h4>@ViewBag.FullName</h4>
+                                <p>精于专业 力求卓越</p>
+                                <p>▼</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align:center;"><img src="~/Content/images/0tan.gif" /></p>
+        <br />
+        <div style="height:50px" class="animate">总有一个号码适合您</div>
+        <img src="~/Content/images/0.gif" class="img-responsive center-block">
+        <br />
+        <span class="kuai">各位亲们！赶快来抢购吧，来晚了可能就买不到啦！~</span>
+        <br />
+        <br />
+        <br />
+    </div>
+</body>
+</html>

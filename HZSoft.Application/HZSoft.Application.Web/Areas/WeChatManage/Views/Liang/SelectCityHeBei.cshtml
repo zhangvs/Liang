@@ -1,0 +1,178 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>城市选择</title>
+
+    <style type="text/css">
+        body {
+            background: #efecec;
+            position: relative;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        body, div, dl, dt, dd, ul, li, form, input, button, h1, h2, h3, h4, h5, h6, p {
+            margin: 0 auto;
+            padding: 0;
+            font-family: "微软雅黑";
+        }
+
+        html {
+            overflow-x: hidden;
+            -webkit-text-size-adjust: none;
+        }
+
+        ul, li, dl, dt, dd {
+            display: block;
+            list-style: none;
+        }
+
+        img {
+            border: 0;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .clear {
+            background: none;
+            border: 0;
+            clear: both;
+            display: block;
+            float: none;
+            font-size: 0;
+            overflow: hidden;
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+
+        a {
+            text-decoration: none;
+            outline: none;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+        .btn-danger {
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+    </style>
+
+    <link href="~/Content/css/selectcity.css" rel="stylesheet"  type="text/css"/>
+
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+    <script>
+        var organizeId = request('organizeId');
+        //提交
+        function valiCode() {
+            $("#ErrorMessage").html("");
+
+            var city = $("#gr_zone_ids").html();
+
+            if (city == "" || city.Length == 0) {
+                $("#ErrorMessage").html("城市不能为空!");
+                return;
+            }
+
+            window.location.href = "Index?organizeId=" + organizeId + "&city=" + city;
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="loan_jm1">
+        <ul>
+            <li class="loan_jm_l1">
+                <span class="loan_jm_spa1">选择城市</span>
+                <span class="wbk_srn select_show select_gr" id="gr_zone_ids" data-id="130100">全国</span><b></b>
+                <button type="button" class="btn btn-danger" style="border-radius:0.107rem;background-color:#f85959 !important;color:#FFF;margin-left:5px" onclick="valiCode()">确定</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container" style="z-index: 9999; ">
+        <div class="city">
+            <div class="city-list">
+                <p data-id="">全国</p>
+                <p data-id="130600">保定市</p>
+                <p data-id="110100">北京市</p>
+                <p data-id="130900">沧州市</p>
+                <p data-id="130800">承德市</p>
+                <p data-id="130400">邯郸市</p>
+                <p data-id="131000">廊坊市</p>
+                <p data-id="130300">秦皇岛市</p>
+                <p data-id="130200">唐山市</p>
+                <p data-id="120100">天津市</p>
+                <p data-id="130500">邢台市</p>
+                <p data-id="130700">张家口市</p>
+                <p data-id="510100">成都市</p>
+                <p data-id="130100">石家庄市</p>
+                <p data-id="140100">太原市</p>
+                <p data-id="460100">海口市</p>
+                <p data-id="211400">葫芦岛市</p>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/Content/scripts/plugins/zepto.js"></script>
+    <script type="text/javascript">
+//加载城市事件
+$('body').on('click', '#zone_ids,#gr_zone_ids', function () {
+	var zid = $(this).attr('id');
+	$('.container').show();
+
+});
+//选择城市 start
+$('body').on('click', '.city-list p', function () {
+	var type = $('.container').data('type');
+	$('#zone_ids').html($(this).html()).attr('data-id', $(this).attr('data-id'));
+	$('#gr_zone_ids').html($(this).html()).attr('data-id', $(this).attr('data-id'));
+	$('.container').hide();
+});
+$('body').on('click', '.letter a', function () {
+	var s = $(this).html();
+	$(window).scrollTop($('#' + s + '1').offset().top);
+});
+    </script>
+
+
+</body>
+</html>

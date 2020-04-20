@@ -1,0 +1,3349 @@
+﻿
+
+
+ 
+  
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="http://www.ybdw.com:443/" />
+<title>全国数字靓号发布平台</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link href="css/css01.css" rel="stylesheet" type="text/css" />
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery/md5.js" ></script>
+<script type="text/javascript" src="layer/layer.js"></script>
+<script src="js/ybdw.js"></script>
+<script src="js/list.common.js"></script>
+<script src="js/geo.js"></script>
+<!-- select2 -->
+<link rel="stylesheet" href="js/select2/css/select2.min.css">
+<script type="text/javascript" src="js/select2/js/select2.full.min.js"></script>
+<style>
+  .close-adv-img {
+  	position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+  }
+  .left-top-adv {
+    position: fixed;
+    top: 20px;
+    left:20px;
+  }
+  .right-top-adv {
+    position: fixed;
+    top: 20px;
+    right:20px;
+  }
+  .left-bottom-adv {
+    position: fixed;
+    bottom: 20px;
+    left:20px;
+  }
+  .right-bottom-adv {
+    position: fixed;
+    bottom: 20px;
+    right:20px;
+  }
+  .adv-img-big {
+  	width: 172px;
+    height: 192px;
+  }
+  .adv-img-mini {
+  	width: 96px;
+     height: 106px;
+  }
+  .length-adv-img {
+  	width: 200px;
+    height: 355px;
+  }
+  .card-rule-text {
+  	white-space: nowrap;
+    overflow: hidden;
+  }
+  .width-adv-img-big {
+  	width: 231px;
+    height: 104px;
+  }
+  .width-adv-img-mini {
+  	width: 134px;
+    height: 59px;
+  }
+  .hulian-img-mini {
+  	width: 135px;
+    height: 151px;
+    cursor: pointer;
+  }
+  .hulian-img-big {
+  	width: 229px;
+    height: 256px;
+    cursor: pointer;
+  }
+  .adv-url-big {
+  	position: absolute;
+  	color: #02d4c3;
+  	bottom: 73px;
+  	left: 100px;
+  	text-decoration: none;
+  	cursor: pointer;
+  }
+  .adv-url-mini {
+  	position: absolute;
+    color: #02d4c3;
+    bottom: 40px;
+    left: 54px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 12px;
+  }
+</style>
+<script type="text/javascript">
+	var query = function() {
+		//$("#operatorCate_id").val("");
+		//$("#phone").val("");
+		//$("#mantissa_id").val("");
+		//$("#type").val("");
+		//$("#regphone").val("");
+		$("#currPage").val(1);
+		$("#queryFrom2").submit();
+		var index = layer.load(1, {
+		  shade: [0.1,'#fff'] //0.1透明度的白色背景
+		});
+	}
+	$(function() {
+		//var encode_version = 'sojson.v5', bwtrc = '__0x49dee',  __0x49dee=['w5tvcw==','CcKrJcOjwqc+wrw=','ATfDlGrCs8O4wrvDp8O6','w79uw5nCpGnDrBJ8QA==','5LiT6IC55Yil6ZqAw7YHVxfDncKTJcK0w74=','w6TDncOvZcK8b3RAO0I2wrnDtcOicQ==','LsOhw7jDkMO3VcKO','woHDh8Kk','VcK+GFvDsw=='];(function(_0x231fd0,_0x4f680a){var _0x5b4826=function(_0x4a3682){while(--_0x4a3682){_0x231fd0['push'](_0x231fd0['shift']());}};_0x5b4826(++_0x4f680a);}(__0x49dee,0x152));var _0x3afc=function(_0x5a0bf2,_0x37d278){_0x5a0bf2=_0x5a0bf2-0x0;var _0xdea4b8=__0x49dee[_0x5a0bf2];if(_0x3afc['initialized']===undefined){(function(){var _0x1de69f=typeof window!=='undefined'?window:typeof process==='object'&&typeof require==='function'&&typeof global==='object'?global:this;var _0x357d96='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';_0x1de69f['atob']||(_0x1de69f['atob']=function(_0x4a333e){var _0x16f39a=String(_0x4a333e)['replace'](/=+$/,'');for(var _0x54e4a4=0x0,_0x3f3895,_0x579c1e,_0x474ed5=0x0,_0x24aa7a='';_0x579c1e=_0x16f39a['charAt'](_0x474ed5++);~_0x579c1e&&(_0x3f3895=_0x54e4a4%0x4?_0x3f3895*0x40+_0x579c1e:_0x579c1e,_0x54e4a4++%0x4)?_0x24aa7a+=String['fromCharCode'](0xff&_0x3f3895>>(-0x2*_0x54e4a4&0x6)):0x0){_0x579c1e=_0x357d96['indexOf'](_0x579c1e);}return _0x24aa7a;});}());var _0x548049=function(_0x503728,_0x565a68){var _0x5052b2=[],_0x3885a7=0x0,_0xe09995,_0x432b95='',_0x5b9aa2='';_0x503728=atob(_0x503728);for(var _0x2aa261=0x0,_0x214af0=_0x503728['length'];_0x2aa261<_0x214af0;_0x2aa261++){_0x5b9aa2+='%'+('00'+_0x503728['charCodeAt'](_0x2aa261)['toString'](0x10))['slice'](-0x2);}_0x503728=decodeURIComponent(_0x5b9aa2);for(var _0x27d280=0x0;_0x27d280<0x100;_0x27d280++){_0x5052b2[_0x27d280]=_0x27d280;}for(_0x27d280=0x0;_0x27d280<0x100;_0x27d280++){_0x3885a7=(_0x3885a7+_0x5052b2[_0x27d280]+_0x565a68['charCodeAt'](_0x27d280%_0x565a68['length']))%0x100;_0xe09995=_0x5052b2[_0x27d280];_0x5052b2[_0x27d280]=_0x5052b2[_0x3885a7];_0x5052b2[_0x3885a7]=_0xe09995;}_0x27d280=0x0;_0x3885a7=0x0;for(var _0x1eab71=0x0;_0x1eab71<_0x503728['length'];_0x1eab71++){_0x27d280=(_0x27d280+0x1)%0x100;_0x3885a7=(_0x3885a7+_0x5052b2[_0x27d280])%0x100;_0xe09995=_0x5052b2[_0x27d280];_0x5052b2[_0x27d280]=_0x5052b2[_0x3885a7];_0x5052b2[_0x3885a7]=_0xe09995;_0x432b95+=String['fromCharCode'](_0x503728['charCodeAt'](_0x1eab71)^_0x5052b2[(_0x5052b2[_0x27d280]+_0x5052b2[_0x3885a7])%0x100]);}return _0x432b95;};_0x3afc['rc4']=_0x548049;_0x3afc['data']={};_0x3afc['initialized']=!![];}var _0x1a56b6=_0x3afc['data'][_0x5a0bf2];if(_0x1a56b6===undefined){if(_0x3afc['once']===undefined){_0x3afc['once']=!![];}_0xdea4b8=_0x3afc['rc4'](_0xdea4b8,_0x37d278);_0x3afc['data'][_0x5a0bf2]=_0xdea4b8;}else{_0xdea4b8=_0x1a56b6;}return _0xdea4b8;};var signDate=new Date();var keyNumber=_0x3afc('0x0','3ND1');var signDateStr=signDate[_0x3afc('0x1','A)88')]()+'';var sign=$[_0x3afc('0x2','rApr')](keyNumber+signDateStr);$(_0x3afc('0x3','hD5g'))[_0x3afc('0x4','9&ip')](sign);$(_0x3afc('0x5','GVO)'))['val'](signDateStr);;if(!(typeof encode_version!==_0x3afc('0x6','oTxD')&&encode_version===_0x3afc('0x7','2Xx%'))){window['alert'](_0x3afc('0x8','mQmo'));};encode_version = 'sojson.v5';
+		//var jumpurl = window.location.href;
+		//if(jumpurl.substr(0,7).toLowerCase() == "http://"){
+		//	window.location.href = jumpurl.replace("http://", "http://");
+		//} 
+		if (document.body.offsetWidth < 1483 && document.body.offsetWidth > 1110) {
+			$(".right-top-adv #adv").addClass("adv-img-mini");
+			$(".left-top-adv #adv").addClass("adv-img-mini");
+			$(".right-top-adv #adv").removeClass("adv-img-big");
+			$(".left-top-adv #adv").removeClass("adv-img-big");
+			$(".right-bottom-adv #adv").addClass("adv-img-mini");
+			$(".right-bottom-adv #adv").removeClass("adv-img-big");
+		}
+		$(".d_acces li a").on("click", function() {
+			var cid = $(this).attr("cid");
+			var tel = $(this).attr("tel");
+			var mant = $(this).attr("mant");
+			var cardRule = $(this).attr("cardRule");
+			$("#operatorCate_id").val(cid);
+			$("#tel").val(tel);
+			$("#mantissa_id").val(mant);
+			$("#regphone").val(cardRule);
+			if(cardRule!=''&&cardRule=='特价号码'){
+				$("#type").val(3);
+			}
+			if(cardRule!=''&&cardRule=='预存赠送'){
+				$("#type").val(5);
+			}
+			$("#currPage").val(1);
+			$("#queryFrom2").submit();
+		});
+	});
+	function restartScroll(){
+		var demo = $("#demo");
+		demo.scrollTop(0);
+	}
+	function closeAdv(name){
+		$("."+name+"-adv" ).css("display", "none");
+	}
+	function ScrollImgTop1() {
+		 var speed = 3; //滚动速度
+	        var rows =108; //每行高度
+	        var stim = 1500; //停留时间倍数 * speed
+	        var stop = 0; //初始化值
+			var demo = $("#demo");
+			var demo1 = $("#demo1");
+			var demo2 = $("#demo2");
+	        demo2.html(demo1.html());
+			function Marquee() {
+	            if (demo.scrollTop() % rows == 0 && stop <= stim) {
+	                stop++;
+	                return;
+	            }
+	            stop = 0;
+	            var dff2 = demo2.offset()
+	            if (dff2.top - demo.scrollTop() <= 0){
+	            	//alert(demo1.height()+"-"+demo.scrollTop());
+	                //demo.scrollTop(demo.scrollTop()-demo1.height());
+	            	//setTimeout(restartScroll, 5000);
+	            	setTimeout("", 100);
+	            	demo.scrollTop(demo.scrollTop() + 1);
+	            }else {
+					demo.scrollTop(demo.scrollTop() + 1);
+	            }
+	        }
+	        var MyMar = setInterval(Marquee, speed)
+	        demo.mouseover(function() {
+				clearInterval(MyMar);
+			})
+			demo.mouseout(function() {
+				MyMar = setInterval(Marquee, speed);
+			})
+	}
+	$(function() {
+		var beauSize = "73";
+		if (beauSize <= 5) {
+			$("#demo").attr("style",
+					"overflow: hidden; width:962px; height:108px");
+		} else {
+			ScrollImgTop1();
+		}
+		//setTimeout("ScrollImgTop1()", 2000);//暂停
+	});
+	$(function() {
+		$("[id^='mode_ul']").each(function() {
+			$(this).find("li:lt(6)").css('display', 'block');
+		});
+		$(".ulshow").click(function() {
+			var ulid = $(this).attr("ulid");
+			if ($(this).hasClass('da_down')) {
+				$("#" + ulid + " li").css('display', 'block');
+				$(this).removeClass('da_down');
+			} else {
+
+				$("#" + ulid + " li:gt(5)").css('display', 'none');
+				$(this).addClass('da_down');
+			}
+		})
+	});
+	//
+	$(function() {
+		$(".tel_num li").click(
+				function() {
+					if ((navigator.userAgent.indexOf('MSIE') >= 0)
+							&& (navigator.userAgent.indexOf('Opera') < 0)) {
+						var orderid = $(this).attr("orderid");
+						//var href = "order_" + orderid + ".html";
+						//document.location.href = href;
+					}
+				});
+	});
+	$(function(){
+		$(".phone_remark_aa").each(function(){
+		    if ($(this).attr("des").indexOf("不能开卡") != -1) {
+				$(this).css("color", "red");
+			}
+		});
+		$(".des_aa").hover(function(){
+			var a = $(this).attr("des");
+			var id = $(this).attr("id");
+			//tips层-右
+			//layer.tips(a,"#"+id);
+			//小tips
+			layer.tips(a, "#"+id, {
+			    tips: [1, '#f60']
+			});
+		},function(){
+			var index = layer.tips();
+			layer.close(index);
+		});
+		
+		$(".phone_remark_aa").hover(function(){
+			var a = $(this).attr("des");
+			var id = $(this).attr("id");
+			//tips层-右
+			//layer.tips(a,"#"+id);
+			//小tips
+			layer.tips(a, "#"+id, {
+			    tips: [1, '#f60']
+			});
+		},function(){
+			var index = layer.tips();
+			layer.close(index);
+		});
+		
+		$("#mode_ul4 li").hover(function(){
+			var a = $(this).attr("des");
+			var id = $(this).attr("id");
+			//tips层-右
+			//layer.tips(a,"#"+id);
+			//小tips
+			layer.tips(a, "#"+id, {
+			    tips: [1, '#f60']
+			});
+		},function(){
+			var index = layer.tips();
+			layer.close(index);
+		});
+		
+		$(".fuwuqu_aa").hover(function(){
+			var a = $(this).attr("des");
+			var id = $(this).attr("id");
+			//tips层-右
+			//layer.tips(a,"#"+id);
+			//小tips
+			layer.tips(a, "#"+id, {
+			    tips: [1, '#f60']
+			});
+		},function(){
+			var index = layer.tips();
+			layer.close(index);
+		});
+		
+		$(".price_aa").hover(function(){
+			var a = $(this).attr("des");
+			var id = $(this).attr("id");
+			//tips层-右
+			//layer.tips(a,"#"+id);
+			//小tips
+			layer.tips(a, "#"+id, {
+			    tips: [1, '#f60']
+			});
+		},function(){
+			var index = layer.tips();
+			layer.close(index);
+		});
+		
+	});
+	
+	$(function(){
+		
+		$('.detail_wp tr').hover(function(){
+			
+			$(this).css('background','#ccc');
+			$(this).find('td').eq(0).addClass('td02');
+			$(this).find('td').eq(1).addClass('td02');
+			if(false){
+				$(this).find('td').eq(2).addClass('td02');
+			}
+		},function(){
+			$(this).css('background','');
+			$(this).find('td').eq(0).removeClass('td02');
+			$(this).find('td').eq(1).removeClass('td02');
+			if(false){
+				$(this).find('td').eq(2).removeClass('td02');
+			}
+		})
+			
+		})
+		//分享
+		//全局变量，动态的文章ID
+        var ShareId = "";
+        //绑定所有分享按钮所在A标签的鼠标移入事件，从而获取动态ID
+        $(function () {
+            $(".bdsharebuttonbox a").mouseover(function () {
+                ShareId = $(this).attr("data-id");
+            });
+        });
+        /* 
+         * 动态设置百度分享URL的函数,具体参数
+         * cmd为分享目标id,此id指的是插件中分析按钮的ID
+         *，我们自己的文章ID要通过全局变量获取
+         * config为当前设置，返回值为更新后的设置。
+         */
+         function SetShareUrl(cmd, config) {            
+             if (ShareId) {
+                 config.bdUrl = "http://www.ybdw.com/index-" + ShareId+".html";    
+             }
+             return config;
+         }
+		window._bd_share_config = {
+		"common" : {
+			"onBeforeClick":SetShareUrl,
+			"bdSnsKey" : {},
+			"bdText" : "",
+			"bdMini" : "1",
+			"bdMiniList" : [ "mshare", "qzone",
+					"tsina", "weixin", "tqq", "sqq",
+					"copy" ],
+			"bdPic" : "",
+			"bdUrl" :"http://www.ybdw.com",
+			"bdStyle" : "0",
+			"bdSize" : "23"
+		},
+		"share" : {
+		},
+		"image" : {
+			"viewList" : [],
+			"viewText" : "分享到：",
+			"viewSize" : "16"
+		},
+		"selectShare" : {
+			"bdContainerClass" : null,
+			"bdSelectMiniList" : []
+		}
+	};
+	with (document)
+		0[(getElementsByTagName('head')[0] || body)
+				.appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='
+				+ ~(-new Date() / 36e5)];
+	
+	//下拉号段
+	$(function(){
+		var select2Data = new Array();
+		$.ajax({
+			url:'front/index!haoduan',
+			type:'GET',
+			dataType:'JSON',
+			delay: 250,
+			cache: true,
+			success: function(data){
+				for(var i = 0; i < data.length; i++){
+					var select2Obj = {};
+					select2Obj.id = data[i].id;
+					select2Obj.text = data[i].name;
+					select2Data.push(select2Obj);
+				}
+				$("#haoduan").select2({
+					data: select2Data,
+					placeholder:'请选择号段',//默认文字提示
+				    language: "zh-CN",//汉化
+				    allowClear: true//允许清空
+				});
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	
+
+ 
+  
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<base href="http://www.ybdw.com:443/" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<link rel="shortcut icon" href="http://www.ybdw.com:443/favicon.ico" type="image/x-icon" />
+</head>
+<style>
+  body .bus-btn .layui-layer-btn0{
+    border-color: #4898d5;
+    background-color: #2e8ded;
+    color: #fff;
+  }
+  body .bus-btn .layui-layer-btn1{
+    border-color: #4898d5;
+    background-color: #2e8ded;
+    color: #fff;
+  }
+  
+  
+  body .process-btn .layui-layer-btn0{
+    border-color: #4898d5;
+    background-color: #2e8ded;
+    color: #fff;
+  }
+  body .process-btn .layui-layer-btn1{
+    border-color: #4898d5;
+    background-color: #2e8ded;
+    color: #fff;
+  }
+  body .process-btn .layui-layer-btn2{
+    border-color: #4898d5;
+    background-color: #2e8ded;
+    color: #fff;
+  }
+</style>
+<script type="text/javascript">
+$(document).ready(function () { 
+	var openViolationsMsg = function() {
+		layer.open({
+	        type: 1
+	        ,title: false //不显示标题栏
+	        ,closeBtn: false
+	        ,area: '300px;'
+	        ,shade: 0.8
+	        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	        ,btn: ['知道了']
+	        ,btnAlign: 'c'
+	        ,moveType: 1 //拖拽模式，0或者1
+	        ,content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">null</div>'
+	        ,yes: function(){
+		      layer.closeAll();
+		    }
+	      });
+		
+	}
+	if('null' != 'null' && 'null' != '') {
+		openViolationsMsg();
+	}
+	document.onkeydown = function(e){ 
+	    var ev = document.all ? window.event : e;
+	    if(ev.keyCode==13) {
+	    	//$('#loginForm').submit();
+	    	query();
+	    }
+	}
+	if (false) {
+		resetPass();
+	}
+});
+function forgetPass(){
+	//iframe层-父子操作
+	layer.open({
+	  type: 2,
+	  //title:['忘记密码', 'font-size:18px;'],
+	  area: ['333px', '360px'],
+	  fixed: false, //不固定
+	  maxmin: false,
+	  content: 'http://www.ybdw.com:443//front/index!forgetPassUI'
+	});
+}
+
+function resetPass(){
+	//iframe层-父子操作
+	layer.open({
+	  type: 2,
+	  title:['您刚刚已重置密码，请修改密码', 'font-size:13px;'],
+	  area: ['333px', '360px'],
+	  fixed: false, //不固定
+	  shadeClose: false,
+	  closeBtn: 0,
+	  maxmin: false,
+	  content: 'http://www.ybdw.com:443//front/index!resetPassUI',
+	  end: function () {
+	  	window.location.href = window.location.href;
+	  }
+	});
+}
+
+//询问框
+function goBus(){
+	layer.open({
+		  skin: 'bus-btn',
+		  content: '请您选择合作方式'
+		  ,btn: ['卡商申请', '代理商申请']
+		  ,yes: function(index, layero){
+		    //按钮【按钮一】的回调
+			  window.location.href ="issuer.html";
+		  }
+		  ,btn2: function(index, layero){
+		    //按钮【按钮二】的回调
+		    window.location.href ="agent.html";
+		    //return false 开启该代码可禁止点击该按钮关闭
+		  }
+		  ,cancel: function(){ 
+		    //右上角关闭回调
+		    
+		    //return false 开启该代码可禁止点击该按钮关闭
+		  }
+		});
+}
+
+//服务流程询问框
+function goProcess(){
+	layer.open({
+		  skin: 'process-btn',
+		  content: '请您选择服务流程'
+		  ,btn: ['开户流程', '补卡流程', '过户流程']
+		  ,yes: function(index, layero){
+			  window.location.href ="service_7.html";
+		  }
+		  ,btn2: function(index, layero){
+		    //按钮【按钮二】的回调
+		    window.location.href ="service_8.html";
+		    //return false 开启该代码可禁止点击该按钮关闭
+		  }
+		  ,btn3: function(index, layero){
+		    //按钮【按钮三】的回调
+		    window.location.href ="service_9.html";
+		    //return false 开启该代码可禁止点击该按钮关闭
+		  }
+		  ,cancel: function(){ 
+		  }
+		});
+}
+</script>
+<body> 
+	<div class="yd_top w980">
+		<div class="Fl top_lt">
+			<a href="index.html"><img src="images/logo.jpg" width="414" height="120" /> </a>
+		</div>
+			
+					<div class="Fr top_ri">
+					<form id="loginForm" name="loginForm" action="login.html" method="post">
+						账号：<input type="text" class="tx_user login_username" name="username" value=""/>
+						密码：<input type="password" class="tx_sec login_username" name="password"/>
+						<a href="javascript:$('#loginForm').submit();">登录</a>
+						<a href="javascript:forgetPass();">忘记密码</a>
+					</form>
+
+
+
+
+				</div>
+			
+			
+	</div>
+	<div class="yd_nav w980">
+		<div class="nav_wp">
+			<ul class="nav">
+				<li class="hover"><a href="index.html">首&nbsp;&nbsp;页</a></li>
+				<li><a href="javascript:goBus();">合伙人</a></li>
+				<li><a href="partners.html">合作伙伴</a></li>
+				<li><a href="javascript:goProcess();">服务流程</a></li>
+				<li><a href="member.html">会员中心</a></li>
+				<li><a href="contact.html">互联互通</a></li>
+				<li><a href="preferential.html">818周年庆</a></li>
+			</ul>
+			<a href="myPhone.html" class="show_num">下架靓号</a>
+			<a href="myPhone.html" class="show_num show_xz">发布靓号</a>
+		</div>
+		<div class="sub_not">
+			<div id="callboard">
+				<ul>
+					<li><a href="notice_4.html" class="cl_ray">公告[1]：一步到位接受行业周边公益广告订单！</a></li><li><a href="notice_5.html" class="cl_ray">公告[2]：资费三无：无月租，无低消，无套餐；（因涉及45家品牌，本平台公示10元以下【包含10元】默认为三无资费；特此公告！！！</a></li><li><a href="notice_6.html" class="cl_ray">公告[3]：网站靓号显示蓝色的为推荐号码，显示橙色的靓号可以直接预存话费赠送。</a></li><li><a href="notice_10.html" class="cl_ray">公告[4]：同行合作伙伴申请，将在2020年1月1号起，征收永久加盟费888元，这段期间暂时免费！</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>	
+
+	<form id="queryFrom2" name="queryFrom2" action="index.html" method="post">
+		<div class="seach_wp" style="height: 114px;">
+			<input type="hidden" name="isFirst" value="1"/>
+			<input type="hidden" name="sign" id="sign"/>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="7%" align="right" height="38">号段：</td>
+					<td width="12%"><input type="text" class="rn_text" name="beauPhoneDTO.phone" id="phone" value="" /></td>
+					<td width="5%" align="right">中间：</td>
+					<td width="12%"><input type="text" class="rn_text" name="beauPhoneDTO.middlephone" id="middlephone" value="" /></td>
+					<td width="5%" align="right">尾段：</td>
+					<td width="12%"><input type="text" class="rn_text" name="beauPhoneDTO.endphone" id="endphone" value=""/></td>
+					<td width="12%"><select name="beauPhoneDTO.regphone" id="regphone" class="sind_set">
+    <option value=""
+    >号码规则</option>
+    <option value="3-4-4">3-4-4</option>
+    <option value="5-3-3">5-3-3</option>
+    <option value="1-5-5">1-5-5</option>
+    <option value="2-4-5">2-4-5</option>
+    <option value="3-3-5">3-3-5</option>
+    <option value="3-5-3">3-5-3</option>
+    <option value="3-2-2-2-2">3-2-2-2-2</option>
+    <option value="1-2-2-2-2-2">1-2-2-2-2-2</option>
+    <option value="4-3-4">4-3-4</option>
+    <option value="2-3-3-3">2-3-3-3</option>
+    <option value="4-4-3">4-4-3</option>
+    <option value="3-1-1-1-1-2-2">3-1-1-1-1-2-2</option>
+    <option value="3-2-2-2-1-1">3-2-2-2-1-1</option>
+    <option value="2-2-1-1-1-1-1-1-1">2-2-1-1-1-1-1-1-1</option>
+    <option value="3-2-2-1-1-1-1">3-2-2-1-1-1-1</option>
+    <option value="4-7">4-7</option>
+    <option value="2-3-6">2-3-6</option>
+    <option value="3-8">3-8</option>
+    <option value="3-1-1-1-1-1-1-1-1">3-1-1-1-1-1-1-1-1</option>
+    <option value="2-2-7">2-2-7</option>
+    <option value="3-2-6">3-2-6</option>
+    <option value="2-2-2-5">2-2-2-5</option>
+    <option value="2-2-3-4">2-2-3-4</option>
+    <option value="2-1-1-1-1-1-2-2">2-1-1-1-1-1-2-2</option>
+
+
+</select>
+</td>
+					<td width="12%">
+						<select name="rangePrice" id="queryFrom2_rangePrice" class="sind_set">
+    <option value="-1">价格范围</option>
+    <option value="0">100以下</option>
+    <option value="1">100-200</option>
+    <option value="2">200-300</option>
+    <option value="3">300-500</option>
+    <option value="4">500-1000</option>
+    <option value="5">1000-2000</option>
+    <option value="6">2000-3000</option>
+    <option value="7">3000-5000</option>
+    <option value="8">5000以上</option>
+
+
+</select>
+
+					</td>
+					<td width="12%"><select name="sort" id="queryFrom2_sort" class="sind_set">
+    <option value="">售价高低排序</option>
+    <option value="asc">低到高</option>
+    <option value="desc">高到低</option>
+
+
+</select>
+
+					</td>
+					<td width="12%">
+						&nbsp;
+					</td>
+				</tr>
+			</table>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="7%"  align="right" height="38">带4：</td>
+					<td width="12%"><select name="isFour" id="queryFrom2_isFour" class="rn_text">
+    <option value="-1">请选择</option>
+    <option value="0">不带4</option>
+    <option value="1">带4</option>
+
+
+</select>
+</td>
+					<td width="5%"  align="right">类型：</td>
+					<td width="29%">
+						<select name="beauPhoneDTO.type" id="type" class="sind_set" style="width:79px">
+    <option value="-1">请选择</option>
+    <option value="1">普通号码</option>
+    <option value="2">推荐号码</option>
+    <option value="3">特价号码</option>
+    <option value="5">预存赠送</option>
+
+
+</select>
+
+						<select name="beauPhoneDTO.provinceId" id="province_id" class="sind_set" style="width:95px;font-weight:bold;color:#ff0000;font-size:smaller;" onchange="queryGeo2();">
+    <option value="-1">省份选择</option>
+    <option value="1">福建</option>
+    <option value="30156">北京</option>
+    <option value="30158">天津</option>
+    <option value="30159">河北</option>
+    <option value="30163">山西</option>
+    <option value="30165">内蒙古</option>
+    <option value="30223">辽宁</option>
+    <option value="30227">吉林</option>
+    <option value="30229">黑龙江</option>
+    <option value="30232">上海</option>
+    <option value="30234">江苏</option>
+    <option value="30238">浙江</option>
+    <option value="30239">安徽</option>
+    <option value="30245">江西</option>
+    <option value="30252">山东</option>
+    <option value="30256">河南</option>
+    <option value="30261">湖北</option>
+    <option value="30263">湖南</option>
+    <option value="30268">广东</option>
+    <option value="30312">广西</option>
+    <option value="30314">海南</option>
+    <option value="30317">重庆</option>
+    <option value="30320">四川</option>
+    <option value="30324">贵州</option>
+    <option value="30327">云南</option>
+    <option value="30331">西藏</option>
+    <option value="30340">陕西</option>
+    <option value="30346">甘肃</option>
+    <option value="30351">青海</option>
+    <option value="30354">宁夏</option>
+    <option value="30358">新疆</option>
+    <option value="30361">香港</option>
+    <option value="30364">澳门</option>
+    <option value="30367">台湾</option>
+
+
+</select>
+
+						<select name="beauPhoneDTO.cityId" id="city_id" class="sind_set" style="width:83px;font-weight:bold;color:#ff0000;font-size:smaller;">
+
+
+</select>
+ </td>
+					<td width="12%">
+						<select name="beauPhoneDTO.mantissa_id" id="mantissa_id" class="sind_set">
+    <option value=""
+    >尾号特征</option>
+    <option value="31">AAAAAA</option>
+    <option value="7">AAAAA</option>
+    <option value="5">AAAA</option>
+    <option value="3">AAA</option>
+    <option value="4">AABBB</option>
+    <option value="6">AABBBB</option>
+    <option value="11">AAABBB</option>
+    <option value="28">ABCDE</option>
+    <option value="14">ABCD</option>
+    <option value="27">ABCDABCD</option>
+    <option value="29">AAABBBCCC</option>
+    <option value="13">ABC</option>
+    <option value="30">AABBCCDD</option>
+    <option value="8">ABAB</option>
+    <option value="9">AABB</option>
+    <option value="10">AABBCC</option>
+    <option value="32">ABBA</option>
+    <option value="12">ABABAB</option>
+    <option value="15">ABCABC</option>
+    <option value="16">AAAB</option>
+    <option value="17">AAAAB</option>
+    <option value="18">ABBABB</option>
+    <option value="19">ABBCBB</option>
+    <option value="20">AABCC</option>
+    <option value="25">ABCAB</option>
+    <option value="26">AABAAC</option>
+    <option value="21">**AB**AB</option>
+    <option value="22">*A*A*A</option>
+    <option value="23">**AA**AA</option>
+    <option value="24">A*A*A*</option>
+
+
+</select>
+
+					</td>
+					<td width="12%">
+						<select name="beauPhoneDTO.tel" id="tel" class="sind_set">
+    <option value=""
+    >推荐号码段</option>
+    <option value="165">165</option>
+    <option value="167">167</option>
+    <option value="162">162</option>
+    <option value="170">170</option>
+    <option value="171">171</option>
+    <option value="130">130</option>
+    <option value="131">131</option>
+    <option value="132">132</option>
+    <option value="133">133</option>
+    <option value="135">135</option>
+    <option value="136">136</option>
+    <option value="137">137</option>
+    <option value="138">138</option>
+    <option value="188">188</option>
+    <option value="155">155</option>
+
+
+</select>
+
+					</td>
+					<td width="12%">
+						<select name="beauPhoneDTO.operatorCate_id" id="operatorCate_id" class="sind_set">
+    <option value=""
+    >网络来源</option>
+    <option value="1">移动</option>
+    <option value="2">联通</option>
+    <option value="3">电信</option>
+    <option value="5">固话</option>
+
+
+</select>
+
+					</td>
+					<td width="12%">&nbsp;</td>
+				</tr>
+			</table>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="9%"  align="right" height="38">运营商：</td>
+					<td width="12%">
+						<select name="beauPhoneDTO.telBrand_id" id="queryFrom2_beauPhoneDTO_telBrand_id" class="rn_text">
+    <option value=""
+    >运营商</option>
+    <option value="8">天音通信</option>
+    <option value="18">银盛通信</option>
+    <option value="25">三五互联</option>
+    <option value="63">河马通信</option>
+    <option value="43">民生通讯</option>
+    <option value="33">红豆电信</option>
+    <option value="61">博元</option>
+    <option value="60">长城移动（鹏博士）</option>
+    <option value="6">蜗牛移动</option>
+    <option value="26">中期移动</option>
+    <option value="56">中邮普泰</option>
+    <option value="58">263网络通信</option>
+    <option value="64">中国电信</option>
+    <option value="59">蓝猫移动</option>
+    <option value="53">中国移动</option>
+    <option value="52">青牛</option>
+    <option value="62">全民优打</option>
+    <option value="51">中国联通</option>
+    <option value="50">小米移动</option>
+    <option value="48">巴士在线</option>
+    <option value="46">朗玛移动</option>
+    <option value="5">苏宁互联</option>
+    <option value="45">分享通信</option>
+    <option value="44">用友通信</option>
+    <option value="41">日日顺（海尔）</option>
+    <option value="40">星美</option>
+    <option value="37">远特通信</option>
+    <option value="34">迪信通（迪迦）</option>
+    <option value="32">海航通信</option>
+    <option value="30">U.友（爱施德）</option>
+    <option value="28">长江移动</option>
+    <option value="27">连连科技</option>
+    <option value="24">中麦（巴士在线）</option>
+    <option value="23">话机世界</option>
+    <option value="20">乐语通信</option>
+    <option value="13">阿里通信</option>
+    <option value="11">极信通信(国美)</option>
+    <option value="7">中兴视通</option>
+
+
+</select>
+
+					</td>
+					<td width="7%"  align="right">卡种：</td>
+					<td width="12%">
+						<select name="beauPhoneDTO.phoneRemark" id="phoneRemark" class="rn_text" style="width:79px">
+    <option value="">请选择</option>
+    <option value="现卡">现卡</option>
+    <option value="期卡">期卡</option>
+    <option value="压卡">压卡</option>
+
+
+</select>
+
+					</td>
+					<td width="5%">
+						低消:
+					</td>
+					<td width="12%">
+						<select name="beauPhoneDTO.des" id="des" class="rn_text" style="width:79px">
+    <option value="">请选择</option>
+    <option value="有低消">有低消</option>
+    <option value="无低消">无低消</option>
+
+
+</select>
+
+					</td>
+					<td width="5%">
+						号段:
+					</td>
+					<td width="36%">
+						<input type="text" id="haoduan" name="beauPhoneDTO.haoduan" class="ac_input" value="">
+					</td>
+					<td width="12%">&nbsp;</td>
+					<td width="12%"><a href="javascript:;" onclick="query();" class="stsx_a" >查询</a></td>
+				</tr>
+			</table>
+		</div>
+		<div class=" w980 mar15">
+			<div style="border:1px solid #ddd; padding:8px;">
+				<div id="demo" style="overflow: hidden; width:962px; height:216px">
+					<div id="demo1">
+						<ul class="tel_num">
+							
+								<li orderid="892401"><a href="javascript:void();" title="17077665544(云南玉溪)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-77-66-55-44</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：话机世界(云南玉溪)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">20000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2243782"><a href="javascript:void();" title="17119971997(江苏泰州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-1997-1997</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：红豆电信(江苏泰州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">8000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2243813"><a href="javascript:void();" title="17119931993(江苏徐州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-1993-1993</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：红豆电信(江苏徐州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">8000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2261210"><a href="javascript:void();" title="16508388888(四川遂宁+德阳区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0838-8888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川遂宁...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">60000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2261213"><a href="javascript:void();" title="16508399999(四川达州+广元区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0839-9999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川达州...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">45000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2261216"><a href="javascript:void();" title="16508355555(四川广安+雅安区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0835-5555</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川广安...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">30000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2275646"><a href="javascript:void();" title="17067111111(河南南阳)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-067-111111</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：迪信通（迪迦）(河南南阳)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">80000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282626"><a href="javascript:void();" title="16501888888(辽宁锦州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">16-501-888888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：天音通信(辽宁锦州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">450000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282628"><a href="javascript:void();" title="17172222222(天津)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">1717-2222222</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蜗牛移动(天津)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">700000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282629"><a href="javascript:void();" title="17178888888(广州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">1717-8888888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：迪信通（迪迦）(广州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">1500000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282633"><a href="javascript:void();" title="17059777777(重庆)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-0597-77777</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：天音通信(重庆)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">220000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282635"><a href="javascript:void();" title="17047999999(湖北武汉)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-0479-99999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：远特通信(湖北武汉)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">160000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282641"><a href="javascript:void();" title="17049999999(天津)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-4999-9999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：民生通讯(天津)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">700000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282642"><a href="javascript:void();" title="17069888888(辽宁沈阳)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-069-888888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：朗玛移动(辽宁沈阳)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">300000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282643"><a href="javascript:void();" title="17130666666(吉林长春)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-130-666666</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蜗牛移动(吉林长春)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">280000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282644"><a href="javascript:void();" title="17125888888(内蒙古包头)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-125-888888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：迪信通（迪迦）(内蒙古包...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">300000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282645"><a href="javascript:void();" title="17136888888(山西太原)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-136-888888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：迪信通（迪迦）(山西太原)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">300000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282646"><a href="javascript:void();" title="17120999999(湖南衡阳)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-120-999999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：民生通讯(湖南衡阳)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">200000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282647"><a href="javascript:void();" title="17136999999(山西太原)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-136-999999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：民生通讯(山西太原)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">250000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282649"><a href="javascript:void();" title="17021555555(山东青岛)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-021-555555</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：天音通信(山东青岛)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">165000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2282651"><a href="javascript:void();" title="17014999999(辽宁盘锦)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-014-999999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：海航通信(辽宁盘锦)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">250000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2286817"><a href="javascript:void();" title="17122334455(河南焦作)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-22-33-44-55</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蜗牛移动(河南焦作)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">120000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2286906"><a href="javascript:void();" title="17044556677(黑龙江哈尔滨)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-44-55-66-77</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蜗牛移动(黑龙江哈...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">165000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2286946"><a href="javascript:void();" title="17044334433(黑龙江哈尔滨)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-4433-4433</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：民生通讯(黑龙江哈...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">25000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2299273"><a href="javascript:void();" title="17107144444(黑龙江大庆+黄石区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-0714-4444</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：青牛(黑龙江大...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">18500</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2303415"><a href="javascript:void();" title="16517777777(北京)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-1777-7777</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：分享通信(北京)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">1000000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2307069"><a href="javascript:void();" title="14601234567(江苏南京)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">146-0-1-2-3-4-5-6-7</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中国联通(江苏南京)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">300000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2307070"><a href="javascript:void();" title="17067891011(湖南长沙)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-6-7-8-9-10-11</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖南长沙)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">80000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2307081"><a href="javascript:void();" title="17123434567(河南周囗   8顺)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-1234-34567</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：话机世界(河南周囗...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">22500</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2311486"><a href="javascript:void();" title="16559877777(湖北襄阳)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-598-77777</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(湖北襄阳)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">45000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2311605"><a href="javascript:void();" title="16559888888(湖北襄阳)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">16-559-888888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(湖北襄阳)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">300000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2317943"><a href="javascript:void();" title="16513288888(四川成都)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-132-88888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：迪信通（迪迦）(四川成都)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">55000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2319202"><a href="javascript:void();" title="16537444444(黑龙江牡丹江)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">16-537-444444</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：长城移动（鹏博士）(黑龙江牡...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">80000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2320286"><a href="javascript:void();" title="16505005000(四川成都)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">16-50-500-5000</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蓝猫移动(四川成都)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">30000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2330884"><a href="javascript:void();" title="17114144444(山东济南)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-1414-4444</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：红豆电信(山东济南)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">35000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2388359"><a href="javascript:void();" title="17135791113(福建福州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-1-3-5-7-9-11-13</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：远特通信(福建福州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">50000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2388405"><a href="javascript:void();" title="17026252423(江苏南通)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-26-25-24-23</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：极信通信(国美)(江苏南通)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">2000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533314"><a href="javascript:void();" title="17047777777(辽宁沈阳+鄂尔多斯区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-4777-7777</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：海航通信(辽宁沈阳...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">700000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533318"><a href="javascript:void();" title="16505911111(福建福州+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0591-1111</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建福州...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">45000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533325"><a href="javascript:void();" title="16505910591(福建福州+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0591-0591</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建福州...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533499"><a href="javascript:void();" title="16505930593(福建宁德+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0593-0593</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建宁德...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533540"><a href="javascript:void();" title="16505944444(福建莆田+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0594-4444</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建莆田...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533542"><a href="javascript:void();" title="16505940594(福建莆田+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0594-0594</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建莆田...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533610"><a href="javascript:void();" title="16505960596(福建漳州+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0596-0596</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建漳州...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">45000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533671"><a href="javascript:void();" title="16505980598(福建三明+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0598-0598</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建三明...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533769"><a href="javascript:void();" title="16505999999(福建南平+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0599-9999</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建南平...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">350000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2533777"><a href="javascript:void();" title="16505990599(福建南平+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0599-0599</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建南平...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2534114"><a href="javascript:void();" title="16507122222(湖北孝感+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0712-2222</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖北孝感...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">35000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2534124"><a href="javascript:void();" title="16507120712(湖北孝感+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0712-0712</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖北孝感...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">25000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2534231"><a href="javascript:void();" title="16507133333(湖北黄冈+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0713-3333</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖北黄冈...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">35000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2534240"><a href="javascript:void();" title="16507130713(湖北黄冈+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0713-0713</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖北黄冈...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">25000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2534345"><a href="javascript:void();" title="16507144444(湖北黄石+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0714-4444</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖北黄石...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">28000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2534355"><a href="javascript:void();" title="16507140714(湖北黄石+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0714-0714</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖北黄石...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">20000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2535779"><a href="javascript:void();" title="16500666666(湖南长沙)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">16-500-666666</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(湖南长沙)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">250000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2536203"><a href="javascript:void();" title="16504255555(黑龙江绥化)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0425-5555</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(黑龙江绥...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">40000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2536350"><a href="javascript:void();" title="17107140714(黑龙江大庆+黄石区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-0714-0714</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：青牛(黑龙江大...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">5000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2536887"><a href="javascript:void();" title="16506600000(广东汕尾+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0660-0000</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(广东汕尾...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">35000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2537026"><a href="javascript:void();" title="16508700000(云南昭通+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0870-0000</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(云南昭通...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">35000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2537036"><a href="javascript:void();" title="16508700870(云南昭通+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0870-0870</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(云南昭通...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">20000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2537135"><a href="javascript:void();" title="17123445678(河南周口)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-1234-45678</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蜗牛移动(河南周口)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">26000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2561080"><a href="javascript:void();" title="16714188888(辽宁阜新)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">167-1418-8888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：远特通信(辽宁阜新)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">70000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2561524"><a href="javascript:void();" title="17048484848(山东烟台)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">170-48-48-48-48</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：远特通信(山东烟台)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">50000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562396"><a href="javascript:void();" title="16504280428(辽宁葫芦岛)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0428-0428</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(辽宁葫芦...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">6000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562444"><a href="javascript:void();" title="16508300830(四川泸州+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0830-0830</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川泸州...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">20000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562532"><a href="javascript:void();" title="16508310831(四川宜宾+区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0831-0831</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川宜宾...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">20000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562615"><a href="javascript:void();" title="16508350835(四川广安+雅安区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0835-0835</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川广安...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">12000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562616"><a href="javascript:void();" title="16508380838(四川遂宁+德阳区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0838-0838</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川遂宁...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">12000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562617"><a href="javascript:void();" title="16508390839(四川达州+广元区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0839-0839</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川达州...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">12000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2562618"><a href="javascript:void();" title="16508330833(四川成都+乐山区号)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0833-0833</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：中邮普泰(四川成都...)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">12000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2563558"><a href="javascript:void();" title="17188888888(广东广州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-8888-8888</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：蜗牛移动(广东广州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">6660000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2906260"><a href="javascript:void();" title="17009555555(福建福州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">17-009-555555</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：苏宁互联(福建福州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">300000</span>
+														赠送：90000
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2907385"><a href="javascript:void();" title="17119941994(江苏泰州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">171-1994-1994</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：红豆电信(江苏泰州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">6000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+								<li orderid="2932855"><a href="javascript:void();" title="16505844444(福建福州)" style="">
+										<table width="100%" border="0" cellspacing="0" cellpadding="0">
+											<tr>
+												<td colspan="2" align="center" style="font-size:17px;" class="f20px bold" height="34">165-0584-4444</td>
+											</tr>
+											<tr>
+												
+												<td class="contst" colspan="2" align="center" class="f16px">
+												<p>
+														运营商：银盛通信(福建福州)
+												</p>
+												<p>
+														售价：<span style="color:#c00;font-size:18px;font-weight:bold ">13000</span>
+														赠送：0
+													</p>
+													</td>
+											</tr>
+										</table> </a>
+								</li>
+							
+						</ul>
+					</div>
+					<div id="demo2"></div>
+				</div>
+			</div>
+		</div>
+		<div class="w980 yd_con">
+			<div class="Fl d_con_lt">
+				<div class="d_con_box">
+					<h3>网络来源</h3>
+					<ul class="d_acces" id="mode_ul">
+						
+							<li><a href="javascript:;" cid="1">移动 </a></li>
+						
+							<li><a href="javascript:;" cid="2">联通 </a></li>
+						
+							<li><a href="javascript:;" cid="3">电信 </a></li>
+						
+							<li><a href="javascript:;" cid="5">固话 </a></li>
+						
+					</ul>
+					<a href="javascript:void(0)" class="da_up da_down ulshow" ulid="mode_ul">显示更多>></a>
+				</div>
+				<div class="d_con_box">
+					<h3>推荐号码段</h3>
+					<ul class="d_acces" id="mode_ul2">
+						
+							<li><a href="javascript:;" tel="165">165 </a></li>
+						
+							<li><a href="javascript:;" tel="167">167 </a></li>
+						
+							<li><a href="javascript:;" tel="162">162 </a></li>
+						
+							<li><a href="javascript:;" tel="170">170 </a></li>
+						
+							<li><a href="javascript:;" tel="171">171 </a></li>
+						
+							<li><a href="javascript:;" tel="130">130 </a></li>
+						
+							<li><a href="javascript:;" tel="131">131 </a></li>
+						
+							<li><a href="javascript:;" tel="132">132 </a></li>
+						
+							<li><a href="javascript:;" tel="133">133 </a></li>
+						
+							<li><a href="javascript:;" tel="135">135 </a></li>
+						
+							<li><a href="javascript:;" tel="136">136 </a></li>
+						
+							<li><a href="javascript:;" tel="137">137 </a></li>
+						
+							<li><a href="javascript:;" tel="138">138 </a></li>
+						
+							<li><a href="javascript:;" tel="188">188 </a></li>
+						
+							<li><a href="javascript:;" tel="155">155 </a></li>
+						
+					</ul>
+					<a href="javascript:void(0)" class="da_up da_down ulshow" ulid="mode_ul2">显示更多>></a>
+				</div>
+				<div class="d_con_box">
+					<h3>尾号特征</h3>
+					<ul class="d_acces" id="mode_ul3">
+						
+							<li><a href="javascript:;" mant="31">AAAAAA </a></li>
+						
+							<li><a href="javascript:;" mant="7">AAAAA </a></li>
+						
+							<li><a href="javascript:;" mant="5">AAAA </a></li>
+						
+							<li><a href="javascript:;" mant="3">AAA </a></li>
+						
+							<li><a href="javascript:;" mant="4">AABBB </a></li>
+						
+							<li><a href="javascript:;" mant="6">AABBBB </a></li>
+						
+							<li><a href="javascript:;" mant="11">AAABBB </a></li>
+						
+							<li><a href="javascript:;" mant="28">ABCDE </a></li>
+						
+							<li><a href="javascript:;" mant="14">ABCD </a></li>
+						
+							<li><a href="javascript:;" mant="27">ABCDABCD </a></li>
+						
+							<li><a href="javascript:;" mant="29">AAABBBCCC </a></li>
+						
+							<li><a href="javascript:;" mant="13">ABC </a></li>
+						
+							<li><a href="javascript:;" mant="30">AABBCCDD </a></li>
+						
+							<li><a href="javascript:;" mant="8">ABAB </a></li>
+						
+							<li><a href="javascript:;" mant="9">AABB </a></li>
+						
+							<li><a href="javascript:;" mant="10">AABBCC </a></li>
+						
+							<li><a href="javascript:;" mant="32">ABBA </a></li>
+						
+							<li><a href="javascript:;" mant="12">ABABAB </a></li>
+						
+							<li><a href="javascript:;" mant="15">ABCABC </a></li>
+						
+							<li><a href="javascript:;" mant="16">AAAB </a></li>
+						
+							<li><a href="javascript:;" mant="17">AAAAB </a></li>
+						
+							<li><a href="javascript:;" mant="18">ABBABB </a></li>
+						
+							<li><a href="javascript:;" mant="19">ABBCBB </a></li>
+						
+							<li><a href="javascript:;" mant="20">AABCC </a></li>
+						
+							<li><a href="javascript:;" mant="25">ABCAB </a></li>
+						
+							<li><a href="javascript:;" mant="26">AABAAC </a></li>
+						
+							<li><a href="javascript:;" mant="21">**AB**AB </a></li>
+						
+							<li><a href="javascript:;" mant="22">*A*A*A </a></li>
+						
+							<li><a href="javascript:;" mant="23">**AA**AA </a></li>
+						
+							<li><a href="javascript:;" mant="24">A*A*A* </a></li>
+						
+					</ul>
+					<a href="javascript:void(0)" class="da_up da_down ulshow" ulid="mode_ul3">显示更多>></a>
+				</div>
+				<div class="d_con_box">
+					<h3>号码规则</h3>
+					<ul class="d_acces" id="mode_ul4">
+						
+							<li des="特价号码" id="特价号码"><a class="card-rule-text" href="javascript:;" cardRule="特价号码">特价号码 </a></li>
+						
+							<li des="预存赠送" id="预存赠送"><a class="card-rule-text" href="javascript:;" cardRule="预存赠送">预存赠送 </a></li>
+						
+							<li des="3-4-4" id="3-4-4"><a class="card-rule-text" href="javascript:;" cardRule="3-4-4">3-4-4 </a></li>
+						
+							<li des="5-3-3" id="5-3-3"><a class="card-rule-text" href="javascript:;" cardRule="5-3-3">5-3-3 </a></li>
+						
+							<li des="1-5-5" id="1-5-5"><a class="card-rule-text" href="javascript:;" cardRule="1-5-5">1-5-5 </a></li>
+						
+							<li des="2-4-5" id="2-4-5"><a class="card-rule-text" href="javascript:;" cardRule="2-4-5">2-4-5 </a></li>
+						
+							<li des="3-3-5" id="3-3-5"><a class="card-rule-text" href="javascript:;" cardRule="3-3-5">3-3-5 </a></li>
+						
+							<li des="3-5-3" id="3-5-3"><a class="card-rule-text" href="javascript:;" cardRule="3-5-3">3-5-3 </a></li>
+						
+							<li des="3-2-2-2-2" id="3-2-2-2-2"><a class="card-rule-text" href="javascript:;" cardRule="3-2-2-2-2">3-2-2-2-2 </a></li>
+						
+							<li des="1-2-2-2-2-2" id="1-2-2-2-2-2"><a class="card-rule-text" href="javascript:;" cardRule="1-2-2-2-2-2">1-2-2-2-2-2 </a></li>
+						
+							<li des="4-3-4" id="4-3-4"><a class="card-rule-text" href="javascript:;" cardRule="4-3-4">4-3-4 </a></li>
+						
+							<li des="2-3-3-3" id="2-3-3-3"><a class="card-rule-text" href="javascript:;" cardRule="2-3-3-3">2-3-3-3 </a></li>
+						
+							<li des="4-4-3" id="4-4-3"><a class="card-rule-text" href="javascript:;" cardRule="4-4-3">4-4-3 </a></li>
+						
+							<li des="3-1-1-1-1-2-2" id="3-1-1-1-1-2-2"><a class="card-rule-text" href="javascript:;" cardRule="3-1-1-1-1-2-2">3-1-1-1-1-2-2 </a></li>
+						
+							<li des="3-2-2-2-1-1" id="3-2-2-2-1-1"><a class="card-rule-text" href="javascript:;" cardRule="3-2-2-2-1-1">3-2-2-2-1-1 </a></li>
+						
+							<li des="2-2-1-1-1-1-1-1-1" id="2-2-1-1-1-1-1-1-1"><a class="card-rule-text" href="javascript:;" cardRule="2-2-1-1-1-1-1-1-1">2-2-1-1-1-1-1-1-1 </a></li>
+						
+							<li des="3-2-2-1-1-1-1" id="3-2-2-1-1-1-1"><a class="card-rule-text" href="javascript:;" cardRule="3-2-2-1-1-1-1">3-2-2-1-1-1-1 </a></li>
+						
+							<li des="4-7" id="4-7"><a class="card-rule-text" href="javascript:;" cardRule="4-7">4-7 </a></li>
+						
+							<li des="2-3-6" id="2-3-6"><a class="card-rule-text" href="javascript:;" cardRule="2-3-6">2-3-6 </a></li>
+						
+							<li des="3-8" id="3-8"><a class="card-rule-text" href="javascript:;" cardRule="3-8">3-8 </a></li>
+						
+							<li des="3-1-1-1-1-1-1-1-1" id="3-1-1-1-1-1-1-1-1"><a class="card-rule-text" href="javascript:;" cardRule="3-1-1-1-1-1-1-1-1">3-1-1-1-1-1-1-1-1 </a></li>
+						
+							<li des="2-2-7" id="2-2-7"><a class="card-rule-text" href="javascript:;" cardRule="2-2-7">2-2-7 </a></li>
+						
+							<li des="3-2-6" id="3-2-6"><a class="card-rule-text" href="javascript:;" cardRule="3-2-6">3-2-6 </a></li>
+						
+							<li des="2-2-2-5" id="2-2-2-5"><a class="card-rule-text" href="javascript:;" cardRule="2-2-2-5">2-2-2-5 </a></li>
+						
+							<li des="2-2-3-4" id="2-2-3-4"><a class="card-rule-text" href="javascript:;" cardRule="2-2-3-4">2-2-3-4 </a></li>
+						
+							<li des="2-1-1-1-1-1-2-2" id="2-1-1-1-1-1-2-2"><a class="card-rule-text" href="javascript:;" cardRule="2-1-1-1-1-1-2-2">2-1-1-1-1-1-2-2 </a></li>
+						
+					</ul>
+					<a href="javascript:void(0)" class="da_up da_down ulshow" ulid="mode_ul4">显示更多>></a>
+				</div>
+
+			</div>
+
+			<div class="Fr d_con_ri">
+
+				<div class="detail_wp">
+					<table width="100%" border="1" bordercolor="#dddddd" style=" border-collapse:collapse " cellspacing="0" cellpadding="0" >
+						<tr>
+							<th width="20%" >号码</th>
+							<th width="10%" >价格</th>
+							
+							<th width="7%" height="34">送话费</th>
+							<th width="8%">运营商</th>
+							<th width="8%">网络来源</th>
+							<th width="9%">归属地</th>
+							<th width="13%">描述</th>
+							<th width="12%">靓号备注</th>
+						</tr>
+						
+							
+								<tr style="">
+									
+										<td class="td01" >17164414000</td>
+									
+									
+										<td class="td01">
+											100
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_3205515" des="河南洛阳">河南洛阳</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_3205515" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_3205515" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17105240000</td>
+									
+									
+										<td class="td01">
+											4000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_3205514" des="河南洛阳">河南洛阳</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_3205514" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_3205514" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17157416666</td>
+									
+									
+										<td class="td01">
+											5000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_3205510" des="上海">上海</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_3205510" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_3205510" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17102742222</td>
+									
+									
+										<td class="td01">
+											3000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_3205509" des="河北 唐山">河北 唐...</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_3205509" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_3205509" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17102741111</td>
+									
+									
+										<td class="td01">
+											3000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_3205508" des="河北 唐山">河北 唐...</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_3205508" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_3205508" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104068999</td>
+									
+									
+										<td class="td01">
+											500
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970046" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970046" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970046" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104067999</td>
+									
+									
+										<td class="td01">
+											500
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970045" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970045" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970045" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104065999</td>
+									
+									
+										<td class="td01">
+											500
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970043" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970043" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970043" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104064999</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970042" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970042" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970042" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104063999</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970041" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970041" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970041" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104061999</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970039" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970039" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970039" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104060999</td>
+									
+									
+										<td class="td01">
+											800
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970038" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970038" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970038" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104069888</td>
+									
+									
+										<td class="td01">
+											1000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970037" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970037" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970037" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104067888</td>
+									
+									
+										<td class="td01">
+											1000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970036" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970036" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970036" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104065888</td>
+									
+									
+										<td class="td01">
+											1000
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970034" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970034" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970034" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104064888</td>
+									
+									
+										<td class="td01">
+											800
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970033" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970033" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970033" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104063888</td>
+									
+									
+										<td class="td01">
+											800
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970032" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970032" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970032" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104062888</td>
+									
+									
+										<td class="td01">
+											800
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970031" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970031" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970031" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104061888</td>
+									
+									
+										<td class="td01">
+											800
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970030" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970030" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970030" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104060888</td>
+									
+									
+										<td class="td01">
+											1500
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970029" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970029" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970029" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104069777</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970028" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970028" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970028" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104066777</td>
+									
+									
+										<td class="td01">
+											500
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970026" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970026" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970026" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104065777</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970025" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970025" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970025" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104064777</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970024" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970024" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970024" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+								<tr style="">
+									
+										<td class="td01" >17104063777</td>
+									
+									
+										<td class="td01">
+											300
+										</td>
+										
+									<td>0</td>
+									<td>中期移动
+									</td>
+									<td>联通
+									</td>
+									<td>
+										<div class="fuwuqu_aa" id="fuwuqu_2970023" des="河北唐山">河北唐山</div>
+									</td>
+									<td>
+									 <div class="des_aa" id="des_2970023" des="资费：来显6元">资费：来显...</div>
+									</td>
+									<td>
+									
+										
+									<div class="phone_remark_aa" id="phone_remark_2970023" des="现卡秒杀">现卡秒杀</div>
+									</td>
+								</tr>
+							
+						
+						
+					</table>
+					<div class="detail_page" ><input type="hidden" id="currPage" name="currPage" value="1"/><i class="Fl">共330684条记录,共13228页,当前第1页,每页25条</i><em class="Fr"><a href="javascript:;">首页</a><a href="javascript:;">上一页</a><a href="javascript:topage('2')">下一页</a><a href="javascript:topage('13228')">尾页</a>跳转到<input id="topageno" type="text" value="1" class="serch_goto" />页&nbsp;<input type="button" value="GO" onclick="topage(document.getElementById('topageno').value)" /></em></div>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" name="avcsds" id="avcsds"/>
+	</form>
+
+
+
+
+	<div class="left-top-adv">
+		<img src="images/yd_fail.png" class="close-adv-img" onclick="closeAdv('left-top')" />
+		<img src="images/wx_qr.gif" id="adv" class="adv-img-big" />
+	</div>
+	<div class="right-top-adv">
+		<img src="images/yd_fail.png" class="close-adv-img" onclick="closeAdv('right-top')" />
+		<img src="images/haomawang_qr.jpg" id="adv" class="adv-img-big" />
+	</div>
+	<div class="right-bottom-adv">
+		<img src="images/yd_fail.png" class="close-adv-img" onclick="closeAdv('right-bottom')" />
+		<img src="images/hulian.jpg" style="cursor: pointer;" id="adv" onclick="javascript:location.href='contact.html'"" class="adv-img-big" />
+	</div>
+	<div class="left-bottom-adv">
+		<img src="images/yd_fail.png" class="close-adv-img" onclick="closeAdv('right-bottom')" />
+		<img src="images/818_activity.jpg" style="cursor: pointer;" id="adv" onclick="javascript:location.href='preferential.html'"" class="adv-img-big" />
+	</div>
+	
+
+ 
+  
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="http://www.ybdw.com:443/" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="http://www.ybdw.com:443/favicon.ico" type="image/x-icon" />
+</head>
+<style>
+.flink li {
+	margin: 0 10px;
+	float: left
+}
+</style>
+<script type="text/javascript">
+</script>
+<body>
+	<div class="w980">
+		<div class="d_con_box">
+			<h3>友情链接</h3>
+			<ul class="flink" style="padding:10px 5px;overflow:hidden">
+				<li><a href="http://www.kuaidi100.com/" target="_blank" cardrule="快递查询">快递查询 </a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="w980 yd_footer">
+		<p>Copyright©2015-2020 ybdw.com,All Rights Reserved</p>
+		<p><a href="admin.html">管理登录</a> 闽ICP备16003659号-1 
+			一步到位互联网有限公司<script type="text/javascript">var cnzz_protocol = (("http:" == document.location.protocol) ? " http://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257563360'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1257563360%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
+		</p>
+	</div>
+
+	<div id="kefu" style="display:none">
+		<div class="box-content off">
+			<div class="title-btn cu">
+				<span><a href="#"></a> </span>
+			</div>
+			<div class="pad">
+				<a href="#" class="qq">售前咨询01</a> <a href="#" class="qq">售前咨询02</a> <a href="#" class="qq">售前咨询03</a> <a href="#" class="qq">售前咨询0</a>
+			</div>
+			<div class="text">
+				客服时间：(9:00-18:00)<br> （周六日休息） 
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+</body>
+</html>

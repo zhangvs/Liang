@@ -1,0 +1,197 @@
+﻿@using HZSoft.Application.Entity.BaseManage;
+@{
+    ViewBag.Title = "普号详情";
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name='apple-touch-fullscreen' content='yes'>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+    <link href="~/Content/css/stylelist.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/Content/scripts/utils/hzsoft-ui.js"></script>
+    <script src="~/Content/scripts/utils/hzsoft-form.js"></script>
+    <link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+
+    <title>普号详情</title>
+    <script>
+        var keyValue = request('keyValue');
+        var organizeId = request('organizeId');
+        $(function () {
+            $("#SellerList").click(function () {
+                $("#GradeListHtml").show();
+            });
+            $("#GradeListHtml ul li").click(function () {
+                var currid = $(this).attr("dataid");
+                var currname = $(this).text();
+                $("#SellerId").val(currid);
+                $("#SellerName").val(currname);
+
+                $("#GradeListHtml").hide();
+            });
+            //获取表单
+            if (!!keyValue) {
+                $.SetForm({
+                    url: "../../WeChatManage/LiangMenu2/GetFormJson",
+                    param: { keyValue: keyValue },
+                    success: function (data) {
+                        $("#form1").SetWebControls(data);
+                    }
+                })
+            }
+        })
+
+        function saveForm() {
+            var postData = $("#form1").GetWebControls();
+            $.SaveForm({
+                url: "../../WeChatManage/LiangMenu2/saveForm?keyValue=" + keyValue,
+                param: postData,
+                loading: "正在保存数据...",
+                success: function () {
+                    layer.alert('保存成功！', {
+                        skin: 'layui-layer-lan', closeBtn: 0
+                    });
+                }
+            })
+        }
+    </script>
+    <style>
+        #protable tr td.trdel {
+            font-size: 12px;
+            color: #24ADE4;
+        }
+
+        #protable tr td input {
+            font-size: 14px;
+            border: 1px solid #B3D8E6;
+            height: 25px;
+            width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="~/WeChatManage/Liang/Main?organizeId=@ViewBag.organizeId">
+            <div class="return fl"></div>
+        </a>
+            <h1 class="fl">
+                普号详情
+            </h1>
+            <div class="btn_save" onclick="saveForm()">
+                <input value="保存" type="button" readonly="true" />
+            </div>
+        </header>
+    <form id="form1">
+        <div class="xzkh_yxcs">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="22%">
+                        手机号<a style="color: Red">*</a>：
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="Telphone" name="Telphone"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="xzkh_yxcs">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="22%">
+                        售出状态：
+                    </td>
+                    <td colspan="2">
+                        <select style="width: 100%; border: 0;" id="SellMark">
+                            <option value="">==请选择==</option>
+                            <option value="0">未售出</option>
+                            <option value="1">已售出</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        售出人：
+                    </td>
+                    <td>
+                        <input type="hidden" id="SellerId" name="SellerId" /><input id="SellerName" type="text" />
+                    </td>
+                    <td class="btn_xiala" align="right" id="SellerList">
+                        <div>
+                            <img src="/Content/images/btn_arrow2.png" style="width: auto; height: auto;" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="xzkh_yxcs">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td width="22%">
+                        城市<a style="color: Red">*</a>：
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="City" name="City" />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="22%">
+                        运营商<a style="color: Red">*</a>：
+                    </td>
+                    <td colspan="2">
+                        <select style="width: 100%; border: 0;" id="Operator">
+                            <option value="">==请选择==</option>
+                            <option value="移动">移动</option>
+                            <option value="联通">联通</option>
+                            <option value="电信">电信</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="22%">
+                        价格<a style="color: Red">*</a>：
+                    </td>
+                    <td colspan="2">
+                        <input type="text" id="Price" name="Price" />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="22%">
+                        套餐<a style="color: Red">*</a>：
+                    </td>
+                    <td colspan="2">
+                        <textarea class="xzkh_bzxx" id="Package" onFocus="if(this.value=='请输入……'){this.value=''}" placeholder="请输入……"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="khzl">
+            备注信息：<br />
+            <textarea class="xzkh_bzxx" id="Description" onFocus="if(this.value=='请输入……'){this.value=''}" placeholder="请输入……"></textarea>
+        </div>
+    </form>
+    <div class="bmzf_jjpx" id="GradeListHtml" style="display: none;">
+        <ul>
+             @{
+                 if (ViewBag.userList != null)
+                 {
+                     List<UserEntity> userlist = ViewBag.userList;
+                     foreach (UserEntity user in userlist)
+                     {
+                        <li dataid="@user.UserId">@user.RealName</li>
+                     }
+                 }
+
+            }
+        </ul>
+
+    </div>
+</body>
+</html>

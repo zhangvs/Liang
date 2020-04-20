@@ -1,0 +1,220 @@
+﻿@{
+    ViewBag.Title = "报表预览";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<!--第三方统计图start-->
+<script src="~/Content/Scripts/echarts/echarts.min.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/dark.js" type="text/javascript"></script>
+<script src="~/Content/Scripts/echarts/theme/macarons.js" type="text/javascript"></script>
+<!--第三方统计图end-->
+<!--jqgrid表格组件start-->
+<link href="~/Content/scripts/plugins/jqgrid/jqgrid.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/jqgrid/grid.locale-cn.js"></script>
+<script src="~/Content/scripts/plugins/jqgrid/jqgrid.min.js"></script>
+<!--表格组件end-->
+<link href="~/Content/styles/hzsoft-report.css" rel="stylesheet" />
+<script src="~/Content/Scripts/dms/dms_analysis.js" type="text/javascript"></script>
+<style type="text/css">
+    table.dataView {
+        border-collapse: collapse;
+    }
+
+    table.dataView th, table.dataView td {
+        border: 1px solid #000;
+        padding: 2px;
+    }
+</style>
+
+   
+ 
+<script>
+    $(function () {
+        //点击时间范围
+        $("#time_horizon a.btn-default").click(function () {
+            $("#time_horizon a.btn-default").removeClass("active");
+            $(this).addClass("active");
+            switch ($(this).attr('data-value')) {
+                case "1"://今天
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "2"://本周
+                    $("#StartTime").val("@DateTime.Now.AddDays(1 - ((int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek)).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "3"://本月
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-01")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "4"://全部
+                    $("#StartTime").val("");
+                    $("#EndTime").val("");
+                    break;
+                default:
+                    break;
+            }
+            doserch();
+        });
+
+        doserch();
+    });
+
+    function doserch() {
+        clearData();
+        var queryJson = {
+            StartTime: $("#StartTime").val(),
+            EndTime: $("#EndTime").val()
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/ReportManage/Dms/GetAnalysis",
+            data: { queryJson: JSON.stringify(queryJson), rnd: Math.random() },
+            dataType: "json", //返回数据形式为json  
+            success: function (data) {
+                if (data) {
+                    DrawEChartPieB2();
+                    var optionPieB2 = myChartPieB2.getOption();
+                    DrawEChartPieB3();
+                    var optionPieB3 = myChartPieB3.getOption();
+                    DrawEChartPieOperate();
+                    var optionPieOperate = myChartPieOperate.getOption();
+                    DrawEChartPieWH();
+                    var optionPieWH = myChartPieWH.getOption();
+
+                    for (var j = 0; j < data.length; j++) {
+
+                        var fx = data[j].fx;
+                        if (fx == 'b2') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            b2_datas.push(val);
+                        }
+                        if (fx == 'b3') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            b3_datas.push(val);
+                        }
+                        if (fx == 'operate') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            operate_datas.push(val);
+                        }
+                        if (fx == 'w1') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            w1_datas.push(val);
+                        }
+                        if (fx == 'w2') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            w2_datas.push(val);
+                        }
+                        if (fx == 'w3') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            w3_datas.push(val);
+                        }
+                        if (fx == 'w4') {
+                            var hd = data[j].hd;
+                            var count = data[j].count ;
+
+                            var val = {
+                                value: count,
+                                name: hd
+                            };
+                            w4_datas.push(val);
+                        }
+                        
+                    }
+                    optionPieB2.series[0].data = b2_datas;
+                    myChartPieB2.setOption(optionPieB2);
+
+                    optionPieB3.series[0].data = b3_datas;
+                    myChartPieB3.setOption(optionPieB3);
+
+                    optionPieOperate.series[0].data = operate_datas;
+                    myChartPieOperate.setOption(optionPieOperate);
+
+                    optionPieWH.series[0].data = w1_datas;
+                    optionPieWH.series[1].data = w2_datas;
+                    optionPieWH.series[2].data = w3_datas;
+                    optionPieWH.series[3].data = w4_datas;
+
+                    myChartPieWH.setOption(optionPieWH);
+                }
+            },
+            error: function (errorMsg) {
+                alert("分析请求数据失败啦!");
+
+            }
+        });
+    }
+</script>
+<div id="formAreas" style="padding: 30px; margin: 25px;border-radius:5px; border: 1px solid rgb(204, 204, 204); box-shadow: rgb(189, 189, 189) 0px 0px 10px; background: #fff;">
+    <div class="title-search">
+        <table>
+            <tr>
+                <td style="padding-left: 2px;">
+                    起始日期
+                </td>
+                <td style="padding-left: 2px;">
+                    <input id="StartTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"  />
+                </td>
+                <td style="padding-left: 2px;">
+                    结束日期
+                </td>
+                <td style="padding-left: 2px;">
+                    <input id="EndTime" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })"  />
+                </td>
+                <td style="padding-left: 5px;">
+                    <a id="btn_Search" class="btn btn-primary" onclick="doserch()"><i class="fa fa-search"></i>&nbsp;查询</a>
+                </td>
+                <td style="padding-left: 10px;">
+                    <div id="time_horizon" class="btn-group">
+                        <div id="time_horizon" class="btn-group">
+                            <a class="btn btn-default" data-value="1">今天</a>
+                            <a class="btn btn-default" data-value="2">本周</a>
+                            <a class="btn btn-default" data-value="3">本月</a>
+                            <a class="btn btn-default active" data-value="4">全部</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="mainPieB2" style="height:500px"></div>
+    <div id="mainPieB3" style="height:500px"></div>
+    <div id="mainPieOperate" style="height:500px"></div>
+    <div id="mainPieWH" style="height:500px"></div>
+</div>

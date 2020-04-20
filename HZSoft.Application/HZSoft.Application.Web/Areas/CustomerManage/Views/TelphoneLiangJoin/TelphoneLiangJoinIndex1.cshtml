@@ -1,0 +1,317 @@
+@{;
+    ViewBag.Title = "加盟级别列表页面";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+<script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+<script>
+    var OrganizeId = request('OrganizeId');
+    $(function () {
+        InitialPage();
+        GetGrid();
+    });
+    //初始化页面
+    function InitialPage() {
+        if (!!OrganizeId) {
+            $("#OrganizeId").val(OrganizeId);
+        }
+        //收款状态
+        $("#CheckMark").ComboBox({
+            description: "==请选择==",
+        });
+        //公司
+        //$("#OrganizeId").ComboBoxTree({
+        //    url: "../../BaseManage/Organize/GetTreeJson",
+        //    description: "==请选择==",
+        //    height: "200px",
+        //});
+        //resize重设布局;
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $('#gridTable').setGridHeight($(window).height() - 136.5);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+    //加载表格
+    function GetGrid() {
+        var queryJson = $("#filter-form").GetWebControls();
+        var selectedRowIndex = 0;
+        var $gridTable = $('#gridTable');
+        $gridTable.jqGrid({
+            autowidth: true,
+            height: $(window).height() - 136.5,
+            url: "../../CustomerManage/TelphoneLiangJoin/GetPageListJson1",
+            datatype: "json",
+            postData: { queryJson: JSON.stringify(queryJson) },
+            colModel: [
+                { label: '主键', name: 'Id', index: 'Id', hidden: true },
+                { label: '申请机构名称', name: 'CompanyName', index: 'CompanyName', width: 100, align: 'left', sortable: true },
+                { label: '姓名', name: 'FullName', index: 'FullName', width: 70, align: 'left', sortable: true },
+                { label: '电话', name: 'Telphone', index: 'Telphone', width: 100, align: 'left', sortable: true },
+                { label: '微信号', name: 'WxAccount', index: 'WxAccount', width: 100, align: 'left', sortable: true },
+                { label: '省', name: 'Pro', index: 'Pro', width: 60, align: 'left', sortable: true },
+                { label: '市', name: 'City', index: 'City', width: 60, align: 'left', sortable: true },
+                { label: '区县', name: 'Area', index: 'Area', width: 60, align: 'left', sortable: true },
+                //{ label: '详细地址', name: 'Address', index: 'Address', width: 200, align: 'left', sortable: true },
+                {
+                    label: "用户头像", name: "HeadimgUrl", index: "HeadimgUrl", width: 80, align: "center", sortable: false,
+                    formatter: function (cellvalue) {
+                        return "<img src='" + cellvalue + "' height='50px' width='50px'/>";
+                    }
+                },
+                { label: '微信昵称', name: 'NickName', index: 'NickName', width: 100, align: 'left', sortable: true },
+                {
+                    label: '性别', name: 'Sex', index: 'Sex', width: 45, align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        return cellvalue == 1 ? "男" : "女";
+                    }
+                },
+                { label: '微信省', name: 'WXPro', index: 'Province', width: 60, align: 'left', sortable: true },
+                { label: '微信市', name: 'WxCity', index: 'City', width: 60, align: 'left', sortable: true },
+                {
+                    label: '机构来源', name: 'OrganizeId', index: 'OrganizeId', width: 100, align: 'left',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == null) {
+                            return "总公司"
+                        }
+                        else {
+                            return top.clientorganizeData[cellvalue].FullName
+                        }
+                    }
+                },
+                {
+                    label: '机构来源', name: 'OrganizeId', index: 'OrganizeId', width: 100, align: 'left'
+                },
+                { label: '级别', name: 'Des1', index: 'Des1', width: 50, align: 'center', sortable: true },
+                {
+                    label: '0级机构', name: 'Des2', index: 'Des2', width: 100, align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == null) {
+                            return "总公司"
+                        }
+                        else {
+                            return top.clientorganizeData[cellvalue].FullName
+                        }
+                    }
+                },
+                {
+                    label: "代理状态", name: "AgentMark", index: "AgentMark", width: 60, align: "center", sortable: false,
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    label: "审核状态", name: "CheckMark", index: "CheckMark", width: 80, align: "center",
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue != 0) {
+                            return '<span class=\"label label-success\" style=\"cursor: pointer;\">已通过</span>';
+                        } else if (cellvalue == 0) {
+                            return '<span onclick=\"btn_check(\'' + rowObject.Id + '\')\" class=\"label label-default\" style=\"cursor: pointer;\">未审核</span>';
+                        }
+                    }
+                },
+                { label: '备注', name: 'Description', index: 'Description', width: 200, align: 'left', sortable: true },
+                {
+                    label: '跟进', name: 'FollowDes', index: 'FollowDes', width: 50, align: 'center',
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == -1) {
+                            return '排除';
+                        } else if (cellvalue == 0) {
+                            return '没有微信';
+                        } else if (cellvalue == 1) {
+                            return '已添加';
+                        } else if (cellvalue == 2) {
+                            return '已通过';
+                        } else if (cellvalue == 3) {
+                            return '已审核';
+                        } else {
+                            return '';
+                        }
+                    }
+                },
+                { label: '创建时间', name: 'CreateTime', index: 'CreateTime', width: 118, align: 'left', sortable: true },
+                { label: '修改日期', name: 'ModifyTime', index: 'ModifyTime', width: 118, align: 'left', sortable: true },
+                { label: '修改用户', name: 'ModifyUserName', index: 'ModifyUserName', width: 100, align: 'left', sortable: true }
+            ],
+            viewrecords: true,
+            rowNum: 30,
+            rowList: [30, 50, 100],
+            pager: "#gridPager",
+            sortname: 'CreateTime',
+            sortorder: 'desc',
+            rownumbers: true,
+            shrinkToFit: false,
+            gridview: true,
+            onSelectRow: function () {
+                selectedRowIndex = $('#' + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $('#' + this.id).setSelection(selectedRowIndex, false);
+            }
+        });
+        //查询事件
+        $("#btn_Search").click(function () {
+            var queryJson = $("#filter-form").GetWebControls();
+            $gridTable.jqGrid('setGridParam', {
+                postData: { queryJson: JSON.stringify(queryJson) }, page: 1
+            }).trigger('reloadGrid');
+        });
+        //查询回车
+        $('#txt_Keyword').bind('keypress', function (event) {
+            if (event.keyCode == "13") {
+                $('#btn_Search').trigger("click");
+            }
+        });
+    }
+    //新增
+    function btn_add() {
+        dialogOpen({
+            id: 'Form',
+            title: '添加靓号加盟代理',
+            url: '/CustomerManage/TelphoneLiangJoin/TelphoneLiangJoinForm1',
+            width: '600px',
+            height: '550px',
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick();
+            }
+        });
+    }
+    //编辑
+    function btn_edit() {
+        var keyValue = $('#gridTable').jqGridRowValue('Id');
+        if (checkedRow(keyValue)) {
+            dialogOpen({
+                id: 'Form',
+                title: '编辑靓号加盟代理',
+                url: '/CustomerManage/TelphoneLiangJoin/TelphoneLiangJoinForm1?keyValue=' + keyValue,
+                width: '600px',
+                height: '550px',
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick();
+                }
+            })
+        }
+    }
+    //删除
+    function btn_delete() {
+        var keyValue = $('#gridTable').jqGridRowValue('Id');
+        if (keyValue) {
+            $.RemoveForm({
+                url: '../../CustomerManage/TelphoneLiangJoin/RemoveForm',
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $('#gridTable').trigger('reloadGrid');
+                }
+            })
+        } else {
+            dialogMsg('请选择需要删除的靓号加盟代理！', 0);
+        }
+    }
+    //审单
+    function btn_check(keyValue) {
+        if (keyValue == "undefined") {
+            keyValue = $("#gridTable").jqGridRowValue("Id");
+        }
+        if (checkedRow(keyValue)) {
+            var index = layer.load(0, { shade: false });
+            layer.confirm('注：您确定要通过审核，并为该用户定制一个靓号商城my吗？', {
+                btn: ['是', '否'] //按钮
+            }, function () {
+                $.ajax({
+                    url: "/CustomerManage/TelphoneLiangJoin/UpdateCheckStateMy",
+                    type: "POST",
+                    data: { keyValue: keyValue },
+                    success: function (responseText) {
+                        layer.close(index);
+                        if (responseText != null && responseText != "") {
+                            layer.alert(responseText, { icon: 6 });
+                            $("#gridTable").trigger("reloadGrid");
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+        }
+    }
+    //作废
+    function btn_detete(keyValue) {
+        if (keyValue == "undefined") {
+            keyValue = $("#gridTable").jqGridRowValue("Id");
+        }
+        if (checkedRow(keyValue)) {
+            $.ConfirmAjax({
+                msg: "注：您确定要修改为已作废？",
+                url: '/CustomerManage/TelphoneLiangJoin/UpdateDeleteState',
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#gridTable").trigger("reloadGrid");
+                }
+            })
+        }
+    }
+
+    function openOrgChilds() {
+        var OrganizeId = $('#gridTable').jqGridRowValue('OrganizeId');
+        //关闭父机构搜索
+        top.$.removeTab('b499a057-4fff-47b1-8768-76524d888220a');
+        //打开父机构搜索
+        top.tablist.newTab({
+            id: 'b499a057-4fff-47b1-8768-76524d888220a', title: OrganizeId, closed: true, icon: "fa fa-bank",
+            url: "/CustomerManage/TelphoneLiangJoin/TelphoneLiangJoinIndex1?OrganizeId=" + OrganizeId
+        });
+    }
+</script>
+<div class="titlePanel">
+    <div class="title-search">
+        <table id="filter-form">
+            <tr>
+                <td> 微信昵称：</td>
+                <td>
+                    <input id="Keyword" type="text" class="form-control" style="width: 200px;" />
+                </td>
+                <td> 电话：</td>
+                <td>
+                    <input id="Telphone" type="text" class="form-control" style="width: 200px;" />
+                </td>
+                <td> 来源机构：</td>
+                <td>
+                    <input id="OrganizeId" type="text" class="form-control" style="width: 200px;" />
+                </td>
+                <td> 级别：</td>
+                <td>
+                    <input id="Category" type="text" class="form-control" style="width: 100px;" />
+                </td>
+                <td class="formTitle">审核状态：</td>
+                <td class="formValue">
+                    <div id="CheckMark" type="select" class="ui-select" style="width: 150px;">
+                        <ul>
+                            <li data-value="0">未审核</li>
+                            <li data-value="1">审核</li>
+                            <li data-value="2">审核My</li>
+                        </ul>
+                    </div>
+                </td>
+                <td style="padding-left: 5px;">
+                    <a id="btn_Search" class="btn btn-primary"><i class="fa fa-search"></i>查询</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a id="lr-replace" class="btn btn-default" onclick="reload()"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+            <a id="lr-add" class="btn btn-default" onclick="btn_add()"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a id="lr-child" class="btn btn-default" onclick="openOrgChilds()"><i class="fa fa-plus"></i>&nbsp;申请机构</a>
+            <a id="lr-edit" class="btn btn-default" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+            <a id="lr-delete" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridTable"></table>
+    <div id="gridPager"></div>
+</div>

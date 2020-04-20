@@ -1,0 +1,308 @@
+﻿@{
+    ViewBag.Title = "商机跟进页面";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var objectId = request('objectId');
+    var objectSort = request('objectSort');
+    
+    function getNowFormatDate() {
+        var date = new Date();
+        var seperator1 = "-";
+        var seperator2 = ":";
+        var month = date.getMonth() + 1;
+        var strDate = date.getDate();
+        if (month >= 1 && month <= 9) {
+            month = "0" + month;
+        }
+        if (strDate >= 0 && strDate <= 9) {
+            strDate = "0" + strDate;
+        }
+        var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                + " " + date.getHours() + seperator2 + date.getMinutes()
+                + seperator2 + date.getSeconds();
+        return currentdate;
+    }
+    $(function () {
+        $("#CreateDate").val(getNowFormatDate());
+        //呼叫结果
+        $("#TrackTypeId").ComboBox({
+            url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+            param: { EnCode: "CallResult" },
+            id: "ItemValue",
+            text: "ItemName",
+            description: "==请选择==",
+            height: "400px"
+        }).bind("change", function () {
+            $("#TrackContent").val($(this).attr('data-text'));
+        });
+        GetTimeline();
+    })
+    //获取跟进记录列表
+    function GetTimeline() {
+        $.ajax({
+            url: "../../CustomerManage/TrailRecord/GetListJson",
+            data: { objectId: objectId },
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                var timeline = data.timeline;
+                var rows = data.rows;
+                var _html = "";
+                $.each(timeline, function (key) {
+                    _html += '<li> ';
+                    _html += '    <span class="label label-warning"><i class="fa fa-circle"></i>' + key + '</span> ';
+                    _html += '    <div class="content"> ';
+                    $.each(rows, function (i) {
+                        var row = rows[i];
+                        if (timeline[key] == formatDate(row.CreateDate, 'yyyy-MM-dd')) {
+                            _html += '        <div class="row"> ';
+                            _html += '            <span class="item-flag"><i class="fa fa-file-text-o"></i></span> ';
+                            _html += '            <div class="item-data"> ';
+                            _html += '                <span class="time">' + formatDate(row.CreateDate, 'hh:mm') + '</span> ';
+                            _html += '                <span class="name">' + row.CreateUserName + '<i class="fa fa-caret-right"></i></span> ';
+                            _html += '                <span class="action">' + row.TrackContent + '</span> ';
+                            _html += '            </div> ';
+                            _html += '        </div> ';
+                        }
+                    });
+                    _html += '    </div> ';
+                    _html += '</li> ';
+
+                });
+                $("#ul_timeline").html(_html);
+            }
+        });
+    }
+    //保存表单
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls("");
+        postData["ObjectId"] = objectId;
+        postData["ObjectSort"] = objectSort;
+        postData["NoConnectMark"] = $("input[name='NoConnectMark']:checked").val();
+        postData["YesConnectMark"] = $("input[name='YesConnectMark']:checked").val();
+        postData["SexMark"] = $("input[name='SexMark']:checked").val();
+        postData["AgeMark"] = $("input[name='AgeMark']:checked").val();
+        postData["AreaMark"] = $("input[name='AreaMark']:checked").val();
+
+        $.SaveForm({
+            url: "../../CustomerManage/TrailRecord/SaveForm",
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                GetTimeline();
+                $("#TrackContent").val('');
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<div style="margin: 10px; margin-bottom: 0px;">
+    <table class="form">
+        <tr>
+            <td class="formTitle">未接通方式：</td>
+            <td class="formValue">
+                @*<div id="TrackTypeId" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>*@
+                <input id="CreateDate" type="hidden" />
+
+                <div class="radio">
+                    <label>
+                        <input name="NoConnectMark" type="radio" checked="checked" value="0" />&nbsp;
+                        未知
+                    </label>
+                    <label>
+                        <input name="NoConnectMark" type="radio" value="1" />&nbsp;
+                        拒接
+                    </label>
+                    <label>
+                        <input name="NoConnectMark" type="radio" value="2" />&nbsp;
+                        关机
+                    </label>
+                    <label>
+                        <input name="NoConnectMark" type="radio" value="3" />&nbsp;
+                        无人接听
+                    </label>
+                    <label>
+                        <input name="NoConnectMark" type="radio" value="4" />&nbsp;
+                        停机
+                    </label>
+                    <label>
+                        <input name="NoConnectMark" type="radio" value="5" />&nbsp;
+                        空号
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">拒绝理由：</td>
+            <td class="formValue">
+                <div class="radio">
+                    <label>
+                        <input name="YesConnectMark" type="radio" checked="checked" value="0" />&nbsp;
+                        未知
+                    </label>
+                    <label>
+                        <input name="YesConnectMark" type="radio" value="1" />&nbsp;
+                        用不着
+                    </label>
+                    <label>
+                        <input name="YesConnectMark" type="radio" value="2" />&nbsp;
+                        价格高
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">性别：</td>
+            <td class="formValue">
+                <div class="radio">
+                    <label>
+                        <input name="SexMark" type="radio" checked="checked" value="0" />&nbsp;
+                        未知
+                    </label>
+                    <label>
+                        <input name="SexMark" type="radio" value="1" />&nbsp;
+                        男
+                    </label>
+                    <label>
+                        <input name="SexMark" type="radio" value="2" />&nbsp;
+                        女
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">年龄：</td>
+            <td class="formValue">
+                <div class="radio">
+                    <label>
+                        <input name="AgeMark" type="radio" checked="checked" value="0" />&nbsp;
+                        未知
+                    </label>
+                    <label>
+                        <input name="AgeMark" type="radio" value="1" />&nbsp;
+                        10-20
+                    </label>
+                    <label>
+                        <input name="AgeMark" type="radio" value="2" />&nbsp;
+                        20-30
+                    </label>
+                    <label>
+                        <input name="AgeMark" type="radio" value="3" />&nbsp;
+                        30-40
+                    </label>
+                    <label>
+                        <input name="AgeMark" type="radio" value="4" />&nbsp;
+                        40-50
+                    </label>
+                    <label>
+                        <input name="AgeMark" type="radio" value="5" />&nbsp;
+                        50-60以上
+                    </label>
+                    <label>
+                        <input name="AgeMark" type="radio" value="5" />&nbsp;
+                        60以上
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">区/县：</td>
+            <td class="formValue">
+                <div class="radio">
+                    <label>
+                        <input name="AreaMark" type="radio" checked="checked" value="0" />&nbsp;
+                        未知
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="1" />&nbsp;
+                        兰山区
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="2" />&nbsp;
+                        河东区
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="3" />&nbsp;
+                        罗庄区
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="4" />&nbsp;
+                        郯城县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="5" />&nbsp;
+                        兰陵县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="6" />&nbsp;
+                        莒南县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="7" />&nbsp;
+                        沂水县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="8" />&nbsp;
+                        蒙阴县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="9" />&nbsp;
+                        平邑县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="10" />&nbsp;
+                        费县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="11" />&nbsp;
+                        沂南县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="12" />&nbsp;
+                        临沭县
+                    </label>
+                    <label>
+                        <input name="AreaMark" type="radio" value="13" />&nbsp;
+                        市外
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">备注：</td>
+            <td class="formValue">
+                <textarea id="TrackContent" maxlength="200" placeholder="跟进记录备注" class="form-control" isvalid="yes" checkexpession="NotNull" style="height: 60px; border-radius: 5px;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle"></td>
+            <td class="formValue">
+                <div class="checkbox">
+                    <label>
+                        <input id="IntentionMark" type="checkbox" />
+                        意向客户
+                    </label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle"></td>
+            <td class="formValue" style="text-align: right;">
+                <a id="btn_Search" class="btn btn-success" onclick="AcceptClick()"><i class="fa fa-paper-plane"></i>&nbsp;发布内容</a>
+            </td>
+        </tr>
+    </table>
+    <div style="overflow: auto; height: 380px">
+        <div class="timeline">
+            <div class="line"></div>
+            <ul id="ul_timeline">
+            </ul>
+        </div>
+    </div>
+</div>
+

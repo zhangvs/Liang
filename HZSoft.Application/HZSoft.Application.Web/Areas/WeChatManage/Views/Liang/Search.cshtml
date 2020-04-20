@@ -1,0 +1,153 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>靓号查询</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name='apple-touch-fullscreen' content='yes' />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no" />
+    <script src="~/Content/scripts/jquery/jquery-1.8.3.min.js"></script>
+    <script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+    <link href="~/Content/css/stylelistLogin.css" rel="stylesheet" />
+    <link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+    <link href="~/Content/scripts/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Content/scripts/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+
+    <script type="text/javascript">
+        var organizeId = request('organizeId');
+
+        $(function () {
+            var cache = {};
+            $("#telphone").autocomplete({
+                source: function (request, response) {
+                    var term = request.term;
+
+                    if (term in cache) {
+                        response(cache[term]);
+                        return;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/WeChatManage/Liang/TelAuto",
+                        data: { telphone: request.term,organizeId:organizeId, rnd: Math.random() },
+                        success: function (data) {
+                            var ary = [];
+                            if (data != "")
+                            {
+                                // 解析为js对象
+                                var result = JSON.parse(data);
+                                for (var i = 0; i < result.length; i++) {
+                                    ary.push(result[i].Telphone.replace(/(^\s*)|(\s*$)/g, ""));
+                                }
+                            }
+                            response(ary);
+                        },
+                        error: function () {
+                            layer.alert('错误', {
+                                skin: 'layui-layer-molv', closeBtn: 0
+                            });
+                        }
+                    });
+
+                },
+                minLength: 1,
+                /*
+                 * 选中后的处理
+                 * select: function(event, ui) {
+                    var url = ui.item.id;
+                    if(url != '#') {
+                        location.href = '/blog/' + url;
+                    }
+                },*/
+                select: function (event, ui) {
+                    var url = ui.item.value;
+                    if (url != '') {
+                        $("#telphone").val(url);
+                        f_search();
+                    }
+                },
+                html: true, // optional (jquery.ui.autocomplete.html.js required)
+                // optional (if other layers overlap autocomplete list)
+                open: function (event, ui) {
+                    $(".ui-autocomplete").css("z-index", 1000);
+                }
+            });
+
+        });
+
+        function f_search() {
+            var telphone = $("#telphone").val();
+            $.ajax({
+                url: "/WeChatManage/Liang/SearchTel",
+                type: "POST",
+                data: { telphone: telphone, organizeId: organizeId, rnd: Math.random() },
+                success: function (data) {
+                    if (data != "") {
+                        var dataresult = JSON.parse(data);
+                        var result = dataresult.entity;
+                        if (dataresult.state == 1) {
+                            //询问框
+                            layer.confirm('存在此号码：' + telphone + '<br/>【归属地】：' + result.City+result.Operator + '<br/>【价格】：' + result.Price + '<br/>【套餐】：' + result.Package + '<br/>是否继续编辑此号码？', {
+                                btn: ['是', '否'] //按钮
+                            }, function () {
+                                window.location = "/WeChatManage/Liang/SearchForm?keyValue=" + result.TelphoneID + "&organizeId=" + organizeId;
+                            });
+                        }
+                        else {
+                            //提示框
+                            layer.alert('存在此号码：' + telphone + '<br/>【归属地】：' + result.City + result.Operator + '<br/>【价格】：' + result.Price + '<br/>【价格】：' + result.Price + '<br/>【套餐】：' + result.Package, {
+                                skin: 'layui-layer-molv'
+                              , closeBtn: 0
+                            });
+                        }
+                    }
+                    else {
+                        layer.alert('无此号码', {
+                            skin: 'layui-layer-molv', closeBtn: 0
+                        });
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        }
+    </script>
+</head>
+
+<body bgcolor="#eee">
+    <header class="headerbg2">
+        <div class="header_tit">靓号库查询</div>
+    </header>
+
+
+    <div class="carinfo">
+        <div class="reg_name">
+            手机号<input type="text" id="telphone"  onFocus="if (this.value == '靓号数字组合') { this.value = '' }" placeholder="靓号数字组合" style="text-align:left;" />
+        </div>
+    </div>
+    
+    @*<input style="background:#24ade4; width:100%; left:0; top:7em;border-radius:0;" type="button" id="btlogin" class="btn_tijiao" value="查询" onclick="f_search()" />*@
+
+    <div style="font-size:0.5em; font-family:黑体; color:#898989; padding:1em;line-height:1.5">
+        <p>1.请输入任意你喜欢的靓号数字组合，例如：</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;豹子号：123</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;4顺：1234</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;5顺：12345</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;3A：333</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;4A：4444</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;5A：55555</p>
+        <p>  &nbsp;&nbsp;&nbsp;&nbsp;……</p>
+        <p>2.假如想限定归属地，则可用“归属地+空格+靓号数字”的形式搜索，比如：“临沂 123”</p>
+        <p>3.输入号码后，系统会自动进行数据库匹配</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;智能提示列表出现的号码，都是存在的号码，点击可查看详情或编辑</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;无任何智能提示，则没有此号码</p>
+        <p>4.如有加盟意向，敬请来电咨询<img src="~/Content/images/weixin03_03.png" width="12" height="12"> @ViewBag.Tel</p>
+    </div>
+
+</body>
+</html>

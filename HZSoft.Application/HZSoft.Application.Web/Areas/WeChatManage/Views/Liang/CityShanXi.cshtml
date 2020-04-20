@@ -1,0 +1,97 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>城市选择</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="~/Content/css/iconfont.css" rel="stylesheet" />
+    <link href="~/Content/css/m.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="top-bar top-bar-shade top-bar-small clearfix">
+        <div class="col10"><a href="javascript:void();" class="goback"><i class="icon iconfont icon-jiantou25"></i></a></div>
+        <div class="col80"></div>
+        @*<div class="col10"><a href="nav.aspx"><i class="icon iconfont icon-daohang"></i></a></div>*@
+    </div>
+    @*<div class="tit">热门城市</div>
+        <div class="tag">
+
+            <a href="list.aspx?city=101">北京</a>
+
+            <a href="list.aspx?city=201">天津</a>
+
+            <a href="list.aspx?city=301">石家庄</a>
+
+            <a href="list.aspx?city=306">保定</a>
+
+            <a href="list.aspx?city=310">廊坊</a>
+
+            <a href="list.aspx?city=602">大连</a>
+
+            <a href="list.aspx?city=1508">济宁</a>
+
+            <a href="list.aspx?city=1617">信阳</a>
+
+        </div>*@
+    <div class="tit">全部城市</div>
+    <!--city begin-->
+    <div class="list2 clearfix city">
+        <div class="left">
+            <ul>
+                <li data-provinceid="140000">山西省</li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li class="hide" data-cityid="140100" data-cityname="太原市" data-provinceid="140000" data-provincename="山西省">太原市</li>
+                <li class="hide" data-cityid="140200" data-cityname="大同市" data-provinceid="140000" data-provincename="山西省">大同市</li>
+                <li class="hide" data-cityid="140300" data-cityname="阳泉市" data-provinceid="140000" data-provincename="山西省">阳泉市</li>
+                <li class="hide" data-cityid="140400" data-cityname="长治市" data-provinceid="140000" data-provincename="山西省">长治市</li>
+                <li class="hide" data-cityid="140500" data-cityname="晋城市" data-provinceid="140000" data-provincename="山西省">晋城市</li>
+                <li class="hide" data-cityid="140600" data-cityname="朔州市" data-provinceid="140000" data-provincename="山西省">朔州市</li>
+                <li class="hide" data-cityid="140700" data-cityname="晋中市" data-provinceid="140000" data-provincename="山西省">晋中市</li>
+                <li class="hide" data-cityid="140800" data-cityname="运城市" data-provinceid="140000" data-provincename="山西省">运城市</li>
+                <li class="hide" data-cityid="140900" data-cityname="忻州市" data-provinceid="140000" data-provincename="山西省">忻州市</li>
+                <li class="hide" data-cityid="141000" data-cityname="临汾市" data-provinceid="140000" data-provincename="山西省">临汾市</li>
+                <li class="hide" data-cityid="141100" data-cityname="吕梁市" data-provinceid="140000" data-provincename="山西省">吕梁市</li>
+            </ul>
+        </div>
+    </div>
+    <!--city end-->
+</body>
+</html>
+<script src="~/Content/statics/js/jquery.js"></script>
+<script src="~/Content/Scripts/utils/hzsoft-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var organizeId = request('organizeId');
+    //归属地
+    $(".city .left li").click(function () {
+        $(this).siblings().removeClass("cur");
+        $(this).addClass("cur");
+        $(".city .right li[data-provinceid='" + $(this).data("provinceid") + "']").show();
+        $(".city .right li[data-provinceid!='" + $(this).data("provinceid") + "']").hide();
+        $(".city .right li[data-cityid='0']").show();
+    })
+    $(".city .right li").click(function () {
+        city = $(this).data("cityid");
+        if (city == '0') {
+            city = $(".city .left .cur").data("provinceid");
+        }
+        //do search
+        location.href = "List?organizeId=" + organizeId + "&city=" + city;
+    })
+
+    $(".goback").click(function () {
+        location.href = "Index?organizeId=" + organizeId;
+    })
+
+    $(document).ready(function () {
+        $(".list2").height($(window).height() - $(".tag").height() - 35 - 35 - 40);
+        $(".city .left li:first-child").click();
+    })
+
+</script>

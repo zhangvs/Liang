@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Index1";
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name='apple-touch-fullscreen' content='yes'>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <link href="~/Content/Styles/stylelist.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no">
+    <script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+    <script src="~/Content/scripts/cookie/jquery.cookie.js"></script>
+    <title>靓号模板定制</title>
+    <script>
+        $(function () {
+            //setTimeout("owner()", 1500);
+        });
+        function owner() {
+            //window.location.href = "/WeixinModule/WeiXinHome/Index";
+        }
+        function setHeight() {
+            var max_height = document.documentElement.clientHeight;
+            var primary = document.getElementById('mainBox');
+            primary.style.minHeight = max_height + "px";
+            primary.style.maxHeight = max_height + "px";
+        }
+    </script>
+    <style type="text/css">
+        .mainBox
+        {
+            width: 100%;
+            background-color: #EBB02F;
+            background: url("../../../../Content/Images/jiazaiyemian1.jpg") no-repeat;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+        .mainBox:after
+        {
+            content: "";
+            display: block;
+            padding-top: 160%;
+        }
+    </style>
+</head>
+<body style="background: #FFF9ED;" onload="setHeight();" onresize="setHeight()">
+    <div class="mainBox" id="mainBox">
+    </div>
+</body>
+</html>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script src="~/Content/scripts/utils/hzsoft-ui.js"></script>
+<script type="text/javascript">
+    //var geolocation;
+    if ($.cookie("currlong") == '' || $.cookie("currlong") == null) {
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '@ViewBag.JSSDKUiPackage.AppId',
+            timestamp: '@ViewBag.JSSDKUiPackage.Timestamp',
+            nonceStr: '@ViewBag.JSSDKUiPackage.NonceStr',
+            signature: '@ViewBag.JSSDKUiPackage.Signature',
+            jsApiList: ['getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function () {
+            wx.getLocation({
+                type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+                success: function (res) {
+                    var latitude;
+                    var longitude;
+                    if (res.res) {
+                        latitude = res.res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        longitude = res.res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    }
+                    else {
+                        latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+                        longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+                    }
+                    //window.location.href = "/WeixinModule/WeiXinHome/Index?currentLng=" + longitude + "&currentLat=" + latitude + "";
+                    $.post("/WeChatManage/Liang/getCurrLongLat", { currlong: longitude, currlat: latitude }, function (data) {
+                        window.location.href = "/WeChatManage/Liang/Index";
+                    });
+                },
+                fail: function () {
+                    var longitude = "118.328213";
+                    var latitude = "35.081728";
+                    $.post("/WeChatManage/Liang/getCurrLongLat", { currlong: longitude, currlat: latitude }, function (data) {
+                        window.location.href = "/WeChatManage/Liang/Index";
+                    });
+                },
+                cancel: function (res) {
+                    alert('用户拒绝授权获取地理位置');
+                }
+            });
+        })
+    }
+    else {
+        var longitude = $.cookie("currlong");
+        var latitude = $.cookie("currlat");
+        $.post("/WeChatManage/Liang/getCurrLongLat", { currlong: longitude, currlat: latitude }, function (data) {
+            window.location.href = "/WeChatManage/Liang/Index";
+        });
+    }
+    //解析定位错误信息
+    function onError(data) {
+        document.getElementById('tip').innerHTML = '定位失败';
+    }
+    var EARTH_RADIUS = 6378137.0;    //单位M
+    var PI = Math.PI;
+
+    function getRad(d) {
+        return d * PI / 180.0;
+    }
+
+    function getGreatCircleDistance(lat1, lng1, lat2, lng2) {
+        var radLat1 = getRad(lat1);
+        var radLat2 = getRad(lat2);
+
+        var a = radLat1 - radLat2;
+        var b = getRad(lng1) - getRad(lng2);
+
+        var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000.0;
+        s = Math.round(s / 1000);
+        return s;
+    }
+</script>

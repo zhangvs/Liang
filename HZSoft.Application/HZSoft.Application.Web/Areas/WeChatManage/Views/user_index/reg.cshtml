@@ -1,0 +1,79 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="会员注册 - 全国精品靓号">
+    <title>会员注册 - 全国精品靓号</title>
+    <meta content="【全国精品】手机靓号六连、五连、四连、三连99999、88888、77777、66666、55555、33333、22222、11111" name="keywords">
+    <meta content="专业做靓号，全国各地手机靓号应有尽有，中国移动、中国联通、中国电信靓号最新靓号发布平台" name="description">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/user.css?v=7.4" rel="stylesheet">
+    <script type="text/javascript">
+	var baseUrl = '';
+    </script>
+</head>
+<body>
+    <!--主体部分 开始-->
+    <div class="wrapper reg-page">
+        <div class="mpart">
+            <div class="vision">
+                <div class="s_mide layer" data-depth=".35"></div>
+                <div class="s_botm layer" data-depth-x=".1" data-depth-y=".08"></div>
+                <div class="s_botm layer" data-depth-x=".18" data-depth-y=".15"></div>
+            </div>
+        </div>
+        <form method="post" action="/user_index/regDo/" class="Validform">
+            <div class="weui-cells weui-cells_form">
+                <div class="weui-cell weui-cell_vcode">
+                    <div class="weui-cell__hd"><label class="weui-label">手 机 号：</label></div>
+                    <div class="weui-cell__bd">
+                        <input type="text" name="mobile" class="weui-input mobile" placeholder="请输入手机号" datatype="m" errormsg="请输入手机号！">
+                    </div>
+                    <div class="weui-cell__ft">
+                        <a href="javascript:;" class="weui-vcode-btn btnMobileCode">获取验证码</a>
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">验 证 码：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input type="text" name="verifyCode" class="weui-input" autocomplete="off" placeholder="请输入验证码" datatype="n" errormsg="请输入验证码！">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">设置密码：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input type="password" name="pass" class="weui-input" autocomplete="off" placeholder="请输入密码" datatype="*" errormsg="请设置密码！">
+                    </div>
+                </div>
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">再次输入：</label></div>
+                    <div class="weui-cell__bd weui-cell_primary">
+                        <input type="password" name="repass" class="weui-input" autocomplete="off" placeholder="请再次输入密码" datatype="*" recheck="pass" errormsg="两次输入的密码不一致！">
+                    </div>
+                </div>
+            </div>
+            <div class="weui-btn-area">
+                <a href="javascript:" class="weui-btn weui-btn_warn" id="formSubmit">立即提交注册</a>
+                <a href="/WeChatManage/user_index/login" class="weui-btn weui-btn_default">登录已有账号</a>
+            </div>
+        </form>
+    </div>
+    <!--主体部分 结束-->
+    <script src="~/assets/wap/js/jquery-2.1.4.js?v=7.4"></script>
+    <script src="~/assets/wap/js/validform.min.js?v=7.4"></script>
+    <script src="~/assets/wap/js/weui.min.js?v=7.4"></script>
+    <script src="~/assets/wap/js/fastclick.js?v=7.4"></script>
+    <script src="~/assets/wap/js/global.js?v=7.4"></script>
+    <script src="~/assets/wap/js/user.js?v=7.4"></script>
+</body>
+</html>

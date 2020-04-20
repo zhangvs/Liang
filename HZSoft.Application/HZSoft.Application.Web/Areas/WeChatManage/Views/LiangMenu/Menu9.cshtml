@@ -1,0 +1,380 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.FullName 【全国区号专区选号单】</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="~/Content/scripts/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/scripts/jquery/jquery-1.11.2.min.js"></script>
+    <link href="~/Content/layer2/mobile/need/layer.css" rel="stylesheet" />
+    <script src="~/Content/layer2/layer.js" type="text/javascript"></script>
+    <script src="~/Content/scripts/utils/hzsoft-ui.js"></script>
+    <link href="~/Content/css/menu.css" rel="stylesheet" />
+
+    <!--分享-->
+    @{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName + " 【全国区号专区选号单】", Img = "liang4.jpg" });}
+    <!--end分享-->
+
+</head>
+<body>
+    <header>
+        <a href="~/WeChatManage/Liang/Index?organizeId=@ViewBag.organizeId&city=@ViewBag.city"><div class="return fl"></div></a>
+        <div class="title-menu">
+            全国区号专区  选号单
+        </div>
+    </header>
+    <div>
+        <div style="width: 100%;margin-left: auto;margin-right: auto;">
+            <div style="margin: 5px auto;">
+                <div class="kuang">
+                    <div style="box-sizing:border-box;padding:10px;color:inherit;">
+                        <div class="kuangdiv">
+
+                            <div class="des">
+                                <p>★★★★★</p>
+                                <h4>@ViewBag.FullName</h4>
+                                <p>一家专门做靓号的公司</p>
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list901 = ViewBag.list901;
+                                    if (list901 != null)
+                                    {
+                                        if (list901.Count > 0)
+                                        {
+                                            <p><span class="minclass_txt">经典区号5(6)A</span><img src="~/Content/images/0xing.gif" /></p>
+                                            <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list901)
+                                            {
+                                                <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                            }
+                                        }
+                                    }
+                                }
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list902 = ViewBag.list902;
+                                    if (list902 != null)
+                                    {
+                                        if (list902.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号4A</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list902)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list903 = ViewBag.list903;
+                                    if (list903 != null)
+                                    {
+                                        if (list903.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号3A</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list903)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list904 = ViewBag.list904;
+                                    if (list904 != null)
+                                    {
+                                        if (list904.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号ABCD(EF)</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list904)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list905 = ViewBag.list905;
+                                    if (list905 != null)
+                                    {
+                                        if (list905.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号四（五六）拖一</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list905)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list906 = ViewBag.list906;
+                                    if (list906 != null)
+                                    {
+                                        if (list906.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号个性号</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list906)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list907 = ViewBag.list907;
+                                    if (list907 != null)
+                                    {
+                                        if (list907.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号官号</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list907)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list908 = ViewBag.list908;
+                                    if (list908 != null)
+                                    {
+                                        if (list908.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号情侣号</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list908)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list909 = ViewBag.list909;
+                                    if (list909 != null)
+                                    {
+                                        if (list909.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号DCBA</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list909)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list910 = ViewBag.list910;
+                                    if (list910 != null)
+                                    {
+                                        if (list910.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号AABB</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list910)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list911 = ViewBag.list911;
+                                    if (list911 != null)
+                                    {
+                                        if (list911.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号ABC</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list911)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list912 = ViewBag.list912;
+                                    if (list912 != null)
+                                    {
+                                        if (list912.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号AAAB</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list912)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list913 = ViewBag.list913;
+                                    if (list913 != null)
+                                    {
+                                        if (list913.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号ABAB</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list913)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list914 = ViewBag.list914;
+                                    if (list914 != null)
+                                    {
+                                        if (list914.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号年份（生日）号</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list914)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list915 = ViewBag.list915;
+                                    if (list915 != null)
+                                    {
+                                        if (list915.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号双对子（6789）</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list915)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list916 = ViewBag.list916;
+                                    if (list916 != null)
+                                    {
+                                        if (list916.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号ABBA</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list916)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="minclass">
+                                @{
+                                    List<TelphoneLiangEntity>
+                                        list917 = ViewBag.list917;
+                                    if (list917 != null)
+                                    {
+                                        if (list917.Count > 0)
+                                        {
+                                        <p><span class="minclass_txt">经典区号其他</span><img src="~/Content/images/0xing.gif" /></p>
+                                        <p><span class="minclass_des">号码/ 归属地/ 价格</span></p>
+                                            foreach (var bl in list917)
+                                            {
+                                            <p><a onclick="f_search(@bl.TelphoneID)"><span class="telphone">@bl.Telphone</span></a> &nbsp;@bl.City@bl.Operator &nbsp;<span class="price">@bl.Price</span>  &nbsp;@bl.Description </p>
+                                                }
+                                            }
+                                        }
+                                    }
+                            </div>
+                            <div class="des">
+                                <p>★★★★★</p>
+                                <h4>@ViewBag.FullName</h4>
+                                <p>精于专业 力求卓越</p>
+                                <p>▼</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align:center;"><img src="~/Content/images/0tan.gif" /></p>
+        <br />
+        <div style="height:50px" class="animate">总有一个号码适合您</div>
+        <img src="~/Content/images/0.gif" class="img-responsive center-block">
+        <br />
+        <span class="kuai">各位亲们！赶快来抢购吧，来晚了可能就买不到啦！~</span>
+        <br />
+        <br />
+        <br />
+    </div>
+</body>
+</html>
+<script src="~/Content/webApp/js/menu.js"></script>

@@ -1,0 +1,359 @@
+﻿@{
+    ViewBag.Title = "机构管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Content/layui/layui.js"></script>
+@*<link href="~/Content/scripts/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+<script src="~/Content/scripts/plugins/jquery-ui/jquery-ui.min.js"></script>*@
+<script>
+    var keyValue = request('keyValue');
+    var parentId = request('ParentId');
+
+    $(function () {
+        initControl();
+        autocomplete();
+    })
+
+    function autocomplete() {
+        var cache = {};
+        $("#ShortName").autocomplete({
+            source: function (request, response) {
+                var term = request.term;
+                if (term in cache) {
+                    response(cache[term]);
+                    return;
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/WeChatManage/WeChat_Users/NickNameAuto",
+                    data: { nickname: request.term, rnd: Math.random() },
+                    success: function (data) {
+                        var ary = [];
+                        if (data != "") {
+                            // 解析为js对象
+                            var result = JSON.parse(data);
+                            for (var i = 0; i < result.length; i++) {
+                                ary[i] = new Array();
+                                ary[i].label = result[i].NickName;
+                                ary[i].id = result[i].OpenId;
+                            }
+                        }
+                        response(ary);
+                    },
+                    error: function () {
+                        layer.alert('错误', {
+                            skin: 'layui-layer-molv', closeBtn: 0
+                        });
+                    }
+                });
+            },
+            minLength: 1,
+            select: function (event, ui) {
+                var id = ui.item.id;
+                if (id != '') {
+                    $("#ManagerId").val(id);
+                }
+                var label = ui.item.label;
+                if (label != '') {
+                    $("#ShortName").val(label);
+                }
+            },
+            html: true,
+            open: function (event, ui) {
+                $(".ui-autocomplete").css("z-index", 1000).css("line-height", "25px").css("width", "200px");
+            }
+        });
+    }
+
+    //初始化控件
+    function initControl() {
+        //上级公司
+        //$("#ParentId").ComboBoxTree({
+        //    url: "../../BaseManage/Organize/GetTreeJson",
+        //    description: "==请选择==",
+        //    height: "260px",
+        //    allowSearch: true
+        //});
+        //公司性质
+        //$("#Nature").ComboBox({
+        //    url: "../../SystemManage/DataItemDetail/GetDataItemListJson",
+        //    param: { EnCode: "CompanyNature" },
+        //    id: "ItemValue",
+        //    text: "ItemName",
+        //    description: "==请选择==",
+        //    height: "200px"
+        //});
+        //负责人
+        //$("#ManagerId").ComboBoxTree({
+        //    url: "../../BaseManage/User/GetTreeJson",
+        //    description: "==请选择==",
+        //    height: "220px",
+        //    allowSearch: true
+        //});
+        //省份
+        $("#ProvinceId").ComboBox({
+            url: "../../SystemManage/Area/GetAreaListJson",
+            param: { parentId: "0" },
+            id: "AreaCode",
+            text: "AreaName",
+            description: "选择省",
+            height: "170px"
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            $("#CityId").ComboBox({
+                url: "../../SystemManage/Area/GetAreaListJson",
+                param: { parentId: value },
+                id: "AreaCode",
+                text: "AreaName",
+                description: "选择市",
+                height: "170px"
+            });
+        });
+        //城市
+        $("#CityId").ComboBox({
+            description: "选择市",
+            height: "170px"
+        }).bind("change", function () {
+            var value = $(this).attr('data-value');
+            if (value) {
+                $("#CountyId").ComboBox({
+                    url: "../../SystemManage/Area/GetAreaListJson",
+                    param: { parentId: value },
+                    id: "AreaCode",
+                    text: "AreaName",
+                    description: "选择县/区",
+                    height: "170px"
+                });
+            }
+        });
+        //县/区
+        $("#CountyId").ComboBox({
+            description: "选择县/区",
+            height: "170px"
+        });
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../BaseManage/Organize/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    $("#FoundedTime").val(formatDate(data.FoundedTime, "yyyy-MM-dd"));
+                    $("#ProvinceId").trigger("change");
+                    if (data.F_CityId != undefined) {
+                        $("#CityId").ComboBoxSetValue(data.F_CityId).trigger("change");
+                        $("#CountyId").ComboBoxSetValue(data.F_CountyId);
+                    }
+                    if (data.Img1 != undefined) {
+                        $("#UploadPicture1").attr("imgsrc", data.Img1).html("<img src='" + data.Img1 + "' style='height:13em;' />");
+                    }
+                    if (data.Img2 != undefined) {
+                        $("#UploadPicture2").attr("imgsrc", data.Img2).html("<img src='" + data.Img2 + "' style='height:13em;' />");
+                    }
+                    if (data.Img3 != undefined) {
+                        $("#UploadPicture3").attr("imgsrc", data.Img3).html("<img src='" + data.Img3 + "' style='height:13em;' />");
+                    }
+                    if (data.Img4 != undefined) {
+                        $("#UploadPicture4").attr("imgsrc", data.Img4).html("<img src='" + data.Img4 + "' style='height:13em;' />");
+                    }
+                }
+            });
+        } else {
+            $("#ParentId").val(parentId);
+        }
+
+        if (true) {
+
+        }
+    }
+
+    layui.use('upload', function () {
+        var $ = layui.jquery
+        , upload = layui.upload;
+        //拖拽上传
+        upload.render({
+            elem: ".upload"
+          , url: '/BaseManage/Organize/UploadPicture'
+          , done: function (data) {
+              console.log(data);
+              if (data.Success) {
+                  this.item
+                  $("#" + this.item.context.id).attr("imgsrc", data.Message).html("<img src='" + data.Message + "' style='height:13em;' />");
+              } else {
+                  layer.alert('上传失败:' + data.Message, {
+                      skin: 'layui-layer-molv', closeBtn: 0
+                  });
+              }
+          }
+          , error: function () {
+              layer.alert('上传异常', {
+                  skin: 'layui-layer-molv', closeBtn: 0
+              });
+          }
+        });
+    });
+
+    //保存表单
+    function AcceptClick() {
+        if (!$('#form1').Validform()) {
+            return false;
+        }
+        var postData = $("#form1").GetWebControls(keyValue);
+        if (postData["ParentId"] == "" || postData["ParentId"] == "&nbsp;") {
+            postData["ParentId"] = 0;
+        }
+        //图片为空并且上传图不为空
+        if (!!$("#UploadPicture1").attr("imgsrc")) {
+            var img1 = $("#UploadPicture1").attr("imgsrc");
+            postData.Img1 = img1;
+        }
+        if (!!$("#UploadPicture2").attr("imgsrc")) {
+            var img2 = $("#UploadPicture2").attr("imgsrc");
+            postData.Img2 = img2;
+        }
+        if (!!$("#UploadPicture3").attr("imgsrc")) {
+            var img3 = $("#UploadPicture3").attr("imgsrc");
+            postData.Img3 = img3;
+        }
+        if (!!$("#UploadPicture4").attr("imgsrc")) {
+            var img4 = $("#UploadPicture4").attr("imgsrc");
+            postData.Img4 = img4;
+        }
+        $.SaveForm({
+            url: "../../BaseManage/Organize/SaveForm?keyValue=" + keyValue,
+            param: postData,
+            loading: "正在保存数据...",
+            success: function () {
+                $.currentIframe().$("#gridTable").resetSelection();
+                $.currentIframe().$("#gridTable").trigger("reloadGrid");
+            }
+        })
+    }
+
+
+</script>
+    <div style="margin-left: 10px; margin-right: 10px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#BaseInfo" data-toggle="tab">基本信息</a></li>
+            <li><a href="#ExpandInfo" data-toggle="tab">手机图片</a></li>
+        </ul>
+        <div class="tab-content" style="padding-top: 15px;">
+            <div id="BaseInfo" class="tab-pane active" style="padding-right: 30px;">
+                <table class="form">
+                    <tr>
+                        <th class="formTitle">机构编号</th>
+                        <td class="formValue">
+                            <input id="OrganizeId" type="text" class="form-control" readonly />
+                        </td>
+                        <th class="formTitle">公司名称<font face="宋体">*</font></th>
+                        <td class="formValue">
+                            <input id="FullName" type="text" isvalid="yes" checkexpession="NotNull" onblur="$.ExistField(this.id,'../../BaseManage/Organize/ExistFullName')" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">负责人<font face="宋体">*</font></th>
+                        <td class="formValue">
+                            <input id="Manager" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                        </td>
+                        <th class="formTitle">联系电话(账号)<font face="宋体">*</font></th>
+                        <td class="formValue">
+                            <input id="OuterPhone" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">微信昵称(选择)<font face="宋体">*</font></th>
+                        <td class="formValue">
+                            <input id="ShortName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                        </td>
+                        <th class="formTitle">微信ID<font face="宋体">*</font></th>
+                        <td class="formValue">
+                            <input id="ManagerId" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">
+                            其它代售公司
+                        </th>
+                        <td class="formValue" colspan="3">
+                            <input id="OtherOrganizeId" type="text" class="form-control" />
+                            <input id="ParentId" type="hidden" class="form-control" />
+                            @*<div id="ParentId" type="selectTree" class="ui-select" style="display:none">
+                    </div>*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">公司地点</th>
+                        <td class="formValue" colspan="3">
+                            <div style="float: left; width: 255px;">
+                                <div id="ProvinceId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;"></div>
+                                <div id="CityId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;"></div>
+                                <div id="CountyId" type="select" class="ui-select" style="float: left; width: 84px; margin-right: 1px;"></div>
+                            </div>
+                            <div style="margin: 0 auto; width: 100%;">
+                                <input id="Address" type="text" class="form-control" style="float: left; width: 355px;" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle" valign="top" style="padding-top: 4px;">
+                            推广链接
+                        </th>
+                        <td class="formValue" colspan="3">
+                            <textarea id="Description" class="form-control" readonly style="height: 70px;"></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+                <p>
+                    <b>1. 微信昵称 :</b> 输入关键字之后，会出现自动提示下拉列表，请选择对应的微信昵称。
+                </p>
+                <p style="padding-left:50px;">
+                    如下拉列表之中没有出现相关的微信昵称，请先用该微信点击任意一个手机靓号商城页面，就可以出现在下拉列表之中。
+                </p>
+                <p><b>2. 微信ID :</b> 不需要手动输入，选择完对应的微信昵称之后，会自动显示出来。</p>
+                <p><b>3. 其它代售公司 :</b> 购买Vip服务之后，输入平台其它机构的机构编号，选择该公司的部分靓号代售，便可在手机端靓号平台之中显示。</p>
+            </div>
+            <div id="ExpandInfo" class="tab-pane ">
+                <table class="form">
+                    <tr>
+                        <td class="formValue" colspan="4" style="text-align:center">
+                            <input id="Img1" type="hidden" class="form-control" />
+                            <div class="layui-upload-drag upload" id="UploadPicture1" style="width:350px;height:165px">
+                                <i class="layui-icon"></i>
+                                <p>点击上传切换图片（700*330）</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formValue" colspan="4" style="text-align:center">
+                            <input id="Img2" type="hidden" class="form-control" />
+                            <div class="layui-upload-drag upload" id="UploadPicture2"  style="width:350px;height:165px">
+                                <i class="layui-icon"></i>
+                                <p>点击上传切换图片（700*330）</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formValue" colspan="4" style="text-align:center">
+                            <input id="Img3" type="hidden" class="form-control" />
+                            <div class="layui-upload-drag upload" id="UploadPicture3"  style="width:350px;height:165px">
+                                <i class="layui-icon"></i>
+                                <p>点击上传切换图片（700*330）</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="formValue" colspan="4" style="text-align:center">
+                            <input id="Img4" type="hidden" class="form-control" />
+                            <div class="layui-upload-drag upload" id="UploadPicture4"  style="width:350px;height:165px">
+                                <i class="layui-icon"></i>
+                                <p>点击上传切换图片（700*330）</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>

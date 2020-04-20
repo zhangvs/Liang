@@ -1,0 +1,353 @@
+@{;
+    ViewBag.Title = "列表页面";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script>
+
+    $(function () {
+        InitialPage();
+        GetGrid();
+    });
+
+
+    //初始化页面
+    function InitialPage() {
+        //销售人员
+        $("#SellerId").ComboBoxTree({
+            url: "../../BaseManage/User/GetTreeJson",
+            description: "==请选择==",
+            height: "360px",
+            width: "280px"
+        }).bind("change", function () {
+            $("#SellerName").val($(this).attr('data-text'));
+        });
+        //resize重设布局;
+        $(window).resize(function (e) {
+            window.setTimeout(function () {
+                $('#gridTable').setGridWidth(($('.gridPanel').width()));
+                $('#gridTable').setGridHeight($(window).height() - 136.5);
+            }, 200);
+            e.stopPropagation();
+        });
+    }
+    //加载表格
+    function GetGrid() {
+        var selectedRowIndex = 0;
+        var $gridTable = $('#gridTable');
+        var queryJson = {};
+        queryJson.CheckMark = 1;
+        queryJson.DeleteMark = 0;
+        queryJson.SendMark = 0;
+        $gridTable.jqGrid({
+            autowidth: true,
+            altRows: true,
+            altclass: 'someClass',
+            height: $(window).height() - 136.5,
+            url: "../../CustomerManage/TelphoneOrder/GetPageListJson",
+            postData: { queryJson: JSON.stringify(queryJson) },
+            datatype: "json",
+            colModel: [
+                { label: 'ID', name: 'ID', index: 'ID', width: 100, align: 'left', sortable: true, hidden: true },
+                { label: '订单编号', name: 'OrderCode', index: 'OrderCode', width: 120, align: 'left',sortable: true  },
+                { label: '售出普号', name: 'Telphone', index: 'Telphone', width: 100, align: 'left',sortable: true  },
+                { label: '售出金额', name: 'Amount', index: 'Amount', width: 80, align: 'center', sortable: true },
+                {
+                    label: '配送方式', name: 'Express', index: 'Express', width: 80, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        return top.clientdataItem["psfs"][cellvalue] == undefined ? "" : top.clientdataItem["psfs"][cellvalue];
+                    }
+                },
+                { label: '单号', name: 'Numbers', index: 'Numbers', width: 130, align: 'left', sortable: true },//, formatter: editLink
+                //{ label: '尾款/全款', name: 'ToPay', index: 'ToPay', width: 80, align: 'center', sortable: true },
+                //{ label: '转公司账户时间', name: 'ToPayDate', index: 'ToPayDate', width: 120, align: 'left', sortable: true },
+                //{ label: '到付服务费', name: 'ToPayCharge', index: 'ToPayCharge', width: 80, align: 'center', sortable: true },
+                { label: '收货人', name: 'Consignee', index: 'Consignee', width: 60, align: 'left',sortable: true  },
+                { label: '联系方式', name: 'Contact', index: 'Contact', width: 100, align: 'left', sortable: true },
+                { label: '区县', name: 'Area', index: 'Area', width: 50, align: 'center', sortable: true },
+                { label: '地址', name: 'Address', index: 'Address', width: 250, align: 'left', sortable: true },
+                {
+                    label: "是否发货", name: "SendMark", index: "SendMark", width: 60, align: "center", sortable: false,
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                {
+                    label: "物流状态", name: "Sign", index: "Sign", width: 60, align: "center", sortable: false,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (top.clientdataItem["wlzt"][cellvalue] == undefined) {
+                            return "<span style='color:blue'>未发货</span>";
+                        }
+                        else if (cellvalue == "3") {
+                            return "<span style='color:green'>已签收</span>";
+                        }
+                        else if (cellvalue == "4") {
+                            return "<span style='color:red'>问题件</span>";
+                        }
+                        else {
+                            return top.clientdataItem["wlzt"][cellvalue];
+                        }
+                    }
+                },
+                //{ label: '物流时间', name: 'AcceptTime', index: 'AcceptTime', width: 120, align: 'left', sortable: true },
+                //{ label: '物流追踪', name: 'AcceptStation', index: 'AcceptStation', width: 150, align: 'left', sortable: true },
+                {
+                    label: "是否激活", name: "ActivationMark", index: "ActivationMark", width: 60, align: "center", sortable: false,
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: '核单人', name: 'SellerName', index: 'SellerName', width: 80, align: 'left', sortable: true },
+                { label: '创建日期', name: 'CreateDate', index: 'CreateDate', width: 120, align: 'left', sortable: true },
+                { label: '跟进时间', name: 'ModifyDate', index: 'ModifyDate', width: 120, align: 'left', sortable: true },
+                { label: '跟进人员', name: 'ModifyUserName', index: 'ModifyUserName', width: 100, align: 'left', sortable: true },
+                { label: '备注', name: 'Description', index: 'Description', width: 120, align: 'left', sortable: true },
+            ],
+            viewrecords: true,
+            rowNum: 30,
+            rowList: [30, 50, 100],
+            pager: "#gridPager",
+            sortname: 'CreateDate',
+            sortorder: 'desc',
+            rownumbers: true,
+            shrinkToFit: false,
+            gridview: true,
+            onSelectRow: function () {
+                selectedRowIndex = $('#' + this.id).getGridParam('selrow');
+            },
+            gridComplete: function () {
+                $('#' + this.id).setSelection(selectedRowIndex, false);
+            },
+            ondblClickRow: function () {
+                btn_edit();
+            },
+        });
+
+
+        //点击时间范围（今天、近7天、近一个月、近三个月）
+        $("#time_horizon a.btn-default").click(function () {
+            $("#time_horizon a.btn-default").removeClass("active");
+            $(this).addClass("active");
+            switch ($(this).attr('data-value')) {
+                case "1"://今天
+                    $("#StartTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "2"://近7天
+                    $("#StartTime").val("@DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "3"://近一个月
+                    $("#StartTime").val("@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                case "4"://近三个月
+                    $("#StartTime").val("@DateTime.Now.AddMonths(-3).ToString("yyyy-MM-dd")");
+                    $("#EndTime").val("@DateTime.Now.ToString("yyyy-MM-dd")");
+                    break;
+                default:
+                    break;
+            }
+            $("#SelectedStartTime").html($("#StartTime").val());
+            $("#SelectedEndTime").html($("#EndTime").val());
+            $('#btn_Search').trigger("click");
+        });
+        //查询点击事件
+        $("#btn_Search").click(function () {
+            if (!$(".ui-filter-text").next('.ui-filter-list').is(":hidden")) {
+                $(".ui-filter-text").trigger("click");
+            }
+            $("#SelectedStartTime").html($("#StartTime").val());
+            $("#SelectedEndTime").html($("#EndTime").val());
+            var queryJson = $("#filter-form").GetWebControls();
+            $gridTable.jqGrid('setGridParam', {
+                postData: { queryJson: JSON.stringify(queryJson) },
+                page: 1
+            }).trigger('reloadGrid');
+        });
+    }
+    //https://www.kuaidi100.com/chaxun?com=shunfeng&nu=
+    //需要滑动验证http://www.sf-express.com/cn/sc/dynamic_function/waybill/#search/bill-number/
+    function editLink(cellValue, options, rowdata, action) {
+        if (rowdata.Express == 1) {
+            return rowdata.Numbers+"<a href='https://www.kuaidi100.com/all/sf.shtml?mscomnu=" + cellValue + "'  target='_blank'><img src='/Content/images/iocn/search.png' /></a>";
+        }
+        else if (rowdata.Express == 4) {
+            return rowdata.Numbers + "<a href='https://www.kuaidi100.com/all/st.shtml?mscomnu=" + cellValue + "'  target='_blank'><img src='/Content/images/iocn/search.png' /></a>";
+        }
+        else if (rowdata.Express == "ZTO") {
+            return rowdata.Numbers + "<a href='https://www.kuaidi100.com/all/zt.shtml?mscomnu=" + cellValue + "'  target='_blank'><img src='/Content/images/iocn/search.png' /></a>";
+        }
+        else {
+            return "";
+        }
+    }
+    //新增
+    function btn_add() {
+        dialogOpen({
+            id: 'Form',
+            title: '添加普号订单',
+            url: '/CustomerManage/TelphoneOrder/TelphoneOrderForm',
+            width: '750px',
+            height: '600px',
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick();
+            }
+        });
+    }
+    //编辑
+    function btn_edit() {
+        var keyValue = $('#gridTable').jqGridRowValue( 'ID');
+        if (checkedRow(keyValue)) {
+            dialogOpen({
+                id: 'Form',
+                title: '编辑普号订单',
+                url: '/CustomerManage/TelphoneOrder/TelphoneOrderForm?keyValue=' + keyValue,
+                width: '750px',
+                height: '600px',
+                callBack: function (iframeId) {
+                    top.frames[iframeId].AcceptClick();
+                }
+            })
+        }
+    }
+
+    //var postData = { "PushTime": "2018-08-03 13:11:28", "EBusinessID": "1363273", "Data": [{ "LogisticCode": "219246195368", "ShipperCode": "ZTO", "Traces": [{ "AcceptStation": "【晋城市】  【晋城三部】（0356-6962838、18935270303、18003569811） 的 市场部 （15536895200） 已揽收", "AcceptTime": "2018-07-31 14:50:57" }, { "AcceptStation": "[晋城市]快件离开晋城分拨中心已发往临沂", "AcceptTime": "2018-08-02 00:04:00" }, { "AcceptStation": "[临沂市]快件已到达临沂", "AcceptTime": "2018-08-02 16:01:43" }, { "AcceptStation": "[临沂市]快件离开临沂已发往临沂玩具城二部", "AcceptTime": "2018-08-02 16:12:15" }, { "AcceptStation": "[临沂市]临沂沂蒙的沂蒙1号线[18505491326]正在派件", "AcceptTime": "2018-08-03 08:11:34" }, { "AcceptStation": "[临沂市]快件已在临沂沂蒙签收 签收人：拍照签收,感谢您使用中通快递，期待再次为您服务!", "AcceptTime": "2018-08-03 13:08:43" }], "State": "3", "EBusinessID": "1363273", "Success": true }], "Count": "1" };
+    ////var postData = { "PushTime": "2018-07-19 14:20:53", "EBusinessID": "test1363273", "Data": [{ "LogisticCode": "367258370769", "ShipperCode": "SF", "Traces": [{ "AcceptStation": "顺丰速运已收取快件", "AcceptTime": "2018-07-19 14:20:53", "Remark": "" }, { "AcceptStation": "货物已经到达深圳", "AcceptTime": "2018-07-19 14:20:532", "Remark": "" }, { "AcceptStation": "货物到达福田保税区网点", "AcceptTime": "2018-07-19 14:20:533", "Remark": "" }, { "AcceptStation": "货物已经被张三签收了", "AcceptTime": "2018-07-19 14:20:534", "Remark": "" }], "State": "3", "EBusinessID": "test1363273", "Success": true, "Reason": "", "CallBack": "", "EstimatedDeliveryTime": "2018-07-19 14:20:53" }], "Count": "1" };
+    //$.ajax({
+    //    type: "get",
+    //    url: "/CustomerManage/KdniaoAPI/SavePushRecord",
+    //    contentType: "application/json",
+    //    data: { requestData: JSON.stringify(postData), requestType: "", DataSign: "" },
+    //    success: function (data, status) {
+    //        if (status == "success") {
+    //            alert(data.Reason);
+    //        }
+    //    }
+    //});
+        //var postData = { "status": "polling", "billstatus": "change", "message": "变化", "autoCheck": "0", "comOld": "", "comNew": "", "lastResult": { "message": "ok", "nu": "815272290859", "ischeck": "0", "condition": "00", "com": "yuantong", "status": "200", "state": "0", "data": [{ "time": "2018-07-24 03:54:11", "ftime": "2018-07-24 03:54:11", "context": "快件已发往 北京转运中心" }, { "time": "2018-07-23 23:13:54", "ftime": "2018-07-23 23:13:54", "context": "快件已到达 深圳转运中心" }, { "time": "2018-07-23 21:24:45", "ftime": "2018-07-23 21:24:45", "context": "快件已发往 深圳转运中心" }, { "time": "2018-07-23 21:24:22", "ftime": "2018-07-23 21:24:22", "context": "广东省深圳市科技园南区公司取件人: 刘超波（15019224803）已收件" }] } };
+        ////var postData = { "status": "polling", "billstatus": "got", "message": "", "autoCheck": "1", "comOld": "yuantong", "comNew": "ems", "lastResult": { "message": "ok", "state": "0", "status": "200", "condition": "F00", "ischeck": "0", "com": "shunfeng", "nu": "869091632326", "data": [{ "context": "上海分拨中心/装件入车扫描 ", "time": "2012-08-28 16:33:19", "ftime": "2012-08-28 16:33:19", "status": "在途", "areaCode": "310000000000", "areaName": "上海市" }, { "context": "上海分拨中心/下车扫描 ", "time": "2012-08-27 23:22:42", "ftime": "2012-08-27 23:22:42", "status": "在途", "areaCode": "310000000000", "areaName": "上海市" }] }, "destResult": { "message": "ok", "state": "0", "status": "200", "condition": "F00", "ischeck": "0", "com": "speedpost", "nu": "EX015142583SG", "data": [{ "context": "[01000]Final delivery Delivered to: SLOVESNOV", "time": "2016-05-24 14:00:00", "ftime": "2016-05-24 14:00:00", "status": "签收", "areaCode": null, "areaName": null }] } };
+        //$.ajax({
+        //    type: "post",
+        //    url: "http://localhost:4066/CustomerManage/KD100API/SavePushRecord",
+        //    contentType: "application/json",
+        //    data: { param: JSON.stringify(postData) },
+        //    success: function (data, status) {
+        //        if (status == "success") {
+        //            alert('完成');
+        //        }
+        //    }
+        //});
+
+    //删除
+    function btn_delete() {
+        var keyValue = $('#gridTable').jqGridRowValue( 'ID');
+        if (keyValue) {
+            $.RemoveForm({
+                url: '../../CustomerManage/TelphoneOrder/RemoveForm',
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $('#gridTable').trigger('reloadGrid');
+                }
+            })
+        } else {
+            dialogMsg('请选择需要删除的普号订单！', 0);
+        }
+    }
+    //导出
+    function btn_export() {
+        dialogOpen({
+            id: "ExcelIExportDialog",
+            title: '导出订单',
+            url: '/Utility/ExcelExportForm?gridId=gridTable&filename=普号订单',
+            width: "500px",
+            height: "380px",
+            callBack: function (iframeId) {
+                top.frames[iframeId].AcceptClick();
+            }, btn: ['导出Excel', '关闭']
+        });
+    }
+</script>
+<div class="titlePanel">
+    <div class="title-search">
+        <table>
+            <tr>
+                <td>查询条件</td>
+                <td style="padding-left: 10px;">
+                    <div class="ui-filter" style="width: 200px;">
+                        <div class="ui-filter-text">
+                            <strong id="SelectedStartTime">@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")</strong> 至 <strong id="SelectedEndTime">@DateTime.Now.ToString("yyyy-MM-dd")</strong>
+                        </div>
+                        <div class="ui-filter-list" style="width: 350px;">
+                            <table class="form" id="filter-form">
+                                <tr>
+                                    <th class="formTitle">销售日期：</th>
+                                    <td class="formValue">
+                                        <div style="float: left; width: 45%;">
+                                            <input id="StartTime" readonly type="text" value="@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")" class="form-control input-wdatepicker" onfocus="WdatePicker({maxDate:'%y-%M-%d'})">
+                                        </div>
+                                        <div style="float: left; width: 10%; text-align: center;">至</div>
+                                        <div style="float: left; width: 45%;">
+                                            <input id="EndTime" readonly type="text" value="@HZSoft.Util.Time.GetToday()" class="form-control input-wdatepicker" onfocus="WdatePicker()">
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="formTitle">手机号：</td>
+                                    <td class="formValue">
+                                        <input id="Telphone" type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="formTitle">销售人：</td>
+                                    <td class="formValue">
+                                        <div id="SellerId" type="selectTree" class="ui-select" ></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="formTitle">收货人：</td>
+                                    <td class="formValue">
+                                        <input id="Consignee" type="text" class="form-control">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="ui-filter-list-bottom">
+                                <a id="btn_Reset" class="btn btn-default">&nbsp;重&nbsp;&nbsp;置</a>
+                                <a id="btn_Search" class="btn btn-primary">&nbsp;查&nbsp;&nbsp;询</a>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td style="padding-left: 10px;">
+                    <div id="time_horizon" class="btn-group">
+                        <a class="btn btn-default" data-value="1">今天</a>
+                        <a class="btn btn-default" data-value="2">近7天</a>
+                        <a class="btn btn-default active" data-value="3">近1个月</a>
+                        <a class="btn btn-default" data-value="4">近3个月</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="toolbar">
+        <div class="btn-group">
+            <a id="lr-replace" class="btn btn-default" onclick="reload()"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+            <a id="lr-add" class="btn btn-default" onclick="btn_add()"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a id="lr-edit" class="btn btn-default" onclick="btn_edit()"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+            <a id="lr-delete" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            <a id="lr-export" class="btn btn-default" onclick="btn_export()"><i class="fa fa-sign-out"></i>&nbsp;导出订单</a>
+        </div>
+    </div>
+    @*<form method="post" name="" action="http://hmk.lywenkai.com/CustomerManage/KD100API/SavePushRecord">
+        <input type="text" name="param" value='{"status":"polling","billstatus":"change","message":"变化","autoCheck":"0","comOld":"","comNew":"","lastResult":{"message":"ok","nu":"815272290859","ischeck":"0","condition":"00","com":"yuantong","status":"200","state":"0","data":[{"time":"2018-07-24 03:54:11","ftime":"2018-07-24 03:54:11","context":"【深圳转运中心】 已发出 下一站 【北京转运中心】"},{"time":"2018-07-24 03:16:48","ftime":"2018-07-24 03:16:48","context":"【深圳转运中心】 已打包"},{"time":"2018-07-23 23:51:32","ftime":"2018-07-23 23:51:32","context":"【深圳转运中心】 已收入"},{"time":"2018-07-23 21:24:45","ftime":"2018-07-23 21:24:45","context":"【广东省深圳市科技园南区公司】 已发出 下一站 【深圳转运中心】"},{"time":"2018-07-23 21:24:22","ftime":"2018-07-23 21:24:22","context":"【广东省深圳市科技园南区公司】 已收件"}]}}'>
+        <input type="submit" value="ceshi"/>    
+    </form>*@
+    @*<form method="post" name="" action="/CustomerManage/KdniaoAPI/SavePushRecord">
+        <input type="text" name="requestData" value='{"PushTime":"2018-08-03 13:11:28","EBusinessID":"1363273","Data":[{"LogisticCode":"219246195368","ShipperCode":"ZTO","Traces":[{"AcceptStation":"【晋城市】  【晋城三部】（0356-6962838、18935270303、18003569811） 的 市场部 （15536895200） 已揽收","AcceptTime":"2018-07-31 14:50:57"},{"AcceptStation":"【晋城市】  快件离开 【晋城三部】 发往 【综改中转部】","AcceptTime":"2018-07-31 15:19:18"},{"AcceptStation":"【太原市】  快件到达 【综改中转部】","AcceptTime":"2018-08-01 11:48:41"},{"AcceptStation":"[晋城市]快件离开晋城分拨中心已发往临沂","AcceptTime":"2018-08-02 00:04:00"},{"AcceptStation":"[济南市]快件已到达济南中转部","AcceptTime":"2018-08-02 08:41:59"},{"AcceptStation":"[济南市]快件离开济南中转部已发往临沂中转部","AcceptTime":"2018-08-02 10:59:33"},{"AcceptStation":"[临沂市]快件离开临沂中转部已发往临沂","AcceptTime":"2018-08-02 16:01:26"},{"AcceptStation":"[临沂市]快件已到达临沂","AcceptTime":"2018-08-02 16:01:43"},{"AcceptStation":"[临沂市]快件离开临沂已发往临沂玩具城二部","AcceptTime":"2018-08-02 16:12:15"},{"AcceptStation":"[临沂市]快件已到达临沂沂蒙","AcceptTime":"2018-08-03 05:38:18"},{"AcceptStation":"[临沂市]临沂沂蒙的沂蒙1号线[18505491326]正在派件","AcceptTime":"2018-08-03 08:11:34"},{"AcceptStation":"[临沂市]快件已在临沂沂蒙签收 签收人：拍照签收,感谢您使用中通快递，期待再次为您服务!","AcceptTime":"2018-08-03 13:08:43"}],"State":"3","EBusinessID":"1363273","Success":true}],"Count":"1"}'>
+        <input type="submit" value="ceshi" />
+    </form>*@
+
+</div>
+<div class="gridPanel">
+    <table id="gridTable"></table>
+    <div id="gridPager"></div>
+</div>
