@@ -28,36 +28,55 @@
             url: "../../CustomerManage/Orders/GetPageListJson",
             datatype: "json",
             colModel: [
-                { label: 'Id', name: 'Id', index: 'Id', width: 100, align: 'left',sortable: true  },
-                { label: '订单号', name: 'OrderSn', index: 'OrderSn', width: 100, align: 'left',sortable: true  },
-                { label: '用户ID', name: 'UserId', index: 'UserId', width: 100, align: 'left',sortable: true  },
+                { label: '主键', name: 'Id', hidden: true },
+                { label: '订单号', name: 'OrderSn', index: 'OrderSn', width: 200, align: 'left',sortable: true  },
                 { label: '手机号码', name: 'Tel', index: 'Tel', width: 100, align: 'left',sortable: true  },
-                { label: '价格', name: 'Price', index: 'Price', width: 100, align: 'left',sortable: true  },
-                { label: '发起时间', name: 'CreateDate', index: 'CreateDate', width: 100, align: 'left',sortable: true  },
-                { label: '0 待付款 1 待审核 2 待发货 3 待开卡 4 已完成', name: 'Status', index: 'Status', width: 100, align: 'left',sortable: true  },
-                { label: '0 未支付 1已支付', name: 'PayStatus', index: 'PayStatus', width: 100, align: 'left',sortable: true  },
-                { label: '支付时间', name: 'PayDate', index: 'PayDate', width: 100, align: 'left',sortable: true  },
-                { label: '收件人', name: 'Receiver', index: 'Receiver', width: 100, align: 'left',sortable: true  },
-                { label: '联系电话', name: 'ContactTel', index: 'ContactTel', width: 100, align: 'left',sortable: true  },
-                { label: '省', name: 'Province', index: 'Province', width: 100, align: 'left',sortable: true  },
-                { label: '市', name: 'City', index: 'City', width: 100, align: 'left',sortable: true  },
-                { label: '区', name: 'Country', index: 'Country', width: 100, align: 'left',sortable: true  },
-                { label: '详细地址', name: 'Address', index: 'Address', width: 100, align: 'left',sortable: true  },
-                { label: '发货人', name: 'DeliveryName', index: 'DeliveryName', width: 100, align: 'left',sortable: true  },
-                { label: '发货时间', name: 'DeliveryDate', index: 'DeliveryDate', width: 100, align: 'left',sortable: true  },
-                { label: '快递公司', name: 'ExpressCompany', index: 'ExpressCompany', width: 100, align: 'left',sortable: true  },
-                { label: '快递单号', name: 'ExpressSn', index: 'ExpressSn', width: 100, align: 'left',sortable: true  },
-                { label: '快递公司编号', name: 'ExpressCode', index: 'ExpressCode', width: 100, align: 'left',sortable: true  },
-                { label: '支付单号', name: 'PaySn', index: 'PaySn', width: 100, align: 'left',sortable: true  },
-                { label: '退款时间', name: 'ReturnDate', index: 'ReturnDate', width: 100, align: 'left',sortable: true  },
-                { label: '退款原因', name: 'ReturnRemark', index: 'ReturnRemark', width: 100, align: 'left',sortable: true  },
-                { label: '退货编号', name: 'ReturnSn', index: 'ReturnSn', width: 100, align: 'left',sortable: true  },
+                { label: '价格', name: 'Price', index: 'Price', width: 80, align: 'center',sortable: true  },
+                { label: '下单时间', name: 'CreateDate', index: 'CreateDate', width: 118, align: 'left',sortable: true  },
+                {
+                    label: '订单状态', name: 'Status', index: 'Status', width: 100, align: 'center', sortable: true,
+                    formatter: function (cellvalue, options, rowObject) {
+                        if (cellvalue == 0) {
+                            return "待付款";
+                        } else if (cellvalue == 1) {
+                            return "待审核";
+                        } else if (cellvalue == 2) {
+                            return "待发货";
+                        } else if (cellvalue == 3) {
+                            return "待开卡";
+                        }else if (cellvalue == 4) {
+                            return "已完成";
+                        } else {
+                            return "";
+                        }
+                    } },
+                {
+                    label: '支付状态', name: 'PayStatus', index: 'PayStatus', width: 100, align: 'center', sortable: true,
+                    formatter: function (cellvalue) {
+                        return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
+                    }
+                },
+                { label: '支付时间', name: 'PayDate', index: 'PayDate', width: 118, align: 'left',sortable: true  },
+                { label: '收件人', name: 'Receiver', index: 'Receiver', width: 100, align: 'center',sortable: true  },
+                { label: '联系电话', name: 'ContactTel', index: 'ContactTel', width: 100, align: 'center',sortable: true  },
+                { label: '省', name: 'Province', index: 'Province', width: 100, align: 'center',sortable: true  },
+                { label: '市', name: 'City', index: 'City', width: 100, align: 'center',sortable: true  },
+                { label: '区', name: 'Country', index: 'Country', width: 100, align: 'center',sortable: true  },
+                { label: '详细地址', name: 'Address', index: 'Address', width: 200, align: 'left',sortable: true  },
+                { label: '发货人', name: 'DeliveryName', index: 'DeliveryName', width: 100, align: 'center',sortable: true  },
+                { label: '发货时间', name: 'DeliveryDate', index: 'DeliveryDate', width: 80, align: 'left',sortable: true  },
+                { label: '快递公司', name: 'ExpressCompany', index: 'ExpressCompany', width: 100, align: 'center',sortable: true  },
+                { label: '快递单号', name: 'ExpressSn', index: 'ExpressSn', width: 120, align: 'left',sortable: true  },
+                //{ label: '支付单号', name: 'PaySn', index: 'PaySn', width: 100, align: 'left',sortable: true  },
+                //{ label: '退款时间', name: 'ReturnDate', index: 'ReturnDate', width: 100, align: 'left',sortable: true  },
+                //{ label: '退款原因', name: 'ReturnRemark', index: 'ReturnRemark', width: 100, align: 'left',sortable: true  },
+                //{ label: '退货编号', name: 'ReturnSn', index: 'ReturnSn', width: 100, align: 'left',sortable: true  },
             ],
             viewrecords: true,
             rowNum: 30,
             rowList: [30, 50, 100],
             pager: "#gridPager",
-            sortname: '',
+            sortname: 'CreateDate',
             sortorder: 'desc',
             rownumbers: true,
             shrinkToFit: false,
@@ -77,7 +96,7 @@
             title: '添加订单表',
             url: '/CustomerManage/Orders/OrdersForm',
             width: '700px',
-            height: '600px',
+            height: '500px',
             callBack: function (iframeId) {
                 top.frames[iframeId].AcceptClick();
             }
@@ -92,7 +111,7 @@
                 title: '编辑订单表',
                 url: '/CustomerManage/Orders/OrdersForm?keyValue=' + keyValue,
                 width: '700px',
-                height: '600px',
+                height: '500px',
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick();
                 }
@@ -136,7 +155,7 @@
             <a id="lr-delete" class="btn btn-default" onclick="btn_delete()"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
         </div>
     </div>
-    <script>$('.toolbar').authorizeButton()</script>
+    @*<script>$('.toolbar').authorizeButton()</script>*@
 </div>
 <div class="gridPanel">
     <table id="gridTable"></table>

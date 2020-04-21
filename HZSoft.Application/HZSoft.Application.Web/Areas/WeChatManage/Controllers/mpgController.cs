@@ -162,6 +162,8 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 };
                 orderEntity = ordersbll.SaveForm(orderEntity);
 
+
+
                 root = new H5Response{ code = true,status = true,msg = "\u63d0\u4ea4\u6210\u529f\uff01",data = new H5ResponseData()};
                 root.data.code = "1";
                 root.data.gotoUrl = "/WeChatManage/user_order/payment/" + orderEntity.Id+"?Tel="+tel+"&Price="+ price;

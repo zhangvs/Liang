@@ -34,6 +34,8 @@ namespace HZSoft.Application.IService.CustomerManage
         /// <returns></returns>
         OrdersEntity GetEntity(int? keyValue);
         OrdersEntity GetEntityByOrderSn(string OrderSn);
+        OrdersEntity GetEntityByTel(string tel);
+        OrdersEntity GetEntityByContactTel(string contactTel);
         #endregion
 
         #region 提交数据

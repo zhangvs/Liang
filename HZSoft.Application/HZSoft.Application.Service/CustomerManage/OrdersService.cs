@@ -60,6 +60,24 @@ namespace HZSoft.Application.Service.CustomerManage
         {
             return this.BaseRepository().FindEntity(t=>t.OrderSn == OrderSn);
         }
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="tel">主键值</param>
+        /// <returns></returns>
+        public OrdersEntity GetEntityByTel(string tel)
+        {
+            return this.BaseRepository().FindEntity(t => t.Tel == tel);
+        }
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="contactTel">主键值</param>
+        /// <returns></returns>
+        public OrdersEntity GetEntityByContactTel(string contactTel)
+        {
+            return this.BaseRepository().FindEntity(t => t.ContactTel == contactTel);
+        }
         #endregion
 
         #region 提交数据
