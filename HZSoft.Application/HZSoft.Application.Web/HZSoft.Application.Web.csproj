@@ -285,6 +285,7 @@
     <Compile Include="Areas\WeChatManage\Controllers\LiangController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\mpgController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\ProductController.cs" />
+    <Compile Include="Areas\WeChatManage\Controllers\publicController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\PuMenuController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\LiangMenu2Controller.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\LiangMenuController.cs" />
@@ -323,6 +324,7 @@
     <Content Include="01_修改日志\log.txt" />
     <Content Include="assets\wap\css\iconfont.svg" />
     <Content Include="assets\wap\css\user.css" />
+    <Content Include="assets\wap\images\address-bg.jpg" />
     <Content Include="assets\wap\images\border.jpg" />
     <Content Include="assets\wap\images\card.jpg" />
     <Content Include="assets\wap\images\gongyong\cloud1.png" />
@@ -1884,6 +1886,7 @@
     <Content Include="assets\wap\css\iconfont.eot" />
     <Content Include="assets\wap\css\iconfont.ttf" />
     <Content Include="assets\wap\css\iconfont.woff" />
+    <Content Include="Areas\CustomerManage\Views\Orders\SendForm.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

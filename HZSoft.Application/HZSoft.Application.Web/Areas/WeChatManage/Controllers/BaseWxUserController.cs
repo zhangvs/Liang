@@ -52,6 +52,26 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
             return model;
         }
 
+        //获得微信js sdk config
+        protected BaseWxModel GetWxModel2()
+        {
+            BaseWxModel model = new BaseWxModel();
+
+            model.appid = WeixinConfig.AppID;
+            model.timestamp = JSSDKHelper.GetTimestamp();
+            model.nonce = JSSDKHelper.GetNoncestr();
+
+            model.thisUrl = Request.Url.ToString();//MyCommFun.getTotalUrl();
+
+            string ticket = JsApiTicketContainer.TryGetJsApiTicket(WeixinConfig.AppID, WeixinConfig.AppSecret);
+
+            JSSDKHelper jsHelper = new JSSDKHelper();
+            //最后一个参数url，必须为当前的网址
+            var signature = JSSDKHelper.GetSignature(ticket, model.nonce, model.timestamp, model.thisUrl);
+            model.signature = signature;
+            return model;
+        }
+
         //判断验证码是否正确
         protected void ValidateSmsCode(SmsInfoEntity model, string smsCode)
         {

@@ -63,6 +63,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 //调用统一订单接口
                 var result = TenPayV3.Unifiedorder(xmlDataInfo);
 
+                LogHelper.AddLog(result.ResultXml);//记录日志
 
                 H5PayData h5PayData = new H5PayData()
                 {
@@ -78,8 +79,8 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     trade_type = "NATIVE",
                     trade_no = sp_billno,
                     payid = id.ToString(),
-                    wx_query_href = "http://wx.lywenkai.com/WeChatManage/user_order/queryWx/" + id,
-                    wx_query_over = "http://wx.lywenkai.com/WeChatManage/user_order/paymentFinish/" + id
+                    wx_query_href = Config.GetValue("Domain2")+"/WeChatManage/user_order/queryWx/" + id,
+                    wx_query_over = Config.GetValue("Domain2") +"/WeChatManage/user_order/paymentFinish/" + id
                 };
 
                 H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };

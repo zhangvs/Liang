@@ -61,7 +61,7 @@ body{ background-color: #fff; }
 .simpleModel .mobile-item .txt{ display:none; }
 
 /*靓号详情*/
-.mobile-detail-head { display:block; background: url("/assets/wap/images/mobile-bg.png") no-repeat; background-size: 100%;}
+.mobile-detail-head { display:block; /*background: url("/assets/wap/images/mobile-bg.png") no-repeat; background-size: 100%;*/}
 .mobile-detail-head .cont-bg { display:block; height: 13rem; margin: 0 auto; padding:1rem; background: #fff; border-radius: 16px; box-shadow: 0 0 5px #ccc;}
 .mobile-detail-head .cont-bg .cont { position: relative; display:block; padding:1rem 1.2rem; border: 1px dashed #ccc; border-radius: 16px; background: url("/assets/wap/images/card.jpg") 95% 0.5rem no-repeat;}
 .mobile-detail-head .cont-bg .cont .num { font-family: Arial; color: #555; font-size: 1.6rem; }

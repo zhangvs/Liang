@@ -51,7 +51,9 @@ namespace HZSoft.Application.IService.CustomerManage
         /// <param name="entity">实体对象</param>
         /// <returns></returns>
         void SaveForm(int? keyValue, OrdersEntity entity);
+        void SaveSendForm(int? keyValue, OrdersEntity entity);
         OrdersEntity SaveForm(OrdersEntity entity);
+        void UpdateSendState(int? keyValue);
         #endregion
     }
 }

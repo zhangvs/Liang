@@ -145,7 +145,8 @@ var globalObj = {
 		var shareurl = location.href;
 			
 		if( shareimg ){
-			$.ajax({type:"post",url: baseUrl+"/public/getWxShare",data: "pageurl="+encodeURI(shareurl),dataType: "json",async:true,success: function(dataObj){
+            $.ajax({
+                type: "post", url: baseUrl +"/WeChatManage/public/getWxShare",data: "pageurl="+encodeURI(shareurl),dataType: "json",async:true,success: function(dataObj){
 				if( dataObj.status ){
 					wx.config({
 					    debug: false,

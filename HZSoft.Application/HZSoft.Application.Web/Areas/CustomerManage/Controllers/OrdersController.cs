@@ -36,6 +36,16 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         {
             return View();
         }
+
+
+        /// <summary>
+        /// 发货
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SendForm()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据
@@ -110,6 +120,36 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         public ActionResult SaveForm(int? keyValue, OrdersEntity entity)
         {
             ordersbll.SaveForm(keyValue, entity);
+            return Success("操作成功。");
+        }
+
+
+        /// <summary>
+        /// 发货
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <param name="entity">实体对象</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult SaveSendForm(int? keyValue, OrdersEntity entity)
+        {
+            ordersbll.SaveSendForm(keyValue, entity);
+            return Success("操作成功。");
+        }
+
+        /// <summary>
+        /// 开卡
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult UpdateState(int? keyValue)
+        {
+            ordersbll.UpdateSendState(keyValue);
             return Success("操作成功。");
         }
         #endregion

@@ -71,11 +71,22 @@ namespace HZSoft.Application.Web.Controllers
         public ActionResult AdminDefaultDesktop()
         {
             List<string> data = DmsCache.GetCount();
-            ViewBag.seeCount = data[0];
-            ViewBag.shareCount = data[1];
-            ViewBag.joinCount = data[2];
-            ViewBag.organizeCount = data[3];
-            ViewBag.liangCount = data[4];
+            if (data!=null)
+            {
+                ViewBag.seeCount = data[0];
+                ViewBag.shareCount = data[1];
+                ViewBag.joinCount = data[2];
+                ViewBag.organizeCount = data[3];
+                ViewBag.liangCount = data[4];
+            }
+            else
+            {
+                ViewBag.seeCount = 2763153;
+                ViewBag.shareCount =105513;
+                ViewBag.joinCount = 12405;
+                ViewBag.organizeCount = 7143;
+                ViewBag.liangCount =403816;
+            }
 
             //var dtCount = dmsBLL.GetDateHome_Count();
             //ViewBag.seeCount = dtCount.Rows[0][0];

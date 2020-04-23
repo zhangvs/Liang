@@ -34,6 +34,32 @@ namespace HZSoft.Application.Entity.WeChatManage
         public string Package { get; set; }
     }
 
+
+    public class BaseWxModel2
+    {
+        /// <summary>
+        /// 公众号的唯一标识
+        /// </summary>
+        public string appId { get; set; }
+        /// <summary>
+        /// 生成签名的随机串
+        /// </summary>
+        public string nonceStr { get; set; }
+        /// <summary>
+        /// 时间戳
+        /// </summary>
+        public string timestamp { get; set; }
+        /// <summary>
+        /// 当前URL
+        /// </summary>
+        public string url { get; set; }
+        /// <summary>
+        /// 签名
+        /// </summary>
+        public string signature { get; set; }
+        public string rawString { get; set; }
+    }
+
     public class WFTWxModel
     {
         /// <summary>

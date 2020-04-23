@@ -147,7 +147,7 @@ namespace HZSoft.Application.Entity.CustomerManage
         public override void Create()
         {
             this.CreateDate = DateTime.Now;
-                                }
+        }
         /// <summary>
         /// ±à¼­µ÷ÓÃ
         /// </summary>

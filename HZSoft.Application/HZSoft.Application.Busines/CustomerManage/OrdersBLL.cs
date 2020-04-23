@@ -119,6 +119,42 @@ namespace HZSoft.Application.Busines.CustomerManage
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// 保存表单（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <param name="entity">实体对象</param>
+        /// <returns></returns>
+        public void SaveSendForm(int? keyValue, OrdersEntity entity)
+        {
+            try
+            {
+                service.SaveSendForm(keyValue, entity);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        /// <summary>
+        /// 保存表单（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <param name="entity">实体对象</param>
+        /// <returns></returns>
+        public void UpdateSendState(int? keyValue)
+        {
+            try
+            {
+                service.UpdateSendState(keyValue);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }

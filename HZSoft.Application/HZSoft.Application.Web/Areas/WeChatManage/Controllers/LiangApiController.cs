@@ -97,6 +97,8 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                         sord = sord
                     };
                     var entityList = tlbll.GetPageListH5(pagination, queryJson.ToString());
+
+                    LogHelper.AddLog("LiangApi调用");//记录日志
                     return Content(JsonConvert.SerializeObject(entityList));
                 }
                 return Content("机构暂时未生效或不存在");
