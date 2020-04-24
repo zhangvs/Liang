@@ -49,7 +49,7 @@ namespace HZSoft.Application.Service.CustomerManage
             }
             else
             {
-                if (!OperatorProvider.Provider.Current().IsSystem)
+                if (!OperatorProvider.Provider.Current().IsSystem && OperatorProvider.Provider.Current().UserId != "3303254b-7cd3-4a25-abd3-bb2542a08df9")//龙哥可以查看到所有号码
                 {
                     string companyId = OperatorProvider.Provider.Current().CompanyId;
                     //一级机构可以查看上级0级的号码库，因为自己人员工

@@ -19,23 +19,24 @@
     <link href="/assets/wap/css/weui.min.jquery.css?v=6.5" rel="stylesheet">
     <link href="/assets/wap/css/global.css?v=6.5" rel="stylesheet">
     <link href="/assets/wap/css/style.css?v=6.5" rel="stylesheet">
-    <script src="/assets/wap/js/track_out.js?v=6.5"></script>
-    <script type="text/javascript">
-	var baseUrl = '';
-	var trackToutiaoPara = trackObj.codeToutiao('dLJp5x');
-	if( typeof(trackToutiaoPara.scriptId) != 'undefined' ){
-		(function(r,d,s,l){var meteor=r.meteor=r.meteor||[];meteor.methods=["track","off","on"];meteor.factory=function(method){return function(){
-		var args=Array.prototype.slice.call(arguments);args.unshift(method);meteor.push(args);return meteor}};for(var i=0;i<meteor.methods.length;i++){
-		var key=meteor.methods[i];meteor[key]=meteor.factory(key)}meteor.load=function(){var js,fjs=d.getElementsByTagName(s)[0];js=d.createElement(s);
-		js.src="https://analytics.snssdk.com/meteor.js/v1/"+l+"/sdk";fjs.parentNode.insertBefore(js,fjs)};meteor.load();if(meteor.invoked){return}
-		meteor.invoked=true;meteor.track("pageview")})(window,document,"script",trackToutiaoPara.scriptId);
-	}
-	var tracktGdtPara = trackObj.codeGdt('dLJp5x');
-	if( typeof(tracktGdtPara.init) != 'undefined' ){
-		!function(g,d,t,e,v,n,s){if(g.gdt)return;v=g.gdt=function(){v.tk?v.tk.apply(v,arguments):v.queue.push(arguments)};v.sv='1.0';v.bt=0;v.queue=[];n=d.createElement(t);n.async=!0;n.src=e;s=d.getElementsByTagName(t)[0];s.parentNode.insertBefore(n,s);}(window,document,'script','//qzonestyle.gtimg.cn/qzone/biz/gdt/dmp/user-action/gdtevent.min.js');
-		gdt('init',tracktGdtPara.init);
-	}
+    <!-- Bytedance Tracking -->
+    <script>
+        var baseUrl = '';
+        (function (r, d, s, l) {
+            var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                }
+            }; for (var i = 0; i < meteor.methods.length; i++) {
+                var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+            } meteor.load = function () {
+                var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+            }; meteor.load(); if (meteor.invoked) { return }
+            meteor.invoked = true; meteor.track("pageview")
+        })(window, document, "script", "1664007157743627");
     </script>
+    <!-- End Bytedance Tracking -->
 </head>
 <body>
     <div class="wrapper">

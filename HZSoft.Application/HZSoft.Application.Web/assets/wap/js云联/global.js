@@ -453,18 +453,18 @@ if( $("#formSubmit").length > 0 ){
 	    	if( resObj ){
 				//推广转化
 				if( $("#orderSubmit").val() == '1' ){
-					////头条推广转化（点击提交订单）
-		   // 		if( typeof(trackToutiaoPara) != 'undefined' && typeof(trackToutiaoPara.trackId) != 'undefined' && trackToutiaoPara.trackOrder ){
-		   // 			trackObj.trackToutiao(trackToutiaoPara.trackId);
-		   // 		}
-	    //    		//广点通推广转化（点击提交订单）
-	    //    		if( typeof(tracktGdtPara) != 'undefined' && typeof(tracktGdtPara.init) != 'undefined' && tracktGdtPara.trackOrder ){
-	    //    			trackObj.trackKuaishou(tracktGdtPara.init);
-	    //    		}
-	    //    		//快手推广转化（点击提交订单）
-	    //    		if( typeof(tracktKsPara) != 'undefined' && typeof(tracktKsPara.trackId) != 'undefined' && tracktKsPara.trackOrder ){
-	    //    			trackObj.trackKs(tracktKsPara.trackId);
-	    //    		}
+					//头条推广转化（点击提交订单）
+		    		if( typeof(trackToutiaoPara) != 'undefined' && typeof(trackToutiaoPara.trackId) != 'undefined' && trackToutiaoPara.trackOrder ){
+		    			trackObj.trackToutiao(trackToutiaoPara.trackId);
+		    		}
+	        		//广点通推广转化（点击提交订单）
+	        		if( typeof(tracktGdtPara) != 'undefined' && typeof(tracktGdtPara.init) != 'undefined' && tracktGdtPara.trackOrder ){
+	        			trackObj.trackKuaishou(tracktGdtPara.init);
+	        		}
+	        		//快手推广转化（点击提交订单）
+	        		if( typeof(tracktKsPara) != 'undefined' && typeof(tracktKsPara.trackId) != 'undefined' && tracktKsPara.trackOrder ){
+	        			trackObj.trackKs(tracktKsPara.trackId);
+	        		}
 				}
 	    		switch(resObj.data.code){
 	    			case '1':

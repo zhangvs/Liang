@@ -129,20 +129,19 @@ if( $("#paySubmit").length > 0 ){
 		callback:function(resObj){
 			//支付方式
     		var paytype = $("input[name='pay_type']:checked").val();
-            if (resObj.status) {
-                meteor.track("shopping", { convert_id: "1664753008807948" })
-        		////头条推广转化（点击支付）
-        		//if( typeof(trackToutiaoPara) != 'undefined' && typeof(trackToutiaoPara.trackId) != 'undefined' && trackToutiaoPara.trackPay ){
-        		//	trackObj.trackToutiao(trackToutiaoPara.trackId);
-        		//}
-        		////广点通推广转化（点击支付）
-        		//if( typeof(tracktGdtPara) != 'undefined' && typeof(tracktGdtPara.init) != 'undefined' && tracktGdtPara.trackPay ){
-        		//	trackObj.trackGdt(tracktGdtPara.init);
-        		//}
-        		////快手推广转化（点击提交订单）
-        		//if( typeof(tracktKsPara) != 'undefined' && typeof(tracktKsPara.trackId) != 'undefined' && tracktKsPara.trackPay ){
-        		//	trackObj.trackKs(tracktKsPara.trackId);
-        		//}
+        	if( resObj.status ){
+        		//头条推广转化（点击支付）
+        		if( typeof(trackToutiaoPara) != 'undefined' && typeof(trackToutiaoPara.trackId) != 'undefined' && trackToutiaoPara.trackPay ){
+        			trackObj.trackToutiao(trackToutiaoPara.trackId);
+        		}
+        		//广点通推广转化（点击支付）
+        		if( typeof(tracktGdtPara) != 'undefined' && typeof(tracktGdtPara.init) != 'undefined' && tracktGdtPara.trackPay ){
+        			trackObj.trackGdt(tracktGdtPara.init);
+        		}
+        		//快手推广转化（点击提交订单）
+        		if( typeof(tracktKsPara) != 'undefined' && typeof(tracktKsPara.trackId) != 'undefined' && tracktKsPara.trackPay ){
+        			trackObj.trackKs(tracktKsPara.trackId);
+        		}
         		//不做处理，跳转
 	        	if( resObj.data.target ){
         			location.href = resObj.data.gotoUrl;

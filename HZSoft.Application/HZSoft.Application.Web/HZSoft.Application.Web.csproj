@@ -322,6 +322,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="01_修改日志\log.txt" />
+    <Content Include="assets\image\1585294223_SxcUpg.png" />
     <Content Include="assets\wap\css\iconfont.svg" />
     <Content Include="assets\wap\css\user.css" />
     <Content Include="assets\wap\images\address-bg.jpg" />
@@ -341,7 +342,6 @@
     <Content Include="assets\wap\images\user\icon_4.png" />
     <Content Include="assets\wap\images\user\return_icon.png" />
     <Content Include="assets\image\1579161570_UEvXZK.jpg" />
-    <Content Include="assets\image\1585294223_SxcUpg.png" />
     <Content Include="assets\wap\css\global.css" />
     <Content Include="assets\wap\css\style.css" />
     <Content Include="assets\wap\css\weui.min.css" />
