@@ -24,20 +24,25 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
         //    return View();
         //}
 
-        public ActionResult Index(string keyword, string city, string orderType, string price,  string features, int? page)
+        public ActionResult Index(string keyword, string city, string orderType, string price, string pricef, string pricet, string features, int? page)
         {
             if (!string.IsNullOrEmpty(city))
             {
                 city = HttpUtility.UrlDecode(city).Replace("市", "");
+            }
+            if (!string.IsNullOrEmpty(pricef) || !string.IsNullOrEmpty(pricet))
+            {
+                price = pricef + "-" + pricet;
             }
             JObject queryJson = new JObject { { "Telphone", keyword },
                         { "OrganizeIdH5", "bae859c9-3df5-4da0-bea9-3e20bbc7c353" },//济南利新
                         { "pid", "bae859c9-3df5-4da0-bea9-3e20bbc7c353"},
                         { "top", "bae859c9-3df5-4da0-bea9-3e20bbc7c353" },
                         { "City", city },
-                        { "price", price },
+                        { "MaxPrice", price },
                         { "Grade",features },
-                        { "SellMark",0 }
+                        { "SellMark",0 },
+                        {"max",1 }
                     };
             string sidx = "";
             string sord = "";
@@ -87,7 +92,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 {
                     html+= "<div class=\"weui-col-50\"><a class=\"mobile-item\" href=\"/WeChatManage/mpg/detail/" + bl.TelphoneID
                         + "\">\r\n\t<p class=\"tit\">\r\n\t\t<font class=\"f-orange\">"+ bl.Telphone.Substring(0, 3) + "</font><font class=\"f-green\">"+ bl.Telphone.Substring(3, 4) 
-                        + "</font><font class=\"f-red\">"+ bl.Telphone.Substring(7, 4) + "</font>\r\n\t\t<font class=\"f-orange pri\">\u00a5"+bl.Price + "</font>\r\n\t\t<font class=\"money-market\" style=\"text-decoration:none\">"+ bl.Description + "</font>\r\n\t</p>\r\n\t<p class=\"txt\"><span>"+ bl.City+bl.Operator + "</span></p>\r\n</a></div>";
+                        + "</font><font class=\"f-red\">"+ bl.Telphone.Substring(7, 4) + "</font>\r\n\t\t<font class=\"f-orange pri\">\u00a5"+bl.MaxPrice + "</font>\r\n\t\t<font class=\"money-market\" >"+ bl.MaxPrice*2 + "</font>\r\n\t</p>\r\n\t<p class=\"txt\"><span>"+ bl.City+bl.Operator + "</span></p>\r\n</a></div>";
                 }
                 root.data.html = html;
                 return Content(JsonConvert.SerializeObject(root));
@@ -146,9 +151,12 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 string tel = Request["Tel"];
                 string price = Request["Price"];
 
+                string host = Request.Url.Host;//获取当前域名
+                string url = Request.Url.ToString();//获取 完整url （协议名+域名+站点名+文件名+参数）
+
                 OrdersEntity orderEntity = new OrdersEntity()
                 {
-                    TelphoneID=id,
+                    TelphoneID = id,
                     Tel = tel,
                     Price = Convert.ToDecimal(price),
                     Province = area[0],
@@ -158,7 +166,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     Receiver = contact_name,
                     ContactTel = contact_tel,
                     Status = 0,
-
+                    Host = host
                 };
                 orderEntity = ordersbll.SaveForm(orderEntity);
 

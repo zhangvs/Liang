@@ -58,6 +58,36 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         {
             return View();
         }
+
+
+        /// <summary>
+        /// 列表页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult TelphoneLiangMaxIndex()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 表单页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult TelphoneLiangMaxForm()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 表单页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult TelphoneLiangMaxImport()
+        {
+            return View();
+        }
+        
         #endregion
 
         #region 获取数据
@@ -213,6 +243,12 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + "Resource/ExcelTemplate/";
             string fileName = "靓号批量导入模板.xlsx";
+            return File(path + fileName, "application/ms-excel", fileName);
+        }
+        public FileResult GetFileMax()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + "Resource/ExcelTemplate/";
+            string fileName = "靓号批量导入模板Max.xlsx";
             return File(path + fileName, "application/ms-excel", fileName);
         }
 

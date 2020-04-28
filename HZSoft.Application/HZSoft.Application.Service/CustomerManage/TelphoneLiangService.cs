@@ -169,6 +169,20 @@ namespace HZSoft.Application.Service.CustomerManage
                     strSql += " and price <= '" + jgqj[1] + "'";
                 }
             }
+            //价格区间
+            if (!queryParam["MaxPrice"].IsEmpty())
+            {
+                string MaxPrice = queryParam["MaxPrice"].ToString();
+                string[] jgqj = MaxPrice.Split('-');
+                if (!string.IsNullOrEmpty(jgqj[0]))
+                {
+                    strSql += " and MaxPrice >= '" + jgqj[0] + "'";
+                }
+                if (!string.IsNullOrEmpty(jgqj[1]))
+                {
+                    strSql += " and MaxPrice <= '" + jgqj[1] + "'";
+                }
+            }
             //排除
             if (!queryParam["except"].IsEmpty())
             {
@@ -201,6 +215,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 string ExistMark = queryParam["ExistMark"].ToString();
                 strSql += " and ExistMark = " + ExistMark;
             }
+
             return strSql;
         }
 
@@ -443,7 +458,7 @@ namespace HZSoft.Application.Service.CustomerManage
             //2.代售机构表分支
             string otherWhere = ownWhere.Replace("OrganizeId", "CreateOrganizeId");
             string otherOrgSql = @" UNION all
- SELECT TelphoneID,Telphone,City,Operator,Price,Grade,CASE ExistMark WHEN '2' THEN '代售秒杀' WHEN '1' THEN '代售现卡' ELSE '代售预售' END Description,Package,EnabledMark,CreateOrganizeId OrganizeId FROM TelphoneLiangOther
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,CASE ExistMark WHEN '2' THEN '代售秒杀' WHEN '1' THEN '代售现卡' ELSE '代售预售' END Description,Package,EnabledMark,CreateOrganizeId OrganizeId FROM TelphoneLiangOther
  WHERE EnabledMark = 1  "
 + otherWhere;
 
@@ -456,7 +471,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 shareOrgSql = " and OrganizeId IN(" + shareOrg + ")";
                 string shareWhere = shareOrgSql + GetSql(queryJson);
                 shareSql = @" UNION all
- SELECT TelphoneID,Telphone,City,Operator,Price,Grade,CASE ExistMark WHEN '2' THEN '平台秒杀' WHEN '1' THEN '平台现卡' ELSE '平台预售' END Description,Package,EnabledMark,OrganizeId OrganizeId FROM TelphoneLiang
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,CASE ExistMark WHEN '2' THEN '平台秒杀' WHEN '1' THEN '平台现卡' ELSE '平台预售' END Description,Package,EnabledMark,OrganizeId OrganizeId FROM TelphoneLiang
  WHERE  SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 "// and Grade IN (0,1,2,3,11,12,4,5,6,9,13,14,15,17,18,19,20,903,902,901,904,905,906,907,908,909,910,911,912,913,914,915,1301,1302,1303,1304,1308)
     + shareWhere;
             }
@@ -467,7 +482,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
             //自身，父，0级
             string strSql = @" SELECT * FROM (
- SELECT TelphoneID,Telphone,City,Operator,Price,Grade,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,Package,EnabledMark,OrganizeId FROM TelphoneLiang 
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,Package,EnabledMark,OrganizeId FROM TelphoneLiang 
  WHERE SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 " + ownWhere
 //+ otherOrgSql//代售功能省略
 + shareSql
@@ -1116,6 +1131,10 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns></returns>
         public string IsGreater(int rowsCount)
         {
+            if (OperatorProvider.Provider.Current().IsSystem)
+            {
+                return "";
+            }
             IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
             string companyid = OperatorProvider.Provider.Current().CompanyId;
             var vipEntity = db.FindEntity<TelphoneLiangVipEntity>(t => (t.OrganizeId == companyid || t.Description.Contains(companyid)) && t.VipEndDate > DateTime.Now);
@@ -1251,11 +1270,16 @@ namespace HZSoft.Application.Service.CustomerManage
                             existMark = 0;
                         }
 
+
+                        //推广价
+                        decimal MaxPrice = Convert.ToDecimal(dtSource.Rows[i][7].ToString());
+
                         //添加靓号
                         TelphoneLiangEntity entity = new TelphoneLiangEntity()
                         {
                             Telphone = telphone,
                             Price = Price,
+                            MaxPrice = MaxPrice,
                             MinPrice = MinPrice,
                             ChaPrice = ChaPrice,
                             CheckPrice= CheckPrice,

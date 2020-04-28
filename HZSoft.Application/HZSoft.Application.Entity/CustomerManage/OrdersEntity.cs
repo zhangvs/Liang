@@ -27,7 +27,7 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// ÓÃ»§ID
         /// </summary>
         /// <returns></returns>
-        public int? UserId { get; set; }
+        public string Host { get; set; }
         /// <summary>
         /// TelphoneID
         /// </summary>

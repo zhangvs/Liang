@@ -44,6 +44,18 @@ namespace HZSoft.Application.Service.CustomerManage
                 DateTime endTime = queryParam["EndTime"].ToDate().AddDays(1);
                 strSql += " and CreateDate >= '" + startTime + "' and CreateDate < '" + endTime + "'";
             }
+            //价格大于
+            if (!queryParam["pricef"].IsEmpty() )
+            {
+                string pricef = queryParam["pricef"].ToString();
+                strSql += " and Price >= " + pricef;
+            }
+            //价格小于
+            if (!queryParam["pricet"].IsEmpty())
+            {
+                string pricet = queryParam["pricet"].ToString();
+                strSql += " and Price <= " + pricet;
+            }
 
             //单号
             if (!queryParam["OrderSn"].IsEmpty())

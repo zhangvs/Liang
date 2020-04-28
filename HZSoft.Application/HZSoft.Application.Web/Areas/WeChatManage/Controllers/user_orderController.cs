@@ -52,7 +52,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 tenPayV3Info.MchId,
                 "支付靓号",
                 sp_billno,
-                1,
+                Convert.ToInt32(ordersEntity.Price * 100),
                 Request.UserHostAddress,
                 tenPayV3Info.TenPayV3Notify,
                TenPayV3Type.NATIVE,
@@ -65,32 +65,39 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
 
                 LogHelper.AddLog(result.ResultXml);//记录日志
 
-                H5PayData h5PayData = new H5PayData()
+                H5Response root = null;
+                if (result.return_code== "SUCCESS")
                 {
-                    appid = WeixinConfig.AppID2,
-                    code_url = result.code_url,//weixin://wxpay/bizpayurl?pr=lixpXgt
-                    mch_id = WeixinConfig.MchId,
-                    nonce_str = result.nonce_str,
-                    prepay_id = result.prepay_id,
-                    result_code = result.result_code,
-                    return_code = result.return_code,
-                    return_msg = result.return_msg,
-                    sign = result.sign,
-                    trade_type = "NATIVE",
-                    trade_no = sp_billno,
-                    payid = id.ToString(),
-                    wx_query_href = Config.GetValue("Domain2")+"/WeChatManage/user_order/queryWx/" + id,
-                    wx_query_over = Config.GetValue("Domain2") +"/WeChatManage/user_order/paymentFinish/" + id
-                };
+                    H5PayData h5PayData = new H5PayData()
+                    {
+                        appid = WeixinConfig.AppID2,
+                        code_url = result.code_url,//weixin://wxpay/bizpayurl?pr=lixpXgt
+                        mch_id = WeixinConfig.MchId,
+                        nonce_str = result.nonce_str,
+                        prepay_id = result.prepay_id,
+                        result_code = result.result_code,
+                        return_code = result.return_code,
+                        return_msg = result.return_msg,
+                        sign = result.sign,
+                        trade_type = "NATIVE",
+                        trade_no = sp_billno,
+                        payid = id.ToString(),
+                        wx_query_href = Config.GetValue("Domain2") + "/WeChatManage/user_order/queryWx/" + id,
+                        wx_query_over = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + id
+                    };
 
-                H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
+                    root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
+                }
+                else
+                {
+                    root = new H5Response { code = false, status = false, msg = result.return_msg };
+                }
                 LogHelper.AddLog(JsonConvert.SerializeObject(root));//记录日志
 
                 return Content(JsonConvert.SerializeObject(root));
             }
             catch (Exception ex)
             {
-
                 LogHelper.AddLog(ex.Message);//记录日志
                 throw;
             }

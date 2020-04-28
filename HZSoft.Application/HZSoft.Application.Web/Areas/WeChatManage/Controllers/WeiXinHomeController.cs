@@ -111,7 +111,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     if (tel != null)
                     {
                         tel.SellMark = 1;
-                        tel.SellerName = "砍价活动出售";
+                        tel.SellerName = "头条出售";
                     }
                     tlbll.SaveForm(tel.TelphoneID,tel);
                 }

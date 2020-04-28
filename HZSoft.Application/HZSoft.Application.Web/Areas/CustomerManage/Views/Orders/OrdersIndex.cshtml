@@ -37,7 +37,8 @@
             datatype: "json",
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
-                { label: '订单号', name: 'OrderSn', index: 'OrderSn', width: 200, align: 'left',sortable: true  },
+                { label: '订单号', name: 'OrderSn', index: 'OrderSn', width: 200, align: 'left', sortable: true },
+                { label: '域名', name: 'Host', index: 'Host', width: 110, align: 'left', sortable: true },
                 { label: '靓号', name: 'Tel', index: 'Tel', width: 100, align: 'left',sortable: true  },
                 { label: '价格', name: 'Price', index: 'Price', width: 80, align: 'center',sortable: true  },
                 { label: '下单时间', name: 'CreateDate', index: 'CreateDate', width: 118, align: 'left',sortable: true  },
@@ -149,7 +150,7 @@
                 id: 'SendForm',
                 title: '发货',
                 url: '../../CustomerManage/Orders/SendForm?keyValue=' + keyValue,
-                width: '250px',
+                width: '300px',
                 height: '200px',
                 callBack: function (iframeId) {
                     top.frames[iframeId].AcceptClick();
@@ -163,7 +164,7 @@
         var keyValue = $("#gridTable").jqGridRowValue('Id');
         if (checkedRow(keyValue)) {
             $.ConfirmAjax({
-                msg: "注：您确定【发货】吗？",
+                msg: "注：您确定【开卡】吗？",
                 url: "../../CustomerManage/Orders/UpdateState",
                 param: { keyValue: keyValue },
                 success: function (data) {

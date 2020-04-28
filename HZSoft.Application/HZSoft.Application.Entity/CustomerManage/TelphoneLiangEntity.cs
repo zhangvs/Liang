@@ -59,6 +59,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// <returns></returns>
         public decimal? Price { get; set; }
         /// <summary>
+        /// 最高价
+        /// </summary>
+        /// <returns></returns>
+        public decimal? MaxPrice { get; set; }
+        /// <summary>
         /// 利润
         /// </summary>
         /// <returns></returns>

@@ -1887,6 +1887,9 @@
     <Content Include="assets\wap\css\iconfont.ttf" />
     <Content Include="assets\wap\css\iconfont.woff" />
     <Content Include="Areas\CustomerManage\Views\Orders\SendForm.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\TelphoneLiang\TelphoneLiangMaxIndex.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\TelphoneLiang\TelphoneLiangMaxForm.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\TelphoneLiang\TelphoneLiangMaxImport.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />
