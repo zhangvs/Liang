@@ -1,0 +1,230 @@
+﻿@using HZSoft.Application.Entity.CustomerManage;
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>利新靓号</title>
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
+    <meta name="__hash__" content="ba39410f768a25e6a11b9196fb6407ca_fe05e9c7ec61652835d66c78bb306176" />
+    <style>
+        .money-market {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #E40011;
+            text-decoration: line-through;
+            color: #666;
+            font-size: 12px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body class="index">
+    <div class="top">
+        <div class="nav">
+            <a href="#" id="show-notice">活动攻略</a><a href="/H5/homepage/express">订单查询</a>
+        </div>
+        <img src="/themes/simplebootx_mobile/Public/images/banner.png">
+    </div>
+    <div class="select">
+        <div class="select-title">
+            <span>号码特征</span>
+        </div>
+        <div class="select-box">
+            <a class="active" href="./?keyword=&city=&features=&orderType=">全部</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=0">超级精品号</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=1">AAAAAA</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=2">AAAAA</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=3">AAAA</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=11">3A(0-5)</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=12">3A(6-9)</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=4">双豹子(0-5)</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=5">ABCDE</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=6">ABCD</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=7">ABC</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=9">ABCDEF</a>
+            | <a class="" href="./?keyword=&city=&orderType=&referer=&price=&features=13">大循环</a>
+        </div>
+        <div class="select-title">
+            <span>号码价格</span>
+        </div>
+        <div class="select-box">
+            <a class="active" href="./?keyword=&features=&city=&orderType=">全部</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=-300">300以下</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=301-500">301-500</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=501-1000">501-1000</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=1001-2000">1001-2000</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=2001-5000">2001-5000</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=5001-10000">5001-10000</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=10001-20000">1-2万</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=20001-30000">2-3万</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=30001-50000">3-5万</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=50001-70000">5-7万</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=70001-100000">7-10万</a>
+            | <a class="" href="./?keyword=&features=&city=&orderType=&price=100000-">10万以上</a>
+        </div>
+    </div>
+    <div class="search">
+        <input type="text" id="keywords" class="input-mod" value="" placeholder="请输入您喜欢的号码" autocomplete="off">
+        <a href="javascript:;" class="btn-search" data-url="/h5/homepage/index?keyword=keysval" id="search-submit">
+            <i><img src="/themes/simplebootx_mobile/Public/images/sreach-icon.png"></i>搜索
+        </a>
+    </div>
+    <div class="haoma">
+        <div class="haoma-title">
+            <a href="#" id='city-picker' data-url="/h5/homepage/index?city=cityvalue">
+                归属地
+                <i></i>
+            </a><a href="#" id="manager-picker" data-url="/h5/homepage/index?manager=managervalue">
+                选择网络
+                <i></i>
+            </a><a href="#" id="pricescope-picker" data-url="/h5/homepage/index?price=pricescopevalue">
+                选择价格
+                <i></i>
+            </a>
+        </div>
+        <div class="haoma-list">
+            <ul>
+                @{
+                        
+                        List<TelphoneLiangEntity> list = ViewBag.list;
+                        if (list != null)
+                        {
+                            if (list.Count > 0)
+                            {
+                                foreach (var bl in list)
+                                {
+                                    decimal? yj = bl.MaxPrice * 2;
+                                    <li>
+                                        <a href="/H5/homepage/mobileinfo/@bl.TelphoneID">
+                                            <h1>
+                                                @bl.Telphone
+                                            </h1>
+                                            <div>
+                                                <span class="text-hidden">@bl.City@bl.Operator.Replace("\u7f51\u7edc","")</span>
+                                                <p>
+                                                    <font class="money-market">¥@yj</font>
+                                                    <font class="color-red">¥@bl.MaxPrice</font>
+                                                </p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="tanchu-bg" style="display: none;">
+    </div>
+    <div class="tanchu2" style="display: none;">
+        <div class="tanchu">
+            <div class="tanchu-title">
+                温馨提示
+            </div>
+            <div class="tanchu-box">
+                <div class="wxts">
+                    NO1.所有订单成功后，次日下午7点后发货，会有短信和语音信息通知；
+                    <br />
+                    NO2.查询快递单号，请登陆快递公司官网查询
+                    <br />
+                    NO3.快递均为到付件
+                    <br />
+                    NO4.
+                    <span class="color-red">快递收到后》实名认证》充值缴费》正常使用</span><br />
+                    NO5.客服热线0377-63078038
+                </div>
+            </div>
+        </div>
+        <div class="tanchu-close">
+            <a href="#"><img src="/themes/simplebootx_mobile/Public/images/close.png"></a>
+        </div>
+    </div>
+</body>
+</html>
+<script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
+<script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+<script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var config = $.parseJSON('{"grade":{"0":"\u666e\u901a\u53f7\u7801","28":"\u5c3e\u6570AA","18":"\u5c3e\u6570AAA","19":"\u5c3e\u6570ABC","32":"\u5c3e\u6570AAB","13":"\u5c3e\u6570AAAA","12":"\u5c3e\u6570ABCD","34":"\u5c3e\u6570AAAAB","16":"\u5c3e\u6570AAAB","14":"\u5c3e\u6570AABB","30":"\u5c3e\u6570AABA","17":"\u5c3e\u6570ABAB","15":"\u5c3e\u6570ABBA","29":"\u5c3e\u6570ABAA","11":"\u5c3e\u6570AAAAA","10":"\u5c3e\u6570ABCDE","8":"\u5c3e\u6570AAABB","9":"\u5c3e\u6570AABBB","7":"\u5c3e\u6570AABAA","5":"\u5c3e\u6570ABCABC","3":"\u5c3e\u6570AAABBB","4":"\u5c3e\u6570AABBCC","6":"\u5c3e\u6570ABBABB","2":"\u5c3e\u6570AAAAA+","1":"\u5c3e\u6570ABCDE+","33":"\u5c3e\u6570ABCABCD","31":"\u5c3e\u6570ABCDABCD","26":"\u4e2d\u95f4AAA","24":"\u4e2d\u95f4AAAA","25":"\u4e2d\u95f4AABB","23":"\u4e2d\u95f4AAABB","22":"\u4e2d\u95f4AABBB","21":"\u4e2d\u95f4AAAA+","20":"\u4e2d\u95f4AAABBB","27":"\u4e2d\u95f4AABBCC"},"pricescope":["0-100","100-500","500-1000","1000-2000","2000-5000","5000-10000","10000-20000","10000-20000","20000-30000","30000-50000","50000-70000","70000-100000","100000-"],"manager":{"1":{"id":1,"name":"\u79fb\u52a8\u7f51\u7edc","short":"\u79fb\u52a8\u7f51\u7edc","domain":"yidong"},"2":{"id":2,"name":"\u8054\u901a\u7f51\u7edc","short":"\u8054\u901a\u7f51\u7edc","domain":"liantong"},"3":{"id":3,"name":"\u7535\u4fe1\u7f51\u7edc","short":"\u7535\u4fe1\u7f51\u7edc","domain":"dianxin"},"4":{"id":4,"name":"\u865a\u62df\u8fd0\u8425\u5546","short":"170","domain":"xuni"}},"slavemanager":{"1703":1,"1705":1,"1706":1,"1704":2,"1707":2,"1708":2,"1710":2,"1711":2,"1712":2,"1713":2,"1714":2,"1715":2,"1716":2,"1717":2,"1718":2,"1719":2,"1709":2,"1700":3,"1701":3},"head":{"1":[139,138,137,136,135,134,147,150,151,152,157,158,159,165,178,182,183,184,187,188,198],"2":[130,131,132,155,156,166,167,185,186,145,176],"3":[133,153,162,177,173,199,180,181,189],"4":[170,171]},"month":{"1":"1\u6708","2":"2\u6708","3":"3\u6708","4":"4\u6708","5":"5\u6708","6":"6\u6708","7":"7\u6708","8":"8\u6708","9":"9\u6708","10":"10\u6708","11":"11\u6708","12":"12\u6708"}}');
+        var pricescope = {};
+        var manager = {};
+        var pricescope_display = [];
+        var manager_display = [];
+        pricescope_display.push('选择价格');
+        pricescope['选择价格'] = -1;
+        $.each(config.pricescope, function (key, val) {
+            pricescope_display.push(val);
+            pricescope[val] = key;
+        });
+        manager_display.push('选择网络');
+        manager['选择网络'] = 0;
+        $.each(config.manager, function (key, val) {
+            if (val.id < 4) {
+                var name = val.name;
+                manager_display.push(name);
+                manager[name] = val.id;
+            }
+        });
+        $("#manager-picker").picker({
+            title: "网络",
+            cols: [{
+                textAlign: 'center',
+                values: manager_display
+            }],
+            onClose: function (e) {
+                var key = e.displayValue[0];//移动网络
+                //var val = manager[key];//1
+                var url = $("#manager-picker").data('url');
+                url = url.replace('managervalue', key);
+                window.location.href = url;
+            }
+        });
+        $("#pricescope-picker").picker({
+            title: "价格",
+            cols: [{
+                textAlign: 'center',
+                values: pricescope_display
+            }],
+            onClose: function (e) {
+                var key = e.displayValue[0];//0-100
+                //var val = pricescope[key];//1
+                var url = $("#pricescope-picker").data('url');
+                url = url.replace('pricescopevalue', key);
+                window.location.href = url;
+            }
+        });
+        $("#city-picker").cityPicker({
+            title: "请选择归属地",
+            showDistrict: false,
+            onClose: function (e) {
+                var province = e.displayValue[0];
+                var city = e.displayValue[1];
+                if (city != '选择市') {
+                    var url = $("#city-picker").data('url');
+                    url = url.replace('cityvalue', city);
+                    url = url.replace('provincevalue', province);
+                    window.location.href = url;
+                }
+            }
+        });
+        $('#search-submit').bind('click', function () {
+            var url = $(this).data('url');
+            var keys = $('#keywords').val();
+            url = url.replace('keysval', keys);
+            window.location.href = url;
+        });
+        $('#show-notice').bind('click', function () {
+            $('.tanchu-bg').show();
+            $('.tanchu2').show();
+        });
+        $('.tanchu-close').bind('click', function () {
+            $('.tanchu-bg').hide();
+            $('.tanchu2').hide();
+        });
+    })
+</script>

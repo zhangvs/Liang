@@ -216,6 +216,12 @@ namespace HZSoft.Application.Service.CustomerManage
                 strSql += " and ExistMark = " + ExistMark;
             }
 
+            //网络
+            if (!queryParam["Operator"].IsEmpty())
+            {
+                string Operator = queryParam["Operator"].ToString();
+                strSql += " and Operator = " + Operator;
+            }
             return strSql;
         }
 
@@ -1180,6 +1186,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 return greaterMsg;
             }
 
+            int columns = dtSource.Columns.Count;
             for (int i = 0; i < rowsCount; i++)
             {
                 try
@@ -1270,9 +1277,19 @@ namespace HZSoft.Application.Service.CustomerManage
                             existMark = 0;
                         }
 
+                        //防止不含推广价此列 报错提示：无法找到列 7
+                        decimal? MaxPrice = null;
+                        if (columns==8)
+                        {
+                            //推广价
+                            string maxPriceStr = dtSource.Rows[i][7].ToString();
+                            //如果当前列的单元格报错，也会转类型错误
+                            if (!string.IsNullOrEmpty(maxPriceStr))
+                            {
+                                MaxPrice = Convert.ToDecimal(maxPriceStr);
+                            }
+                        }
 
-                        //推广价
-                        decimal MaxPrice = Convert.ToDecimal(dtSource.Rows[i][7].ToString());
 
                         //添加靓号
                         TelphoneLiangEntity entity = new TelphoneLiangEntity()

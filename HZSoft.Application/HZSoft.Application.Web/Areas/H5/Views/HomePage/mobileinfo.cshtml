@@ -1,0 +1,58 @@
+﻿@model  HZSoft.Application.Entity.CustomerManage.TelphoneLiangEntity
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>号码详情 - 利新靓号</title>
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
+    <meta name="__hash__" content="196815542f66520a987957e62de11344_e0605d62f175b9e213746eeaa58d7946" />
+</head>
+<body class="page">
+    <div class="page-title">
+        <a href="/H5/homepage/index"></a>
+        <h1>号码详情</h1>
+    </div>
+    <div class="page-box">
+        <div class="number">
+            <h1>@Model.Telphone</h1>
+            <p>
+                <strong class="color-red">价格:@Model.MaxPrice</strong>@*<s>原价:@Model.MaxPrice*2</s>*@
+            </p>
+            <p>
+                归属地: @Model.City
+            </p>
+            <p>
+                网络制式:@Model.Operator
+            </p>
+        </div>
+        <div class="sim">
+            <img src="/themes/simplebootx_mobile/Public/images/sim.png">
+            <p>
+                利新靓号
+            </p>
+        </div>
+    </div>
+    <div class="page-kefu">
+        <span>客服电话</span>
+        <p>
+            15864010086
+        </p>
+    </div>
+    <div class="page-content">
+        <h1>资费说明</h1>
+        <p>
+            @Model.Package
+        </p>
+    </div>
+    <div class="page-btn">
+        <a href="/h5/homepage/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.MaxPrice" class="weui-btn">立即订购</a>
+    </div>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+</body>
+</html>
+<!--页面如有提示或报错，文件引用了jquery-weui，可直接调用弹框-->

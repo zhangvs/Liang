@@ -1,0 +1,179 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>订购号码 - 利新靓号</title>
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
+    <meta name="__hash__" content="137ccc9ca3ff27d6c709d815bd63ab8f_175ed9f66d3159947c7f7b2e755ad041" />
+</head>
+<body class="page">
+    <div class="page-title">
+        <a href="/H5/homepage/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
+        <h1>号码订购</h1>
+    </div>
+    <div class="weui-cells__title">
+        配送信息
+    </div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系人</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="name" placeholder="请输入联系人姓名">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">联系电话</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="number" id="mobile" pattern="[0-9]*" placeholder="请输入联系电话">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">配送城市</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id='city' placeholder="请选择城市">
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd">
+                <label class="weui-label">详细地址</label>
+            </div>
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" id="address" placeholder="请输入详细地址">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">
+        预订信息
+    </div>
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">预定号码</label><span class="weui-form-preview__value color-yellow">
+                                                                        <h3>@ViewBag.Tel</h3>
+                </span>
+            </div>
+            @*<div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">号码价格</label><span class="weui-form-preview__value color-yellow">¥@ViewBag.Price</span>
+            </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">预存话费</label><span class="weui-form-preview__value color-yellow">¥0</span>
+            </div>*@
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">订单总计</label><span class="weui-form-preview__value color-danger">
+                                                                        <h3>¥@ViewBag.Price</h3>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">
+        请选择支付方式
+    </div>
+    <div class="weui-cells weui-cells_radio">
+        <label class="weui-cell weui-check__label" for="x11">
+            <div class="weui-cell__hd">
+                <img src="/themes/simplebootx_mobile/Public/images/weixin.png" width="20px">
+            </div>
+            <div class="weui-cell__bd">
+                <p>
+                    微信支付
+                </p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" class="weui-check" value="wechat" name="paytype" id="x11" checked="checked"><span class="weui-icon-checked"></span>
+            </div>
+        </label><label class="weui-cell weui-check__label" for="x12">
+            <div class="weui-cell__hd">
+                <img src="/themes/simplebootx_mobile/Public/images/zhifubao.png" width="20px">
+            </div>
+            <div class="weui-cell__bd">
+                <p>
+                    支付宝支付
+                </p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" name="paytype" value="ali" class="weui-check" id="x12"><span class="weui-icon-checked"></span>
+            </div>
+        </label>
+    </div>
+    <div class="page-btn">
+        <a href="#" id="submit" data-id="@ViewBag.id" class="weui-btn">立即支付</a>
+    </div>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+    <script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#city").cityPicker({
+                title: "请选择城市",
+                showDistrict: false
+            });
+            var check = false
+            $('#submit').bind('click', function () {
+                var that = $(this);
+                if (check) return;
+                check = true;
+                var id = that.data('id');
+                var name = $('#name').val();
+                var mobile = $('#mobile').val();
+                var city = $('#city').val();
+                var address = $('#address').val();
+                var str = /^1[3|4|5|6|7|8|9][0-9]{9}$/;
+                var paytype = $('input[name=paytype]:checked').val();
+                if (name) {
+                    if (str.exec(mobile)) {
+                        if (city) {
+                            if (address) {
+                                $.ajax({
+                                    type: "post",
+                                    url: "/h5/homepage/ajaxorder",
+                                    data: {
+                                        id: id,
+                                        name: name,
+                                        mobile: mobile,
+                                        city: city,
+                                        address: address,
+                                        paytype: paytype
+                                    },
+                                    cache: false,
+                                    async: false,
+                                    dataType: "json",
+                                    success: function (result) {
+                                        if (result.status == 1) {
+                                            window.location.href = result.url;
+                                        } else {
+                                            $.toast(result.info, "forbidden");
+                                        }
+                                    },
+                                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                        $.toast("提交失败，请重试", "forbidden");
+                                    }
+                                });
+                            } else {
+                                $.toast("请输入详细地址", "forbidden");
+                            }
+                        } else {
+                            $.toast("请选择城市", "forbidden");
+                        }
+                    } else {
+                        $.toast("请输入正确的手机号", "forbidden");
+                    }
+                } else {
+                    $.toast("请输入姓名", "forbidden");
+                }
+                check = false;
+                return false;
+            });
+        })
+    </script>
+</body>
+</html>

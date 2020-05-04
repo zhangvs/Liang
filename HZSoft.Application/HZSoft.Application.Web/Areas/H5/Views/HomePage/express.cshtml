@@ -1,0 +1,51 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>快递查询 - 利新靓号</title>
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
+    <meta name="__hash__" content="7b0f3a2a9f377f891467cd68e53fed46_24979016d770f6070b4ecf6b2782af30" />
+</head>
+<body>
+    <div class="express">
+        <div class="express-back">
+            <a href="/H5/home/index"></a>
+        </div>
+        <h1 class="express-h1">快递查询</h1>
+        <div class="express-box">
+            <input placeholder="请输入手机号" id="mobile" type="number" value="" class="land-input phone">
+            <div class="page-btn" style="padding: 0; margin-top: 10px;">
+                <a href="#" data-url="/home/express?mobile=mobileval" id="search-submit" class="weui-btn">立即查询</a>
+            </div>
+            <div class="tip">
+                <p>
+                    <strong>温馨提示</strong>
+                </p>
+                <p>
+                    手机号为购买时留的收货电话
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#search-submit').bind('click', function () {
+                var url = $(this).data('url');
+                var mobile = $('#mobile').val();
+                if (mobile) {
+                    url = url.replace('mobileval', mobile);
+                    window.location.href = url;
+                } else {
+                    $.alert('请输入手机号');
+                }
+            });
+        })
+    </script>
+</body>
+</html>

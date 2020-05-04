@@ -254,6 +254,8 @@
     <Compile Include="Areas\GeneratorManage\Controllers\SingleTableController.cs" />
     <Compile Include="Areas\GeneratorManage\Controllers\TemplateController.cs" />
     <Compile Include="Areas\GeneratorManage\GeneratorManageAreaRegistration.cs" />
+    <Compile Include="Areas\H5\Controllers\HomePageController.cs" />
+    <Compile Include="Areas\H5\H5AreaRegistration.cs" />
     <Compile Include="Areas\PublicInfoManage\Controllers\EmailController.cs" />
     <Compile Include="Areas\PublicInfoManage\Controllers\ResourceFileController.cs" />
     <Compile Include="Areas\PublicInfoManage\Controllers\NewsController.cs" />
@@ -265,6 +267,8 @@
     <Compile Include="Areas\ReportManage\Controllers\ReportController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\ReportDemoController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
+    <Compile Include="Areas\Shop\Controllers\ShopController.cs" />
+    <Compile Include="Areas\Shop\ShopAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\CodeRuleController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\DataItemListController.cs" />
@@ -326,6 +330,8 @@
     <Content Include="assets\wap\css\iconfont.svg" />
     <Content Include="assets\wap\css\user.css" />
     <Content Include="assets\wap\images\address-bg.jpg" />
+    <Content Include="assets\wap\images\banner.png" />
+    <Content Include="assets\wap\images\banner1.png" />
     <Content Include="assets\wap\images\border.jpg" />
     <Content Include="assets\wap\images\card.jpg" />
     <Content Include="assets\wap\images\gongyong\cloud1.png" />
@@ -1496,6 +1502,37 @@
     <Content Include="Content\webApp\templates\tabs.html" />
     <Content Include="Index.htm" />
     <Content Include="MP_verify_TghbgpOlcmiU9e3T.txt" />
+    <Content Include="statics\js\changestyle.js" />
+    <Content Include="statics\js\ext.lanshuo99.cn.js" />
+    <Content Include="statics\js\jquery.cookie.js" />
+    <Content Include="statics\js\jquery.js" />
+    <Content Include="statics\plus\alt_tabs.js" />
+    <Content Include="statics\plus\swiper\swiper.css" />
+    <Content Include="statics\plus\swiper\swiper.min.js" />
+    <Content Include="themes\simplebootx_mobile\Public\css\css.css" />
+    <Content Include="themes\simplebootx_mobile\Public\css\jquery-weui.min.css" />
+    <Content Include="themes\simplebootx_mobile\Public\css\weui.min.css" />
+    <Content Include="themes\simplebootx_mobile\Public\images\banner.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\bg.jpg" />
+    <Content Include="themes\simplebootx_mobile\Public\images\black.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\close.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\express.jpg" />
+    <Content Include="themes\simplebootx_mobile\Public\images\icon-phone.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\page.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\return_icon.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\sim.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\sreach-icon.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\weixin.png" />
+    <Content Include="themes\simplebootx_mobile\Public\images\zhifubao.png" />
+    <Content Include="webapp\css\ali-icon\iconfont.css" />
+    <Content Include="webapp\css\m.css" />
+    <Content Include="webapp\img\icon\cry2.png" />
+    <Content Include="webapp\img\icon\fav11.png" />
+    <Content Include="webapp\img\icon\jd4.png" />
+    <Content Include="webapp\img\icon\ref3.png" />
+    <Content Include="webapp\img\icon\s32.png" />
+    <Content Include="webapp\img\icon\tmall4.png" />
+    <Content Include="webapp\img\icon\top2.png" />
     <Content Include="XmlConfig\XMLToken.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1890,6 +1927,13 @@
     <Content Include="Areas\CustomerManage\Views\TelphoneLiang\TelphoneLiangMaxIndex.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiang\TelphoneLiangMaxForm.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiang\TelphoneLiangMaxImport.cshtml" />
+    <Content Include="Areas\H5\Views\HomePage\Index.cshtml" />
+    <Content Include="Areas\H5\Views\Web.config" />
+    <Content Include="Areas\H5\Views\HomePage\mobileinfo.cshtml" />
+    <Content Include="Areas\H5\Views\HomePage\mobileorder.cshtml" />
+    <Content Include="Areas\H5\Views\HomePage\express.cshtml" />
+    <Content Include="Areas\Shop\Views\Shop\Index.cshtml" />
+    <Content Include="Areas\Shop\Views\Web.config" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />
@@ -1929,6 +1973,9 @@
     <None Include="Properties\PublishProfiles\HZSoft.pubxml" />
     <Content Include="Areas\WeChatManage\Views\Liang\_PartialShare.cshtml" />
     <Content Include="Views\Pc\Index.cshtml" />
+    <Content Include="themes\simplebootx_mobile\Public\js\city-picker.min.js" />
+    <Content Include="themes\simplebootx_mobile\Public\js\jquery-weui.min.js" />
+    <Content Include="themes\simplebootx_mobile\Public\js\jquery.min.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1956,6 +2003,7 @@
     <Folder Include="Content\scripts\plugins\autocomplete\external\" />
     <Folder Include="Content\scripts\plugins\autocomplete\images\" />
     <Folder Include="uploadfile\" />
+    <Folder Include="uploads\ad\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\HZSoft.Cache\HZSoft.Cache.Factory\HZSoft.Cache.Factory.csproj">
