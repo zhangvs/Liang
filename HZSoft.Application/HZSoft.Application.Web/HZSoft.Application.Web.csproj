@@ -55,6 +55,9 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="AopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Alipay.AopSdk.2.0.0\lib\net35\AopSdk.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
       <Private>True</Private>
@@ -267,8 +270,8 @@
     <Compile Include="Areas\ReportManage\Controllers\ReportController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\ReportDemoController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
-    <Compile Include="Areas\Shop\Controllers\ShopController.cs" />
-    <Compile Include="Areas\Shop\ShopAreaRegistration.cs" />
+    <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
+    <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\CodeRuleController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\DataItemListController.cs" />
@@ -1502,6 +1505,24 @@
     <Content Include="Content\webApp\templates\tabs.html" />
     <Content Include="Index.htm" />
     <Content Include="MP_verify_TghbgpOlcmiU9e3T.txt" />
+    <Content Include="public\static\css\fill.css" />
+    <Content Include="public\static\css\wk.css" />
+    <Content Include="public\static\img\2020\bllc2.png" />
+    <Content Include="public\static\img\2020\lhbg.png" />
+    <Content Include="public\static\img\error.png" />
+    <Content Include="public\static\img\loading.gif" />
+    <Content Include="public\static\img\2020\ltlogo.png" />
+    <Content Include="public\static\img\number-close.png" />
+    <Content Include="public\static\img\overtime.png" />
+    <Content Include="public\static\img\successImg.png" />
+    <Content Include="public\static\js\apply\areaInfo.js" />
+    <Content Include="public\static\js\apply\bsk_index20.js" />
+    <Content Include="public\static\js\apply\commonCheckFill.js" />
+    <Content Include="public\static\js\apply\commonJs.js" />
+    <Content Include="public\static\js\apply\hm.js" />
+    <Content Include="public\static\js\apply\id_check.js" />
+    <Content Include="public\static\js\apply\jquery-2.js" />
+    <Content Include="public\static\js\jquery.qrcode.min.js" />
     <Content Include="statics\js\changestyle.js" />
     <Content Include="statics\js\ext.lanshuo99.cn.js" />
     <Content Include="statics\js\jquery.cookie.js" />
@@ -1526,6 +1547,7 @@
     <Content Include="themes\simplebootx_mobile\Public\images\zhifubao.png" />
     <Content Include="webapp\css\ali-icon\iconfont.css" />
     <Content Include="webapp\css\m.css" />
+    <Content Include="webapp\img\cb2.png" />
     <Content Include="webapp\img\icon\cry2.png" />
     <Content Include="webapp\img\icon\fav11.png" />
     <Content Include="webapp\img\icon\jd4.png" />
@@ -1932,8 +1954,13 @@
     <Content Include="Areas\H5\Views\HomePage\mobileinfo.cshtml" />
     <Content Include="Areas\H5\Views\HomePage\mobileorder.cshtml" />
     <Content Include="Areas\H5\Views\HomePage\express.cshtml" />
-    <Content Include="Areas\Shop\Views\Shop\Index.cshtml" />
-    <Content Include="Areas\Shop\Views\Web.config" />
+    <Content Include="Areas\webapp\Views\Shop\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\Web.config" />
+    <Content Include="Areas\webapp\Views\Shop\Apply.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\express.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\info2.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 namespace HZSoft.Application.Web.Areas.Shop
 {
-    public class ShopAreaRegistration : AreaRegistration
+    public class webappAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "Shop";
+                return "webapp";
             }
         }
 

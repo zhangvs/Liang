@@ -54,6 +54,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// <returns></returns>
         public int? Status { get; set; }
         /// <summary>
+        /// 支付方式
+        /// </summary>
+        /// <returns></returns>
+        public string PayType { get; set; }
+        /// <summary>
         /// 0 未支付 1已支付
         /// </summary>
         /// <returns></returns>
@@ -147,6 +152,7 @@ namespace HZSoft.Application.Entity.CustomerManage
         public override void Create()
         {
             this.CreateDate = DateTime.Now;
+            this.Status = 0;
         }
         /// <summary>
         /// 编辑调用

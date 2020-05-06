@@ -10,17 +10,35 @@
     <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
     <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
     <meta name="__hash__" content="196815542f66520a987957e62de11344_e0605d62f175b9e213746eeaa58d7946" />
+    <!-- Bytedance Tracking -->
+    <script>
+        var baseUrl = '';
+        (function (r, d, s, l) {
+            var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                }
+            }; for (var i = 0; i < meteor.methods.length; i++) {
+                var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+            } meteor.load = function () {
+                var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+            }; meteor.load(); if (meteor.invoked) { return }
+            meteor.invoked = true; meteor.track("pageview")
+        })(window, document, "script", "1664007157743627");
+    </script>
+    <!-- End Bytedance Tracking -->
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/H5/homepage/index"></a>
+        <a href="/webapp/shop/index"></a>
         <h1>号码详情</h1>
     </div>
     <div class="page-box">
         <div class="number">
             <h1>@Model.Telphone</h1>
             <p>
-                <strong class="color-red">价格:@Model.MaxPrice</strong>@*<s>原价:@Model.MaxPrice*2</s>*@
+                <strong class="color-red">价格:@Model.Price</strong> <s>原价:@Model.MaxPrice</s>
             </p>
             <p>
                 归属地: @Model.City
@@ -32,14 +50,14 @@
         <div class="sim">
             <img src="/themes/simplebootx_mobile/Public/images/sim.png">
             <p>
-                号运来靓号网
+                号运来
             </p>
         </div>
     </div>
-    <div class="page-kefu">
-        <span>客服电话</span>
+    <div class="page-kefu" style="border: solid 1px #f4584b">
+        <span style="background: #ee5246;">客服电话</span>
         <p>
-            15864010086
+            <a href="tel:16505310086">16505310086</a>
         </p>
     </div>
     <div class="page-content">
@@ -81,8 +99,9 @@
             由于号码是特殊商品，一旦售出，均无法办理退换货，购买之前请慎重！
         </p>
     </div>
-    <div class="page-btn">
-        <a href="/h5/homepage/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.MaxPrice" class="weui-btn">立即订购</a>
+    <div style="height:40px;"></div>
+    <div class="page-btn2">
+        <a href="/webapp/shop/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price" class="weui-btn" style="background: #ee5246;">立即订购</a>
     </div>
     <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
     <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>

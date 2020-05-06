@@ -1,0 +1,195 @@
+* {
+    padding: 0;
+    margin: 0
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font-size: 1rem
+}
+
+body,html {
+    margin: 0 auto
+}
+
+body {
+    font-family: Adobe Heiti Std,Helvetica,Arial,sans-serif;
+    position: relative;
+    color: #666;
+    min-height: 100%;
+    max-width: 40rem;
+    -webkit-text-size-adjust: none;
+    display: block
+}
+
+.top-img[data-v-409ece3a] {
+    font-size: 0
+}
+
+.top-img img[data-v-409ece3a] {
+    width: 100%;
+    display: block
+}
+
+img[data-v-409ece3a] {
+    border: 0
+}
+
+.apply[data-v-409ece3a] {
+    background: #242c6c url(../img/bg.967795c1.jpg) no-repeat;
+    background-size: 100%;
+    overflow: hidden
+}
+
+.apply .switch-area[data-v-409ece3a] {
+    margin: 0 auto 1.125rem;
+    width: 18.75rem;
+    position: relative;
+    top: .9375rem;
+    height: 8.75rem
+}
+
+.apply .btn-box .btn[data-v-409ece3a] {
+    display: block;
+    width: 16.125rem;
+    height: 3.28125rem;
+    margin: 0 auto;
+    text-align: center;
+    background: url(../img/btn.18d353ec.png) no-repeat;
+    background-size: 100%;
+    line-height: 3.28125rem;
+    font-family: PingFang SC,Droid Sans Fallback,Helvetica,Arial,sans-serif;
+    color: #fff;
+    font-size: 1.25rem;
+    text-decoration: none;
+    border-radius: .3125rem
+}
+
+.detail p[data-v-409ece3a] {
+    color: #fff!important;
+    text-decoration: underline;
+    font-size: .8rem
+}
+
+a[data-v-409ece3a],p[data-v-409ece3a],ul[data-v-409ece3a],ul li[data-v-409ece3a] {
+    -webkit-tap-highlight-color: transparent
+}
+
+a[data-v-409ece3a] {
+    background: transparent
+}
+
+a[data-v-409ece3a]:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+    text-decoration: underline
+}
+
+.charges-info[data-v-409ece3a] {
+    font-size: 0
+}
+
+.charges-info img[data-v-409ece3a] {
+    display: block;
+    width: 100%
+}
+
+map[data-v-409ece3a] {
+    display: inline
+}
+
+area[data-v-409ece3a] {
+    display: inline;
+    cursor: pointer
+}
+
+map area[data-v-409ece3a] {
+    outline: none
+}
+
+.apply .detail a[data-v-409ece3a] {
+    color: #fff;
+    font-size: .8rem;
+    font-family: FZLBJW\\2014GB1-0
+}
+
+.apply .detail[data-v-409ece3a] {
+    text-align: center;
+    background: #242c6c;
+    line-height: 2.0625rem
+}
+
+.cf[data-v-409ece3a]:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden
+}
+
+.apply .switch-area .tab.left[data-v-409ece3a] {
+    top: 1.5rem;
+    width: 8.125rem;
+    height: 5.125rem;
+    left: -.625rem;
+    z-index: 4
+}
+
+.apply .switch-area .tab.center[data-v-409ece3a] {
+    width: 11.875rem;
+    height: 7.5rem;
+    z-index: 10;
+    top: 0;
+    left: 3.4375rem
+}
+
+.apply .switch-area .tab.right[data-v-409ece3a] {
+    z-index: 4;
+    top: 1.5rem;
+    width: 8.125rem;
+    height: 5.125rem;
+    left: 11.3125rem
+}
+
+.apply .switch-area .one[data-v-409ece3a] {
+    background: url(../img/tian-center.4d2e66ea.png) 0 0 no-repeat;
+    background-size: 100%
+}
+
+.apply .switch-area .two[data-v-409ece3a] {
+    background: url(../img/big-center.c9c99a94.png) 0 0 no-repeat;
+    background-size: 100%
+}
+
+.apply .switch-area .three[data-v-409ece3a] {
+    background: url(../img/di-center.b862aaa7.png) 0 0 no-repeat;
+    background-size: 100%;
+}
+
+.apply .switch-area .one[data-v-409ece3a],.apply .switch-area .three[data-v-409ece3a],.apply .switch-area .two[data-v-409ece3a] {
+    position: absolute;
+    border-radius: .375rem
+}
+
+.apply .switch-area .tab.left.down[data-v-409ece3a] {
+    z-index: 0
+}
+
+.apply .switch-area .tab.transition[data-v-409ece3a] {
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    -webkit-transition: all .5s;
+    transition: all .5s
+}
+
+#toTop[data-v-409ece3a] {
+    position: fixed;
+    bottom: 3.375rem;
+    right: 1.125rem;
+    width: 2.6875rem;
+    height: 2.875rem;
+    background: url(../img/goTop.f9c4c426.png) 50% no-repeat;
+    background-size: 2.6875rem 2.875rem
+}
