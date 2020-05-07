@@ -33,7 +33,7 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1664007157743627");
+        })(window, document, "script", "1663392064049159");
     </script>
     <!-- End Bytedance Tracking -->
 </head>
@@ -58,7 +58,7 @@
             </div>
             <div class="weui-msg__opr-area" style="display:@ViewBag.display">
                 <p class="weui-btn-area">
-                    <a href="/WeChatManage/user_order/payment/@ViewBag.Id" class="weui-btn weui-btn_warn">重新支付</a>
+                    <a href="/webapp/shop2/mobileorder/@ViewBag.TelphoneID?Tel=@ViewBag.Telphone&Price=@ViewBag.Price" class="weui-btn weui-btn_warn">重新支付</a>
                 </p>
             </div>
         </div>
@@ -83,22 +83,5 @@
     <script src="/assets/wap/js/fastclick.js?v=7.4"></script>
     <script src="/assets/wap/js/global.js?v=7.4"></script>
     <script src="/assets/wap/js/user.js?v=7.4"></script>
-    <script type="text/javascript">
-	var payStatus = '0';
-	//头条推广转化（点击支付）
-	if( typeof(trackToutiaoPara) != 'undefined' && typeof(trackToutiaoPara.trackId) != 'undefined' && trackToutiaoPara.trackPayed && payStatus=='9' ){
-		trackObj.trackToutiao(trackToutiaoPara.trackId);
-		$.alert({
-			title: '支付成功',text: '请花一分钟阅读温馨提醒，以便顺利进行后续服务！',onOK: function () {}
-		});
-	}
-	//广点通推广转化（点击支付）
-	if( typeof(tracktGdtPara) != 'undefined' && typeof(tracktGdtPara.init) != 'undefined'  && tracktGdtPara.trackPayed && payStatus=='9' ){
-		trackObj.trackGdt(tracktGdtPara.init);
-		$.alert({
-			title: '支付成功',text: '请花一分钟阅读温馨提醒，以便顺利进行后续服务！',onOK: function () {}
-		});
-	}
-    </script>
 </body>
 </html>

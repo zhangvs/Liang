@@ -19,7 +19,7 @@ using System.Web.Mvc;
 
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
-    public class ShopController : Controller
+    public class Shop2Controller : Controller
     {
 
         private TelphoneLiangBLL tlbll = new TelphoneLiangBLL();
@@ -109,7 +109,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='/webapp/shop/mobileinfo/{item.TelphoneID}'>" +
+                        $"    <a href='/webapp/shop2/mobileinfo/{item.TelphoneID}'>" +
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Operator}</div>" +
                         $"        <div class='price'>" +
@@ -175,8 +175,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 tenPayV3Info.MchId,
                 "支付靓号",
                 sp_billno,
-                Convert.ToInt32(ordersEntity.Price * 100),
-                //1,
+                //Convert.ToInt32(ordersEntity.Price * 100),
+                1,
                 Request.UserHostAddress,
                 tenPayV3Info.TenPayV3Notify,
                TenPayV3Type.NATIVE,
@@ -291,7 +291,6 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             Console.WriteLine(response.Body);
             return null;
         }
-
         public ActionResult express(string mobile)
         {
             string display = "none";
@@ -326,14 +325,11 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     ViewBag.msg = "暂无信息";
                 }
                 display = "block";
-                
+
             }
             ViewBag.display = display;
             return View();
         }
-
-
-
 
         public decimal? GetJG(decimal? price, string grade)
         {
@@ -380,6 +376,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
 
 
+
         public ActionResult paymentFinish(int? id)
         {
             ViewBag.Id = id;
@@ -401,6 +398,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     ViewBag.Tel = ordersEntity.Tel;
                     ViewBag.TelphoneID = ordersEntity.TelphoneID;
                     ViewBag.Price = ordersEntity.Price;
+
                 }
             }
 

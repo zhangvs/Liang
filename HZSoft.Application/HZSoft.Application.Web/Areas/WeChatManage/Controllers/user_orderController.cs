@@ -125,12 +125,14 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     ViewBag.Result = "支付成功";
                     ViewBag.icon = "success";
                     ViewBag.display = "none";
+                    ViewBag.Tel = ordersEntity.Tel;
                 }
                 else
                 {
                     ViewBag.Result = "未支付";
                     ViewBag.icon = "warn";
                     ViewBag.display = "block";
+                    ViewBag.Tel = ordersEntity.Tel;
 
                 }
             }

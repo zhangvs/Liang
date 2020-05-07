@@ -57,6 +57,9 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 //0 待付款 1 待审核 2 待发货 3 待开卡 4 已完成
                 switch (ordersEntity.Status)
                 {
+                    case 0:
+                        msg = "待付款";
+                        break;
                     case 1:
                         msg = "待审核";
                         break;

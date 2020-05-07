@@ -213,19 +213,16 @@ namespace HZSoft.Application.Web.Areas.H5.Controllers
                 if (ordersEntity != null)
                 {
                     string msg = "";
-                    //0 待付款 1 待审核 2 待发货 3 待开卡 4 已完成
+                    //0 待付款 1 待发货 2 待开卡 3 已完成
                     switch (ordersEntity.Status)
                     {
                         case 1:
-                            msg = "待审核";
-                            break;
-                        case 2:
                             msg = "待发货";
                             break;
-                        case 3:
+                        case 2:
                             msg = "已发货待开卡，" + ordersEntity.ExpressCompany + "：" + ordersEntity.ExpressSn;
                             break;
-                        case 4:
+                        case 3:
                             msg = "已完成";
                             break;
                         default:

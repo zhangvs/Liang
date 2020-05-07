@@ -49,7 +49,7 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// <returns></returns>
         public DateTime? CreateDate { get; set; }
         /// <summary>
-        /// 0 待付款 1 待审核 2 待发货 3 待开卡 4 已完成
+        /// 0 待付款 1 待发货 2 待开卡 3 已完成 
         /// </summary>
         /// <returns></returns>
         public int? Status { get; set; }

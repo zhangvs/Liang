@@ -38,6 +38,10 @@ namespace HZSoft.Application.Busines.CustomerManage
         {
             return service.GetPageListH5(pagination, queryJson);
         }
+        public IEnumerable<TelphoneLiangEntity> GetPageListH5LX(Pagination pagination, string queryJson)
+        {
+            return service.GetPageListH5LX(pagination, queryJson);
+        }
         /// <summary>
         /// 获取列表
         /// </summary>

@@ -24,6 +24,7 @@ namespace HZSoft.Application.IService.CustomerManage
         IEnumerable<TelphoneLiangEntity> GetPageList(Pagination pagination, string queryJson);
         IEnumerable<TelphoneLiangEntity> GetPageListJoin(Pagination pagination, string queryJson);
         IEnumerable<TelphoneLiangEntity> GetPageListH5(Pagination pagination, string queryJson);
+        IEnumerable<TelphoneLiangEntity> GetPageListH5LX(Pagination pagination, string queryJson);
         /// <summary>
         /// 获取列表
         /// </summary>

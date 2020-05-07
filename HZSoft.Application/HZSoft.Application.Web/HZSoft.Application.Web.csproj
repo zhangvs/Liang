@@ -270,6 +270,8 @@
     <Compile Include="Areas\ReportManage\Controllers\ReportController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\ReportDemoController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
+    <Compile Include="Areas\webapp\Controllers\AliPayController.cs" />
+    <Compile Include="Areas\webapp\Controllers\Shop2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
@@ -323,6 +325,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\AliPay\AliPay.cs" />
+    <Compile Include="Utility\AliPay\AliPayConfig.cs" />
     <Compile Include="Utility\AnalyzeHelper.cs" />
     <Compile Include="Utility\CurrentWxUser.cs" />
     <Compile Include="Utility\WebSiteConfig.cs" />
@@ -1961,6 +1965,13 @@
     <Content Include="Areas\webapp\Views\Shop\mobileorder.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\express.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\express.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\paymentFinish.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

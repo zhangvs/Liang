@@ -200,7 +200,7 @@ namespace HZSoft.Application.Service.CustomerManage
             if (!string.IsNullOrEmpty(keyValue.ToString()))
             {
                 entity.Modify(keyValue);
-                entity.Status = 3;
+                entity.Status = 2;//发货
                 entity.DeliveryName = OperatorProvider.Provider.Current().UserName;
                 entity.DeliveryDate = DateTime.Now;
                 this.BaseRepository().Update(entity);
@@ -219,7 +219,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 {
                     OrdersEntity entity = GetEntity(keyValue);
                     entity.Modify(keyValue);
-                    entity.Status = 4;//开发，订单已完成
+                    entity.Status = 3;//开发，订单已完成
                     this.BaseRepository().Update(entity);
                 }
             }

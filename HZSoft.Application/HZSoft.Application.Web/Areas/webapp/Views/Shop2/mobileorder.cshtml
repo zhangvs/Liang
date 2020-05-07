@@ -16,10 +16,8 @@
     <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
     <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
     <meta name="__hash__" content="137ccc9ca3ff27d6c709d815bd63ab8f_175ed9f66d3159947c7f7b2e755ad041" />
-
     <!-- Bytedance Tracking -->
     <script>
-        var baseUrl = '';
         (function (r, d, s, l) {
             var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
                 return function () {
@@ -32,13 +30,13 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1664007157743627");
+        })(window, document, "script", "1663392064049159");
     </script>
     <!-- End Bytedance Tracking -->
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/shop/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
+        <a href="/webapp/shop2/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -162,7 +160,7 @@
                             if (address) {
                                 $.ajax({
                                     type: "post",
-                                    url: "/webapp/shop/ajaxorder",
+                                    url: "/webapp/shop2/ajaxorder",
                                     data: {
                                         TelphoneID: id,
                                         Receiver: name,
@@ -185,7 +183,7 @@
 
                                         if (resObj.status) {
                                             //头条推广转化（点击支付）
-                                            meteor.track("shopping", { convert_id: "1664753008807948" })
+                                            meteor.track('form', { convert_id: 1666010616296460 })
                                             //不做处理，跳转
                                             if (resObj.data.target) {
                                                 location.href = resObj.data.gotoUrl;
@@ -213,7 +211,7 @@
                                                     text: qrsrc,
                                                     buttons: [
                                                         { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
-                                                        { text: "支付完成", onClick: function () { location.href = '/webapp/shop/paymentFinish/' + resObj.data.payid; } }
+                                                        { text: "支付完成", onClick: function () { location.href = '/webapp/shop2/paymentFinish/' + resObj.data.payid; } }
                                                     ]
                                                 });
                                                 //检测付款状态

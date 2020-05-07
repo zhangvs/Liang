@@ -48,12 +48,10 @@
                         if (cellvalue == 0) {
                             return "待付款";
                         } else if (cellvalue == 1) {
-                            return "待审核";
-                        } else if (cellvalue == 2) {
                             return "待发货";
-                        } else if (cellvalue == 3) {
+                        } else if (cellvalue == 2) {
                             return "待开卡";
-                        }else if (cellvalue == 4) {
+                        } else if (cellvalue == 3) {
                             return "已完成";
                         } else {
                             return "";
@@ -229,10 +227,9 @@
                                         <div id="Status" type="select" class="ui-select">
                                             <ul>
                                                 <li data-value="0">待付款</li>
-                                                <li data-value="1">待审核</li>
-                                                <li data-value="2">待发货</li>
-                                                <li data-value="3">待开卡</li>
-                                                <li data-value="4">已完成</li>
+                                                <li data-value="1">待发货</li>
+                                                <li data-value="2">待开卡</li>
+                                                <li data-value="3">已完成</li>
                                             </ul>
                                         </div>
                                     </td>

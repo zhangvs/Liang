@@ -24,7 +24,46 @@ namespace HZSoft.Application.Web
         public static string MchId { private set; get; }
         public static string Key { private set; get; }
         public static string TenPayV3Notify { private set; get; }
-        
+
+
+
+        //支付宝网关地址
+        public static string serviceUrl { private set; get; }
+
+        //应用ID
+        public static string appId { private set; get; }
+
+        //开发者私钥，由开发者自己生成
+        public static string privateKey { private set; get; }
+
+        //支付宝的应用公钥
+        public static string publicKey { private set; get; }
+
+        //支付宝的支付公钥
+        public static string payKey { private set; get; }
+
+        //服务器异步通知页面路径
+        public static string notify_url { private set; get; }
+
+        //页面跳转同步通知页面路径
+        public static string return_url { private set; get; }
+
+        //参数返回格式，只支持json
+        public static string format { private set; get; }
+
+        // 调用的接口版本，固定为：1.0
+        public static string version { private set; get; }
+
+        // 商户生成签名字符串所使用的签名算法类型，目前支持RSA2和RSA，推荐使用RSA2
+        public static string signType{ private set; get; }
+
+        // 字符编码格式 目前支持utf-8
+        public static string charset { private set; get; }
+
+        // false 表示不从文件加载密钥
+        public static bool keyFromFile { private set; get; }
+
+
 
 
         public static void Register()
@@ -42,6 +81,23 @@ namespace HZSoft.Application.Web
             GetTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + AppID + "&secret=" + AppSecret + "&code={0}&grant_type=authorization_code";
             GetTokenBaseUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + AppID + "&secret=" + AppSecret;
             GetUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang=zh_CN";
+
+
+
+            serviceUrl = Config.GetValue("aliServiceUrl");
+            appId = Config.GetValue("aliAppId");
+            privateKey = Config.GetValue("aliPrivateKey");
+            publicKey = Config.GetValue("aliPublicKey");
+            payKey = Config.GetValue("aliPayKey");
+            notify_url = Config.GetValue("Domain2") + Config.GetValue("aliNotifyUrl");
+            return_url = Config.GetValue("Domain2") + Config.GetValue("aliReturnUrl");
+            format = Config.GetValue("aliFormat");
+            version = Config.GetValue("aliVersion");
+            signType = Config.GetValue("aliSignType");
+            charset = Config.GetValue("aliCharset");
+            keyFromFile = false;
+
+
         }
     }
 }

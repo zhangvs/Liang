@@ -107,15 +107,14 @@ namespace HZSoft.Application.Entity.WeChatManage
 
 
     /// <summary>
-    /// 订单状态:0 待付款 1 待审核 2 待发货 3 待开卡 4 已完成
+    /// 订单状态:0 待付款 1 待发货 2 待开卡 3 已完成 
     /// </summary>
     public enum OrderStatus
     {
         待付款 = 0,
         未发货 = 1,
-        已发货 = 2,
-        退款 = 3,
-        已结束 = 4
+        待开卡 = 2,
+        已完成 = 4
     }
 
     /// <summary>
