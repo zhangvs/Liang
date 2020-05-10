@@ -52,6 +52,10 @@ namespace HZSoft.Application.Entity.WeChatManage
         /// </summary>
         public string appid { get; set; }
         /// <summary>
+        /// H5连接 <mweb_url><![CDATA[https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx0821504501009699fc47ba7d1821679000&package=3205204241]]></mweb_url>
+        /// </summary>
+        public string mweb_url { get; set; }
+        /// <summary>
         /// 
         /// </summary>
         public string code_url { get; set; }

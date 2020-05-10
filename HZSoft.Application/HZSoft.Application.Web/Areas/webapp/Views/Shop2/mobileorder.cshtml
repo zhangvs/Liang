@@ -117,27 +117,30 @@
             </div>
         </label>
         @*<label class="weui-cell weui-check__label" for="x12">
-            <div class="weui-cell__hd">
-                <img src="/themes/simplebootx_mobile/Public/images/zhifubao.png" width="20px">
-            </div>
-            <div class="weui-cell__bd">
-                <p>
-                    支付宝支付
-                </p>
-            </div>
-            <div class="weui-cell__ft">
-                <input type="radio" name="paytype" value="ali" class="weui-check" id="x12"><span class="weui-icon-checked"></span>
-            </div>
-        </label>*@
+                <div class="weui-cell__hd">
+                    <img src="/themes/simplebootx_mobile/Public/images/zhifubao.png" width="20px">
+                </div>
+                <div class="weui-cell__bd">
+                    <p>
+                        支付宝支付
+                    </p>
+                </div>
+                <div class="weui-cell__ft">
+                    <input type="radio" name="paytype" value="ali" class="weui-check" id="x12"><span class="weui-icon-checked"></span>
+                </div>
+            </label>*@
     </div>
     <div class="page-btn">
         <a href="#" id="submit" data-id="@ViewBag.id" class="weui-btn" style="background: #ee5246;">立即支付</a>
     </div>
     <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
     <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
-    <script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>
+    @*<script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>*@
+    <script src="~/assets/wap/js/city-picker.min.js"></script>
     <script type="text/javascript">
         $(function () {
+            var flag = IsPC(); //true为PC端，false为手机端
+
             $("#city").cityPicker({
                 title: "请选择城市",
                 showDistrict: false
@@ -156,7 +159,7 @@
                 var paytype = $('input[name=paytype]:checked').val();
                 if (name) {
                     if (str.exec(mobile)) {
-                        if (city) {
+                        if (city && city.indexOf("选择")<0) {
                             if (address) {
                                 $.ajax({
                                     type: "post",
@@ -169,7 +172,8 @@
                                         Address: address,
                                         PayType: paytype,
                                         Tel:@ViewBag.Tel,
-                                        Price:@ViewBag.Price
+                                        Price:@ViewBag.Price,
+                                        PC: flag
                                     },
                                     cache: false,
                                     async: false,
@@ -201,7 +205,7 @@
                                             //微信
                                             if (paytype == 'wechat') {
                                                 //H5支付
-                                                if (typeof (resObj.data.mweb_url) != "undefined") {
+                                                if (typeof (resObj.data.mweb_url) != "undefined" && resObj.data.mweb_url != null) {
                                                     location.href = resObj.data.mweb_url + '&redirect_url=' + encodeURIComponent(resObj.data.wx_query_over);
                                                     return false;
                                                 }
@@ -258,6 +262,34 @@
                 return false;
             });
         })
+
+
+        function IsPC() {
+            var flag = 1;
+            //平台、设备和操作系统
+            var system = {
+                win: false,
+                mac: false,
+                xll: false,
+                ipad: false
+            };
+            //检测平台
+            var p = navigator.platform;
+            system.win = p.indexOf("Win") == 0;
+            system.mac = p.indexOf("Mac") == 0;
+            system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+            system.ipad = (navigator.userAgent.match(/iPad/i) != null) ? true : false;
+            //跳转语句，如果是PC访问就自动跳转到所要访问的页面http://www.电脑.com
+            if (system.win || system.mac || system.xll || system.ipad) {
+                //默认访问http://www.电脑.com
+            } else {
+                //window.location.href = "http://www.手机.com/";
+                flag = 0;
+            }
+            return flag;
+        }
+
+
     </script>
 </body>
 </html>

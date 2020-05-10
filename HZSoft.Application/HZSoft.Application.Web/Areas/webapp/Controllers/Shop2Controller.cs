@@ -9,11 +9,13 @@ using HZSoft.Util;
 using HZSoft.Util.WebControl;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Senparc.Weixin.HttpUtility;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -105,13 +107,13 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         string hou = item.Telphone.Substring(7, 4);
                         string telphone = "<font color='#E33F23'>" + qian + "</font><font color='#3A78F3'>" + zhong + "</font><font color='#E33F23'>" + hou + "</font>";
                         //利新价格调整规则，这是需要单独写代码的价格调整：
-                        decimal? jg = GetJG(item.Price, item.Grade);
+                        decimal? jg = GetJG(item.Price, item.Grade,item.ExistMark);
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='/webapp/shop2/mobileinfo/{item.TelphoneID}'>" +
+                        $"    <a href='https://shop.jnlxsm.net/webapp/shop2/mobileinfo/{item.TelphoneID}'>" +
                         $"        <div class='mobile'>{telphone}</div>" +
-                        $"        <div class='city'>{item.City}·{item.Operator}</div>" +
+                        $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
                         $"            <i>￥</i>{jg}" +
                         $"            <span class='hide oldprice'>原价<i><i>￥</i>{jg * 2}</i></span>" +
@@ -137,7 +139,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             if (entity!=null)
             {
                 //利新价格调整规则，这是需要单独写代码的价格调整：
-                entity.Price = GetJG(entity.Price, entity.Grade);
+                entity.Price = GetJG(entity.Price, entity.Grade,entity.ExistMark);
                 entity.MaxPrice = entity.Price * 2;
             }
 
@@ -161,6 +163,14 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/WeChatManage/user_order/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/WeChatManage/user_order/paymentFinish/11\"}}");
             try
             {
+                string[] area = ordersEntity.City.Split(' ');
+                if (area.Length>0)
+                {
+                    ordersEntity.Province = area[0];//省
+                    ordersEntity.City = area[1];//市
+                }
+
+
                 ordersEntity.Host = Request.Url.Host;
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
@@ -170,52 +180,114 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 //商品Id，用户自行定义
                 string productId = ordersEntity.TelphoneID.ToString();
 
-                //创建请求统一订单接口参数
-                var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
-                tenPayV3Info.MchId,
-                "支付靓号",
-                sp_billno,
-                //Convert.ToInt32(ordersEntity.Price * 100),
-                1,
-                Request.UserHostAddress,
-                tenPayV3Info.TenPayV3Notify,
-               TenPayV3Type.NATIVE,
-                null,
-                tenPayV3Info.Key,
-                nonceStr,
-                productId: productId);
-                //调用统一订单接口
-                var result = TenPayV3.Unifiedorder(xmlDataInfo);
-
-                LogHelper.AddLog(result.ResultXml);//记录日志
-
                 H5Response root = null;
-                if (result.return_code == "SUCCESS")
+                //pc端返回二维码，否则H5
+                if (ordersEntity.PC==1)
                 {
-                    H5PayData h5PayData = new H5PayData()
+                    //创建请求统一订单接口参数
+                    var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
+                    tenPayV3Info.MchId,
+                    "扫码支付靓号",
+                    sp_billno,
+                    //Convert.ToInt32(ordersEntity.Price * 100),
+                    1,
+                    Request.UserHostAddress,
+                    tenPayV3Info.TenPayV3Notify,
+                   TenPayV3Type.NATIVE,
+                    null,
+                    tenPayV3Info.Key,
+                    nonceStr,
+                    productId: productId);
+                    //调用统一订单接口
+                    var result = TenPayV3.Unifiedorder(xmlDataInfo);
+                    if (result.return_code == "SUCCESS")
                     {
-                        appid = WeixinConfig.AppID2,
-                        code_url = result.code_url,//weixin://wxpay/bizpayurl?pr=lixpXgt
-                        mch_id = WeixinConfig.MchId,
-                        nonce_str = result.nonce_str,
-                        prepay_id = result.prepay_id,
-                        result_code = result.result_code,
-                        return_code = result.return_code,
-                        return_msg = result.return_msg,
-                        sign = result.sign,
-                        trade_type = "NATIVE",
-                        trade_no = sp_billno,
-                        payid = ordersEntity.Id.ToString(),
-                        wx_query_href = Config.GetValue("Domain2") + "/WeChatManage/user_order/queryWx/" + ordersEntity.Id,
-                        wx_query_over = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id
-                    };
+                        H5PayData h5PayData = new H5PayData()
+                        {
+                            appid = WeixinConfig.AppID2,
+                            code_url = result.code_url,//weixin://wxpay/bizpayurl?pr=lixpXgt-----------扫码支付
+                            mch_id = WeixinConfig.MchId,
+                            nonce_str = result.nonce_str,
+                            prepay_id = result.prepay_id,
+                            result_code = result.result_code,
+                            return_code = result.return_code,
+                            return_msg = result.return_msg,
+                            sign = result.sign,
+                            trade_type = "NATIVE",
+                            trade_no = sp_billno,
+                            payid = ordersEntity.Id.ToString(),
+                            wx_query_href = Config.GetValue("Domain2") + "/WeChatManage/user_order/queryWx/" + ordersEntity.Id,
+                            wx_query_over = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id
+                        };
 
-                    root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
+                        root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
+                    }
+                    else
+                    {
+                        root = new H5Response { code = false, status = false, msg = result.return_msg };
+                    }
                 }
                 else
                 {
-                    root = new H5Response { code = false, status = false, msg = result.return_msg };
+                    var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "H5购买靓号", sp_billno, 1,
+                    Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.MWEB/*此处无论传什么，方法内部都会强制变为MWEB*/, null, tenPayV3Info.Key, nonceStr);
+
+                    var resultH5 = TenPayV3.Html5Order(xmlDataInfoH5);//调用统一订单接口
+                    LogHelper.AddLog(resultH5.ResultXml);//记录日志
+                    if (resultH5.return_code == "SUCCESS")
+                    {
+                        H5PayData h5PayData = new H5PayData()
+                        {
+                            appid = WeixinConfig.AppID2,
+                            mweb_url = resultH5.mweb_url,//H5访问链接
+                            mch_id = WeixinConfig.MchId,
+                            nonce_str = resultH5.nonce_str,
+                            prepay_id = resultH5.prepay_id,
+                            result_code = resultH5.result_code,
+                            return_code = resultH5.return_code,
+                            return_msg = resultH5.return_msg,
+                            sign = resultH5.sign,
+                            trade_type = "H5",
+                            trade_no = sp_billno,
+                            payid = ordersEntity.Id.ToString(),
+                            wx_query_href = Config.GetValue("Domain2") + "/WeChatManage/user_order/queryWx/" + ordersEntity.Id,
+                            wx_query_over = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id
+                        };
+
+                        root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
+
+                        //var timeStamp = TenPayV3Util.GetTimestamp();
+
+                        //var package = string.Format("prepay_id={0}", resultH5.prepay_id);
+
+                        //ViewData["product"] = ordersEntity.Tel;
+
+                        //ViewData["appId"] = WeixinConfig.AppID2;
+                        //ViewData["timeStamp"] = timeStamp;
+                        //ViewData["nonceStr"] = nonceStr;
+                        //ViewData["package"] = package;
+                        //ViewData["paySign"] = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, tenPayV3Info.Key);
+
+                        ////设置成功页面（也可以不设置，支付成功后默认返回来源地址）
+                        //var returnUrl = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id;
+
+                        //var mwebUrl = resultH5.mweb_url;
+                        //if (!string.IsNullOrEmpty(returnUrl))
+                        //{
+                        //    mwebUrl += string.Format("&redirect_url={0}", returnUrl.AsUrlData());
+                        //}
+
+                        //ViewData["MWebUrl"] = mwebUrl;
+                        //return View();
+                    }
+                    else
+                    {
+                        root = new H5Response { code = false, status = false, msg = resultH5.return_msg };
+                    }
                 }
+
+
+
                 LogHelper.AddLog(JsonConvert.SerializeObject(root));//记录日志
 
                 return Content(JsonConvert.SerializeObject(root));
@@ -331,7 +403,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             return View();
         }
 
-        public decimal? GetJG(decimal? price, string grade)
+        public decimal? GetJG(decimal? price, string grade,int? existMark)
         {
             //秒杀号码不同步
             //8001以上价位不变
@@ -342,7 +414,12 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             //601 - 800加208
             //801 - 2500加199
             //2501 - 8000四连号加599 三连号以及其他号码价格不动
+
             decimal? jg = price;
+            if (existMark==2)
+            {
+                return jg;//秒杀价格不变
+            }
             if (jg > 0 && jg <= 100)
             {
                 jg = 399;
@@ -380,29 +457,50 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         public ActionResult paymentFinish(int? id)
         {
             ViewBag.Id = id;
-            OrdersEntity ordersEntity = ordersbll.GetEntity(id);
-            if (ordersEntity != null)
+            for (int i = 0; i < 5; i++)
             {
-                if (ordersEntity.PayStatus == 1)
+                OrdersEntity ordersEntity = ordersbll.GetEntity(id);
+                if (ordersEntity != null)
                 {
-                    ViewBag.Result = "支付成功";
-                    ViewBag.icon = "success";
-                    ViewBag.display = "none";
-                    ViewBag.Tel = ordersEntity.Tel;
+                    if (ordersEntity.PayStatus == 1)
+                    {
+                        ViewBag.Result = "支付成功";
+                        ViewBag.icon = "success";
+                        ViewBag.display = "none";
+                        ViewBag.Tel = ordersEntity.Tel;
+                    }
+                    else
+                    {
+                        ViewBag.Result = "未支付";
+                        ViewBag.icon = "warn";
+                        ViewBag.display = "block";
+                        ViewBag.Tel = ordersEntity.Tel;
+                        ViewBag.TelphoneID = ordersEntity.TelphoneID;
+                        ViewBag.Price = ordersEntity.Price;
+
+                    }
                 }
                 else
                 {
-                    ViewBag.Result = "未支付";
-                    ViewBag.icon = "warn";
-                    ViewBag.display = "block";
-                    ViewBag.Tel = ordersEntity.Tel;
-                    ViewBag.TelphoneID = ordersEntity.TelphoneID;
-                    ViewBag.Price = ordersEntity.Price;
-
+                    Thread.Sleep(3000);//当前线程休眠3秒，等待微信回调执行完成
                 }
             }
+
 
             return View();
         }
     }
 }
+//H5支付点击按钮返回报文
+//<xml>
+//  <return_code><![CDATA[SUCCESS]]></return_code>
+//  <return_msg><![CDATA[OK]]></return_msg>
+//  <appid><![CDATA[wx288f944166a4bdc6]]></appid>
+//  <mch_id><![CDATA[1582948931]]></mch_id>
+//  <nonce_str><![CDATA[N8M3gWuQWTFU4GB7]]></nonce_str>
+//  <sign><![CDATA[9BDF874BB44D75ECBED699BCCA55ADB7]]></sign>
+//  <result_code><![CDATA[SUCCESS]]></result_code>
+//  <prepay_id><![CDATA[wx0821504501009699fc47ba7d1821679000]]></prepay_id>
+//  <trade_type><![CDATA[MWEB]]></trade_type>
+//  <mweb_url><![CDATA[https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx0821504501009699fc47ba7d1821679000&package=3205204241]]></mweb_url>
+//</xml>

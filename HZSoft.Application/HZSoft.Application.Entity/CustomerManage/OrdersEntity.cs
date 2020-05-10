@@ -143,6 +143,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// </summary>
         /// <returns></returns>
         public string ReturnSn { get; set; }
+        /// <summary>
+        /// 0 pc  1 手机
+        /// </summary>
+        /// <returns></returns>
+        public int? PC { get; set; }
         #endregion
 
         #region 扩展操作

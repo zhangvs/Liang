@@ -470,7 +470,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 shareOrgSql = " and OrganizeId IN(" + shareOrg + ")";
                 string shareWhere = shareOrgSql + GetSql(queryJson);
                 shareSql = @" UNION all
- SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,CASE ExistMark WHEN '2' THEN '平台秒杀' WHEN '1' THEN '平台现卡' ELSE '平台预售' END Description,Package,EnabledMark,OrganizeId OrganizeId FROM TelphoneLiang
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '平台秒杀' WHEN '1' THEN '平台现卡' ELSE '平台预售' END Description,Package,EnabledMark,OrganizeId OrganizeId FROM TelphoneLiang
  WHERE  SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 and ExistMark=1 "//平台只卖现卡的
     + shareWhere;
             }
@@ -481,7 +481,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
             //自身，父，0级
             string strSql = @" SELECT * FROM (
- SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,Package,EnabledMark,OrganizeId FROM TelphoneLiang 
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,Package,EnabledMark,OrganizeId FROM TelphoneLiang 
  WHERE SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 " + ownWhere//自身可以卖秒杀，现卡，预售
 //+ otherOrgSql//代售功能省略
 + shareSql
