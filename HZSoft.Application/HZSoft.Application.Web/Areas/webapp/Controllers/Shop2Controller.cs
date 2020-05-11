@@ -1,10 +1,12 @@
 ﻿using Aop.Api;
+using Aop.Api.Domain;
 using Aop.Api.Request;
 using Aop.Api.Response;
 using HZSoft.Application.Busines.BaseManage;
 using HZSoft.Application.Busines.CustomerManage;
 using HZSoft.Application.Entity.CustomerManage;
 using HZSoft.Application.Entity.WeChatManage;
+using HZSoft.Application.Web.Utility.AliPay;
 using HZSoft.Util;
 using HZSoft.Util.WebControl;
 using Newtonsoft.Json;
@@ -300,69 +302,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         }
 
 
-        public ActionResult zfb()
-        {
-            IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
-            //IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", "app_id", "merchant_private_key", "json", "1.0", "RSA2", "alipay_public_key", "GBK", false);
-            AlipayTradeCreateRequest request = new AlipayTradeCreateRequest();
-            request.BizContent = "{" +
-            "\"out_trade_no\":\"20150320010101001\"," +
-            "\"seller_id\":\"2088102146225135\"," +
-            "\"total_amount\":88.88," +
-            "\"discountable_amount\":8.88," +
-            "\"subject\":\"Iphone6 16G\"," +
-            "\"body\":\"Iphone6 16G\"," +
-            "\"buyer_id\":\"2088102146225135\"," +
-            "      \"goods_detail\":[{" +
-            "        \"goods_id\":\"apple-01\"," +
-            "\"goods_name\":\"ipad\"," +
-            "\"quantity\":1," +
-            "\"price\":2000," +
-            "\"goods_category\":\"34543238\"," +
-            "\"categories_tree\":\"124868003|126232002|126252004\"," +
-            "\"body\":\"特价手机\"," +
-            "\"show_url\":\"http://www.alipay.com/xxx.jpg\"" +
-            "        }]," +
-            "\"product_code\":\"FACE_TO_FACE_PAYMENT\"," +
-            "\"operator_id\":\"Yx_001\"," +
-            "\"store_id\":\"NJ_001\"," +
-            "\"terminal_id\":\"NJ_T_001\"," +
-            "\"extend_params\":{" +
-            "\"sys_service_provider_id\":\"2088511833207846\"," +
-            "\"card_type\":\"S0JP0000\"" +
-            "    }," +
-            "\"timeout_express\":\"90m\"," +
-            "\"settle_info\":{" +
-            "        \"settle_detail_infos\":[{" +
-            "          \"trans_in_type\":\"cardAliasNo\"," +
-            "\"trans_in\":\"A0001\"," +
-            "\"summary_dimension\":\"A0001\"," +
-            "\"settle_entity_id\":\"2088xxxxx;ST_0001\"," +
-            "\"settle_entity_type\":\"SecondMerchant、Store\"," +
-            "\"amount\":0.1" +
-            "          }]," +
-            "\"settle_period_time\":\"7d\"" +
-            "    }," +
-            "\"logistics_detail\":{" +
-            "\"logistics_type\":\"EXPRESS\"" +
-            "    }," +
-            "\"business_params\":{" +
-            "\"campus_card\":\"0000306634\"," +
-            "\"card_type\":\"T0HK0000\"," +
-            "\"actual_order_time\":\"2019-05-14 09:18:55\"" +
-            "    }," +
-            "\"receiver_address_info\":{" +
-            "\"name\":\"张三\"," +
-            "\"address\":\"上海市浦东新区陆家嘴银城中路501号\"," +
-            "\"mobile\":\"13120180615\"," +
-            "\"zip\":\"200120\"," +
-            "\"division_code\":\"310115\"" +
-            "    }" +
-            "  }";
-            AlipayTradeCreateResponse response = client.Execute(request);
-            Console.WriteLine(response.Body);
-            return null;
-        }
+        
         public ActionResult express(string mobile)
         {
             string display = "none";
@@ -488,6 +428,158 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
 
             return View();
+        }
+
+
+
+
+
+
+
+
+
+
+        public ActionResult zfb()
+        {
+            IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
+            //IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", "app_id", "merchant_private_key", "json", "1.0", "RSA2", "alipay_public_key", "GBK", false);
+            AlipayTradeCreateRequest request = new AlipayTradeCreateRequest();
+            request.BizContent = "{" +
+            "\"out_trade_no\":\"20150320010101001\"," +
+            "\"seller_id\":\"2088102146225135\"," +
+            "\"total_amount\":88.88," +
+            "\"discountable_amount\":8.88," +
+            "\"subject\":\"Iphone6 16G\"," +
+            "\"body\":\"Iphone6 16G\"," +
+            "\"buyer_id\":\"2088102146225135\"," +
+            "      \"goods_detail\":[{" +
+            "        \"goods_id\":\"apple-01\"," +
+            "\"goods_name\":\"ipad\"," +
+            "\"quantity\":1," +
+            "\"price\":2000," +
+            "\"goods_category\":\"34543238\"," +
+            "\"categories_tree\":\"124868003|126232002|126252004\"," +
+            "\"body\":\"特价手机\"," +
+            "\"show_url\":\"http://www.alipay.com/xxx.jpg\"" +
+            "        }]," +
+            "\"product_code\":\"FACE_TO_FACE_PAYMENT\"," +
+            "\"operator_id\":\"Yx_001\"," +
+            "\"store_id\":\"NJ_001\"," +
+            "\"terminal_id\":\"NJ_T_001\"," +
+            "\"extend_params\":{" +
+            "\"sys_service_provider_id\":\"2088511833207846\"," +
+            "\"card_type\":\"S0JP0000\"" +
+            "    }," +
+            "\"timeout_express\":\"90m\"," +
+            "\"settle_info\":{" +
+            "        \"settle_detail_infos\":[{" +
+            "          \"trans_in_type\":\"cardAliasNo\"," +
+            "\"trans_in\":\"A0001\"," +
+            "\"summary_dimension\":\"A0001\"," +
+            "\"settle_entity_id\":\"2088xxxxx;ST_0001\"," +
+            "\"settle_entity_type\":\"SecondMerchant、Store\"," +
+            "\"amount\":0.1" +
+            "          }]," +
+            "\"settle_period_time\":\"7d\"" +
+            "    }," +
+            "\"logistics_detail\":{" +
+            "\"logistics_type\":\"EXPRESS\"" +
+            "    }," +
+            "\"business_params\":{" +
+            "\"campus_card\":\"0000306634\"," +
+            "\"card_type\":\"T0HK0000\"," +
+            "\"actual_order_time\":\"2019-05-14 09:18:55\"" +
+            "    }," +
+            "\"receiver_address_info\":{" +
+            "\"name\":\"张三\"," +
+            "\"address\":\"上海市浦东新区陆家嘴银城中路501号\"," +
+            "\"mobile\":\"13120180615\"," +
+            "\"zip\":\"200120\"," +
+            "\"division_code\":\"310115\"" +
+            "    }" +
+            "  }";
+            AlipayTradeCreateResponse response = client.Execute(request);
+            Console.WriteLine(response.Body);
+            return null;
+        }
+        /// <summary>
+        /// 订单编号
+        /// </summary>
+        /// <param name="oidStr"></param>
+        /// <returns></returns>
+        public ActionResult AliPay(string oidStr)
+        {
+            #region 验证订单有效
+
+            if (string.IsNullOrEmpty(oidStr))
+            {
+                return Json(false, "OrderError");
+            }
+
+            //int[] oIds = Serialize.JsonTo<int[]>(oidStr);
+
+            decimal payPrice = 1;
+
+            ///订单验证，统计订单总金额
+
+            #endregion
+
+            #region 统一下单
+            try
+            {
+                ////var notify_url = AliPayConfig.notify_url;
+                ////var return_url = AliPayConfig.return_url;
+                //IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
+                //AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+                ////SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+                //AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+                //model.Subject = "商品购买";
+                //model.TotalAmount = payPrice.ToString("F2");
+                //model.ProductCode = "QUICK_MSECURITY_PAY";
+                //Random rd = new Random();
+                //var payNum = DateTime.Now.ToString("yyyyMMddHHmmss") + rd.Next(0, 1000).ToString().PadLeft(3, '0');
+                //model.OutTradeNo = payNum;
+                //model.TimeoutExpress = "30m";
+                //request.SetBizModel(model);
+                ////request.SetNotifyUrl(notify_url);
+                ////request.SetReturnUrl(return_url);
+                ////这里和普通的接口调用不同，使用的是sdkExecute
+                //AlipayTradeAppPayResponse response = client.SdkExecute(request);
+
+                ////统一下单
+                ////OrderBll.Value.UpdateOrderApp(oIds, payNum);
+                //Response.Write(HttpUtility.HtmlEncode(response.Body));
+                ////return Json(true, new { response.Body }, "OK");
+                //return null;
+
+
+
+                IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
+                //IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", APPID, APP_PRIVATE_KEY, "json", "1.0", "RSA2", ALIPAY_PUBLIC_KEY, CHARSET, false);
+                //实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称如：alipay.trade.app.pay
+                AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+                //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+                AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+                model.Body = "我是测试数据";
+                model.Subject = "App支付测试DoNet";
+                model.TotalAmount = "0.01";
+                model.ProductCode = "QUICK_MSECURITY_PAY";
+                model.OutTradeNo = "20170216test01";
+                model.TimeoutExpress = "30m";
+                request.SetBizModel(model);
+                request.SetNotifyUrl("https://shop.jnlxsm.net//WeChatManage/WeiXinHome/AliPayNotifyUrl");
+                //这里和普通的接口调用不同，使用的是sdkExecute
+                AlipayTradeAppPayResponse response = client.SdkExecute(request);
+                //HttpUtility.HtmlEncode是为了输出到页面时防止被浏览器将关键参数html转义，实际打印到日志以及http传输不会有这个问题
+                Response.Write(HttpUtility.HtmlEncode(response.Body));
+                //页面输出的response.Body就是orderString 可以直接给客户端请求，无需再做处理。
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = false, msg = "缺少参数" });
+            }
+            #endregion
         }
     }
 }

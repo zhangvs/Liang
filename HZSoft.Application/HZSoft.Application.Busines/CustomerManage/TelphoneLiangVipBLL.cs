@@ -39,6 +39,7 @@ namespace HZSoft.Application.Busines.CustomerManage
         {
             return service.GetList(queryJson);
         }
+
         /// <summary>
         /// 获取实体
         /// </summary>
@@ -47,6 +48,15 @@ namespace HZSoft.Application.Busines.CustomerManage
         public TelphoneLiangVipEntity GetEntity(string keyValue)
         {
             return service.GetEntity(keyValue);
+        }
+        /// <summary>
+        /// 获取实体
+        /// </summary>
+        /// <param name="keyValue">主键值</param>
+        /// <returns></returns>
+        public List<string> GetVipOrgList(string organizeId, string pid, string top)
+        {
+            return service.GetVipOrgList(organizeId, pid, top);
         }
 
         public bool IsShareMark(string organizeId)

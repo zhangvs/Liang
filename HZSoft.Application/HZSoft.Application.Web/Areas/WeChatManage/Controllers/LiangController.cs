@@ -136,6 +136,11 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
             if (!string.IsNullOrEmpty(organizeId))
             {
                 var organize = organizebll.GetEntity(organizeId);
+                var viplist= vipbll.GetVipOrgList(organize.OrganizeId, organize.ParentId, organize.TopOrganizeId);
+                if (viplist.Count==0)
+                {
+                    return Content("当前机构为非Vip机构或需要续费！");
+                }
                 if (organize != null)
                 {
                     ViewBag.FullName = organize.FullName;

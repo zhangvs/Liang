@@ -63,6 +63,56 @@ namespace HZSoft.Application.Service.CustomerManage
                 return false;
             }
         }
+
+
+        /// <summary>
+        /// 判断机构是否逾期，所售机构范围
+        /// </summary>
+        /// <param name="organizeId"></param>
+        /// <param name="pid"></param>
+        /// <param name="top"></param>
+        /// <returns></returns>
+        public List<string> GetVipOrgList(string organizeId, string pid, string top)
+        {
+            List<string> vipList = new List<string>();
+            //判断vip到期情况
+            //1.本机构
+            if (GetVipByOrganizeId(organizeId))
+            {
+                vipList.Add(organizeId);
+            }
+            else
+            {
+                organizeId = "";
+            }
+            //2.代售直属上级
+            if (!string.IsNullOrEmpty(pid) && organizeId != pid)
+            {
+                if (GetVipByOrganizeId(pid))
+                {
+                    vipList.Add(pid);
+                }
+                else
+                {
+                    pid = "";
+                }
+            }
+            else
+            {
+                pid = "";
+            }
+            // 3.顶级机构
+            if (!string.IsNullOrEmpty(top) && top != organizeId && top != pid)
+            {
+                if (GetVipByOrganizeId(top))
+                {
+                    vipList.Add(top);
+                }
+            }
+
+            return vipList;
+        }
+
         /// <summary>
         /// 判断当前机构是否加入共享平台
         /// </summary>

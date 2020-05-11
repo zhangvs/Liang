@@ -34,6 +34,7 @@ namespace HZSoft.Application.IService.CustomerManage
         /// <param name="organizeId"></param>
         /// <returns></returns>
         bool GetVipByOrganizeId(string organizeId);
+        List<string> GetVipOrgList(string organizeId, string pid, string top);
         /// <summary>
         /// 判断当前机构是否到期
         /// </summary>

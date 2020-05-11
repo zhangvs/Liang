@@ -86,7 +86,7 @@ namespace HZSoft.Application.Service.CustomerManage
                     if (!string.IsNullOrEmpty(organizeData.OrganizeId))
                     {
                         //string inOrg = GetInOrg(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
-                        List<string> vipList= GetVipOrgList(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
+                        List<string> vipList= vipService.GetVipOrgList(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
                         string inOrg = GetOtherOrg(vipList);//自定义优先，共享平台其次
                         if (!string.IsNullOrEmpty(inOrg))
                         {
@@ -223,54 +223,6 @@ namespace HZSoft.Application.Service.CustomerManage
                 strSql += " and Operator = " + Operator;
             }
             return strSql;
-        }
-
-        /// <summary>
-        /// 判断机构是否逾期，所售机构范围
-        /// </summary>
-        /// <param name="organizeId"></param>
-        /// <param name="pid"></param>
-        /// <param name="top"></param>
-        /// <returns></returns>
-        private List<string> GetVipOrgList(string organizeId,string pid,string top)
-        {
-            List<string> vipList = new List<string>();   
-            //判断vip到期情况
-            //1.本机构
-            if (vipService.GetVipByOrganizeId(organizeId))
-            {
-                vipList.Add(organizeId);
-            }
-            else
-            {
-                organizeId = "";
-            }
-            //2.代售直属上级
-            if (!string.IsNullOrEmpty(pid) && organizeId != pid)
-            {
-                if (vipService.GetVipByOrganizeId(pid))
-                {
-                    vipList.Add(pid);
-                }
-                else
-                {
-                    pid = "";
-                }
-            }
-            else
-            {
-                pid = "";
-            }
-            // 3.顶级机构
-            if (!string.IsNullOrEmpty(top) && top != organizeId && top != pid)
-            {
-                if (vipService.GetVipByOrganizeId(top))
-                {
-                    vipList.Add(top);
-                }
-            }
-
-            return vipList;
         }
 
 
@@ -445,7 +397,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
             string allOrg = "";
             //过滤出vip机构
-            viplist = GetVipOrgList(organizeId, pid, top);
+            viplist = vipService.GetVipOrgList(organizeId, pid, top);
             foreach (var item in viplist)
             {
                 vipOrg += "'" + item + "',";
@@ -530,7 +482,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
             string allOrg = "";
             //过滤出vip机构
-            viplist = GetVipOrgList(organizeId, pid, top);
+            viplist = vipService.GetVipOrgList(organizeId, pid, top);
             foreach (var item in viplist)
             {
                 vipOrg += "'" + item + "',";
@@ -627,7 +579,7 @@ namespace HZSoft.Application.Service.CustomerManage
             string pid = queryParam["pid"].ToString();
             string top = queryParam["top"].ToString();
             //过滤出vip机构
-            viplist = GetVipOrgList(organizeId, pid, top);
+            viplist = vipService.GetVipOrgList(organizeId, pid, top);
             foreach (var item in viplist)
             {
                 vipOrg += "'" + item + "',";
