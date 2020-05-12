@@ -47,12 +47,12 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         {
             return View();
         }
-        
+
         /// <summary>
         /// 模糊搜索等 + '&price=' + price + '&except=' + except + '&yy=' + yuyi;
         /// </summary>
         /// <returns></returns>
-        public ActionResult ListData(string keyword,string city, int? page, string orderType, string price, string except, string yuyi, string features)
+        public ActionResult ListData(string keyword, string city, int? page, string orderType, string price, string except, string yuyi, string features)
         {
             int ipage = page == null ? 1 : int.Parse(page.ToString());
             string organizeId = "bae859c9-3df5-4da0-bea9-3e20bbc7c353";
@@ -109,7 +109,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         string hou = item.Telphone.Substring(7, 4);
                         string telphone = "<font color='#E33F23'>" + qian + "</font><font color='#3A78F3'>" + zhong + "</font><font color='#E33F23'>" + hou + "</font>";
                         //利新价格调整规则，这是需要单独写代码的价格调整：
-                        decimal? jg = GetJG(item.Price, item.Grade,item.ExistMark);
+                        decimal? jg = GetJG(item.Price, item.Grade, item.ExistMark);
 
                         styleStr +=
                         $" <li> " +
@@ -138,10 +138,10 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         public ActionResult mobileinfo(int? id)
         {
             TelphoneLiangEntity entity = tlbll.GetEntity(id);
-            if (entity!=null)
+            if (entity != null)
             {
                 //利新价格调整规则，这是需要单独写代码的价格调整：
-                entity.Price = GetJG(entity.Price, entity.Grade,entity.ExistMark);
+                entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
                 entity.MaxPrice = entity.Price * 2;
             }
 
@@ -166,7 +166,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             try
             {
                 string[] area = ordersEntity.City.Split(' ');
-                if (area.Length>0)
+                if (area.Length > 0)
                 {
                     ordersEntity.Province = area[0];//省
                     ordersEntity.City = area[1];//市
@@ -182,9 +182,14 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 //商品Id，用户自行定义
                 string productId = ordersEntity.TelphoneID.ToString();
 
+                if (ordersEntity.PayType == "alipay")
+                {
+                    Redirect("alipay");
+                }
+
                 H5Response root = null;
                 //pc端返回二维码，否则H5
-                if (ordersEntity.PC==1)
+                if (ordersEntity.PC == 1)
                 {
                     //创建请求统一订单接口参数
                     var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
@@ -302,7 +307,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         }
 
 
-        
+
         public ActionResult express(string mobile)
         {
             string display = "none";
@@ -343,7 +348,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             return View();
         }
 
-        public decimal? GetJG(decimal? price, string grade,int? existMark)
+        public decimal? GetJG(decimal? price, string grade, int? existMark)
         {
             //秒杀号码不同步
             //8001以上价位不变
@@ -356,7 +361,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             //2501 - 8000四连号加599 三连号以及其他号码价格不动
 
             decimal? jg = price;
-            if (existMark==2)
+            if (existMark == 2)
             {
                 return jg;//秒杀价格不变
             }
@@ -397,36 +402,29 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         public ActionResult paymentFinish(int? id)
         {
             ViewBag.Id = id;
+            OrdersEntity ordersEntity = ordersbll.GetEntity(id);
             for (int i = 0; i < 5; i++)
             {
-                OrdersEntity ordersEntity = ordersbll.GetEntity(id);
-                if (ordersEntity != null)
+                if (ordersEntity.PayStatus == 1)//如果支付成功直接返回
                 {
-                    if (ordersEntity.PayStatus == 1)
-                    {
-                        ViewBag.Result = "支付成功";
-                        ViewBag.icon = "success";
-                        ViewBag.display = "none";
-                        ViewBag.Tel = ordersEntity.Tel;
-                    }
-                    else
-                    {
-                        ViewBag.Result = "未支付";
-                        ViewBag.icon = "warn";
-                        ViewBag.display = "block";
-                        ViewBag.Tel = ordersEntity.Tel;
-                        ViewBag.TelphoneID = ordersEntity.TelphoneID;
-                        ViewBag.Price = ordersEntity.Price;
-
-                    }
+                    ViewBag.Result = "支付成功";
+                    ViewBag.icon = "success";
+                    ViewBag.display = "none";
+                    ViewBag.Tel = ordersEntity.Tel;
+                    return View();
                 }
                 else
                 {
                     Thread.Sleep(3000);//当前线程休眠3秒，等待微信回调执行完成
                 }
             }
-
-
+            //如果超过15秒还未支付成功，返回未支付，防止直接跳转结果页面，显示失败，微信回调还没有完成
+            ViewBag.Result = "未支付";
+            ViewBag.icon = "warn";
+            ViewBag.display = "block";
+            ViewBag.Tel = ordersEntity.Tel;
+            ViewBag.TelphoneID = ordersEntity.TelphoneID;
+            ViewBag.Price = ordersEntity.Price;
             return View();
         }
 
@@ -507,77 +505,62 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         /// </summary>
         /// <param name="oidStr"></param>
         /// <returns></returns>
-        public ActionResult AliPay(string oidStr)
+        public void AliPay()
         {
-            #region 验证订单有效
-
-            if (string.IsNullOrEmpty(oidStr))
-            {
-                return Json(false, "OrderError");
-            }
-
-            //int[] oIds = Serialize.JsonTo<int[]>(oidStr);
-
-            decimal payPrice = 1;
-
-            ///订单验证，统计订单总金额
-
-            #endregion
 
             #region 统一下单
             try
             {
-                ////var notify_url = AliPayConfig.notify_url;
-                ////var return_url = AliPayConfig.return_url;
-                //IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
-                //AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
-                ////SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
-                //AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
-                //model.Subject = "商品购买";
-                //model.TotalAmount = payPrice.ToString("F2");
-                //model.ProductCode = "QUICK_MSECURITY_PAY";
-                //Random rd = new Random();
-                //var payNum = DateTime.Now.ToString("yyyyMMddHHmmss") + rd.Next(0, 1000).ToString().PadLeft(3, '0');
-                //model.OutTradeNo = payNum;
-                //model.TimeoutExpress = "30m";
-                //request.SetBizModel(model);
-                ////request.SetNotifyUrl(notify_url);
-                ////request.SetReturnUrl(return_url);
-                ////这里和普通的接口调用不同，使用的是sdkExecute
-                //AlipayTradeAppPayResponse response = client.SdkExecute(request);
 
-                ////统一下单
-                ////OrderBll.Value.UpdateOrderApp(oIds, payNum);
-                //Response.Write(HttpUtility.HtmlEncode(response.Body));
-                ////return Json(true, new { response.Body }, "OK");
-                //return null;
+                DefaultAopClient client = new DefaultAopClient(WeixinConfig.serviceUrl, WeixinConfig.appId, WeixinConfig.privateKey, "json", "1.0",
+                    WeixinConfig.signType, WeixinConfig.publicKey, WeixinConfig.charset, false);
 
+                // 外部订单号，商户网站订单系统中唯一的订单号
+                string out_trade_no = "20170216test01";
 
+                // 订单名称
+                string subject = "App支付测试DoNet";
 
-                IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
-                //IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", APPID, APP_PRIVATE_KEY, "json", "1.0", "RSA2", ALIPAY_PUBLIC_KEY, CHARSET, false);
-                //实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称如：alipay.trade.app.pay
-                AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
-                //SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
-                AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
-                model.Body = "我是测试数据";
-                model.Subject = "App支付测试DoNet";
-                model.TotalAmount = "0.01";
-                model.ProductCode = "QUICK_MSECURITY_PAY";
-                model.OutTradeNo = "20170216test01";
-                model.TimeoutExpress = "30m";
+                // 付款金额
+                string total_amout = "0.01";
+
+                // 商品描述
+                string body = "我是测试数据";
+
+                // 支付中途退出返回商户网站地址
+                string quit_url = "https://wl012.rrzwl.com/webapp/shop2/index";
+
+                // 组装业务参数model
+                AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
+                model.Body = body;
+                model.Subject = subject;
+                model.TotalAmount = total_amout;
+                model.OutTradeNo = out_trade_no;
+                model.ProductCode = "QUICK_WAP_WAY";
+                model.QuitUrl = quit_url;
+
+                AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
+                // 设置支付完成同步回调地址
+                // request.SetReturnUrl("");
+                // 设置支付完成异步通知接收地址
+                // request.SetNotifyUrl("");
+                // 将业务model载入到request
                 request.SetBizModel(model);
-                request.SetNotifyUrl("https://shop.jnlxsm.net//WeChatManage/WeiXinHome/AliPayNotifyUrl");
-                //这里和普通的接口调用不同，使用的是sdkExecute
-                AlipayTradeAppPayResponse response = client.SdkExecute(request);
-                //HttpUtility.HtmlEncode是为了输出到页面时防止被浏览器将关键参数html转义，实际打印到日志以及http传输不会有这个问题
-                Response.Write(HttpUtility.HtmlEncode(response.Body));
-                //页面输出的response.Body就是orderString 可以直接给客户端请求，无需再做处理。
-                return null;
+
+                AlipayTradeWapPayResponse response = null;
+                try
+                {
+                    response = client.pageExecute(request, null, "post");
+                    Response.Write(response.Body);
+                }
+                catch (Exception exp)
+                {
+                    throw exp;
+                }
             }
             catch (Exception ex)
             {
-                return Json(new { Result = false, msg = "缺少参数" });
+                //return Json(new { Result = false, msg = "缺少参数" });
             }
             #endregion
         }
@@ -596,3 +579,58 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 //  <trade_type><![CDATA[MWEB]]></trade_type>
 //  <mweb_url><![CDATA[https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx0821504501009699fc47ba7d1821679000&package=3205204241]]></mweb_url>
 //</xml>
+
+
+
+
+
+
+//支付宝
+
+////var notify_url = AliPayConfig.notify_url;
+////var return_url = AliPayConfig.return_url;
+//IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
+//AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+////SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+//AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+//model.Subject = "商品购买";
+//model.TotalAmount = payPrice.ToString("F2");
+//model.ProductCode = "QUICK_MSECURITY_PAY";
+//Random rd = new Random();
+//var payNum = DateTime.Now.ToString("yyyyMMddHHmmss") + rd.Next(0, 1000).ToString().PadLeft(3, '0');
+//model.OutTradeNo = payNum;
+//model.TimeoutExpress = "30m";
+//request.SetBizModel(model);
+////request.SetNotifyUrl(notify_url);
+////request.SetReturnUrl(return_url);
+////这里和普通的接口调用不同，使用的是sdkExecute
+//AlipayTradeAppPayResponse response = client.SdkExecute(request);
+
+////统一下单
+////OrderBll.Value.UpdateOrderApp(oIds, payNum);
+//Response.Write(HttpUtility.HtmlEncode(response.Body));
+////return Json(true, new { response.Body }, "OK");
+//return null;
+
+
+
+//IAopClient client = Utility.AliPay.AliPay.GetAlipayClient();
+////IAopClient client = new DefaultAopClient("https://openapi.alipay.com/gateway.do", APPID, APP_PRIVATE_KEY, "json", "1.0", "RSA2", ALIPAY_PUBLIC_KEY, CHARSET, false);
+////实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称如：alipay.trade.app.pay
+//AlipayTradeAppPayRequest request = new AlipayTradeAppPayRequest();
+////SDK已经封装掉了公共参数，这里只需要传入业务参数。以下方法为sdk的model入参方式(model和biz_content同时存在的情况下取biz_content)。
+//AlipayTradeAppPayModel model = new AlipayTradeAppPayModel();
+//model.Body = "我是测试数据";
+//model.Subject = "App支付测试DoNet";
+//model.TotalAmount = "0.01";
+//model.ProductCode = "QUICK_MSECURITY_PAY";
+//model.OutTradeNo = "20170216test01";
+//model.TimeoutExpress = "30m";
+//request.SetBizModel(model);
+//request.SetNotifyUrl("https://shop.jnlxsm.net/WeChatManage/WeiXinHome/AliPayNotifyUrl");
+////这里和普通的接口调用不同，使用的是sdkExecute
+//AlipayTradeAppPayResponse response = client.SdkExecute(request);
+////HttpUtility.HtmlEncode是为了输出到页面时防止被浏览器将关键参数html转义，实际打印到日志以及http传输不会有这个问题
+//Response.Write(HttpUtility.HtmlEncode(response.Body));
+////页面输出的response.Body就是orderString 可以直接给客户端请求，无需再做处理。
+//return null;
