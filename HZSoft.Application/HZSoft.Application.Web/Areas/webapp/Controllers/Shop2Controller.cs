@@ -32,7 +32,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
         private static TenPayV3Info tenPayV3Info = new TenPayV3Info(WeixinConfig.AppID2, WeixinConfig.AppSecret2, WeixinConfig.MchId
             , WeixinConfig.Key, WeixinConfig.TenPayV3Notify);
-
+        
         //
         // GET: /webapp/Shop/
         public ActionResult Index()
@@ -54,6 +54,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         /// <returns></returns>
         public ActionResult ListData(string keyword, string city, int? page, string orderType, string price, string except, string yuyi, string features)
         {
+            string host= Request.Url.Host;
             int ipage = page == null ? 1 : int.Parse(page.ToString());
             string organizeId = "bae859c9-3df5-4da0-bea9-3e20bbc7c353";
             if (!string.IsNullOrEmpty(organizeId))
@@ -113,7 +114,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='https://shop.jnlxsm.net/webapp/shop2/mobileinfo/{item.TelphoneID}'>" +
+                        $"    <a href='https://shop.jnlxsm.net/webapp/shop2/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -135,7 +136,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         }
 
 
-        public ActionResult mobileinfo(int? id)
+        public ActionResult mobileinfo(int? id,string host)
         {
             TelphoneLiangEntity entity = tlbll.GetEntity(id);
             if (entity != null)
@@ -143,6 +144,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 //利新价格调整规则，这是需要单独写代码的价格调整：
                 entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
                 entity.MaxPrice = entity.Price * 2;
+                ViewBag.host = host;
             }
 
             return View(entity);
@@ -150,11 +152,12 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         //
         // GET: /H5/Home/
 
-        public ActionResult mobileorder(int? id, string Tel, string Price)
+        public ActionResult mobileorder(int? id, string Tel, string Price,string host)
         {
             ViewBag.id = id;
             ViewBag.Tel = Tel;
             ViewBag.Price = Price;
+            ViewBag.host = host;
             return View();
         }
 
@@ -162,7 +165,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         [HttpPost]
         public ActionResult ajaxorder(OrdersEntity ordersEntity)
         {
-            //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/WeChatManage/user_order/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/WeChatManage/user_order/paymentFinish/11\"}}");
+            //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/webapp/shop2/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/webapp/shop2/paymentFinish/11\"}}");
             try
             {
                 string[] area = ordersEntity.City.Split(' ');
@@ -172,8 +175,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     ordersEntity.City = area[1];//市
                 }
 
-
-                ordersEntity.Host = Request.Url.Host;
+                
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
                 var sp_billno = ordersEntity.OrderSn;
@@ -223,8 +225,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                             trade_type = "NATIVE",
                             trade_no = sp_billno,
                             payid = ordersEntity.Id.ToString(),
-                            wx_query_href = Config.GetValue("Domain2") + "/WeChatManage/user_order/queryWx/" + ordersEntity.Id,
-                            wx_query_over = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id
+                            wx_query_href = Config.GetValue("Domain2") + "/webapp/shop2/queryWx/" + ordersEntity.Id,
+                            wx_query_over = Config.GetValue("Domain2") + "/webapp/shop2/paymentFinish/" + ordersEntity.Id
                         };
 
                         root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -257,8 +259,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                             trade_type = "H5",
                             trade_no = sp_billno,
                             payid = ordersEntity.Id.ToString(),
-                            wx_query_href = Config.GetValue("Domain2") + "/WeChatManage/user_order/queryWx/" + ordersEntity.Id,
-                            wx_query_over = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id
+                            wx_query_href = Config.GetValue("Domain2") + "/webapp/shop2/queryWx/" + ordersEntity.Id,
+                            wx_query_over = Config.GetValue("Domain2") + "/webapp/shop2/paymentFinish/" + ordersEntity.Id
                         };
 
                         root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -276,7 +278,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         //ViewData["paySign"] = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, tenPayV3Info.Key);
 
                         ////设置成功页面（也可以不设置，支付成功后默认返回来源地址）
-                        //var returnUrl = Config.GetValue("Domain2") + "/WeChatManage/user_order/paymentFinish/" + ordersEntity.Id;
+                        //var returnUrl = Config.GetValue("Domain2") + "/webapp/shop2/paymentFinish/" + ordersEntity.Id;
 
                         //var mwebUrl = resultH5.mweb_url;
                         //if (!string.IsNullOrEmpty(returnUrl))
@@ -397,25 +399,41 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         }
 
 
+        public ActionResult queryWx(int? id)
+        {
+            OrdersEntity ordersEntity = ordersbll.GetEntity(id);
+            if (ordersEntity.PayStatus == 1)
+            {
+                return Json(new { status = true });
+            }
+            return Json(new { status = false });
+        }
 
-
+        /// <summary>
+        /// 支付结果页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult paymentFinish(int? id)
         {
             ViewBag.Id = id;
-            OrdersEntity ordersEntity = ordersbll.GetEntity(id);
+            OrdersEntity ordersEntity = ordersbll.GetEntity(id);//第一次打开，微信回调还没完成，一般是未支付状态
             for (int i = 0; i < 5; i++)
             {
+                ordersEntity = ordersbll.GetEntity(id);//第二次才会成功获取到支付成功状态
                 if (ordersEntity.PayStatus == 1)//如果支付成功直接返回
                 {
                     ViewBag.Result = "支付成功";
                     ViewBag.icon = "success";
                     ViewBag.display = "none";
                     ViewBag.Tel = ordersEntity.Tel;
+                    LogHelper.AddLog(id + "支付成功");
                     return View();
                 }
                 else
                 {
                     Thread.Sleep(3000);//当前线程休眠3秒，等待微信回调执行完成
+                    LogHelper.AddLog(id + "支付结果获取："+i);
                 }
             }
             //如果超过15秒还未支付成功，返回未支付，防止直接跳转结果页面，显示失败，微信回调还没有完成

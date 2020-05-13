@@ -110,11 +110,11 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     order.Status = (int)OrderStatus.未发货;
                     ordersbll.SaveForm(order.Id, order);
 
-                    TelphoneLiangEntity tel = tlbll.GetEntityByOrgTel(order.Tel);
+                    TelphoneLiangEntity tel = tlbll.GetEntity(order.TelphoneID);//根据靓号id获取靓号，修改售出状态
                     if (tel != null)
                     {
                         tel.SellMark = 1;
-                        tel.SellerName = "头条出售";
+                        tel.SellerName = order.Host;
                     }
                     tlbll.SaveForm(tel.TelphoneID,tel);
                 }

@@ -54,6 +54,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
         /// <returns></returns>
         public ActionResult ListData(string keyword, string organizeId, string city, int page, string orderType, string price, string except, string yuyi, string features, string ExistMark)
         {
+            string url = Request.Url.ToString();
             if (!string.IsNullOrEmpty(organizeId))
             {
                 var organize = organizebll.GetEntity(organizeId);
@@ -98,7 +99,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     };
                     var entityList = tlbll.GetPageListH5(pagination, queryJson.ToString());
 
-                    LogHelper.AddLog("LiangApi调用");//记录日志
+                    LogHelper.AddLog("LiangApi调用:"+ url);//记录日志
                     return Content(JsonConvert.SerializeObject(entityList));
                 }
                 return Content("机构暂时未生效或不存在");
