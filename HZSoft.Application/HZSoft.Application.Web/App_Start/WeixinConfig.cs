@@ -31,7 +31,7 @@ namespace HZSoft.Application.Web
         public static string serviceUrl { private set; get; }
 
         //应用ID
-        public static string appId { private set; get; }
+        public static string aliAppId { private set; get; }
 
         //开发者私钥，由开发者自己生成
         public static string privateKey { private set; get; }
@@ -85,7 +85,7 @@ namespace HZSoft.Application.Web
 
 
             serviceUrl = Config.GetValue("aliServiceUrl");
-            appId = Config.GetValue("aliAppId");
+            aliAppId = Config.GetValue("aliAppId");
             privateKey = Config.GetValue("aliPrivateKey");
             publicKey = Config.GetValue("aliPublicKey");
             payKey = Config.GetValue("aliPayKey");

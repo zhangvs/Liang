@@ -73,7 +73,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                             OpenId = userInfo.openid,
                             Province = userInfo.province,
                             Sex = userInfo.sex,
-                            AppName=WeixinConfig.AppName
+                            AppName = WeixinConfig.AppName
                         };
                         userBll.SaveForm("", userEntity);
                     }
@@ -104,7 +104,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     //订单号
                     string orderSn = rspHandler.GetParameter("out_trade_no");
                     OrdersEntity order = ordersbll.GetEntityByOrderSn(orderSn);
-                    
+
                     order.PayDate = DateTime.Now;
                     order.PayStatus = (int)PayStatus.已支付;
                     order.Status = (int)OrderStatus.未发货;
@@ -116,7 +116,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                         tel.SellMark = 1;
                         tel.SellerName = order.Host;
                     }
-                    tlbll.SaveForm(tel.TelphoneID,tel);
+                    tlbll.SaveForm(tel.TelphoneID, tel);
                 }
             }
 
@@ -128,147 +128,232 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
 
         }
 
-
+        /// <summary>
+        /// 服务器异步通知页面
+        /// </summary>
+        public ActionResult ReturnUrl()
+        {
+            /* 实际验证过程建议商户添加以下校验。
+            1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
+            2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
+            3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
+            4、验证app_id是否为该商户本身。
+            */
+            Dictionary<string, string> sArray = GetRequestGet();
+            if (sArray.Count != 0)
+            {
+                bool flag = AlipaySignature.RSACheckV1(sArray, WeixinConfig.payKey, WeixinConfig.charset, WeixinConfig.signType, false);//支付宝公钥
+                //订单号
+                OrdersEntity order = ordersbll.GetEntityByOrderSn(sArray["out_trade_no"]);
+                if (flag)
+                {
+                    ViewBag.Result = "支付成功";
+                    ViewBag.icon = "success";
+                    ViewBag.display = "none";
+                    ViewBag.Tel = order.Tel;
+                    LogHelper.AddLog("同步验证通过,订单号：" + order.Tel);
+                }
+                else
+                {
+                    ViewBag.Result = "未支付";
+                    ViewBag.icon = "warn";
+                    ViewBag.display = "block";
+                    ViewBag.Tel = order.Tel;
+                    ViewBag.TelphoneID = order.TelphoneID;
+                    ViewBag.Price = order.Price;
+                    LogHelper.AddLog("同步验证失败,订单号：" + order.Tel);
+                }
+            }
+            return View();
+        }
 
         /// <summary>
         /// 服务器异步通知页面
         /// </summary>
         public void AliPayNotifyUrl()
         {
-            //Pay.Log Log = new Pay.Log(AliPayConfig.LogPath);
-            LogHelper.AddLog("AliPayNotifyUrl：支付页面异步回调");
-            IDictionary<string, string> map = GetRequestPost();
+            ////Pay.Log Log = new Pay.Log(AliPayConfig.LogPath);
+            //IDictionary<string, string> map = GetRequestPost();
 
-            if (map.Count > 0)
+            //LogHelper.AddLog("AliPayNotifyUrl：支付页面异步回调："+ map.Count);
+            //if (map.Count > 0)
+            //{
+            //    try
+            //    {
+            //        string alipayPublicKey = AliPayConfig.payKey;
+            //        string signType = AliPayConfig.signType;
+            //        string charset = AliPayConfig.charset;
+            //        bool keyFromFile = false;
+
+            //        bool verify_result = AlipaySignature.RSACheckV1(map, alipayPublicKey, charset, signType, keyFromFile);
+            //        LogHelper.AddLog("AliPayNotifyUrl验签:" + verify_result + "");
+
+            //        //验签成功后，按照支付结果异步通知中的描述，对支付结果中的业务内容进行二次校验，校验成功后再response中返回success并继续商户自身业务处理，校验失败返回false
+            //        if (verify_result)
+            //        {
+            //            //商户订单号
+            //            string out_trade_no = map["out_trade_no"];
+            //            //支付宝交易号
+            //            string trade_no = map["trade_no"];
+            //            //交易创建时间
+            //            string gmt_create = map["gmt_create"];
+            //            //交易付款时间
+            //            string gmt_payment = map["gmt_payment"];
+            //            //通知时间
+            //            string notify_time = map["notify_time"];
+            //            //通知类型  trade_status_sync
+            //            string notify_type = map["notify_type"];
+            //            //通知校验ID
+            //            string notify_id = map["notify_id"];
+            //            //开发者的app_id
+            //            string app_id = map["app_id"];
+            //            //卖家支付宝用户号
+            //            string seller_id = map["seller_id"];
+            //            //买家支付宝用户号
+            //            string buyer_id = map["buyer_id"];
+            //            //实收金额
+            //            string receipt_amount = map["receipt_amount"];
+            //            //交易状态
+            //            string return_code = map["trade_status"];
+
+            //            //交易状态TRADE_FINISHED的通知触发条件是商户签约的产品不支持退款功能的前提下，买家付款成功；
+            //            //或者，商户签约的产品支持退款功能的前提下，交易已经成功并且已经超过可退款期限
+            //            //状态TRADE_SUCCESS的通知触发条件是商户签约的产品支持退款功能的前提下，买家付款成功
+            //            if (return_code == "TRADE_FINISHED" || return_code == "TRADE_SUCCESS")
+            //            {
+            //                string msg;
+
+            //                LogHelper.AddLog("AliPayNotifyUrl：" + receipt_amount + "==" + trade_no + "==" + return_code + "==" + out_trade_no + "==" + gmt_payment);
+
+            //                //判断该笔订单是否在商户网站中已经做过处理
+            //                ///支付回调的业务处理
+            //                //bool res = OrderBll.Value.CompleteAliPay(receipt_amount, trade_no, return_code, out_trade_no, gmt_payment, out msg);
+
+
+            //                //订单号
+            //                OrdersEntity order = ordersbll.GetEntityByOrderSn(out_trade_no);
+
+            //                order.PayDate = DateTime.Now;
+            //                order.PayStatus = (int)PayStatus.已支付;
+            //                order.Status = (int)OrderStatus.未发货;
+            //                ordersbll.SaveForm(order.Id, order);
+
+            //                TelphoneLiangEntity tel = tlbll.GetEntity(order.TelphoneID);//根据靓号id获取靓号，修改售出状态
+            //                if (tel != null)
+            //                {
+            //                    tel.SellMark = 1;
+            //                    tel.SellerName = order.Host;
+            //                }
+            //                tlbll.SaveForm(tel.TelphoneID, tel);
+
+            //                bool res = true;
+
+            //                if (res == false)
+            //                {
+            //                    Response.Write("添加支付信息失败!");
+            //                }
+            //                LogHelper.AddLog("AliPayNotifyUrl：支付成功:" + out_trade_no + "下架：" + tel.TelphoneID);
+            //                Response.Write("success");  //请不要修改或删除
+            //            }
+            //        }
+            //        else
+            //        {
+            //            //验证失败
+            //            LogHelper.AddLog("AliPayNotifyUrl：支付验证失败");
+            //            Response.Write("验证失败!");
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        Response.Write("添加支付信息失败!");
+            //        LogHelper.AddLog("AliPayNotifyUrl：添加支付信息失败");
+            //    }
+            //}
+            //else
+            //{
+            //    //无返回参数
+            //    Response.Write("无返回参数!");
+            //    LogHelper.AddLog("AliPayNotifyUrl：无返回参数");
+            //}
+
+            /* 实际验证过程建议商户添加以下校验。
+            1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
+            2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
+            3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
+            4、验证app_id是否为该商户本身。
+            */
+            Dictionary<string, string> sArray = GetRequestPost();
+            if (sArray.Count != 0)
             {
-                try
+                bool flag = AlipaySignature.RSACheckV1(sArray, WeixinConfig.payKey, WeixinConfig.charset, WeixinConfig.signType, false);//支付宝公钥
+                //订单号
+                OrdersEntity order = ordersbll.GetEntityByOrderSn(sArray["out_trade_no"]);
+                if (flag)
                 {
-                    string alipayPublicKey = AliPayConfig.payKey;
-                    string signType = AliPayConfig.signType;
-                    string charset = AliPayConfig.charset;
-                    bool keyFromFile = false;
+                    //交易状态
+                    //判断该笔订单是否在商户网站中已经做过处理
+                    //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+                    //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+                    //如果有做过处理，不执行商户的业务程序
 
-                    bool verify_result = AlipaySignature.RSACheckV1(map, alipayPublicKey, charset, signType, keyFromFile);
-                    LogHelper.AddLog("AliPayNotifyUrl验签:"+verify_result + "");
 
-                    //验签成功后，按照支付结果异步通知中的描述，对支付结果中的业务内容进行二次校验，校验成功后再response中返回success并继续商户自身业务处理，校验失败返回false
-                    if (verify_result)
+                    order.PayDate = DateTime.Now;
+                    order.PayStatus = (int)PayStatus.已支付;
+                    order.Status = (int)OrderStatus.未发货;
+                    ordersbll.SaveForm(order.Id, order);
+
+                    TelphoneLiangEntity tel = tlbll.GetEntity(order.TelphoneID);//根据靓号id获取靓号，修改售出状态
+                    if (tel != null)
                     {
-                        //商户订单号
-                        string out_trade_no = map["out_trade_no"];
-                        //支付宝交易号
-                        string trade_no = map["trade_no"];
-                        //交易创建时间
-                        string gmt_create = map["gmt_create"];
-                        //交易付款时间
-                        string gmt_payment = map["gmt_payment"];
-                        //通知时间
-                        string notify_time = map["notify_time"];
-                        //通知类型  trade_status_sync
-                        string notify_type = map["notify_type"];
-                        //通知校验ID
-                        string notify_id = map["notify_id"];
-                        //开发者的app_id
-                        string app_id = map["app_id"];
-                        //卖家支付宝用户号
-                        string seller_id = map["seller_id"];
-                        //买家支付宝用户号
-                        string buyer_id = map["buyer_id"];
-                        //实收金额
-                        string receipt_amount = map["receipt_amount"];
-                        //交易状态
-                        string return_code = map["trade_status"];
-
-                        //交易状态TRADE_FINISHED的通知触发条件是商户签约的产品不支持退款功能的前提下，买家付款成功；
-                        //或者，商户签约的产品支持退款功能的前提下，交易已经成功并且已经超过可退款期限
-                        //状态TRADE_SUCCESS的通知触发条件是商户签约的产品支持退款功能的前提下，买家付款成功
-                        if (return_code == "TRADE_FINISHED" || return_code == "TRADE_SUCCESS")
-                        {
-                            string msg;
-
-                            LogHelper.AddLog("AliPayNotifyUrl："+receipt_amount + "==" + trade_no + "==" + return_code + "==" + out_trade_no + "==" + gmt_payment);
-
-                            //判断该笔订单是否在商户网站中已经做过处理
-                            ///支付回调的业务处理
-                            //bool res = OrderBll.Value.CompleteAliPay(receipt_amount, trade_no, return_code, out_trade_no, gmt_payment, out msg);
-                            bool res = true;
-
-                            if (res == false)
-                            {
-                                Response.Write("添加支付信息失败!");
-                            }
-                            LogHelper.AddLog("AliPayNotifyUrl：支付成功");
-                            Response.Write("success");  //请不要修改或删除
-                        }
+                        tel.SellMark = 1;
+                        tel.SellerName = order.Host;
                     }
-                    else
-                    {
-                        //验证失败
-                        LogHelper.AddLog("AliPayNotifyUrl：支付验证失败");
-                        Response.Write("验证失败!");
-                    }
+                    tlbll.SaveForm(tel.TelphoneID, tel);
+
+                    //注意：
+                    //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+                    string trade_status = Request.Form["trade_status"];
+
+                    LogHelper.AddLog("异步调用success,订单号："+ order.Id);
                 }
-                catch (Exception e)
+                else
                 {
-                    Response.Write("添加支付信息失败!");
-                    LogHelper.AddLog("AliPayNotifyUrl：添加支付信息失败");
+                    LogHelper.AddLog("异步调用fail,订单号：" + order.Id);
                 }
-            }
-            else
-            {
-                //无返回参数
-                Response.Write("无返回参数!");
-                LogHelper.AddLog("AliPayNotifyUrl：无返回参数");
             }
         }
 
 
-        /// <summary>
-        /// 获取支付宝Get过来的通知消息，并以“参数名=参数值”的形式组成数组
-        /// </summary>
-        /// <returns></returns>
-        public IDictionary<string, string> GetRequestGet()
+        public Dictionary<string, string> GetRequestPost()
         {
-            //Pay.Log Log = new Pay.Log(Pay.AliPay.AliPayConfig.LogPath);
             int i = 0;
-            IDictionary<string, string> sArry = new Dictionary<string, string>();
+            Dictionary<string, string> sArray = new Dictionary<string, string>();
             NameValueCollection coll;
-            coll = Request.QueryString;
-
-            String[] requstItem = coll.AllKeys;
-
-            for (i = 0; i < requstItem.Length; i++)
-            {
-                LogHelper.AddLog("GetRequestGet:"+ requstItem[i] + ":" + Request.QueryString[requstItem[i]]);
-                sArry.Add(requstItem[i], Request.QueryString[requstItem[i]]);
-            }
-
-            return sArry;
-        }
-
-        /// <summary>
-        /// 获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
-        /// </summary>
-        /// <returns>request回来的信息组成的数组</returns>
-        public IDictionary<string, string> GetRequestPost()
-        {
-            //Pay.Log Log = new Pay.Log(Pay.AliPay.AliPayConfig.LogPath);
-            int i = 0;
-            IDictionary<string, string> sArray = new Dictionary<string, string>();
-            NameValueCollection coll;
-
-            //Load Form variables into NameValueCollection variable.
+            //coll = Request.Form;
             coll = Request.Form;
-
-            // Get names of all forms into a string array.
             String[] requestItem = coll.AllKeys;
             for (i = 0; i < requestItem.Length; i++)
             {
-                LogHelper.AddLog("GetRequestPost"+requestItem[i] + ":" + Request.Form[requestItem[i]]);
                 sArray.Add(requestItem[i], Request.Form[requestItem[i]]);
             }
-
             return sArray;
+
+        }
+
+        public Dictionary<string, string> GetRequestGet()
+        {
+            int i = 0;
+            Dictionary<string, string> sArray = new Dictionary<string, string>();
+            NameValueCollection coll;
+            //coll = Request.Form;
+            coll = Request.QueryString;
+            String[] requestItem = coll.AllKeys;
+            for (i = 0; i < requestItem.Length; i++)
+            {
+                sArray.Add(requestItem[i], Request.QueryString[requestItem[i]]);
+            }
+            return sArray;
+
         }
     }
 }

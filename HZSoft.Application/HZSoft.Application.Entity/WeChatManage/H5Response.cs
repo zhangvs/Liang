@@ -107,6 +107,10 @@ namespace HZSoft.Application.Entity.WeChatManage
         /// 
         /// </summary>
         public string wx_query_over { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string form { get; set; }
     }
 
 

@@ -1979,6 +1979,7 @@
     <Content Include="Areas\webapp\Views\Shop\mobileinfo.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\mobileorder.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\paymentFinish.cshtml" />
+    <Content Include="Areas\WeChatManage\Views\WeiXinHome\ReturnUrl.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

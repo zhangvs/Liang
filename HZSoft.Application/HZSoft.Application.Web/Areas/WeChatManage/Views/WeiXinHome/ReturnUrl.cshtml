@@ -1,0 +1,87 @@
+﻿
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="applicable-device" content="mobile">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="支付结果 - 号运来靓号网">
+    <title>支付结果 - 号运来靓号网</title>
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/assets/wap/css/weui.min.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/weui.min.jquery.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/global.css?v=7.4" rel="stylesheet">
+    <link href="/assets/wap/css/user.css?v=7.4" rel="stylesheet">
+    <!-- Bytedance Tracking -->
+    <script>
+        var baseUrl = '';
+        (function (r, d, s, l) {
+            var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                }
+            }; for (var i = 0; i < meteor.methods.length; i++) {
+                var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+            } meteor.load = function () {
+                var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+            }; meteor.load(); if (meteor.invoked) { return }
+            meteor.invoked = true; meteor.track("pageview")
+        })(window, document, "script", "1663392064049159");
+    </script>
+    <!-- End Bytedance Tracking -->
+</head>
+<body>
+    <!--主体部分 开始-->
+    <div class="wrapper">
+        <header><a href="javascript:history.go(-1);" class="t_icon"></a>支付结果</header>
+        <div class="mpart">
+            <div class="vision">
+                <div class="s_mide layer" data-depth=".35"></div>
+                <div class="s_botm layer" data-depth-x=".1" data-depth-y=".08"></div>
+                <div class="s_botm layer" data-depth-x=".18" data-depth-y=".15"></div>
+            </div>
+        </div>
+        <div class="weui-msg" style="padding:2rem 0.5rem 0;background:#fff; ">
+            <div class="weui-msg__icon-area" style="margin-bottom: 10px;">
+                <i class="weui-icon-@ViewBag.icon weui-icon_msg"></i>
+            </div>
+            <div class="weui-msg__text-area">
+                <h2 class="weui-msg__title">@ViewBag.Result</h2>
+                <h2 class="weui-msg__title">@ViewBag.Tel</h2>
+            </div>
+            <div class="weui-msg__opr-area" style="display:@ViewBag.display">
+                <p class="weui-btn-area">
+                    <a href="/webapp/shop2/mobileorder/@ViewBag.TelphoneID?Tel=@ViewBag.Telphone&Price=@ViewBag.Price" class="weui-btn weui-btn_warn">重新支付</a>
+                </p>
+            </div>
+        </div>
+        <div class="weui-msg" style="padding: 0rem 2rem 0; color: #999; text-align:left; ">
+            <b>温馨提醒：</b><br />
+            1、所有订单成功，次日下午7点发货，会有短信和语音通知，请留意<br />
+            2、查询快递单号，请登录快递官方网站查询<br />
+            3、快递均为到付件<br />
+            4、收到快递之后：实名认证☞ 充值缴费☞ 正常使用<br />
+            <font style="color: #f00;">5、建议支付成功后截屏保存本页面</font><br />
+            5、客服电话：<br />
+            <p style="padding-left: 20px;">
+                <a href="tel:15864010086">15864010086</a>
+            </p>
+            <p style="padding-left: 20px;">（工作时间：9:00-18:00）。</p>
+        </div>
+    </div>
+    <!--主体部分 结束-->
+    <script src="/assets/wap/js/jquery-2.1.4.js?v=7.4"></script>
+    <script src="/assets/wap/js/validform.min.js?v=7.4"></script>
+    <script src="/assets/wap/js/weui.min.js?v=7.4"></script>
+    <script src="/assets/wap/js/fastclick.js?v=7.4"></script>
+    <script src="/assets/wap/js/global.js?v=7.4"></script>
+    <script src="/assets/wap/js/user.js?v=7.4"></script>
+</body>
+</html>

@@ -12,7 +12,7 @@ namespace HZSoft.Application.Web.Utility.AliPay
         {
             string serviceUrl = WeixinConfig.serviceUrl;
 
-            string appId = WeixinConfig.appId;
+            string appId = WeixinConfig.aliAppId;
 
             string privateKey = WeixinConfig.privateKey;
 
