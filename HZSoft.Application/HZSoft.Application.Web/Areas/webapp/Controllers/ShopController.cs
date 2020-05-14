@@ -194,7 +194,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     try
                     {
                         DefaultAopClient client = new DefaultAopClient(WeixinConfig.serviceUrl, WeixinConfig.aliAppId, WeixinConfig.privateKey, "json", "1.0",
-                            WeixinConfig.signType, WeixinConfig.publicKey, WeixinConfig.charset, false);
+                            WeixinConfig.signType, WeixinConfig.payKey, WeixinConfig.charset, false);
 
                         // 组装业务参数model
                         AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
