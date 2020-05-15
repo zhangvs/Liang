@@ -200,7 +200,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
                         model.Body = "支付宝购买靓号";// 商品描述
                         model.Subject = productId;// 订单名称
-                        model.TotalAmount = "0.01";// 付款金额
+                        model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
                         model.QuitUrl = "https://wl012.rrzwl.com/webapp/shop2/index";// 支付中途退出返回商户网站地址
@@ -244,8 +244,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         tenPayV3Info.MchId,
                         "扫码支付靓号",
                         sp_billno,
-                        //Convert.ToInt32(ordersEntity.Price * 100),
-                        1,
+                        Convert.ToInt32(ordersEntity.Price * 100),
+                        //1,
                         Request.UserHostAddress,
                         tenPayV3Info.TenPayV3Notify,
                        TenPayV3Type.NATIVE,
@@ -284,7 +284,9 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     }
                     else
                     {
-                        var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "H5购买靓号", sp_billno, 1,
+                        var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "H5购买靓号", sp_billno,
+                        // 1,
+                        Convert.ToInt32(ordersEntity.Price * 100),
                         Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.MWEB/*此处无论传什么，方法内部都会强制变为MWEB*/, null, tenPayV3Info.Key, nonceStr);
 
                         var resultH5 = TenPayV3.Html5Order(xmlDataInfoH5);//调用统一订单接口
