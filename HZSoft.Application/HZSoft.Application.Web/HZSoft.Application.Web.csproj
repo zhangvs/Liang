@@ -381,6 +381,8 @@
     <Content Include="ContentNew\images\banner1.jpg" />
     <Content Include="ContentNew\images\bg.jpg" />
     <Content Include="ContentNew\images\bg2.jpg" />
+    <Content Include="ContentNew\images\fav2.png" />
+    <Content Include="ContentNew\images\fav3.png" />
     <Content Include="ContentNew\images\flexslider-bg.png" />
     <Content Include="ContentNew\images\footer-ico1-cur.png" />
     <Content Include="ContentNew\images\footer-ico1.png" />

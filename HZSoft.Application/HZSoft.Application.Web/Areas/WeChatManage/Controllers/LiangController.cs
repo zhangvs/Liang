@@ -547,7 +547,6 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                             </a>
                         </li>";
                     }
-                    ViewBag.HaoDan = styleStr;
                     return Content(styleStr);
                 }
                 return Content("机构暂时未生效或不存在");
@@ -608,8 +607,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     {
                         styleStr += $"{item.Telphone}&nbsp;&nbsp;{item.City}{item.Operator}&nbsp;&nbsp;{item.Price}元<br/>";
                     }
-
-                    return Content(styleStr);
+                    return Content(styleStr+ "<br/><br/><br/><br/><br/>");
                 }
                 return Content("机构暂时未生效或不存在");
             }
