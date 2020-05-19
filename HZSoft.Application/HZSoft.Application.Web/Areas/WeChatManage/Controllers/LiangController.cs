@@ -487,7 +487,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
         /// 模糊搜索等 + '&price=' + price + '&except=' + except + '&yy=' + yuyi;
         /// </summary>
         /// <returns></returns>
-        public ActionResult ListData(string keyword, string organizeId, string city, int page, string orderType, string price, string except, string yuyi, string features, string ExistMark)
+        public ActionResult ListData(string keyword, string organizeId, string city, int page, string orderType, string price, string except, string Operator, string features, string ExistMark)
         {
             if (!string.IsNullOrEmpty(organizeId))
             {
@@ -501,7 +501,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                         { "city", city },
                         { "price", price },
                         { "except", except },
-                        { "yuyi", yuyi },
+                        { "Operator", Operator },
                         { "Grade",features },
                         { "SellMark",0 },
                         { "ExistMark",ExistMark }

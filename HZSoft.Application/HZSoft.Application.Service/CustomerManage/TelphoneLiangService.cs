@@ -1224,6 +1224,7 @@ namespace HZSoft.Application.Service.CustomerManage
             }
 
             int columns = dtSource.Columns.Count;
+            string cf = "";
             for (int i = 0; i < rowsCount; i++)
             {
                 try
@@ -1234,7 +1235,7 @@ namespace HZSoft.Application.Service.CustomerManage
                         var liang_Data = db.FindEntity<TelphoneLiangEntity>(t => t.Telphone == telphone && t.DeleteMark!=1);//删除过的可以再次导入
                         if (liang_Data != null)
                         {
-                            return telphone + "重复导入！";
+                            cf+= telphone + ",";
                         }
 
                         //根据前7位确定城市和运营商
@@ -1359,7 +1360,15 @@ namespace HZSoft.Application.Service.CustomerManage
 
             }
             db.Commit();
-            return "导入成功";
+            if (cf!="")
+            {
+                return "跳过重复导入号码：" + cf;
+            }
+            else
+            {
+                return "导入成功";
+            }
+            
         }
 
         /// <summary>

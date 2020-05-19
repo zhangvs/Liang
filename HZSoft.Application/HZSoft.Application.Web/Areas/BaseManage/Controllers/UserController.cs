@@ -73,7 +73,7 @@ namespace HZSoft.Application.Web.Areas.BaseManage.Controllers
         [HttpGet]
         public ActionResult GetTreeJson(string keyword)
         {
-            string dataAutor = string.Format(OperatorProvider.Provider.Current().DataAuthorize.ReadAutorize, OperatorProvider.Provider.Current().UserId);
+            //string dataAutor = string.Format(OperatorProvider.Provider.Current().DataAuthorize.ReadAutorize, OperatorProvider.Provider.Current().UserId);
 
             //var organizedata = organizeCache.GetList();
             //var departmentdata = departmentCache.GetList();
