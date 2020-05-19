@@ -220,7 +220,7 @@ namespace HZSoft.Application.Service.CustomerManage
             if (!queryParam["Operator"].IsEmpty())
             {
                 string Operator = queryParam["Operator"].ToString();
-                strSql += " and Operator = " + Operator;
+                strSql += " and Operator = '" + Operator + "'";
             }
             return strSql;
         }
