@@ -8,7 +8,7 @@
     <meta name="Keywords" content="" />
     <meta name="Description" content="" />
     <link href="~/ContentNew/css/iconfont.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/ContentNew/css/m.css">
+    <link rel="stylesheet" href="~/ContentNew/css/m.css?t=2">
     <link rel="stylesheet" type="text/css" href="~/ContentNew/css/style.css">
 
     <!--分享-->
@@ -784,7 +784,7 @@
         <span>加载中...</span>
     </div>
 
-    <div class="fav-nav"><a href="Favorite.aspx"></a></div>
+    <div class="fav-nav"></div>
 
     <div class="gotop hide"><img src="~/Content/images/iocn/top2.png" /></div>
     <!--kw搜索-->
@@ -1332,4 +1332,9 @@
             }
         });
     }
+    $(".fav-nav").click(function () {
+        var url = 'HaoDan?organizeId=' + organizeId + '&city=' + city + '&keyword=' + keyword + '&page=' + curpage + '&features=' + features + '&orderType=' + orderType + '&price=' + price + '&except=' + except + '&Operator=' + Operator + '&ExistMark=' + ExistMark;
+        location.href = url;
+    })
+
 </script>

@@ -11,7 +11,32 @@
     <link href="~/ContentNew/css/iconfont.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/ContentNew/css/m.css">
     <link rel="stylesheet" type="text/css" href="~/ContentNew/css/style.css">
+    <style>
+        .sale-log {
+            height: 30px;
+            line-height: 20px;
+            overflow: hidden;
+        }
 
+        .sale-log-left {
+            float: left;
+            width: 40%;
+            text-align: center;
+        }
+
+        .sale-log-right {
+            float: right;
+            width: 55%;
+        }
+
+        .slide-box3 {
+            height: 40px;
+        }
+
+            .slide-box3 .name {
+                margin-left: 15px;
+            }
+    </style>
 </head>
 
 <body class="page">
@@ -854,6 +879,31 @@
         </ul>
     </div>
 
+    <div class="sale-log">
+        <div>
+            <div class="sale-log-left">交易动态</div>
+            <div class="sale-log-right">
+                <!---->
+                <div class="slide-box3 swiper-container-vertical">
+                    <ul class="swiper-wrapper" style="transform: translate3d(0px, -360px, 0px); transition-duration: 0ms;">
+                        <li class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="9" style="height: 40px;">165****8765<span class="name">孔**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="0" style="height: 40px;">167****6666<span class="name">林**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="1" style="height: 40px;">162****1212<span class="name">陈**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="2" style="height: 40px;">191****0668<span class="name">李**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="3" style="height: 40px;">170****5550<span class="name">方**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="4" style="height: 40px;">165****7733<span class="name">潘**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="5" style="height: 40px;">165****1119<span class="name">王**</span></li>
+                        <li class="swiper-slide" data-swiper-slide-index="6" style="height: 40px;">166****1230<span class="name">王**</span></li>
+                        <li class="swiper-slide swiper-slide-prev" data-swiper-slide-index="7" style="height: 40px;">167****5588<span class="name">赵**</span></li>
+                        <li class="swiper-slide swiper-slide-active" data-swiper-slide-index="8" style="height: 40px;">170****1999<span class="name">陈**</span></li>
+                        <li class="swiper-slide swiper-slide-next" data-swiper-slide-index="9" style="height: 40px;">165****8765<span class="name">孔**</span></li>
+                        <li class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0" style="height: 40px;">167****6666<span class="name">林**</span></li>
+                    </ul>
+                </div>
+                <!---->
+            </div>
+        </div>
+    </div>
     <div class="fixed-box fixed-box1">
         <ul>
             <li>
@@ -1053,8 +1103,8 @@
             </li>
         </ul>
     </footer>
-    @{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName , Img = "liang.png" });}
-    
+    @{Html.RenderAction("_PartialShare", "Liang", new { title = @ViewBag.FullName, Img = "liang.png" });}
+
 
     <script src="~/Content/statics/js/jquery.js"></script>
     <script src="~/Content/statics/js/jquery.cookie.js"></script>
@@ -1168,6 +1218,35 @@
                 directionNav: true,
                 pauseOnAction: false
             });
+        });
+    </script>
+    <script type="text/javascript" src="/statics/plus/swiper/swiper.min.js"></script>
+    <script type="text/javascript">
+        var swiper = new Swiper('.slide-box', {
+            pagination: '.dottedNav',
+            spaceBetween: 0,
+            centeredSlides: true,
+            autoplay: 3500,
+            loop: true,
+            autoplayDisableOnInteraction: false
+        });
+
+        var swiper = new Swiper('.slide-box2', {
+            pagination: '.dottedNav',
+            spaceBetween: 0,
+            centeredSlides: true,
+            autoplay: 0,
+            loop: false,
+            autoplayDisableOnInteraction: false
+        });
+
+        var swiper = new Swiper('.slide-box3', {
+            direction: 'vertical',
+            autoplay: 1500,
+            loop: true,
+            spaceBetween: 0,
+            centeredSlides: true,
+            autoplayDisableOnInteraction: false
         });
     </script>
 </body>

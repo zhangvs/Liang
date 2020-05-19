@@ -520,7 +520,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     }
                     else
                     {
-                        sidx = "right(Telphone,1)";//按照最后一位排序
+                        sidx = "grade,right(Telphone,1)";//先按照类别排序，再按照最后一位排序
                         sord = "asc";
                     }
                     Pagination pagination = new Pagination()
@@ -547,6 +547,68 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                             </a>
                         </li>";
                     }
+                    ViewBag.HaoDan = styleStr;
+                    return Content(styleStr);
+                }
+                return Content("机构暂时未生效或不存在");
+            }
+            else
+            {
+                return Content("链接不正确不或完整");
+            }
+        }
+
+        public ActionResult HaoDan(string keyword, string organizeId, string city, int page, string orderType, string price, string except, string Operator, string features, string ExistMark)
+        {
+            if (!string.IsNullOrEmpty(organizeId))
+            {
+                var organize = organizebll.GetEntity(organizeId);
+                if (!string.IsNullOrEmpty(organize.OrganizeId))
+                {
+                    JObject queryJson = new JObject { { "Telphone", keyword },
+                        { "OrganizeIdH5", organizeId },
+                        { "pid", organize.ParentId },
+                        { "top", organize.TopOrganizeId },
+                        { "city", city },
+                        { "price", price },
+                        { "except", except },
+                        { "Operator", Operator },
+                        { "Grade",features },
+                        { "SellMark",0 },
+                        { "ExistMark",ExistMark }
+                    };
+                    string sidx = "";
+                    string sord = "";
+                    if (orderType == "1")
+                    {
+                        sidx = "price";
+                        sord = "asc";
+                    }
+                    else if (orderType == "2")
+                    {
+                        sidx = "price";
+                        sord = "desc";
+                    }
+                    else
+                    {
+                        sidx = "grade,right(Telphone,1)";//先按照类别排序，再按照最后一位排序
+                        sord = "asc";
+                    }
+                    Pagination pagination = new Pagination()
+                    {
+                        rows = 40,
+                        page = page,
+                        sidx = sidx,
+                        sord = sord
+                    };
+                    var entityList = tlbll.GetPageListH5(pagination, queryJson.ToString());
+
+                    string styleStr = "";
+                    foreach (var item in entityList)
+                    {
+                        styleStr += $"{item.Telphone}&nbsp;&nbsp;{item.City}{item.Operator}&nbsp;&nbsp;{item.Price}元<br/>";
+                    }
+
                     return Content(styleStr);
                 }
                 return Content("机构暂时未生效或不存在");
