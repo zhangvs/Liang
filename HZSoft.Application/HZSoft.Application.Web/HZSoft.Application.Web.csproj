@@ -274,6 +274,7 @@
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\Controllers\Shop2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\Shop0Controller.cs" />
+    <Compile Include="Areas\webapp\Controllers\XddController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\CodeRuleController.cs" />
@@ -1983,6 +1984,12 @@
     <Content Include="Areas\webapp\Views\Shop\paymentFinish.cshtml" />
     <Content Include="Areas\WeChatManage\Views\WeiXinHome\ReturnUrl.cshtml" />
     <Content Include="Areas\WeChatManage\Views\Liang\HaoDan.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\express.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\Index.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />
