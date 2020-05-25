@@ -36,7 +36,7 @@
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/shop2/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
+        <a href="/webapp/xdd/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -163,7 +163,7 @@
                             if (address) {
                                 $.ajax({
                                     type: "post",
-                                    url: "/webapp/shop2/ajaxorder",
+                                    url: "/webapp/xdd/ajaxorder",
                                     data: {
                                         TelphoneID: id,
                                         Receiver: name,
@@ -216,7 +216,7 @@
                                                     text: qrsrc,
                                                     buttons: [
                                                         { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
-                                                        { text: "支付完成", onClick: function () { location.href = '/webapp/shop2/paymentFinish/' + resObj.data.payid; } }
+                                                        { text: "支付完成", onClick: function () { location.href = '/webapp/xdd/paymentFinish/' + resObj.data.payid; } }
                                                     ]
                                                 });
                                                 //检测付款状态

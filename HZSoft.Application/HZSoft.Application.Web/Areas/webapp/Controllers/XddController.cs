@@ -117,7 +117,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='https://xdd.jnlxsm.net:448/webapp/xdd/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
+                        $"    <a href='https://xdd.jnlxsm.net:441/webapp/xdd/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -203,7 +203,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "https://hllf25.zitiaonc.com/webapp/xdd/index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://hllf25.zitiaonc.com:4411/webapp/xdd/index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
@@ -271,8 +271,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "NATIVE",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd.jnlxsm.net:448/webapp/xdd/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd.jnlxsm.net:448/webapp/xdd/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://xdd.jnlxsm.net:441/webapp/xdd/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://xdd.jnlxsm.net:441/webapp/xdd/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -307,8 +307,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "H5",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd.jnlxsm.net:448/webapp/xdd/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd.jnlxsm.net:448/webapp/xdd/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://xdd.jnlxsm.net:441/webapp/xdd/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://xdd.jnlxsm.net:441/webapp/xdd/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -522,7 +522,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 string body = "我是测试数据";
 
                 // 支付中途退出返回商户网站地址
-                string quit_url = "https://hllf25.zitiaonc.com/webapp/xdd/index";
+                string quit_url = "https://hllf25.zitiaonc.com:4411/webapp/xdd/index";
 
                 // 组装业务参数model
                 AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
