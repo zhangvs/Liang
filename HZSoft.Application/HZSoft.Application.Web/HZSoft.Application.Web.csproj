@@ -274,6 +274,7 @@
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\Controllers\Shop2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\Shop0Controller.cs" />
+    <Compile Include="Areas\webapp\Controllers\Xdd2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\XddController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
@@ -1990,6 +1991,12 @@
     <Content Include="Areas\webapp\Views\Xdd\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\Xdd\express.cshtml" />
     <Content Include="Areas\webapp\Views\Xdd\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\express.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\paymentFinish.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />
