@@ -25,6 +25,11 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
     /// 广州头条：先跳转到hllf25.zitiaonc.com，再跳转到xdd2.jnlxsm.net
+    /// 响当当第二个账号添加
+    ///xdd2.jnlxsm.net:8023
+    ///xdd2.jnlxsm.net:442
+    ///hllf25.zitiaonc.com:4422
+    ///hllf25.zitiaonc.com:8022
     /// </summary>
     public class Xdd2Controller : Controller
     {
@@ -57,7 +62,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         /// <returns></returns>
         public ActionResult ListData(string keyword, string city, int? page, string orderType, string price, string except, string yuyi, string features)
         {
-            string host = Request.Url.Host;
+            string host = Request.Url.Host + Request.Url.Port;
             int ipage = page == null ? 1 : int.Parse(page.ToString());
             string organizeId = "bae859c9-3df5-4da0-bea9-3e20bbc7c353";
             if (!string.IsNullOrEmpty(organizeId))
@@ -236,8 +241,9 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 }
                 else
                 {
+                    //0 手机（H5支付）  1 电脑（扫码Native支付），2微信浏览器（JSAPI）
                     //pc端返回二维码，否则H5
-                    if (ordersEntity.PC == 1)
+                    if (ordersEntity.PC == 1)//电脑端
                     {
                         //创建请求统一订单接口参数
                         var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
@@ -282,6 +288,41 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                             root = new H5Response { code = false, status = false, msg = result.return_msg };
                         }
                     }
+                    else if (ordersEntity.PC == 2)//微信浏览器
+                    {
+                        var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
+                        //Convert.ToInt32(ordersEntity.Price * 100),
+                        1,
+                        Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, null, tenPayV3Info.Key, nonceStr);
+
+                        var resultH5 = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
+                        LogHelper.AddLog(resultH5.ResultXml);//记录日志
+                        if (resultH5.return_code == "SUCCESS")
+                        {
+                            H5PayData h5PayData = new H5PayData()
+                            {
+                                appid = WeixinConfig.AppID2,
+                                mch_id = WeixinConfig.MchId,
+                                nonce_str = resultH5.nonce_str,
+                                prepay_id = resultH5.prepay_id,
+                                result_code = resultH5.result_code,
+                                return_code = resultH5.return_code,
+                                return_msg = resultH5.return_msg,
+                                sign = resultH5.sign,
+                                trade_type = "JSAPI",
+                                trade_no = sp_billno,
+                                payid = ordersEntity.Id.ToString(),
+                                wx_query_href = "https://xdd2.jnlxsm.net:442/webapp/xdd2/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://xdd2.jnlxsm.net:442/webapp/xdd2/paymentFinish/" + ordersEntity.Id
+                            };
+
+                            root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
+                        }
+                        else
+                        {
+                            root = new H5Response { code = false, status = false, msg = resultH5.return_msg };
+                        }
+                    }
                     else
                     {
                         var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "H5购买靓号", sp_billno,
@@ -312,30 +353,6 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
-
-                            //var timeStamp = TenPayV3Util.GetTimestamp();
-
-                            //var package = string.Format("prepay_id={0}", resultH5.prepay_id);
-
-                            //ViewData["product"] = ordersEntity.Tel;
-
-                            //ViewData["appId"] = WeixinConfig.AppID2;
-                            //ViewData["timeStamp"] = timeStamp;
-                            //ViewData["nonceStr"] = nonceStr;
-                            //ViewData["package"] = package;
-                            //ViewData["paySign"] = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, tenPayV3Info.Key);
-
-                            ////设置成功页面（也可以不设置，支付成功后默认返回来源地址）
-                            //var returnUrl = Config.GetValue("Domain2") + "/webapp/xdd2/paymentFinish/" + ordersEntity.Id;
-
-                            //var mwebUrl = resultH5.mweb_url;
-                            //if (!string.IsNullOrEmpty(returnUrl))
-                            //{
-                            //    mwebUrl += string.Format("&redirect_url={0}", returnUrl.AsUrlData());
-                            //}
-
-                            //ViewData["MWebUrl"] = mwebUrl;
-                            //return View();
                         }
                         else
                         {

@@ -57,7 +57,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         /// <returns></returns>
         public ActionResult ListData(string keyword, string city, int? page, string orderType, string price, string except, string yuyi, string features)
         {
-            string host = Request.Url.Host;
+            string host = Request.Url.Host + Request.Url.Port;
             int ipage = page == null ? 1 : int.Parse(page.ToString());
             string organizeId = "bae859c9-3df5-4da0-bea9-3e20bbc7c353";
             if (!string.IsNullOrEmpty(organizeId))

@@ -285,9 +285,22 @@
                 //默认访问http://www.电脑.com
             } else {
                 //window.location.href = "http://www.手机.com/";
+                if (isWeiXin) {
+                    flag = 2;
+                }
                 flag = 0;
             }
             return flag;
+        }
+
+
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
         }
 
 

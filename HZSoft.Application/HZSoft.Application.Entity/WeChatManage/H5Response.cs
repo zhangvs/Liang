@@ -58,6 +58,10 @@ namespace HZSoft.Application.Entity.WeChatManage
         /// <summary>
         /// 
         /// </summary>
+        public string notify_url { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public string code_url { get; set; }
         /// <summary>
         /// 

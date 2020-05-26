@@ -144,7 +144,7 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// <returns></returns>
         public string ReturnSn { get; set; }
         /// <summary>
-        /// 0 pc  1 手机
+        /// 0 手机（H5支付）  1 电脑（扫码Native支付），2微信浏览器（JSAPI）
         /// </summary>
         /// <returns></returns>
         public int? PC { get; set; }

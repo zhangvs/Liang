@@ -161,7 +161,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
             //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/WeChatManage/user_order/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/WeChatManage/user_order/paymentFinish/11\"}}");
             try
             {
-                ordersEntity.Host = Request.Url.Host;
+                string host = Request.Url.Host + Request.Url.Port;
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
                 var sp_billno = ordersEntity.OrderSn;

@@ -151,7 +151,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 string tel = Request["Tel"];
                 string price = Request["Price"];
 
-                string host = Request.Url.Host;//获取当前域名
+                string host = Request.Url.Host + Request.Url.Port;
                 string url = Request.Url.ToString();//获取 完整url （协议名+域名+站点名+文件名+参数）
 
                 OrdersEntity orderEntity = new OrdersEntity()
