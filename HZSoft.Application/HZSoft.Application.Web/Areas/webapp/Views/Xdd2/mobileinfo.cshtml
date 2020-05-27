@@ -100,10 +100,40 @@
     </div>
     <div style="height:40px;"></div>
     <div class="page-btn2">
-        <a href="/webapp/xdd2/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host" class="weui-btn" style="background: #ee5246;">立即订购</a>
+        <a href="#" id="submit" class="weui-btn" style="background: #ee5246;">立即订购</a>
     </div>
     <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
     <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#submit').bind('click', function () {
+                if (isWeiXin()) {
+                    location.href = '/webapp/xdd2/jsapi/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
+                }
+                else {
+                    location.href = '/webapp/xdd2/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
+                }
+            });
+        })
+
+
+        //微信浏览器：Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1912261
+        //换行MicroMessenger / 7.0.4 Language / zh_CN webview / 15904873695067660 webdebugger port / 47695
+
+        //谷歌浏览器：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+
+        //360极速浏览器：Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
 </body>
 </html>
 <!--页面如有提示或报错，文件引用了jquery-weui，可直接调用弹框-->

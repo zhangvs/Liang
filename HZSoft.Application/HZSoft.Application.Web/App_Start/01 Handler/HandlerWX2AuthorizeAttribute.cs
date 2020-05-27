@@ -13,12 +13,12 @@ namespace HZSoft.Application.Web
     /// 日 期：2015.11.9 10:45
     /// 描 述：登录认证（会话验证组件）
     /// </summary>
-    public class HandlerWXAuthorizeAttribute : AuthorizeAttribute
+    public class HandlerWX2AuthorizeAttribute : AuthorizeAttribute
     {
         private LoginMode _customMode;
         /// <summary>默认构造</summary>
         /// <param name="Mode">认证模式</param>
-        public HandlerWXAuthorizeAttribute(LoginMode Mode)
+        public HandlerWX2AuthorizeAttribute(LoginMode Mode)
         {
             _customMode = Mode;
         }
@@ -46,9 +46,13 @@ namespace HZSoft.Application.Web
             //判断是否微信通过认证
             if (CurrentWxUser.Users == null)
             {
-                filterContext.Result = new RedirectResult(string.Format(WeixinConfig.GetCodeUrl, HttpUtility.UrlEncode(RequestUri)));
+                filterContext.Result = new RedirectResult(string.Format(WeixinConfig.GetCodeUrl2, HttpUtility.UrlEncode(RequestUri)));
+                LogHelper.AddLog("filterContext.Result:" + filterContext.Result);
                 return;
             }
         }
+
+
+
     }
 }

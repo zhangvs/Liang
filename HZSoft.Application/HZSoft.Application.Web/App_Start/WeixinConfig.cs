@@ -21,6 +21,12 @@ namespace HZSoft.Application.Web
 
         public static string AppID2 { private set; get; }
         public static string AppSecret2 { private set; get; }
+        public static string AppName2 { private set; get; }
+        public static string RedirectUri2 { private set; get; }
+        public static string GetCodeUrl2 { private set; get; }
+        public static string GetTokenUrl2 { private set; get; }
+        public static string GetTokenBaseUrl2 { private set; get; }
+        public static string GetUserInfoUrl2 { private set; get; }
         public static string MchId { private set; get; }
         public static string Key { private set; get; }
         public static string TenPayV3Notify { private set; get; }
@@ -70,19 +76,26 @@ namespace HZSoft.Application.Web
         {
             AppID = Config.GetValue("AppID");
             AppSecret = Config.GetValue("AppSecret");
-            AppID2 = Config.GetValue("AppID2");
-            AppSecret2 = Config.GetValue("AppSecret2");
-            MchId = Config.GetValue("MchId");
-            Key = Config.GetValue("Key");
             AppName = Config.GetValue("AppName");
             RedirectUri = Config.GetValue("Domain") + "/WeChatManage/WXLogin/Redirect";
-            TenPayV3Notify = Config.GetValue("Domain2") + "/WeChatManage/WeiXinHome/Notify";
             GetCodeUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + AppID + "&redirect_uri=" + HttpUtility.UrlEncode(WeixinConfig.RedirectUri) + "&response_type=code&scope=snsapi_userinfo&state={0}#wechat_redirect";//HttpUtility.UrlEncode(WeixinConfig.ReturnUri)
             GetTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + AppID + "&secret=" + AppSecret + "&code={0}&grant_type=authorization_code";
             GetTokenBaseUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + AppID + "&secret=" + AppSecret;
             GetUserInfoUrl = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang=zh_CN";
 
+            AppID2 = Config.GetValue("AppID2");
+            AppSecret2 = Config.GetValue("AppSecret2");
+            AppName2 = Config.GetValue("AppName2");
+            RedirectUri2 = Config.GetValue("Domain2") + "/WeChatManage/WX2Login/Redirect";
+            GetCodeUrl2 = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + AppID2 + "&redirect_uri=" + HttpUtility.UrlEncode(WeixinConfig.RedirectUri2) + "&response_type=code&scope=snsapi_userinfo&state={0}#wechat_redirect";
+            GetTokenUrl2 = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + AppID2 + "&secret=" + AppSecret2 + "&code={0}&grant_type=authorization_code";
+            GetTokenBaseUrl2 = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + AppID2 + "&secret=" + AppSecret2;
+            GetUserInfoUrl2 = "https://api.weixin.qq.com/sns/userinfo?access_token={0}&openid={1}&lang=zh_CN";
+            
 
+            TenPayV3Notify = Config.GetValue("Domain2") + "/WeChatManage/WeiXinHome/Notify";
+            MchId = Config.GetValue("MchId");
+            Key = Config.GetValue("Key");
 
             serviceUrl = Config.GetValue("aliServiceUrl");
             aliAppId = Config.GetValue("aliAppId");

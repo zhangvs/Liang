@@ -30,7 +30,7 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1667359354378253");
+        })(window, document, "script", "1664007157743627");
     </script>
     <!-- End Bytedance Tracking -->
 </head>
@@ -116,19 +116,6 @@
                 <input type="radio" class="weui-check" value="wechat" name="paytype" id="x11" checked="checked"><span class="weui-icon-checked"></span>
             </div>
         </label>
-        <label class="weui-cell weui-check__label" for="x12">
-            <div class="weui-cell__hd">
-                <img src="/themes/simplebootx_mobile/Public/images/zhifubao.png" width="20px">
-            </div>
-            <div class="weui-cell__bd">
-                <p>
-                    支付宝支付
-                </p>
-            </div>
-            <div class="weui-cell__ft">
-                <input type="radio" name="paytype" value="alipay" class="weui-check" id="x12"><span class="weui-icon-checked"></span>
-            </div>
-        </label>
     </div>
     <div class="page-btn">
         <a href="#" id="submit" data-id="@ViewBag.id" class="weui-btn" style="background: #ee5246;">立即支付</a>
@@ -137,6 +124,7 @@
     <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
     @*<script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>*@
     <script src="~/assets/wap/js/city-picker.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
             var flag = IsPC(); //true为PC端，false为手机端
@@ -163,7 +151,7 @@
                             if (address) {
                                 $.ajax({
                                     type: "post",
-                                    url: "/webapp/xdd2/ajaxorder",
+                                    url: "/webapp/shop/JsApi",
                                     data: {
                                         TelphoneID: id,
                                         Receiver: name,
@@ -180,62 +168,38 @@
                                     async: false,
                                     dataType: "json",
                                     success: function (resObj) {
-                                        //if (result.status == 1) {
-                                        //    window.location.href = result.url;
-                                        //} else {
-                                        //    $.toast(result.info, "forbidden");
-                                        //}
-
                                         if (resObj.status) {
                                             //头条推广转化（点击支付）
-                                            meteor.track("form", { convert_id: "1667736631584772" })
-                                            //不做处理，跳转
-                                            if (resObj.data.target) {
-                                                location.href = resObj.data.gotoUrl;
-                                                return false;
-                                            }
-                                            //站外支付方式
-                                            if (paytype == 'offline') {
-                                                location.href = resObj.data.uploadpic_url;
-                                            }
-                                            //支付宝
-                                            if (paytype == 'alipay') {
-                                                //输出提交表单
-                                                $("body").append(resObj.data.form);
-                                            }
+                                            meteor.track("form", { convert_id: "1667100208827405" })
+
                                             //微信
                                             if (paytype == 'wechat') {
-                                                //H5支付
-                                                if (typeof (resObj.data.mweb_url) != "undefined" && resObj.data.mweb_url != null) {
-                                                    location.href = resObj.data.mweb_url + '&redirect_url=' + encodeURIComponent(resObj.data.wx_query_over);
-                                                    return false;
-                                                }
-                                                //扫码支付
-                                                var qrsrc = '<img src="/WeChatManage/user_index/getPageqr/?pageurl=' + encodeURIComponent(resObj.data.code_url) + '" style="max-width:100%;" />';
-                                                $.modal({
-                                                    text: qrsrc,
-                                                    buttons: [
-                                                        { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
-                                                        { text: "支付完成", onClick: function () { location.href = '/webapp/xdd2/paymentFinish/' + resObj.data.payid; } }
-                                                    ]
+                                                //JSApi支付
+                                                WeixinJSBridge.invoke(
+                                                'getBrandWCPayRequest', {
+                                                    "appId": resObj.data.appId, //公众号名称，由商户传入
+                                                    "timeStamp": resObj.data.timeStamp, //时间戳
+                                                    "nonceStr": resObj.data.nonceStr, //随机串
+                                                    "package": resObj.data.package,//扩展包
+                                                    "signType": "MD5", //微信签名方式:MD5
+                                                    "paySign": resObj.data.paySign //微信签名
+                                                },
+                                                function (res) {
+                                                    if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                                        //支付成功，后续自行处理
+                                                        $.toast("支付成功", function () {
+                                                            document.location.href = resObj.data.callback_url;
+                                                        });
+                                                    }
+                                                    else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                                                        //支付取消，或者其他错误，自行处理
+                                                        $.toast("支付取消", "cancel");
+                                                    }
+                                                    else {
+                                                        alert(res.err_msg);
+                                                        $.toast("支付失败", "forbidden");
+                                                    }
                                                 });
-                                                //检测付款状态
-                                                setInterval(function () {
-                                                    $.ajax({
-                                                        type: "post",
-                                                        url: resObj.data.wx_query_href,
-                                                        data: '',
-                                                        dataType: 'json',
-                                                        success: function (result) {
-                                                            if (result.status) {
-                                                                //支付成功
-                                                                location.href = resObj.data.wx_query_over;
-                                                            } else {
-                                                                console.log("等待付款");
-                                                            }
-                                                        }
-                                                    });
-                                                }, 2000);
                                             }
                                         } else {
                                             $.hideLoading();
@@ -247,6 +211,7 @@
                                         $.toast("提交失败，请重试", "forbidden");
                                     }
                                 });
+
                             } else {
                                 $.toast("请输入详细地址", "forbidden");
                             }
@@ -263,6 +228,7 @@
                 return false;
             });
         })
+
 
         function IsPC() {
             var flag = 1;
@@ -286,7 +252,25 @@
                 //window.location.href = "http://www.手机.com/";
                 flag = 0;
             }
+            if (isWeiXin()) {
+                flag = 2;
+            }
             return flag;
+        }
+
+        //微信浏览器：Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1912261
+        //换行MicroMessenger / 7.0.4 Language / zh_CN webview / 15904873695067660 webdebugger port / 47695
+
+        //谷歌浏览器：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+
+        //360极速浏览器：Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
         }
 
 

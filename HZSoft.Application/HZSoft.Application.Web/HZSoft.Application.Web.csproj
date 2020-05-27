@@ -92,10 +92,6 @@
     <Reference Include="Senparc.Weixin.MP, Version=14.14.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Senparc.Weixin.MP.14.14.0\lib\net45\Senparc.Weixin.MP.dll</HintPath>
     </Reference>
-    <Reference Include="Senparc.Weixin.MP.MvcExtension, Version=4.0.1.32581, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Senparc.Weixin.MP.MvcExtension.dll</HintPath>
-    </Reference>
     <Reference Include="ServiceStack.Text, Version=4.0.56.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Bin\ServiceStack.Text.dll</HintPath>
@@ -178,6 +174,7 @@
     <Compile Include="App_Start\01 Handler\HandlerAuthorizeAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerErrorAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerLoginAttribute.cs" />
+    <Compile Include="App_Start\01 Handler\HandlerWX2AuthorizeAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerWXAuthorizeAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerWXLoginAttribute.cs" />
     <Compile Include="App_Start\01 Handler\MvcControllerBase.cs" />
@@ -273,7 +270,6 @@
     <Compile Include="Areas\webapp\Controllers\AliPayController.cs" />
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\Controllers\Shop2Controller.cs" />
-    <Compile Include="Areas\webapp\Controllers\Shop0Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\Xdd2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\XddController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
@@ -315,6 +311,7 @@
     <Compile Include="Areas\WeChatManage\Controllers\user_orderController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\WeChat_UsersController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\WeiXinHomeController.cs" />
+    <Compile Include="Areas\WeChatManage\Controllers\WX2LoginController.cs" />
     <Compile Include="Areas\WeChatManage\Controllers\WXLoginController.cs" />
     <Compile Include="Areas\WeChatManage\WeChatManageAreaRegistration.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
@@ -1963,20 +1960,13 @@
     <Content Include="Areas\H5\Views\HomePage\mobileinfo.cshtml" />
     <Content Include="Areas\H5\Views\HomePage\mobileorder.cshtml" />
     <Content Include="Areas\H5\Views\HomePage\express.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop0\Index.cshtml" />
     <Content Include="Areas\webapp\Views\Web.config" />
-    <Content Include="Areas\webapp\Views\Shop0\Apply.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop0\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop0\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop0\express.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop0\info2.cshtml" />
     <Content Include="Areas\webapp\Views\Shop2\express.cshtml" />
     <Content Include="Areas\webapp\Views\Shop2\Index.cshtml" />
     <Content Include="Areas\webapp\Views\Shop2\info2.cshtml" />
     <Content Include="Areas\webapp\Views\Shop2\mobileinfo.cshtml" />
     <Content Include="Areas\webapp\Views\Shop2\mobileorder.cshtml" />
     <Content Include="Areas\webapp\Views\Shop2\paymentFinish.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop0\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\express.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\Index.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\info2.cshtml" />
@@ -1997,6 +1987,10 @@
     <Content Include="Areas\webapp\Views\Xdd2\mobileinfo.cshtml" />
     <Content Include="Areas\webapp\Views\Xdd2\mobileorder.cshtml" />
     <Content Include="Areas\webapp\Views\Xdd2\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd2\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\Xdd\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop2\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\JsApi.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />
