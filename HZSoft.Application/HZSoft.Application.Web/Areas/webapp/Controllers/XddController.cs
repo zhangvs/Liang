@@ -118,7 +118,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='https://xdd.jnlxsm.net:441/webapp/xdd/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
+                        $"    <a href='https://shop.jnlxsm.net/webapp/xdd/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -272,8 +272,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "NATIVE",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd.jnlxsm.net:441/webapp/xdd/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd.jnlxsm.net:441/webapp/xdd/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/xdd/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/xdd/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -308,8 +308,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "H5",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd.jnlxsm.net:441/webapp/xdd/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd.jnlxsm.net:441/webapp/xdd/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/xdd/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/xdd/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -410,7 +410,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         nonceStr = nonceStr,
                         package = package,
                         paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                        callback_url = "https://xdd.jnlxsm.net:442/webapp/xdd/paymentFinish/" + ordersEntity.Id
+                        callback_url = "https://shop.jnlxsm.net/webapp/xdd/paymentFinish/" + ordersEntity.Id
                     };
 
                     root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = jsApiPayData };

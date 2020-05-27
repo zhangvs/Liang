@@ -123,7 +123,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='https://xdd2.jnlxsm.net:442/webapp/xdd2/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
+                        $"    <a href='https://shop.jnlxsm.net/webapp/xdd2/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -278,8 +278,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "NATIVE",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd2.jnlxsm.net:442/webapp/xdd2/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd2.jnlxsm.net:442/webapp/xdd2/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/xdd2/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/xdd2/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -287,41 +287,6 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         else
                         {
                             root = new H5Response { code = false, status = false, msg = result.return_msg };
-                        }
-                    }
-                    else if (ordersEntity.PC == 2)//微信浏览器
-                    {
-                        var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
-                        //Convert.ToInt32(ordersEntity.Price * 100),
-                        1,
-                        Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, "wxd930ea5d5a258f4f", tenPayV3Info.Key, nonceStr);
-
-                        var resultH5 = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
-                        LogHelper.AddLog(resultH5.ResultXml);//记录日志
-                        if (resultH5.return_code == "SUCCESS")
-                        {
-                            H5PayData h5PayData = new H5PayData()
-                            {
-                                appid = WeixinConfig.AppID2,
-                                mch_id = WeixinConfig.MchId,
-                                nonce_str = resultH5.nonce_str,
-                                prepay_id = resultH5.prepay_id,
-                                result_code = resultH5.result_code,
-                                return_code = resultH5.return_code,
-                                return_msg = resultH5.return_msg,
-                                sign = resultH5.sign,
-                                trade_type = "JSAPI",
-                                trade_no = sp_billno,
-                                payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd2.jnlxsm.net:442/webapp/xdd2/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd2.jnlxsm.net:442/webapp/xdd2/paymentFinish/" + ordersEntity.Id
-                            };
-
-                            root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
-                        }
-                        else
-                        {
-                            root = new H5Response { code = false, status = false, msg = resultH5.return_msg };
                         }
                     }
                     else
@@ -349,8 +314,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "H5",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://xdd2.jnlxsm.net:442/webapp/xdd2/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://xdd2.jnlxsm.net:442/webapp/xdd2/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/xdd2/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/xdd2/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -427,7 +392,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         nonceStr = nonceStr,
                         package = package,
                         paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                        callback_url = "https://xdd2.jnlxsm.net:442/webapp/xdd2/paymentFinish/" + ordersEntity.Id
+                        callback_url = "https://shop.jnlxsm.net/webapp/xdd2/paymentFinish/" + ordersEntity.Id
                     };
 
                     root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = jsApiPayData };
