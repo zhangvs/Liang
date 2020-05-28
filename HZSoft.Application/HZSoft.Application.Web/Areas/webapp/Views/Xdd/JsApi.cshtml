@@ -1,4 +1,9 @@
-﻿<!doctype html>
+﻿@model HZSoft.Application.Entity.CustomerManage.OrdersEntity
+@{
+    ViewBag.Title = "微信支付";
+    var wxModel = ViewBag.WxModel as HZSoft.Application.Entity.WeChatManage.WFTWxModel;
+}
+<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -36,7 +41,7 @@
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/xdd2/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
+        <a href="/webapp/xdd2/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -83,18 +88,12 @@
         <div class="weui-form-preview__bd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">预定号码</label><span class="weui-form-preview__value color-yellow">
-                    <h3>@ViewBag.Tel</h3>
+                    <h3>@Model.Tel</h3>
                 </span>
             </div>
-            @*<div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">号码价格</label><span class="weui-form-preview__value color-yellow">¥@ViewBag.Price</span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">预存话费</label><span class="weui-form-preview__value color-yellow">¥0</span>
-                </div>*@
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">订单总计</label><span class="weui-form-preview__value color-danger">
-                    <h3>¥@ViewBag.Price</h3>
+                    <h3>¥@Model.Price</h3>
                 </span>
             </div>
         </div>
@@ -122,13 +121,9 @@
     </div>
     <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
     <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
-    @*<script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>*@
     <script src="~/assets/wap/js/city-picker.min.js"></script>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
-            var flag = IsPC(); //true为PC端，false为手机端
-
             $("#city").cityPicker({
                 title: "请选择城市",
                 showDistrict: false
@@ -153,16 +148,12 @@
                                     type: "post",
                                     url: "/webapp/xdd/JsApi",
                                     data: {
-                                        TelphoneID: id,
+                                        Id:@Model.Id,
                                         Receiver: name,
                                         ContactTel: mobile,
                                         City: city,
                                         Address: address,
-                                        PayType: paytype,
-                                        Tel:@ViewBag.Tel,
-                                        Price:@ViewBag.Price,
-                                        PC: flag,
-                                        Host:'@ViewBag.host'
+                                        PayType: paytype
                                     },
                                     cache: false,
                                     async: false,
@@ -172,23 +163,21 @@
                                             //头条推广转化（点击支付）
                                             meteor.track("form", { convert_id: "1667652330327043" })
 
-                                            //微信
-                                            if (paytype == 'wechat') {
                                                 //JSApi支付
                                                 WeixinJSBridge.invoke(
                                                 'getBrandWCPayRequest', {
-                                                    "appId": resObj.data.appId, //公众号名称，由商户传入
-                                                    "timeStamp": resObj.data.timeStamp, //时间戳
-                                                    "nonceStr": resObj.data.nonceStr, //随机串
-                                                    "package": resObj.data.package,//扩展包
-                                                    "signType": "MD5", //微信签名方式:MD5
-                                                    "paySign": resObj.data.paySign //微信签名
+                                                    "appId":"@wxModel.appId",     //公众号名称，由商户传入
+                                                    "timeStamp": "@wxModel.timeStamp",         //时间戳，自1970年以来的秒数
+                                                    "nonceStr": "@wxModel.nonceStr", //随机串
+                                                    "package": "@wxModel.package",
+                                                    "signType": "MD5",         //微信签名方式：
+                                                    "paySign": "@wxModel.paySign" //微信签名
                                                 },
                                                 function (res) {
                                                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                                                         //支付成功，后续自行处理
                                                         $.toast("支付成功", function () {
-                                                            document.location.href = resObj.data.callback_url;
+                                                            document.location.href = '@wxModel.callback_url';
                                                         });
                                                     }
                                                     else if (res.err_msg == "get_brand_wcpay_request:cancel") {
@@ -200,7 +189,6 @@
                                                         $.toast("支付失败", "forbidden");
                                                     }
                                                 });
-                                            }
                                         } else {
                                             $.hideLoading();
                                             //状态显示
@@ -228,52 +216,6 @@
                 return false;
             });
         })
-
-
-        function IsPC() {
-            var flag = 1;
-            //平台、设备和操作系统
-            var system = {
-                win: false,
-                mac: false,
-                xll: false,
-                ipad: false
-            };
-            //检测平台
-            var p = navigator.platform;
-            system.win = p.indexOf("Win") == 0;
-            system.mac = p.indexOf("Mac") == 0;
-            system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-            system.ipad = (navigator.userAgent.match(/iPad/i) != null) ? true : false;
-            //跳转语句，如果是PC访问就自动跳转到所要访问的页面http://www.电脑.com
-            if (system.win || system.mac || system.xll || system.ipad) {
-                //默认访问http://www.电脑.com
-            } else {
-                //window.location.href = "http://www.手机.com/";
-                flag = 0;
-            }
-            if (isWeiXin()) {
-                flag = 2;
-            }
-            return flag;
-        }
-
-        //微信浏览器：Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1912261
-        //换行MicroMessenger / 7.0.4 Language / zh_CN webview / 15904873695067660 webdebugger port / 47695
-
-        //谷歌浏览器：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
-
-        //360极速浏览器：Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
-        function isWeiXin() {
-            var ua = window.navigator.userAgent.toLowerCase();
-            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-
     </script>
 </body>
 </html>

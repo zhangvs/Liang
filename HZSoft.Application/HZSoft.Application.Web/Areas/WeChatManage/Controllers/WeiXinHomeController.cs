@@ -203,11 +203,11 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                         if (Convert.ToDecimal(total_amount) ==order.Price)
                         {
                             LogHelper.AddLog("异步调用orderSn：" + orderSn+ "total_amount:" + total_amount+"金额一致");
+                            order.PayDate = DateTime.Now;
+                            order.PayStatus = (int)PayStatus.已支付;
+                            order.Status = (int)OrderStatus.未发货;
+                            ordersbll.SaveForm(order.Id, order);
                         }
-                        order.PayDate = DateTime.Now;
-                        order.PayStatus = (int)PayStatus.已支付;
-                        order.Status = (int)OrderStatus.未发货;
-                        ordersbll.SaveForm(order.Id, order);
                     }
 
                     //不同步
@@ -267,3 +267,11 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
         }
     }
 }
+//{"gmt_create":"2020-05-28 09:48:11","charset":"utf-8","seller_email":"359085234@qq.com","subject":"587259",
+//"sign":"L7bDDq7flA97dSuSHn0xky+m0Qg3N2iQ1Yn5+QnjlRED9f88TSshZZcVC67jIRA3BL9vXU7kVsIWEdAiL5Gc33vxeJ5s/VQUJKuCrTTgEJYy5tJXdr09w358rwFO8oV7Q7S/cEFSC7HWyb0fCqKK+y/Ug69dV9AoWsD3bDNsJdJP5f33cFZJKZpP0/OgnR/2a18NHvJaycYafJrW2IoelCyiXL7iXNnda5iMSwEjF2mv+keOXODZfUTR4MG1EP63R2hKgx8phx2iypiqXFXi36pLeLB8AXWsoBRpd91nH9+JcNCsAkDnErgg6KnZyN9pG39cCHQ46adk0CGt3ke5Tg==",
+//"body":"支付宝购买靓号","buyer_id":"2088302481469674","invoice_amount":"399.00","notify_id":"2020052800222094812069671446541835",
+//"fund_bill_list":"[{\"amount\":\"399.00\",\"fundChannel\":\"ALIPAYACCOUNT\"}]","notify_type":"trade_status_sync","trade_status":
+//"TRADE_SUCCESS","receipt_amount":"399.00","buyer_pay_amount":"399.00","app_id":"2021001122647841",
+//"sign_type":"RSA2","seller_id":"2088731550772126","gmt_payment":"2020-05-28 09:48:12",
+//"notify_time":"2020-05-28 13:15:16","version":"1.0","out_trade_no":"LX-20200528094756",
+//"total_amount":"399.00","trade_no":"2020052822001469671458153210","auth_app_id":"2021001122647841","buyer_logon_id":"182***@qq.com","point_amount":"0.00"}

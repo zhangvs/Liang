@@ -27,7 +27,8 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 广州头条：先跳转到hllf25.zitiaonc.com，再跳转到xdd2.jnlxsm.net
+    /// 广州头条：先跳转到hllf25.zitiaonc.com，
+    /// 再跳转到 shop.jnlxsm.net
     /// 响当当第二个账号添加
     ///xdd2.jnlxsm.net:8023
     ///xdd2.jnlxsm.net:442
@@ -362,8 +363,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
             //商品Id，用户自行定义
             var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
-//Convert.ToInt32(ordersEntity.Price * 100),
-1,
+Convert.ToInt32(ordersEntity.Price * 100),
 Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId, tenPayV3Info.Key, nonceStr);
             var result = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
             LogHelper.AddLog(result.ResultXml);//记录日志
@@ -392,6 +392,12 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
         {
             try
             {
+                string[] area = ordersEntity.City.Split(' ');
+                if (area.Length > 0)
+                {
+                    ordersEntity.Province = area[0];//省
+                    ordersEntity.City = area[1];//市
+                }
                 ordersbll.SaveForm(ordersEntity.Id,ordersEntity);
                 H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = { } };
                 return Content(JsonConvert.SerializeObject(root));

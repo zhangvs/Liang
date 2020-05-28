@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Senparc.Weixin.HttpUtility;
 using Senparc.Weixin.MP;
+using Senparc.Weixin.MP.Containers;
+using Senparc.Weixin.MP.Helpers;
 using Senparc.Weixin.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
@@ -25,10 +27,15 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 济南头条https://www.jnlxsm.net:447/webapp/Shop/Index
-    /// 二跳shop.jnlxsm.net
+    /// 广州头条：先跳转到mwd.gzjxwlkj.cn:400，
+    /// 再跳转到 shop.jnlxsm.net
+    /// 响当当第二个账号添加
+    ///mwd2.jnlxsm.net:8023
+    ///mwd2.jnlxsm.net:442
+    ///hllf25.zitiaonc.com:4422
+    ///hllf25.zitiaonc.com:8022
     /// </summary>
-    public class ShopController : Controller
+    public class mwd2Controller : Controller
     {
 
         private TelphoneLiangBLL tlbll = new TelphoneLiangBLL();
@@ -119,7 +126,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='/webapp/shop/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器
+                        $"    <a href='https://shop.jnlxsm.net/webapp/mwd2/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -170,7 +177,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         [HttpPost]
         public ActionResult ajaxorder(OrdersEntity ordersEntity)
         {
-            //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/webapp/shop/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/webapp/shop/paymentFinish/11\"}}");
+            //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/webapp/mwd2/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/webapp/mwd2/paymentFinish/11\"}}");
             try
             {
                 string[] area = ordersEntity.City.Split(' ');
@@ -180,7 +187,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     ordersEntity.City = area[1];//市
                 }
 
-
+                //创建订单表
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
                 var sp_billno = ordersEntity.OrderSn;
@@ -205,7 +212,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "/webapp/shop/index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://hllf25.zitiaonc.com:4422/webapp/mwd2/index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
@@ -238,8 +245,9 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 }
                 else
                 {
+                    //0 手机（H5支付）  1 电脑（扫码Native支付），2微信浏览器（JSAPI）
                     //pc端返回二维码，否则H5
-                    if (ordersEntity.PC == 1)
+                    if (ordersEntity.PC == 1)//电脑端
                     {
                         //创建请求统一订单接口参数
                         var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
@@ -273,8 +281,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "NATIVE",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "/webapp/shop/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "/webapp/shop/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/mwd2/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/mwd2/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -286,8 +294,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     }
                     else
                     {
-                        var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "H5购买靓号", sp_billno, 
-                           // 1,
+                        var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "H5购买靓号", sp_billno,
+                        // 1,
                         Convert.ToInt32(ordersEntity.Price * 100),
                         Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.MWEB/*此处无论传什么，方法内部都会强制变为MWEB*/, null, tenPayV3Info.Key, nonceStr);
 
@@ -309,8 +317,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "H5",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "/webapp/shop/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "/webapp/shop/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/mwd2/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/mwd2/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -369,14 +377,14 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     nonceStr = nonceStr,
                     package = package,
                     paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                    callback_url = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
+                    callback_url = "https://shop.jnlxsm.net/webapp/mwd2/paymentFinish/" + ordersEntity.Id
                 };
                 ViewBag.WxModel = jsApiPayData;
                 LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
             }
             return View(ordersEntity);
         }
-
+        
 
         //需要OAuth登录
         [HttpPost]
@@ -390,7 +398,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     ordersEntity.Province = area[0];//省
                     ordersEntity.City = area[1];//市
                 }
-                ordersbll.SaveForm(ordersEntity.Id, ordersEntity);
+                ordersbll.SaveForm(ordersEntity.Id,ordersEntity);
                 H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = { } };
                 return Content(JsonConvert.SerializeObject(root));
             }
@@ -407,8 +415,6 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                 return Content(msg);
             }
         }
-
-
 
         public ActionResult express(string mobile)
         {
@@ -575,7 +581,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                 string body = "我是测试数据";
 
                 // 支付中途退出返回商户网站地址
-                string quit_url = "/webapp/shop/index";
+                string quit_url = "https://hllf25.zitiaonc.com:4422/webapp/mwd2/index";
 
                 // 组装业务参数model
                 AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();

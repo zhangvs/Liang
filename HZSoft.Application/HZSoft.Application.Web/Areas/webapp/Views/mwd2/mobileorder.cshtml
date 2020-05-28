@@ -1,9 +1,4 @@
-﻿@model HZSoft.Application.Entity.CustomerManage.OrdersEntity
-@{
-    ViewBag.Title = "微信支付";
-    var wxModel = ViewBag.WxModel as HZSoft.Application.Entity.WeChatManage.WFTWxModel;
-}
-<!doctype html>
+﻿<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -35,13 +30,13 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1663392064049159");
+        })(window, document, "script", "1667359354378253");
     </script>
     <!-- End Bytedance Tracking -->
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/xdd2/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
+        <a href="/webapp/xdd2/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -88,12 +83,18 @@
         <div class="weui-form-preview__bd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">预定号码</label><span class="weui-form-preview__value color-yellow">
-                    <h3>@Model.Tel</h3>
+                    <h3>@ViewBag.Tel</h3>
                 </span>
             </div>
+            @*<div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">号码价格</label><span class="weui-form-preview__value color-yellow">¥@ViewBag.Price</span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">预存话费</label><span class="weui-form-preview__value color-yellow">¥0</span>
+                </div>*@
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">订单总计</label><span class="weui-form-preview__value color-danger">
-                    <h3>¥@Model.Price</h3>
+                    <h3>¥@ViewBag.Price</h3>
                 </span>
             </div>
         </div>
@@ -115,15 +116,31 @@
                 <input type="radio" class="weui-check" value="wechat" name="paytype" id="x11" checked="checked"><span class="weui-icon-checked"></span>
             </div>
         </label>
+        <label class="weui-cell weui-check__label" for="x12">
+            <div class="weui-cell__hd">
+                <img src="/themes/simplebootx_mobile/Public/images/zhifubao.png" width="20px">
+            </div>
+            <div class="weui-cell__bd">
+                <p>
+                    支付宝支付
+                </p>
+            </div>
+            <div class="weui-cell__ft">
+                <input type="radio" name="paytype" value="alipay" class="weui-check" id="x12"><span class="weui-icon-checked"></span>
+            </div>
+        </label>
     </div>
     <div class="page-btn">
         <a href="#" id="submit" data-id="@ViewBag.id" class="weui-btn" style="background: #ee5246;">立即支付</a>
     </div>
     <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
     <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+    @*<script src="/themes/simplebootx_mobile/Public/js/city-picker.min.js"></script>*@
     <script src="~/assets/wap/js/city-picker.min.js"></script>
     <script type="text/javascript">
         $(function () {
+            var flag = IsPC(); //true为PC端，false为手机端
+
             $("#city").cityPicker({
                 title: "请选择城市",
                 showDistrict: false
@@ -146,49 +163,80 @@
                             if (address) {
                                 $.ajax({
                                     type: "post",
-                                    url: "/webapp/shop2/JsApi",
+                                    url: "/webapp/xdd2/ajaxorder",
                                     data: {
-                                        Id:@Model.Id,
+                                        TelphoneID: id,
                                         Receiver: name,
                                         ContactTel: mobile,
                                         City: city,
                                         Address: address,
-                                        PayType: paytype
+                                        PayType: paytype,
+                                        Tel:@ViewBag.Tel,
+                                        Price:@ViewBag.Price,
+                                        PC: flag,
+                                        Host:'@ViewBag.host'
                                     },
                                     cache: false,
                                     async: false,
                                     dataType: "json",
                                     success: function (resObj) {
+                                        //if (result.status == 1) {
+                                        //    window.location.href = result.url;
+                                        //} else {
+                                        //    $.toast(result.info, "forbidden");
+                                        //}
+
                                         if (resObj.status) {
                                             //头条推广转化（点击支付）
-                                            meteor.track("form", { convert_id: "1666010616296460" })
-
-                                                //JSApi支付
-                                                WeixinJSBridge.invoke(
-                                                'getBrandWCPayRequest', {
-                                                    "appId":"@wxModel.appId",     //公众号名称，由商户传入
-                                                    "timeStamp": "@wxModel.timeStamp",         //时间戳，自1970年以来的秒数
-                                                    "nonceStr": "@wxModel.nonceStr", //随机串
-                                                    "package": "@wxModel.package",
-                                                    "signType": "MD5",         //微信签名方式：
-                                                    "paySign": "@wxModel.paySign" //微信签名
-                                                },
-                                                function (res) {
-                                                    if (res.err_msg == "get_brand_wcpay_request:ok") {
-                                                        //支付成功，后续自行处理
-                                                        $.toast("支付成功", function () {
-                                                            document.location.href = '@wxModel.callback_url';
-                                                        });
-                                                    }
-                                                    else if (res.err_msg == "get_brand_wcpay_request:cancel") {
-                                                        //支付取消，或者其他错误，自行处理
-                                                        $.toast("支付取消", "cancel");
-                                                    }
-                                                    else {
-                                                        alert(res.err_msg);
-                                                        $.toast("支付失败", "forbidden");
-                                                    }
+                                            meteor.track("form", { convert_id: "1667736631584772" })
+                                            //不做处理，跳转
+                                            if (resObj.data.target) {
+                                                location.href = resObj.data.gotoUrl;
+                                                return false;
+                                            }
+                                            //站外支付方式
+                                            if (paytype == 'offline') {
+                                                location.href = resObj.data.uploadpic_url;
+                                            }
+                                            //支付宝
+                                            if (paytype == 'alipay') {
+                                                //输出提交表单
+                                                $("body").append(resObj.data.form);
+                                            }
+                                            //微信
+                                            if (paytype == 'wechat') {
+                                                //H5支付
+                                                if (typeof (resObj.data.mweb_url) != "undefined" && resObj.data.mweb_url != null) {
+                                                    location.href = resObj.data.mweb_url + '&redirect_url=' + encodeURIComponent(resObj.data.wx_query_over);
+                                                    return false;
+                                                }
+                                                //扫码支付
+                                                var qrsrc = '<img src="/WeChatManage/user_index/getPageqr/?pageurl=' + encodeURIComponent(resObj.data.code_url) + '" style="max-width:100%;" />';
+                                                $.modal({
+                                                    text: qrsrc,
+                                                    buttons: [
+                                                        { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
+                                                        { text: "支付完成", onClick: function () { location.href = '/webapp/xdd2/paymentFinish/' + resObj.data.payid; } }
+                                                    ]
                                                 });
+                                                //检测付款状态
+                                                setInterval(function () {
+                                                    $.ajax({
+                                                        type: "post",
+                                                        url: resObj.data.wx_query_href,
+                                                        data: '',
+                                                        dataType: 'json',
+                                                        success: function (result) {
+                                                            if (result.status) {
+                                                                //支付成功
+                                                                location.href = resObj.data.wx_query_over;
+                                                            } else {
+                                                                console.log("等待付款");
+                                                            }
+                                                        }
+                                                    });
+                                                }, 2000);
+                                            }
                                         } else {
                                             $.hideLoading();
                                             //状态显示
@@ -199,7 +247,6 @@
                                         $.toast("提交失败，请重试", "forbidden");
                                     }
                                 });
-
                             } else {
                                 $.toast("请输入详细地址", "forbidden");
                             }
@@ -216,6 +263,33 @@
                 return false;
             });
         })
+
+        function IsPC() {
+            var flag = 1;
+            //平台、设备和操作系统
+            var system = {
+                win: false,
+                mac: false,
+                xll: false,
+                ipad: false
+            };
+            //检测平台
+            var p = navigator.platform;
+            system.win = p.indexOf("Win") == 0;
+            system.mac = p.indexOf("Mac") == 0;
+            system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+            system.ipad = (navigator.userAgent.match(/iPad/i) != null) ? true : false;
+            //跳转语句，如果是PC访问就自动跳转到所要访问的页面http://www.电脑.com
+            if (system.win || system.mac || system.xll || system.ipad) {
+                //默认访问http://www.电脑.com
+            } else {
+                //window.location.href = "http://www.手机.com/";
+                flag = 0;
+            }
+            return flag;
+        }
+
+
     </script>
 </body>
 </html>
