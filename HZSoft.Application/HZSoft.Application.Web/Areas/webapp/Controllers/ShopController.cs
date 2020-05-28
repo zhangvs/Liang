@@ -119,7 +119,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='/webapp/shop/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器
+                        $"    <a href='https://shop.jnlxsm.net/webapp/shop/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -205,7 +205,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "/webapp/shop/index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://www.jnlxsm.net:447/webapp/Shop/Index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
@@ -273,8 +273,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "NATIVE",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "/webapp/shop/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "/webapp/shop/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/shop/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -309,8 +309,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "H5",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "/webapp/shop/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "/webapp/shop/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/shop/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
