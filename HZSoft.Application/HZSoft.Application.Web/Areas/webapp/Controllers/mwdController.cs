@@ -27,13 +27,8 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 广州头条：先跳转到mwd.gzjxwlkj.cn:4444，
+    /// 广州头条：先跳转到mwd.gzjxwlkj.cn:8022，
     /// 再跳转到 shop.jnlxsm.net
-    /// 响当当第二个账号添加
-    ///mwd.jnlxsm.net:8023
-    ///mwd.jnlxsm.net:442
-    ///hllf25.zitiaonc.com:4422
-    ///hllf25.zitiaonc.com:8022
     /// </summary>
     public class mwdController : Controller
     {
@@ -212,7 +207,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "https://hllf25.zitiaonc.com:4422/webapp/mwd/index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://mwd.gzjxwlkj.cn:8022/webapp/mwd/index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
@@ -551,72 +546,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
             ViewBag.Price = ordersEntity.Price;
             return View();
         }
-
-
-        /// <summary>
-        /// 订单编号
-        /// </summary>
-        /// <param name="oidStr"></param>
-        /// <returns></returns>
-        public void AliPay()
-        {
-
-            #region 统一下单
-            try
-            {
-
-                DefaultAopClient client = new DefaultAopClient(WeixinConfig.serviceUrl, WeixinConfig.aliAppId, WeixinConfig.privateKey, "json", "1.0",
-                    WeixinConfig.signType, WeixinConfig.publicKey, WeixinConfig.charset, false);
-
-                // 外部订单号，商户网站订单系统中唯一的订单号
-                string out_trade_no = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-                // 订单名称
-                string subject = "App支付测试DoNet";
-
-                // 付款金额
-                string total_amout = "0.01";
-
-                // 商品描述
-                string body = "我是测试数据";
-
-                // 支付中途退出返回商户网站地址
-                string quit_url = "https://hllf25.zitiaonc.com:4422/webapp/mwd/index";
-
-                // 组装业务参数model
-                AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
-                model.Body = body;
-                model.Subject = subject;
-                model.TotalAmount = total_amout;
-                model.OutTradeNo = out_trade_no;
-                model.ProductCode = "QUICK_WAP_WAY";
-                model.QuitUrl = quit_url;
-
-                AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
-                // 设置支付完成同步回调地址
-                // request.SetReturnUrl("");
-                // 设置支付完成异步通知接收地址
-                // request.SetNotifyUrl("");
-                // 将业务model载入到request
-                request.SetBizModel(model);
-
-                AlipayTradeWapPayResponse response = null;
-                try
-                {
-                    response = client.pageExecute(request, null, "post");
-                    Response.Write(response.Body);
-                }
-                catch (Exception exp)
-                {
-                    throw exp;
-                }
-            }
-            catch (Exception ex)
-            {
-                //return Json(new { Result = false, msg = "缺少参数" });
-            }
-            #endregion
-        }
+        
     }
 }
 //H5支付点击按钮返回报文

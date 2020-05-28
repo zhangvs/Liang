@@ -25,7 +25,7 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 广州头条：先跳转到hllf25.zitiaonc.com，
+    /// 广州头条：先跳转到https://hllf25.zitiaonc.com:4411/webapp/xdd/index，
     /// 再跳转到 shop.jnlxsm.net
     /// </summary>
     public class XddController : Controller

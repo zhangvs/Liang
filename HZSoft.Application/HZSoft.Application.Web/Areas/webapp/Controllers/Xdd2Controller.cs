@@ -27,13 +27,9 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 广州头条：先跳转到hllf25.zitiaonc.com，
+    /// 广州头条：先跳转到https://hllf25.zitiaonc.com:4422/webapp/xdd2/index
     /// 再跳转到 shop.jnlxsm.net
     /// 响当当第二个账号添加
-    ///xdd2.jnlxsm.net:8023
-    ///xdd2.jnlxsm.net:442
-    ///hllf25.zitiaonc.com:4422
-    ///hllf25.zitiaonc.com:8022
     /// </summary>
     public class Xdd2Controller : Controller
     {

@@ -27,13 +27,8 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 广州头条：先跳转到mwd.gzjxwlkj.cn:400，
+    /// 广州头条：先跳转到mwd.gzjxwlkj.cn:8023，
     /// 再跳转到 shop.jnlxsm.net
-    /// 响当当第二个账号添加
-    ///mwd2.jnlxsm.net:8023
-    ///mwd2.jnlxsm.net:442
-    ///hllf25.zitiaonc.com:4422
-    ///hllf25.zitiaonc.com:8022
     /// </summary>
     public class mwd2Controller : Controller
     {
@@ -212,7 +207,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "https://hllf25.zitiaonc.com:4422/webapp/mwd2/index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://mwd.gzjxwlkj.cn:8023/webapp/mwd2/index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
