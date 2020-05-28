@@ -37,7 +37,7 @@
             datatype: "json",
             colModel: [
                 { label: '主键', name: 'Id', hidden: true },
-                { label: '订单号', name: 'OrderSn', index: 'OrderSn', width: 200, align: 'left', sortable: true },
+                { label: '订单号', name: 'OrderSn', index: 'OrderSn', width: 170, align: 'left', sortable: true },
                 { label: '域名', name: 'Host', index: 'Host', width: 180, align: 'left', sortable: true },
                 { label: '靓号', name: 'Tel', index: 'Tel', width: 100, align: 'left',sortable: true  },
                 { label: '价格', name: 'Price', index: 'Price', width: 80, align: 'center',sortable: true  },
@@ -63,12 +63,13 @@
                         return cellvalue == 1 ? "<i class=\"fa fa-toggle-on\"></i>" : "<i class=\"fa fa-toggle-off\"></i>";
                     }
                 },
-                { label: '支付时间', name: 'PayDate', index: 'PayDate', width: 118, align: 'left',sortable: true  },
+                { label: '支付时间', name: 'PayDate', index: 'PayDate', width: 118, align: 'left', sortable: true },
+                { label: '支付方式', name: 'PayType', index: 'PayType', width: 100, align: 'center', sortable: true },
                 { label: '收件人', name: 'Receiver', index: 'Receiver', width: 100, align: 'center',sortable: true  },
                 { label: '联系电话', name: 'ContactTel', index: 'ContactTel', width: 100, align: 'center',sortable: true  },
                 { label: '省', name: 'Province', index: 'Province', width: 100, align: 'center',sortable: true  },
                 { label: '市', name: 'City', index: 'City', width: 100, align: 'center',sortable: true  },
-                { label: '区', name: 'Country', index: 'Country', width: 100, align: 'center',sortable: true  },
+                //{ label: '区', name: 'Country', index: 'Country', width: 100, align: 'center',sortable: true  },
                 { label: '详细地址', name: 'Address', index: 'Address', width: 200, align: 'left',sortable: true  },
                 { label: '发货人', name: 'DeliveryName', index: 'DeliveryName', width: 100, align: 'center',sortable: true  },
                 { label: '发货时间', name: 'DeliveryDate', index: 'DeliveryDate', width: 80, align: 'left',sortable: true  },

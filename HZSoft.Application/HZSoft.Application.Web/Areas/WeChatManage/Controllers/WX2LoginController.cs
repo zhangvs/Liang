@@ -28,7 +28,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
     /// <summary>
     /// 微信认证和登录
     /// </summary>
-    public class WX2LoginController : BaseWxUserController
+    public class WX2LoginController : Controller
     {
         WeChat_UsersBLL wechatUserBll = new WeChat_UsersBLL();
         UserBLL userBLL = new UserBLL();
@@ -42,7 +42,7 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
         /// <returns></returns>
         public ActionResult Redirect(string code, string state)
         {
-            //LogHelper.AddLog($"微信认证请求地址：{System.Web.HttpContext.Current.Request.Url.ToString()}  参数code： {code}，参数state： {state}");
+            LogHelper.AddLog($"微信认证请求地址：{System.Web.HttpContext.Current.Request.Url.ToString()}  参数code： {code}，参数state： {state}");
             //若用户禁止授权，则重定向后不会带上code参数
             if (string.IsNullOrEmpty(code))
             {

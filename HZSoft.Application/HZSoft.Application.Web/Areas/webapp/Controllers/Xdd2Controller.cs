@@ -14,6 +14,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Senparc.Weixin.HttpUtility;
 using Senparc.Weixin.MP;
+using Senparc.Weixin.MP.Containers;
+using Senparc.Weixin.MP.Helpers;
 using Senparc.Weixin.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
@@ -339,70 +341,59 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         }
 
         //需要OAuth登录
+        [HandlerWX2AuthorizeAttribute(LoginMode.Enforce)]
         public ActionResult JsApi(int? id, string Tel, string Price, string host)
         {
-            ViewBag.id = id;
-            ViewBag.Tel = Tel;
-            ViewBag.Price = Price;
-            ViewBag.host = host;
-            return View();
-        }
+            OrdersEntity ordersEntity = new OrdersEntity()
+            {
+                TelphoneID = id,
+                Tel = Tel,
+                Price = Convert.ToDecimal(Price),
+                Host = host,
+            };
 
+            //创建订单表
+            ordersEntity = ordersbll.SaveForm(ordersEntity);
+
+            var openId = (string)Session["OpenId"];
+            var sp_billno = ordersEntity.OrderSn;
+            var nonceStr = TenPayV3Util.GetNoncestr();
+            var timeStamp = TenPayV3Util.GetTimestamp();
+
+            //商品Id，用户自行定义
+            var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
+//Convert.ToInt32(ordersEntity.Price * 100),
+1,
+Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId, tenPayV3Info.Key, nonceStr);
+            var result = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
+            LogHelper.AddLog(result.ResultXml);//记录日志
+            var package = string.Format("prepay_id={0}", result.prepay_id);
+            if (result.return_code == "SUCCESS")
+            {
+                WFTWxModel jsApiPayData = new WFTWxModel()
+                {
+                    appId = WeixinConfig.AppID2,
+                    timeStamp = timeStamp,
+                    nonceStr = nonceStr,
+                    package = package,
+                    paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
+                    callback_url = "https://shop.jnlxsm.net/webapp/xdd2/paymentFinish/" + ordersEntity.Id
+                };
+                ViewBag.WxModel = jsApiPayData;
+                LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
+            }
+            return View(ordersEntity);
+        }
+        
 
         //需要OAuth登录
         [HttpPost]
-        [HandlerWX2AuthorizeAttribute(LoginMode.Enforce)]
         public ActionResult JsApi(OrdersEntity ordersEntity)
         {
             try
             {
-                string[] area = ordersEntity.City.Split(' ');
-                if (area.Length > 0)
-                {
-                    ordersEntity.Province = area[0];//省
-                    ordersEntity.City = area[1];//市
-                }
-
-                //创建订单表
-                ordersEntity = ordersbll.SaveForm(ordersEntity);
-
-                var openId = (string)Session["OpenId"];
-                var sp_billno = ordersEntity.OrderSn;
-                var nonceStr = TenPayV3Util.GetNoncestr();
-                var timeStamp = TenPayV3Util.GetTimestamp();
-
-                //商品Id，用户自行定义
-                string productId = ordersEntity.TelphoneID.ToString();
-
-
-                var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
-                //Convert.ToInt32(ordersEntity.Price * 100),
-                1,
-                Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId, tenPayV3Info.Key, nonceStr);
-                var result = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
-                LogHelper.AddLog(result.ResultXml);//记录日志
-                var package = string.Format("prepay_id={0}", result.prepay_id);
-                H5Response root = null;
-                if (result.return_code == "SUCCESS")
-                {
-                    WFTWxModel jsApiPayData = new WFTWxModel()
-                    {
-                        appId = WeixinConfig.AppID2,
-                        timeStamp = timeStamp,
-                        nonceStr = nonceStr,
-                        package = package,
-                        paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                        callback_url = "https://shop.jnlxsm.net/webapp/xdd2/paymentFinish/" + ordersEntity.Id
-                    };
-
-                    root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = jsApiPayData };
-                }
-                else
-                {
-                    root = new H5Response { code = false, status = false, msg = result.return_msg };
-                }
-                LogHelper.AddLog(JsonConvert.SerializeObject(root));//记录日志
-
+                ordersbll.SaveForm(ordersEntity.Id,ordersEntity);
+                H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = { } };
                 return Content(JsonConvert.SerializeObject(root));
             }
             catch (Exception ex)

@@ -1,4 +1,9 @@
-﻿<!doctype html>
+﻿@model HZSoft.Application.Entity.CustomerManage.OrdersEntity
+@{
+    ViewBag.Title = "微信支付";
+    var wxModel = ViewBag.WxModel as HZSoft.Application.Entity.WeChatManage.WFTWxModel;
+}
+<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -36,7 +41,7 @@
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/xdd2/mobileinfo/@ViewBag.id"><i class="-back"></i></a>
+        <a href="/webapp/xdd2/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -86,12 +91,6 @@
                     <h3>@ViewBag.Tel</h3>
                 </span>
             </div>
-            @*<div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">号码价格</label><span class="weui-form-preview__value color-yellow">¥@ViewBag.Price</span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">预存话费</label><span class="weui-form-preview__value color-yellow">¥0</span>
-                </div>*@
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">订单总计</label><span class="weui-form-preview__value color-danger">
                     <h3>¥@ViewBag.Price</h3>
@@ -153,16 +152,17 @@
                                     type: "post",
                                     url: "/webapp/xdd2/JsApi",
                                     data: {
+                                        Id:@Model.Id
                                         TelphoneID: id,
                                         Receiver: name,
                                         ContactTel: mobile,
                                         City: city,
                                         Address: address,
                                         PayType: paytype,
-                                        Tel:@ViewBag.Tel,
-                                        Price:@ViewBag.Price,
+                                        Tel:@Model.Tel,
+                                        Price:@Model.Price,
                                         PC: flag,
-                                        Host:'@ViewBag.host'
+                                        Host:'@Model.Host'
                                     },
                                     cache: false,
                                     async: false,
@@ -172,23 +172,21 @@
                                             //头条推广转化（点击支付）
                                             meteor.track("form", { convert_id: "1667736631584772" })
 
-                                            //微信
-                                            if (paytype == 'wechat') {
                                                 //JSApi支付
                                                 WeixinJSBridge.invoke(
                                                 'getBrandWCPayRequest', {
-                                                    "appId": resObj.data.appId, //公众号名称，由商户传入
-                                                    "timeStamp": resObj.data.timeStamp, //时间戳
-                                                    "nonceStr": resObj.data.nonceStr, //随机串
-                                                    "package": resObj.data.package,//扩展包
-                                                    "signType": "MD5", //微信签名方式:MD5
-                                                    "paySign": resObj.data.paySign //微信签名
+                                                    "appId":"@wxModel.appId",     //公众号名称，由商户传入
+                                                    "timeStamp": "@wxModel.timeStamp",         //时间戳，自1970年以来的秒数
+                                                    "nonceStr": "@wxModel.nonceStr", //随机串
+                                                    "package": "@wxModel.package",
+                                                    "signType": "MD5",         //微信签名方式：
+                                                    "paySign": "@wxModel.paySign" //微信签名
                                                 },
                                                 function (res) {
                                                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                                                         //支付成功，后续自行处理
                                                         $.toast("支付成功", function () {
-                                                            document.location.href = resObj.data.callback_url;
+                                                            document.location.href = @wxModel.callback_url;
                                                         });
                                                     }
                                                     else if (res.err_msg == "get_brand_wcpay_request:cancel") {
@@ -200,7 +198,6 @@
                                                         $.toast("支付失败", "forbidden");
                                                     }
                                                 });
-                                            }
                                         } else {
                                             $.hideLoading();
                                             //状态显示

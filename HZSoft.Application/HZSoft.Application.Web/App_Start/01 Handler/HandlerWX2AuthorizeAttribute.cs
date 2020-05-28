@@ -46,8 +46,9 @@ namespace HZSoft.Application.Web
             //判断是否微信通过认证
             if (CurrentWxUser.Users == null)
             {
-                filterContext.Result = new RedirectResult(string.Format(WeixinConfig.GetCodeUrl2, HttpUtility.UrlEncode(RequestUri)));
-                LogHelper.AddLog("filterContext.Result:" + filterContext.Result);
+                string url = string.Format(WeixinConfig.GetCodeUrl2, HttpUtility.UrlEncode(RequestUri));
+                filterContext.Result = new RedirectResult(url);
+                LogHelper.AddLog("filterContext.Result:" + url);
                 return;
             }
         }
