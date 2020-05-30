@@ -346,8 +346,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 TelphoneID = id,
                 Tel = Tel,
                 Price = Convert.ToDecimal(Price),
-                Host = host,
-                PayType = "JsApi"
+                Host = host
             };
 
             //创建订单表
@@ -395,6 +394,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     ordersEntity.Province = area[0];//省
                     ordersEntity.City = area[1];//市
                 }
+                ordersEntity.PayType = "JsApi";
                 ordersbll.SaveForm(ordersEntity.Id,ordersEntity);
                 H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = { } };
                 return Content(JsonConvert.SerializeObject(root));

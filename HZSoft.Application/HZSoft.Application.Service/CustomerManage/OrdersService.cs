@@ -182,20 +182,22 @@ namespace HZSoft.Application.Service.CustomerManage
         public OrdersEntity SaveForm(OrdersEntity entity)
         {
             //如果购买靓号和联系电话为同一个人订单，在原订单基础上修改，不再创建新的订单
-            OrdersEntity oldEntity = GetEntityByContactTel(entity.Tel, entity.ContactTel);
-            if (oldEntity != null)
-            {
-                oldEntity.Modify(oldEntity.Id);
-                SaveForm(oldEntity.Id, entity);
-                return oldEntity;
-            }
-            else
-            {
-                entity.Create();
-                entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
-                this.BaseRepository().Insert(entity);
-                return entity;
-            }
+            //OrdersEntity oldEntity = GetEntityByContactTel(entity.Tel, entity.ContactTel);
+            //if (oldEntity != null)
+            //{
+            //    entity.Id = oldEntity.Id;
+            //    entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
+            //    entity.Modify(entity.Id);
+            //    this.BaseRepository().Update(entity);
+            //}
+            //else
+            //{
+
+            //}
+            entity.Create();
+            entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
+            this.BaseRepository().Insert(entity);
+            return entity;
         }
 
 
