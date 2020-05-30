@@ -185,16 +185,17 @@ namespace HZSoft.Application.Service.CustomerManage
             OrdersEntity oldEntity = GetEntityByContactTel(entity.Tel, entity.ContactTel);
             if (oldEntity != null)
             {
-                SaveForm(entity.Id, entity);
+                oldEntity.Modify(oldEntity.Id);
+                SaveForm(oldEntity.Id, entity);
+                return oldEntity;
             }
             else
             {
                 entity.Create();
                 entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
                 this.BaseRepository().Insert(entity);
+                return entity;
             }
-            return entity;
-
         }
 
 

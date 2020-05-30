@@ -148,6 +148,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// </summary>
         /// <returns></returns>
         public int? PC { get; set; }
+        /// <summary>
+        /// 修改时间
+        /// </summary>
+        /// <returns></returns>
+        public DateTime? ModifyDate { get; set; }
         #endregion
 
         #region 扩展操作
@@ -166,7 +171,8 @@ namespace HZSoft.Application.Entity.CustomerManage
         public override void Modify(int? keyValue)
         {
             this.Id = keyValue;
-                                            }
+            this.ModifyDate = DateTime.Now;
+        }
         #endregion
     }
 }
