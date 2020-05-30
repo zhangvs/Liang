@@ -65,14 +65,6 @@ namespace HZSoft.Application.Busines.CustomerManage
         {
             return service.GetEntityByTel(tel);
         }
-        /// <summary>
-        /// 获取实体
-        /// </summary>
-        /// <param name="keyValue">主键值</param>
-        public OrdersEntity GetEntityByContactTel(string contactTel)
-        {
-            return service.GetEntityByContactTel(contactTel);
-        }
         #endregion
 
         #region 提交数据

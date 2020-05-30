@@ -171,6 +171,10 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
 
         /// <summary>
         /// 服务器异步通知页面
+        /// 调用接口，收到异步通知后，返回小写的success，告知支付宝已收到通知：每当交易状态改变时，服务器异步通知页面就会收到支付宝发来的处理结果通知， 
+        /// 程序执行完后必须打印输出success。如果商户反馈给支付宝的字符不是success这7个字符，支付宝服务器会不断重发通知，直到超过24小时22分钟。
+        /// 一般情况下，25小时以内完成8次通知（通知的间隔频率一般是：4m,10m,10m,1h,2h,6h,15h）。  参考示例代码： JAVA版本：out.println("success"); PHP版本：echo "success";  
+        /// .NET版本：Response.Write("success"); 注：返回success是为了告知支付宝，商户已收到异步，避免重复发送异步通知，与该笔交易的交易状态无关。
         /// </summary>
         public void AliPayNotifyUrl()
         {
@@ -190,38 +194,40 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                 string orderSn = sArray["out_trade_no"];
                 if (flag)
                 {
-                    //交易状态
-                    //判断该笔订单是否在商户网站中已经做过处理
-                    //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-                    //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
-                    //如果有做过处理，不执行商户的业务程序
-                    //订单号
-                    OrdersEntity order = ordersbll.GetEntityByOrderSn(orderSn);
-                    if (order!=null)
-                    {
-                        string total_amount = sArray["total_amount"];
-                        if (Convert.ToDecimal(total_amount) ==order.Price)
-                        {
-                            LogHelper.AddLog("异步调用orderSn：" + orderSn+ "total_amount:" + total_amount+"金额一致");
-                            order.PayDate = DateTime.Now;
-                            order.PayStatus = (int)PayStatus.已支付;
-                            order.Status = (int)OrderStatus.未发货;
-                            ordersbll.SaveForm(order.Id, order);
-                        }
-                    }
-
-                    //不同步
-                    //TelphoneLiangEntity tel = tlbll.GetEntity(order.TelphoneID);//根据靓号id获取靓号，修改售出状态
-                    //if (tel != null)
-                    //{
-                    //    tel.SellMark = 1;
-                    //    tel.SellerName = order.Host;
-                    //}
-                    //tlbll.SaveForm(tel.TelphoneID, tel);
-
                     //注意：
                     //退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
                     string trade_status = Request.Form["trade_status"];
+                    if (trade_status== "TRADE_SUCCESS")
+                    {
+                        //交易状态
+                        //判断该笔订单是否在商户网站中已经做过处理
+                        //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+                        //请务必判断请求时的total_amount与通知时获取的total_fee为一致的
+                        //如果有做过处理，不执行商户的业务程序
+                        //订单号
+                        OrdersEntity order = ordersbll.GetEntityByOrderSn(orderSn);
+                        if (order != null)
+                        {
+                            string total_amount = sArray["total_amount"];
+                            if (Convert.ToDecimal(total_amount) == order.Price)
+                            {
+                                LogHelper.AddLog("异步调用orderSn：" + orderSn + "total_amount:" + total_amount + "金额一致");
+                                order.PayDate = DateTime.Now;
+                                order.PayStatus = (int)PayStatus.已支付;
+                                order.Status = (int)OrderStatus.未发货;
+                                ordersbll.SaveForm(order.Id, order);
+
+                                //不同步
+                                //TelphoneLiangEntity tel = tlbll.GetEntity(order.TelphoneID);//根据靓号id获取靓号，修改售出状态
+                                //if (tel != null)
+                                //{
+                                //    tel.SellMark = 1;
+                                //    tel.SellerName = order.Host;
+                                //}
+                                //tlbll.SaveForm(tel.TelphoneID, tel);
+                            }
+                        }
+                    }
 
                     LogHelper.AddLog("异步调用success,订单号："+ orderSn);
                     Response.Write("success");

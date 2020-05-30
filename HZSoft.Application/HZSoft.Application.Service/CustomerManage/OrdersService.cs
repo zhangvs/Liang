@@ -45,7 +45,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 strSql += " and CreateDate >= '" + startTime + "' and CreateDate < '" + endTime + "'";
             }
             //价格大于
-            if (!queryParam["pricef"].IsEmpty() )
+            if (!queryParam["pricef"].IsEmpty())
             {
                 string pricef = queryParam["pricef"].ToString();
                 strSql += " and Price >= " + pricef;
@@ -121,7 +121,7 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns></returns>
         public OrdersEntity GetEntityByOrderSn(string OrderSn)
         {
-            return this.BaseRepository().FindEntity(t=>t.OrderSn == OrderSn);
+            return this.BaseRepository().FindEntity(t => t.OrderSn == OrderSn);
         }
         /// <summary>
         /// 获取实体
@@ -135,11 +135,12 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <summary>
         /// 获取实体
         /// </summary>
-        /// <param name="contactTel">主键值</param>
+        /// <param name="tel">购买号码</param>
+        /// <param name="contactTel">联系电话</param>
         /// <returns></returns>
-        public OrdersEntity GetEntityByContactTel(string contactTel)
+        public OrdersEntity GetEntityByContactTel(string tel, string contactTel)
         {
-            return this.BaseRepository().FindEntity(t => t.ContactTel == contactTel);
+            return this.BaseRepository().FindEntity(t => t.Tel == tel && t.ContactTel == contactTel);
         }
         #endregion
 
@@ -180,10 +181,20 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns></returns>
         public OrdersEntity SaveForm(OrdersEntity entity)
         {
-            entity.Create();
-            entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
-            this.BaseRepository().Insert(entity);
+            //如果购买靓号和联系电话为同一个人订单，在原订单基础上修改，不再创建新的订单
+            OrdersEntity oldEntity = GetEntityByContactTel(entity.Tel, entity.ContactTel);
+            if (oldEntity != null)
+            {
+                SaveForm(entity.Id, entity);
+            }
+            else
+            {
+                entity.Create();
+                entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
+                this.BaseRepository().Insert(entity);
+            }
             return entity;
+
         }
 
 

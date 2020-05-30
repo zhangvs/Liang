@@ -343,6 +343,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 Tel = Tel,
                 Price = Convert.ToDecimal(Price),
                 Host = host,
+                PayType = "JsApi"
             };
 
             //创建订单表
