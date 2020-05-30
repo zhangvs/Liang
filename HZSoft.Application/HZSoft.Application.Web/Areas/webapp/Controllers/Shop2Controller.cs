@@ -563,7 +563,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
             ViewBag.display = "block";
             ViewBag.Tel = ordersEntity.Tel;
             ViewBag.TelphoneID = ordersEntity.TelphoneID;
-            ViewBag.Price = ordersEntity.Price;
+            ViewBag.Price = ordersEntity.Price.ToString().Replace(".00", "");
             ViewBag.Host = ordersEntity.Host;
             return View();
         }
