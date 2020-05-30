@@ -180,7 +180,23 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                     ordersEntity.City = area[1];//市
                 }
 
-
+                string payType = ordersEntity.PayType;
+                if (payType == "alipay")
+                {
+                    payType = "支付宝";
+                }
+                else
+                {
+                    if (ordersEntity.PC == 1)
+                    {
+                        payType = "微信扫码";
+                    }
+                    else
+                    {
+                        payType = "微信H5";
+                    }
+                }
+                ordersEntity.PayType = payType;
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
                 var sp_billno = ordersEntity.OrderSn;
@@ -191,7 +207,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                 H5Response root = null;
 
-                if (ordersEntity.PayType == "alipay")
+                if (payType == "支付宝")
                 {
                     try
                     {
@@ -239,7 +255,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 else
                 {
                     //pc端返回二维码，否则H5
-                    if (ordersEntity.PC == 1)
+                    if (payType == "微信扫码")
                     {
                         //创建请求统一订单接口参数
                         var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
@@ -390,7 +406,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     ordersEntity.Province = area[0];//省
                     ordersEntity.City = area[1];//市
                 }
-                ordersEntity.PayType = "JsApi";
+                ordersEntity.PayType = "微信JSAPI";
                 ordersbll.SaveForm(ordersEntity.Id, ordersEntity);
                 H5Response root = new H5Response { code = true, status = true, msg = "\u63d0\u4ea4\u6210\u529f\uff01", data = { } };
                 return Content(JsonConvert.SerializeObject(root));

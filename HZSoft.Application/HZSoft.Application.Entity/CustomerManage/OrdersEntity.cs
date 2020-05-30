@@ -153,6 +153,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// </summary>
         /// <returns></returns>
         public DateTime? ModifyDate { get; set; }
+        /// <summary>
+        /// 删除标记
+        /// </summary>
+        /// <returns></returns>
+        public int? DeleteMark { get; set; }
         #endregion
 
         #region 扩展操作
@@ -163,6 +168,7 @@ namespace HZSoft.Application.Entity.CustomerManage
         {
             this.CreateDate = DateTime.Now;
             this.Status = 0;
+            this.DeleteMark = 0;
         }
         /// <summary>
         /// 编辑调用

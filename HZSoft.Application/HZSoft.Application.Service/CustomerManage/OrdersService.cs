@@ -7,7 +7,6 @@ using HZSoft.Data.Repository;
 using HZSoft.Util;
 using HZSoft.Util.Extension;
 using HZSoft.Util.WebControl;
-using Senparc.Weixin.MP.TenPayLibV3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -181,19 +180,14 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns></returns>
         public OrdersEntity SaveForm(OrdersEntity entity)
         {
-            //如果购买靓号和联系电话为同一个人订单，在原订单基础上修改，不再创建新的订单
-            //OrdersEntity oldEntity = GetEntityByContactTel(entity.Tel, entity.ContactTel);
-            //if (oldEntity != null)
-            //{
-            //    entity.Id = oldEntity.Id;
-            //    entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
-            //    entity.Modify(entity.Id);
-            //    this.BaseRepository().Update(entity);
-            //}
-            //else
-            //{
+            IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
+            var list= db.FindList<OrdersEntity>(t => t.Tel == entity.Tel && t.ContactTel == entity.ContactTel && t.Status==0);
+            if (list.Count()>0)
+            {
+                db.Delete<OrdersEntity>(t => t.Tel == entity.Tel && t.ContactTel == entity.ContactTel && t.Status == 0);
+                db.Commit();
+            }
 
-            //}
             entity.Create();
             entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
             this.BaseRepository().Insert(entity);

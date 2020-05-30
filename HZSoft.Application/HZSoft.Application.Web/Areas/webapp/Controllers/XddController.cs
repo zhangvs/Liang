@@ -181,6 +181,23 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 }
 
                 //创建订单表
+                string payType = ordersEntity.PayType;
+                if (payType == "alipay")
+                {
+                    payType = "支付宝";
+                }
+                else
+                {
+                    if (ordersEntity.PC == 1)
+                    {
+                        payType = "微信扫码";
+                    }
+                    else
+                    {
+                        payType = "微信H5";
+                    }
+                }
+                ordersEntity.PayType = payType;
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
                 var sp_billno = ordersEntity.OrderSn;
@@ -191,7 +208,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                 H5Response root = null;
 
-                if (ordersEntity.PayType == "alipay")
+                if (payType == "支付宝")
                 {
                     try
                     {
@@ -239,7 +256,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 else
                 {
                     //pc端返回二维码，否则H5
-                    if (ordersEntity.PC == 1)
+                    if (payType == "微信扫码")
                     {
                         //创建请求统一订单接口参数
                         var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,

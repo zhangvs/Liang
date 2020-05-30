@@ -184,6 +184,23 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 }
 
                 //创建订单表
+                string payType = ordersEntity.PayType;
+                if (payType == "alipay")
+                {
+                    payType = "支付宝";
+                }
+                else
+                {
+                    if (ordersEntity.PC == 1)
+                    {
+                        payType = "微信扫码";
+                    }
+                    else
+                    {
+                        payType = "微信H5";
+                    }
+                }
+                ordersEntity.PayType = payType;
                 ordersEntity = ordersbll.SaveForm(ordersEntity);
 
                 var sp_billno = ordersEntity.OrderSn;
@@ -194,7 +211,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                 H5Response root = null;
 
-                if (ordersEntity.PayType == "alipay")
+                if (payType == "支付宝")
                 {
                     try
                     {
@@ -243,7 +260,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 {
                     //0 手机（H5支付）  1 电脑（扫码Native支付），2微信浏览器（JSAPI）
                     //pc端返回二维码，否则H5
-                    if (ordersEntity.PC == 1)//电脑端
+                    if (payType == "微信扫码")
                     {
                         //创建请求统一订单接口参数
                         var xmlDataInfo = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2,
@@ -549,71 +566,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
             return View();
         }
 
-
-        /// <summary>
-        /// 订单编号
-        /// </summary>
-        /// <param name="oidStr"></param>
-        /// <returns></returns>
-        public void AliPay()
-        {
-
-            #region 统一下单
-            try
-            {
-
-                DefaultAopClient client = new DefaultAopClient(WeixinConfig.serviceUrl, WeixinConfig.aliAppId, WeixinConfig.privateKey, "json", "1.0",
-                    WeixinConfig.signType, WeixinConfig.publicKey, WeixinConfig.charset, false);
-
-                // 外部订单号，商户网站订单系统中唯一的订单号
-                string out_trade_no = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-                // 订单名称
-                string subject = "App支付测试DoNet";
-
-                // 付款金额
-                string total_amout = "0.01";
-
-                // 商品描述
-                string body = "我是测试数据";
-
-                // 支付中途退出返回商户网站地址
-                string quit_url = "https://hllf25.zitiaonc.com:4422/webapp/xdd2/index";
-
-                // 组装业务参数model
-                AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
-                model.Body = body;
-                model.Subject = subject;
-                model.TotalAmount = total_amout;
-                model.OutTradeNo = out_trade_no;
-                model.ProductCode = "QUICK_WAP_WAY";
-                model.QuitUrl = quit_url;
-
-                AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
-                // 设置支付完成同步回调地址
-                // request.SetReturnUrl("");
-                // 设置支付完成异步通知接收地址
-                // request.SetNotifyUrl("");
-                // 将业务model载入到request
-                request.SetBizModel(model);
-
-                AlipayTradeWapPayResponse response = null;
-                try
-                {
-                    response = client.pageExecute(request, null, "post");
-                    Response.Write(response.Body);
-                }
-                catch (Exception exp)
-                {
-                    throw exp;
-                }
-            }
-            catch (Exception ex)
-            {
-                //return Json(new { Result = false, msg = "缺少参数" });
-            }
-            #endregion
-        }
+        
     }
 }
 //H5支付点击按钮返回报文
