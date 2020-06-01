@@ -41,7 +41,7 @@
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/mwd/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
+        <a href="/webapp/gm/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -148,7 +148,7 @@
                             if (address) {
                                 $.ajax({
                                     type: "post",
-                                    url: "/webapp/mwd/JsApi",
+                                    url: "/webapp/gm/JsApi",
                                     data: {
                                         Id:@Model.Id,
                                         Receiver: name,

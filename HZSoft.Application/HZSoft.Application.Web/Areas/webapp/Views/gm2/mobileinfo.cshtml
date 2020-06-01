@@ -30,7 +30,7 @@
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="https://mwd.gzjxwlkj.cn:8023/webapp/mwd2/index"></a>
+        <a href="https://wl034.szlwwhcm.top:8062/webapp/gm2/index"></a>
         <h1>号码详情</h1>
     </div>
     <div class="page-box">
@@ -109,10 +109,10 @@
         $(function () {
             $('#submit').bind('click', function () {
                 if (isWeiXin()) {
-                    location.href = '/webapp/mwd2/jsapi/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
+                    location.href = '/webapp/gm2/jsapi/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
                 }
                 else {
-                    location.href = '/webapp/mwd2/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
+                    location.href = '/webapp/gm2/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
                 }
             });
         })

@@ -270,8 +270,6 @@
     <Compile Include="Areas\webapp\Controllers\AliPayController.cs" />
     <Compile Include="Areas\webapp\Controllers\gm2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\gmController.cs" />
-    <Compile Include="Areas\webapp\Controllers\mwd2Controller.cs" />
-    <Compile Include="Areas\webapp\Controllers\mwdController.cs" />
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\Controllers\Shop2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\Xdd2Controller.cs" />
@@ -337,20 +335,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="01_修改日志\log.txt" />
-    <Content Include="Areas\webapp\Views\mwd2\express.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd2\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd2\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd2\JsApi.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd2\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd2\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd2\paymentFinish.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\express.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\JsApi.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\paymentFinish.cshtml" />
     <Content Include="assets\image\1585294223_SxcUpg.png" />
     <Content Include="assets\wap\css\iconfont.svg" />
     <Content Include="assets\wap\css\user.css" />
