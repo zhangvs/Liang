@@ -361,7 +361,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                 TelphoneID = id,
                 Tel = Tel,
                 Price = Convert.ToDecimal(Price),
-                Host = host
+                Host = host,
+                PayType = "JsApi"
             };
 
             //创建订单表
