@@ -32,7 +32,7 @@
         var $gridTable = $('#gridTable');
         $gridTable.jqGrid({
             autowidth: true,
-            height: $(window).height() - 136.5,
+            height: $(window).height() - 156.5,
             url: "../../CustomerManage/Orders/GetPageListJson",
             datatype: "json",
             colModel: [
@@ -92,8 +92,15 @@
             onSelectRow: function () {
                 selectedRowIndex = $('#' + this.id).getGridParam('selrow');
             },
+            footerrow: true,
             gridComplete: function () {
-                $('#' + this.id).setSelection(selectedRowIndex, false);
+                var total1 = $(this).getCol("Price", false, "sum");
+                //合计价格
+                $(this).footerData("set", {
+                    "location": "合计：",
+                    "Price": total1,
+                });
+                $('table.ui-jqgrid-ftable td').prevUntil().css("border-right-color", "#fff");
             }
         });
         //点击时间范围（今天、近7天、近一个月、近三个月）

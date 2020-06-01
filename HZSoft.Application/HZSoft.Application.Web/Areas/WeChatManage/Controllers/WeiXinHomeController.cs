@@ -105,11 +105,17 @@ namespace HZSoft.Application.Web.Areas.WeChatManage.Controllers
                     //订单号
                     string orderSn = rspHandler.GetParameter("out_trade_no");
                     OrdersEntity order = ordersbll.GetEntityByOrderSn(orderSn);
-
-                    order.PayDate = DateTime.Now;
-                    order.PayStatus = (int)PayStatus.已支付;
-                    order.Status = (int)OrderStatus.未发货;
-                    ordersbll.SaveForm(order.Id, order);
+                    if (order!=null)
+                    {
+                        order.PayDate = DateTime.Now;
+                        order.PayStatus = (int)PayStatus.已支付;
+                        order.Status = (int)OrderStatus.未发货;
+                        ordersbll.SaveForm(order.Id, order);
+                    }
+                    else
+                    {
+                        LogHelper.AddLog("订单号不存在："+ orderSn);
+                    }
 
                     //不同步
                     //TelphoneLiangEntity tel = tlbll.GetEntity(order.TelphoneID);//根据靓号id获取靓号，修改售出状态

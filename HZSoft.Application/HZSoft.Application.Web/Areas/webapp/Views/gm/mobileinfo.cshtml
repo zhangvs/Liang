@@ -1,0 +1,139 @@
+﻿@model  HZSoft.Application.Entity.CustomerManage.TelphoneLiangEntity
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>号码详情 - 号运来靓号网</title>
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
+    <meta name="__hash__" content="196815542f66520a987957e62de11344_e0605d62f175b9e213746eeaa58d7946" />
+    <!-- Bytedance Tracking -->
+    <script>
+        (function (r, d, s, l) {
+            var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                }
+            }; for (var i = 0; i < meteor.methods.length; i++) {
+                var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+            } meteor.load = function () {
+                var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+            }; meteor.load(); if (meteor.invoked) { return }
+            meteor.invoked = true; meteor.track("pageview")
+        })(window, document, "script", "1661318015460365");
+    </script>
+    <!-- End Bytedance Tracking -->
+</head>
+<body class="page">
+    <div class="page-title">
+        <a href="https://mwd.gzjxwlkj.cn:8022/webapp/mwd/index"></a>
+        <h1>号码详情</h1>
+    </div>
+    <div class="page-box">
+        <div class="number">
+            <h1>@Model.Telphone</h1>
+            <p>
+                <strong class="color-red">价格:@Model.Price</strong> <s>原价:@Model.MaxPrice</s>
+            </p>
+            <p>
+                归属地: @Model.City
+            </p>
+            <p>
+                网络制式:@Model.Operator
+            </p>
+        </div>
+        <div class="sim">
+            <img src="/themes/simplebootx_mobile/Public/images/sim.png">
+            <p>
+                号运来
+            </p>
+        </div>
+    </div>
+    <div class="page-kefu" style="border: solid 1px #f4584b">
+        <span style="background: #ee5246;">客服电话</span>
+        <p>
+            <a href="tel:16505310086">16505310086</a>
+        </p>
+    </div>
+    <div class="page-content">
+        <h1>资费说明</h1>
+        <p>
+            @Model.Package
+        </p>
+    </div>
+    <div class="page-content">
+        <h1>过户须知</h1>
+        <p>
+            1、关于实名制
+        </p>
+        <p>
+            根据国家工信部《电话用户真实身份信息登记规定》（工业和信息化部令第25号）文件要求，用户办理新号码入网必须进行实名制登记。
+        </p>
+        <p>
+            2、关于套餐
+        </p>
+        <p>
+            本店出售的号码套餐资费和正常手机卡套餐资费相同，具体号码套餐情况，可咨询运营商，套餐可以变更。
+        </p>
+        <p>
+            3、关于含话费
+        </p>
+        <p>
+            本店出售的号码注明的含话费金额仅供参考，具体含话费金额可咨询客服。
+        </p>
+        <p>
+            4、关于归属地
+        </p>
+        <p>
+            号码归属地是号码办理开通的地区，归属地不可修改，不同的地区运营商资费不同，但全球通套餐全国资费一样。
+        </p>
+        <p>
+            5、关于退换货
+        </p>
+        <p>
+            由于号码是特殊商品，一旦售出，均无法办理退换货，购买之前请慎重！
+        </p>
+    </div>
+    <div style="height:40px;"></div>
+    <div class="page-btn2">
+        <a href="#" id="submit" class="weui-btn" style="background: #ee5246;">立即订购</a>
+    </div>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#submit').bind('click', function () {
+                if (isWeiXin()) {
+                    location.href = '/webapp/mwd/jsapi/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
+                }
+                else {
+                    location.href = '/webapp/mwd/mobileorder/@Model.TelphoneID?Tel=@Model.Telphone&Price=@Model.Price&host=@ViewBag.host';
+                }
+            });
+        })
+
+
+        //微信浏览器：Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1912261
+        //换行MicroMessenger / 7.0.4 Language / zh_CN webview / 15904873695067660 webdebugger port / 47695
+
+        //谷歌浏览器：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
+
+        //360极速浏览器：Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>
+<!--页面如有提示或报错，文件引用了jquery-weui，可直接调用弹框-->

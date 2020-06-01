@@ -349,3 +349,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 /HZSoft.Application/HZSoft.Application.Web/Resource
+/HZSoft.Application/HZSoft.Application.Web/App_Data/HZSoftFramework_Base_2016.bak

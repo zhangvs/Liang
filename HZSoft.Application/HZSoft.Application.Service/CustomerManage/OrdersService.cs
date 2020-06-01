@@ -33,7 +33,7 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns>返回分页列表</returns>
         public IEnumerable<OrdersEntity> GetPageList(Pagination pagination, string queryJson)
         {
-            string strSql = $"select * from Orders where 1=1 ";
+            string strSql = $"select * from Orders where (DeleteMark <> 1 or PayStatus = 1) ";
             var expression = LinqExtensions.True<OrdersEntity>();
             var queryParam = queryJson.ToJObject();
             //成立日期
@@ -181,10 +181,16 @@ namespace HZSoft.Application.Service.CustomerManage
         public OrdersEntity SaveForm(OrdersEntity entity)
         {
             IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
-            var list= db.FindList<OrdersEntity>(t => t.Tel == entity.Tel && t.ContactTel == entity.ContactTel && t.Status==0);
+            var list= db.FindList<OrdersEntity>(t => t.Tel == entity.Tel && (t.ContactTel == entity.ContactTel || t.ContactTel == null) && t.Status==0);
             if (list.Count()>0)
             {
-                db.Delete<OrdersEntity>(t => t.Tel == entity.Tel && t.ContactTel == entity.ContactTel && t.Status == 0);
+                foreach (var item in list)
+                {
+                    item.DeleteMark = 1;
+                    db.Update<OrdersEntity>(item);
+                    LogHelper.AddLog("删除未付款订单：" + item.OrderSn);
+                }
+                //db.Delete<OrdersEntity>(t => t.Tel == entity.Tel && t.ContactTel == entity.ContactTel && t.Status == 0);
                 db.Commit();
             }
 
