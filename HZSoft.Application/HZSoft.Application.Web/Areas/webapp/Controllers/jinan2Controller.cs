@@ -27,7 +27,7 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 广州头条：先跳转到shop.jnlxsm.net:8064，
+    /// 广州头条：先跳转到www.jnlxsm.net:8064，
     /// 再跳转到 shop.jnlxsm.net
     /// </summary>
     public class jinan2Controller : Controller
@@ -224,7 +224,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "https://shop.jnlxsm.net:8064/webapp/jinan2/index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://www.jnlxsm.net:8064/webapp/jinan2/index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
