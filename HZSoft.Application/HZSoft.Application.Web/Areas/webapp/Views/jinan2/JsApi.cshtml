@@ -35,13 +35,13 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1668011877567496");
+        })(window, document, "script", "1668530965859335");
     </script>
     <!-- End Bytedance Tracking -->
 </head>
 <body class="page">
     <div class="page-title">
-        <a href="/webapp/gm2/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
+        <a href="/webapp/jinan2/mobileinfo/@Model.TelphoneID"><i class="-back"></i></a>
         <h1>号码订购</h1>
     </div>
     <div class="weui-cells__title">
@@ -148,7 +148,7 @@
                             if (address) {
                                 $.ajax({
                                     type: "post",
-                                    url: "/webapp/gm2/JsApi",
+                                    url: "/webapp/jinan2/JsApi",
                                     data: {
                                         Id:@Model.Id,
                                         Receiver: name,
@@ -163,7 +163,7 @@
                                     success: function (resObj) {
                                         if (resObj.status) {
                                             //头条推广转化（点击支付）
-                                            meteor.track("form", { convert_id: "1667736631584772" })
+                                            meteor.track('form', { convert_id: 1668534341012483 })
 
                                                 //JSApi支付
                                                 WeixinJSBridge.invoke(
