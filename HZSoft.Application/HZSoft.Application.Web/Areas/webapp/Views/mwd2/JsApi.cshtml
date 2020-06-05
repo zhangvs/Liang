@@ -35,7 +35,7 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1661318014923790");
+        })(window, document, "script", "1661317769883661");
     </script>
     <!-- End Bytedance Tracking -->
 </head>
@@ -163,7 +163,7 @@
                                     success: function (resObj) {
                                         if (resObj.status) {
                                             //头条推广转化（点击支付）
-                                            meteor.track("form", { convert_id: "1667736631584772" })
+                                            meteor.track('form', { convert_id: 1662310441571332 })
 
                                                 //JSApi支付
                                                 WeixinJSBridge.invoke(

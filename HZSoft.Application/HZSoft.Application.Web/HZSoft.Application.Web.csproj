@@ -268,6 +268,8 @@
     <Compile Include="Areas\ReportManage\Controllers\ReportDemoController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
     <Compile Include="Areas\webapp\Controllers\AliPayController.cs" />
+    <Compile Include="Areas\webapp\Controllers\gm2Controller.cs" />
+    <Compile Include="Areas\webapp\Controllers\gmController.cs" />
     <Compile Include="Areas\webapp\Controllers\jinan2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\jinanController.cs" />
     <Compile Include="Areas\webapp\Controllers\mwd2Controller.cs" />
@@ -337,6 +339,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="01_修改日志\log.txt" />
+    <Content Include="Areas\webapp\Views\gm2\express.cshtml" />
+    <Content Include="Areas\webapp\Views\gm2\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\gm2\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\gm2\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\gm2\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\gm2\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\gm2\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\express.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\express.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\Index.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\info2.cshtml" />

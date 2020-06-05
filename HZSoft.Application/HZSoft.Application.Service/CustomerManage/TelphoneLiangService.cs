@@ -1244,9 +1244,16 @@ namespace HZSoft.Application.Service.CustomerManage
                         var TelphoneData = db.FindEntity<TelphoneDataEntity>(t => t.Number7 == Number7);
                         if (TelphoneData != null)
                         {
-                            City = TelphoneData.City.Replace("市","");
-                            CityId = TelphoneData.CityId;
-                            Operator = TelphoneData.Operate;
+                            if (string.IsNullOrEmpty(TelphoneData.City))
+                            {
+                                return "号段城市为空：" + Number7;
+                            }
+                            else
+                            {
+                                City = TelphoneData.City.Replace("市", "");
+                                CityId = TelphoneData.CityId;
+                                Operator = TelphoneData.Operate;
+                            }
                         }
                         else
                         {
@@ -1355,6 +1362,7 @@ namespace HZSoft.Application.Service.CustomerManage
                 }
                 catch (Exception ex)
                 {
+                    LogHelper.AddLog(ex.Message);
                     return ex.Message;
                 }
 
@@ -1362,6 +1370,7 @@ namespace HZSoft.Application.Service.CustomerManage
             db.Commit();
             if (cf!="")
             {
+                LogHelper.AddLog("跳过重复导入号码：" + cf);
                 return "跳过重复导入号码：" + cf;
             }
             else
