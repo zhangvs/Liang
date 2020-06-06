@@ -121,7 +121,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
                         styleStr +=
                         $" <li> " +
-                        $"    <a href='https://shop.jnlxsm.net/webapp/gm/mobileinfo/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
+                        $"    <a href='https://shop.jnlxsm.net/webapp/gm/product/{item.TelphoneID}?host={host}'>" +//跳转到135服务器详情页面
                         $"        <div class='mobile'>{telphone}</div>" +
                         $"        <div class='city'>{item.City}·{item.Description}</div>" +//·{item.Operator}
                         $"        <div class='price'>" +
@@ -169,17 +169,45 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
         }
 
 
+
+        public ActionResult product(int? id, string host)
+        {
+            TelphoneLiangEntity entity = tlbll.GetEntity(id);
+            if (entity != null)
+            {
+                //利新价格调整规则，这是需要单独写代码的价格调整：
+                entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
+                entity.MaxPrice = entity.Price * 2;
+                ViewBag.host = host;
+            }
+
+            return View(entity);
+        }
+
         [HttpPost]
         public ActionResult ajaxorder(OrdersEntity ordersEntity)
         {
-            //return Content("{\"code\":true,\"status\":true,\"msg\":\"提交成功！\",\"data\":{\"appid\":\"wx288f944166a4bdc6\",\"code_url\":\"weixin://wxpay/bizpayurl?pr=K9tQFgw\",\"mch_id\":\"1582948931\",\"nonce_str\":\"gelx5Eej34TWkYjL\",\"prepay_id\":\"wx18152655644502b82539bf421260374600\",\"result_code\":\"SUCCESS\",\"return_code\":\"SUCCESS\",\"return_msg\":null,\"sign\":\"4D19F96F050056C904DBD7371D974905\",\"trade_type\":\"NATIVE\",\"trade_no\":\"LX-20200418151928103008\",\"payid\":\"11\",\"wx_query_href\":\"http://localhost:4066/webapp/gm/queryWx/11\",\"wx_query_over\":\"http://localhost:4066/webapp/gm/paymentFinish/11\"}}");
             try
             {
-                string[] area = ordersEntity.City.Split(' ');
-                if (area.Length > 0)
+                string city = ordersEntity.City;
+                if (city.Contains("-"))
                 {
-                    ordersEntity.Province = area[0];//省
-                    ordersEntity.City = area[1];//市
+                    string[] area = ordersEntity.City.Split('-');
+                    if (area.Length > 0)
+                    {
+                        ordersEntity.Province = area[0];//省
+                        ordersEntity.City = area[1];//市
+                        ordersEntity.Country = area[2];//市
+                    }
+                }
+                else
+                {
+                    string[] area = ordersEntity.City.Split(' ');
+                    if (area.Length > 0)
+                    {
+                        ordersEntity.Province = area[0];//省
+                        ordersEntity.City = area[1];//市
+                    }
                 }
 
                 //创建订单表

@@ -188,7 +188,7 @@
 
                                         if (resObj.status) {
                                             //头条推广转化（点击支付）
-                                            meteor.track('form', { convert_id: 1668622719711245 })
+                                            meteor.track("form", { convert_id: "1668622719711245" })
                                             //不做处理，跳转
                                             if (resObj.data.target) {
                                                 location.href = resObj.data.gotoUrl;
