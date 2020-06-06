@@ -23,7 +23,7 @@
                 js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
             }; meteor.load(); if (meteor.invoked) { return }
             meteor.invoked = true; meteor.track("pageview")
-        })(window, document, "script", "1664007157743627");
+        })(window, document, "script", "1668012696985607");
     </script>
     <!-- End Bytedance Tracking -->
 
@@ -385,7 +385,7 @@
                 }
                 $('.mask_dl').show();
                 $.ajax({
-                    url: "/webapp/shop/ajaxorder",
+                    url: "/webapp/gm/ajaxorder",
                     type: 'post',
                     dataType: 'json',
                     data: {
@@ -403,7 +403,7 @@
                         if (resObj.status) {
                             //头条推广转化（点击支付）
                             //埋点
-                            meteor.track("form", { convert_id: "1667100208827405" })
+                            meteor.track("form", { convert_id: "1668622719711245" })
                             //不做处理，跳转
                             if (resObj.data.target) {
                                 location.href = resObj.data.gotoUrl;
@@ -427,7 +427,7 @@
                                     text: qrsrc,
                                     buttons: [
                                         { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
-                                        { text: "支付完成", onClick: function () { location.href = '/webapp/shop/paymentFinish/' + resObj.data.payid; } }
+                                        { text: "支付完成", onClick: function () { location.href = '/webapp/gm/paymentFinish/' + resObj.data.payid; } }
                                     ]
                                 });
                                 //检测付款状态
