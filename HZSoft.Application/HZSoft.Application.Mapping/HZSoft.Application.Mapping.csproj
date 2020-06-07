@@ -66,6 +66,7 @@
     <Compile Include="CustomerManage\OrdersMap.cs" />
     <Compile Include="CustomerManage\ReceivableMap.cs" />
     <Compile Include="CustomerManage\SmsInfoMap.cs" />
+    <Compile Include="CustomerManage\TelphoneLiangH5Map.cs" />
     <Compile Include="CustomerManage\TelphoneLiangJoinMap.cs" />
     <Compile Include="CustomerManage\TelphoneLiangMap.cs" />
     <Compile Include="CustomerManage\TelphoneLiangOtherMap.cs" />

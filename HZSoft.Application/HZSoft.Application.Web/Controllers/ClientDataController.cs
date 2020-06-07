@@ -40,12 +40,12 @@ namespace HZSoft.Application.Web.Controllers
         {
             var jsonData = new
             {
-                organize = this.GetOrganizeData(),              //公司
-                department = this.GetDepartmentData(),          //部门
-                post = this.GetPostData(),                      //岗位
-                role = this.GetRoleData(),                      //角色
-                userGroup = this.GetUserGroupData(),            //用户组
-                user = this.GetUserData(),                      //用户
+                //organize = this.GetOrganizeData(),              //公司
+                //department = this.GetDepartmentData(),          //部门
+                //post = this.GetPostData(),                      //岗位
+                //role = this.GetRoleData(),                      //角色
+                //userGroup = this.GetUserGroupData(),            //用户组
+                //user = this.GetUserData(),                      //用户
                 dataItem = this.GetDataItem(),                  //字典
                 authorizeMenu = this.GetModuleData(),           //导航菜单
                 authorizeButton = this.GetModuleButtonData(),   //功能按钮

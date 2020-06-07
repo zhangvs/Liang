@@ -59,6 +59,7 @@
     <Compile Include="CustomerManage\ReceivableReportBLL.cs" />
     <Compile Include="CustomerManage\SmsInfoBLL.cs" />
     <Compile Include="CustomerManage\TelphoneLiangBLL.cs" />
+    <Compile Include="CustomerManage\TelphoneLiangH5BLL.cs" />
     <Compile Include="CustomerManage\TelphoneLiangJoinBLL.cs" />
     <Compile Include="CustomerManage\TelphoneLiangOtherBLL.cs" />
     <Compile Include="CustomerManage\TelphoneLiangSeeBLL.cs" />

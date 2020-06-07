@@ -63,6 +63,7 @@
     <Compile Include="CustomerManage\ReceivableEntity.cs" />
     <Compile Include="CustomerManage\SmsInfoEntity.cs" />
     <Compile Include="CustomerManage\TelphoneLiangEntity.cs" />
+    <Compile Include="CustomerManage\TelphoneLiangH5Entity.cs" />
     <Compile Include="CustomerManage\TelphoneLiangJoinEntity.cs" />
     <Compile Include="CustomerManage\TelphoneLiangOtherEntity.cs" />
     <Compile Include="CustomerManage\TelphoneLiangSeeEntity.cs" />

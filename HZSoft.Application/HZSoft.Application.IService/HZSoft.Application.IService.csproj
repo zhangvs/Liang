@@ -73,6 +73,7 @@
     <Compile Include="CustomerManage\IReceivableReportService.cs" />
     <Compile Include="CustomerManage\OrdersIService.cs" />
     <Compile Include="CustomerManage\SmsInfoIService.cs" />
+    <Compile Include="CustomerManage\TelphoneLiangH5IService.cs" />
     <Compile Include="CustomerManage\TelphoneLiangIService.cs" />
     <Compile Include="CustomerManage\TelphoneLiangJoinIService.cs" />
     <Compile Include="CustomerManage\TelphoneLiangOtherIService.cs" />

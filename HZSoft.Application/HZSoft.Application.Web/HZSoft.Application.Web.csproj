@@ -224,6 +224,7 @@
     <Compile Include="Areas\CustomerManage\Controllers\ReceivableReportController.cs" />
     <Compile Include="Areas\CustomerManage\Controllers\SmsInfoController.cs" />
     <Compile Include="Areas\CustomerManage\Controllers\TelphoneLiangController.cs" />
+    <Compile Include="Areas\CustomerManage\Controllers\TelphoneLiangH5Controller.cs" />
     <Compile Include="Areas\CustomerManage\Controllers\TelphoneLiangJoinController.cs" />
     <Compile Include="Areas\CustomerManage\Controllers\TelphoneLiangOtherController.cs" />
     <Compile Include="Areas\CustomerManage\Controllers\TelphoneLiangSeeController.cs" />
@@ -2058,6 +2059,9 @@
     <Content Include="Areas\webapp\Views\jinan2\product.cshtml" />
     <Content Include="Areas\webapp\Views\jinan\product.cshtml" />
     <Content Include="Areas\webapp\Views\gm\product.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Form.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Import.cshtml" />
+    <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Index.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />
