@@ -2,9 +2,12 @@ using HZSoft.Application.Code;
 using HZSoft.Application.Entity.BaseManage;
 using HZSoft.Application.Entity.CustomerManage;
 using HZSoft.Application.Entity.SystemManage;
+using HZSoft.Application.IService.BaseManage;
 using HZSoft.Application.IService.CustomerManage;
+using HZSoft.Application.Service.BaseManage;
 using HZSoft.Data.Repository;
 using HZSoft.Util;
+using HZSoft.Util.Extension;
 using HZSoft.Util.WebControl;
 using System;
 using System.Collections.Generic;
@@ -22,7 +25,160 @@ namespace HZSoft.Application.Service.CustomerManage
     /// </summary>
     public class TelphoneLiangH5Service : RepositoryFactory<TelphoneLiangH5Entity>, TelphoneLiangH5IService
     {
+        private IOrganizeService orgService = new OrganizeService();
+        private TelphoneLiangVipIService vipService = new TelphoneLiangVipService();
+        private TelphoneVipShareIService vipShareService = new TelphoneVipShareService();
         #region 获取数据
+
+        /// <summary>
+        /// 根据json拼接sql条件，除机构外的条件
+        /// </summary>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        private string GetSql(string queryJson)
+        {
+            string strSql = "";
+            var queryParam = queryJson.ToJObject();
+
+            //单据编号
+            if (!queryParam["Telphone"].IsEmpty())
+            {
+                string Telphone = queryParam["Telphone"].ToString();
+                if (Telphone.Contains("|"))
+                {
+                    strSql += " and Telphone like '%" + Telphone.Replace("|", "") + "'";
+                }
+                else
+                {
+                    strSql += " and Telphone like '%" + Telphone + "%'";
+                }
+
+            }
+            //分类
+            if (!queryParam["Grade"].IsEmpty())
+            {
+                string Grade = queryParam["Grade"].ToString();
+                if (Grade.Contains(","))
+                {
+                    strSql += " and Grade in (" + Grade + ")";
+                }
+                else
+                {
+                    strSql += " and Grade = '" + Grade + "'";
+                }
+            }
+            //城市
+            if (!queryParam["city"].IsEmpty())
+            {
+                string city = queryParam["city"].ToString();
+                if (city.Contains("0000"))
+                {
+                    strSql += " and cityid like '" + city.Substring(0, 2) + "%'";
+                }
+                else if (city != "0")
+                {
+                    strSql += " and cityid = '" + city + "'";
+                }
+            }
+            //城市名称
+            if (!queryParam["City"].IsEmpty())
+            {
+                string City = queryParam["City"].ToString();
+                strSql += " and City like '%" + City + "%'";
+            }
+            //价格区间
+            if (!queryParam["price"].IsEmpty())
+            {
+                string price = queryParam["price"].ToString();
+                string[] jgqj = price.Split('-');
+                if (!string.IsNullOrEmpty(jgqj[0]))
+                {
+                    strSql += " and price >= '" + jgqj[0] + "'";
+                }
+                if (!string.IsNullOrEmpty(jgqj[1]))
+                {
+                    strSql += " and price <= '" + jgqj[1] + "'";
+                }
+            }
+            //价格区间
+            if (!queryParam["MaxPrice"].IsEmpty())
+            {
+                string MaxPrice = queryParam["MaxPrice"].ToString();
+                string[] jgqj = MaxPrice.Split('-');
+                if (!string.IsNullOrEmpty(jgqj[0]))
+                {
+                    strSql += " and MaxPrice >= '" + jgqj[0] + "'";
+                }
+                if (!string.IsNullOrEmpty(jgqj[1]))
+                {
+                    strSql += " and MaxPrice <= '" + jgqj[1] + "'";
+                }
+            }
+            //排除
+            if (!queryParam["except"].IsEmpty())
+            {
+                string except = queryParam["except"].ToString();
+                strSql += " and Telphone not like '%" + except.Replace("e", "") + "%'";
+            }
+            //寓意
+            if (!queryParam["yuyi"].IsEmpty())
+            {
+                string yuyi = queryParam["yuyi"].ToString();
+                if (yuyi == "1")
+                {//1349风水能量
+                    strSql += " and Telphone like '%1349%'";
+                }
+                else if (yuyi == "2")
+                {//
+                    strSql += " and (Telphone like '%520%' or Telphone like '%521%' or Telphone like '%1314%')";
+                }
+            }
+            //售出标识
+            if (!queryParam["SellMark"].IsEmpty())
+            {
+                string SellMark = queryParam["SellMark"].ToString();
+                strSql += " and SellMark = " + SellMark;
+            }
+
+            //状态条件
+            if (!queryParam["ExistMark"].IsEmpty())
+            {
+                string ExistMark = queryParam["ExistMark"].ToString();
+                strSql += " and ExistMark = " + ExistMark;
+            }
+
+            //网络
+            if (!queryParam["Operator"].IsEmpty())
+            {
+                string Operator = queryParam["Operator"].ToString();
+                strSql += " and Operator = '" + Operator + "'";
+            }
+            return strSql;
+        }
+
+
+        /// <summary>
+        /// 从过滤共享平台中的vip机构
+        /// </summary>
+        /// <param name="vipList">vip机构</param>
+        /// <returns></returns>
+        private string GetOtherOrg(List<string> vipList)
+        {
+            string shareOrg = "";
+            //1.自定义共享机构
+            foreach (var item in vipList)
+            {
+                var sharelist = vipShareService.GetVipList(item);
+                if (sharelist != null)
+                {
+                    foreach (var item2 in sharelist)
+                    {
+                        shareOrg += "'" + item2.ShareId + "',";//所有自定义选择的共享机构
+                    }
+                }
+            }
+            return shareOrg.Trim(',');
+        }
         /// <summary>
         /// 获取列表
         /// </summary>
@@ -31,8 +187,123 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns>返回分页列表</returns>
         public IEnumerable<TelphoneLiangH5Entity> GetPageList(Pagination pagination, string queryJson)
         {
-            return this.BaseRepository().FindList(pagination);
+            var queryParam = queryJson.ToJObject();
+            string strSql = "select * from TelphoneLiangH5 where DeleteMark <> 1 and EnabledMark <> 1";
+            //机构后台
+            if (!queryParam["OrganizeId"].IsEmpty())
+            {
+                string OrganizeId = queryParam["OrganizeId"].ToString();
+                strSql += " and OrganizeId = '" + OrganizeId + "'";
+            }
+            else
+            {
+                if (!OperatorProvider.Provider.Current().IsSystem)
+                {
+                    string companyId = OperatorProvider.Provider.Current().CompanyId;
+                    var organizeData = orgService.GetEntity(companyId);
+                    if (!string.IsNullOrEmpty(organizeData.OrganizeId))
+                    {
+                        //string inOrg = GetInOrg(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
+                        List<string> vipList = vipService.GetVipOrgList(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
+                        string inOrg = GetOtherOrg(vipList);//自定义优先，共享平台其次
+                        if (!string.IsNullOrEmpty(inOrg))
+                        {
+                            strSql += " and OrganizeId IN(" + inOrg + ")";
+                        }
+                    }
+                }
+            }
+            strSql += GetSql(queryJson);
+            return this.BaseRepository().FindList(strSql.ToString(), pagination);
         }
+
+
+        /// <summary>
+        /// H5端查询按钮，List页面，分页加载
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public IEnumerable<TelphoneLiangH5Entity> GetPageListH5LX(Pagination pagination, string queryJson)
+        {
+            //机构前台H5
+            List<string> viplist = null;
+            //本机构sql
+            string vipOrg = "";
+            string ownOrgSql = "";//默认为空
+            //分享平台机构sql
+            string shareOrg = "";
+            string shareOrgSql = "";//默认为空
+
+            var queryParam = queryJson.ToJObject();
+            if (queryParam["OrganizeIdH5"].IsEmpty())
+            {
+                return null;
+            }
+
+            string organizeId = queryParam["OrganizeIdH5"].ToString();
+            string pid = queryParam["pid"].ToString();
+            string top = queryParam["top"].ToString();
+
+            string allOrg = "";
+            //过滤出vip机构
+            viplist = vipService.GetVipOrgList(organizeId, pid, top);
+            foreach (var item in viplist)
+            {
+                vipOrg += "'" + item + "',";
+            }
+            //本身机构判断为空，返回null，vip全部过期不查了
+            if (vipOrg == "")
+            {
+                return null;
+            }
+
+            //1.自身机构体系
+            vipOrg = vipOrg.Trim(',');
+            ownOrgSql = " and OrganizeId IN(" + vipOrg + ")";
+            string ownWhere = ownOrgSql + GetSql(queryJson);
+
+            //2.共享平台，限制类型
+            string shareSql = "";
+            shareOrg = GetOtherOrg(viplist);
+            if (!shareOrg.IsEmpty())
+            {
+                allOrg = vipOrg + "," + shareOrg;
+                shareOrgSql = " and OrganizeId IN(" + shareOrg + ")";
+                string shareWhere = shareOrgSql + GetSql(queryJson);
+                shareSql = @" UNION all
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '平台秒杀' WHEN '1' THEN '平台现卡' ELSE '平台预售' END Description,Package,EnabledMark,OrganizeId OrganizeId FROM TelphoneLiangH5
+ WHERE  SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 and ExistMark=1 "//平台只卖现卡的
+    + shareWhere;
+            }
+            else
+            {
+                allOrg = vipOrg;
+            }
+
+            //自身，父，0级
+            string strSql = @" SELECT * FROM (
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,Package,EnabledMark,OrganizeId FROM TelphoneLiangH5 
+ WHERE SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 " + ownWhere//自身可以卖秒杀，现卡，预售
+                                                                      //+ otherOrgSql//代售功能省略
++ shareSql
+                + " )t ";
+
+
+            //按照机构排序
+            string[] orderbyOrg = allOrg.Split(',');
+            string orderbySql = " case ";
+            for (int i = 0; i < orderbyOrg.Length; i++)
+            {
+                orderbySql += " when OrganizeId=" + orderbyOrg[i] + " then " + i;
+            }
+            orderbySql += " end ASC,";
+            pagination.sidx = orderbySql + pagination.sidx + " " + pagination.sord;
+
+            return this.BaseRepository().FindList(strSql.ToString(), pagination);
+        }
+
+
         /// <summary>
         /// 获取列表
         /// </summary>
@@ -108,7 +379,7 @@ namespace HZSoft.Application.Service.CustomerManage
                     string telphone = dtSource.Rows[i][0].ToString();
                     if (telphone.Length == 11)
                     {
-                        var liang_Data = db.FindEntity<TelphoneLiangEntity>(t => t.Telphone == telphone && t.DeleteMark != 1);//删除过的可以再次导入
+                        var liang_Data = db.FindEntity<TelphoneLiangH5Entity>(t => t.Telphone == telphone && t.DeleteMark != 1);//删除过的可以再次导入
                         if (liang_Data != null)
                         {
                             cf += telphone + ",";
@@ -213,7 +484,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
 
                         //添加靓号
-                        TelphoneLiangEntity entity = new TelphoneLiangEntity()
+                        TelphoneLiangH5Entity entity = new TelphoneLiangH5Entity()
                         {
                             Telphone = telphone,
                             Price = Price,

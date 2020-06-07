@@ -34,6 +34,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
     {
 
         private TelphoneLiangBLL tlbll = new TelphoneLiangBLL();
+        private TelphoneLiangH5BLL telH5bll = new TelphoneLiangH5BLL();
         private OrdersBLL ordersbll = new OrdersBLL();
         private OrganizeBLL organizebll = new OrganizeBLL();
 

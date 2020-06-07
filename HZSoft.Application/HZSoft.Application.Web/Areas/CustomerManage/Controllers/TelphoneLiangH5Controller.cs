@@ -46,7 +46,7 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         /// 批量导入靓号
         /// </summary>
         /// <returns></returns>
-        public ActionResult TelphoneLiangImport()
+        public ActionResult TelphoneLiangH5Import()
         {
             return View();
         }
@@ -137,7 +137,7 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         }
 
         [HttpPost]
-        public ActionResult TelphoneLiangImport(HttpPostedFileBase filebase)
+        public ActionResult TelphoneLiangH5Import(HttpPostedFileBase filebase)
         {
             HttpPostedFileBase file = Request.Files["files"];
             string FileName;
