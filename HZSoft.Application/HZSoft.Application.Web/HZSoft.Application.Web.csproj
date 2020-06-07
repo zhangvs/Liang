@@ -269,16 +269,11 @@
     <Compile Include="Areas\ReportManage\Controllers\ReportDemoController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
     <Compile Include="Areas\webapp\Controllers\AliPayController.cs" />
-    <Compile Include="Areas\webapp\Controllers\gm2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\gmController.cs" />
     <Compile Include="Areas\webapp\Controllers\jinan2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\jinanController.cs" />
     <Compile Include="Areas\webapp\Controllers\mwd2Controller.cs" />
-    <Compile Include="Areas\webapp\Controllers\mwdController.cs" />
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
-    <Compile Include="Areas\webapp\Controllers\Shop2Controller.cs" />
-    <Compile Include="Areas\webapp\Controllers\Xdd2Controller.cs" />
-    <Compile Include="Areas\webapp\Controllers\XddController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\CodeRuleController.cs" />
@@ -340,13 +335,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="01_修改日志\log.txt" />
-    <Content Include="Areas\webapp\Views\gm2\express.cshtml" />
-    <Content Include="Areas\webapp\Views\gm2\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\gm2\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\gm2\JsApi.cshtml" />
-    <Content Include="Areas\webapp\Views\gm2\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\gm2\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\gm2\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\gm\express.cshtml" />
     <Content Include="Areas\webapp\Views\gm\Index.cshtml" />
     <Content Include="Areas\webapp\Views\gm\info2.cshtml" />
@@ -361,13 +349,6 @@
     <Content Include="Areas\webapp\Views\mwd2\mobileinfo.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\mobileorder.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\paymentFinish.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\express.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\JsApi.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\mwd\paymentFinish.cshtml" />
     <Content Include="assets\image\1585294223_SxcUpg.png" />
     <Content Include="assets\wap\css\iconfont.svg" />
     <Content Include="assets\wap\css\user.css" />
@@ -2010,12 +1991,6 @@
     <Content Include="Areas\H5\Views\HomePage\mobileorder.cshtml" />
     <Content Include="Areas\H5\Views\HomePage\express.cshtml" />
     <Content Include="Areas\webapp\Views\Web.config" />
-    <Content Include="Areas\webapp\Views\Shop2\express.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop2\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop2\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop2\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop2\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop2\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\express.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\Index.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\info2.cshtml" />
@@ -2024,21 +1999,6 @@
     <Content Include="Areas\webapp\Views\Shop\paymentFinish.cshtml" />
     <Content Include="Areas\WeChatManage\Views\WeiXinHome\ReturnUrl.cshtml" />
     <Content Include="Areas\WeChatManage\Views\Liang\HaoDan.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\paymentFinish.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\express.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\express.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\paymentFinish.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd2\JsApi.cshtml" />
-    <Content Include="Areas\webapp\Views\Xdd\JsApi.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop2\JsApi.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\JsApi.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\express.cshtml" />
@@ -2062,6 +2022,7 @@
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Form.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Import.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Index.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\productJsApi.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

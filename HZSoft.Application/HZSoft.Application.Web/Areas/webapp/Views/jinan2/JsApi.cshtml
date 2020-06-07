@@ -124,8 +124,6 @@
     <script src="~/assets/wap/js/city-picker.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            var flag = IsPC(); //true为PC端，false为手机端
-
             $("#city").cityPicker({
                 title: "请选择城市",
                 showDistrict: false
@@ -219,41 +217,6 @@
             });
         })
 
-
-        function IsPC() {
-            var flag = 1;
-            //平台、设备和操作系统
-            var system = {
-                win: false,
-                mac: false,
-                xll: false,
-                ipad: false
-            };
-            //检测平台
-            var p = navigator.platform;
-            system.win = p.indexOf("Win") == 0;
-            system.mac = p.indexOf("Mac") == 0;
-            system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-            system.ipad = (navigator.userAgent.match(/iPad/i) != null) ? true : false;
-            //跳转语句，如果是PC访问就自动跳转到所要访问的页面http://www.电脑.com
-            if (system.win || system.mac || system.xll || system.ipad) {
-                //默认访问http://www.电脑.com
-            } else {
-                //window.location.href = "http://www.手机.com/";
-                flag = 0;
-            }
-            if (isWeiXin()) {
-                flag = 2;
-            }
-            return flag;
-        }
-
-        //微信浏览器：Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A372 Safari/604.1 wechatdevtools/1.02.1912261
-        //换行MicroMessenger / 7.0.4 Language / zh_CN webview / 15904873695067660 webdebugger port / 47695
-
-        //谷歌浏览器：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36
-
-        //360极速浏览器：Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
         function isWeiXin() {
             var ua = window.navigator.userAgent.toLowerCase();
             if (ua.match(/MicroMessenger/i) == 'micromessenger') {

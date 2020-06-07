@@ -319,9 +319,13 @@
                         let tpl = '<li class="mui-table-view-cell  param-district-li param-district-li-render" data-id = "__NAME__" data-pcode="__CID__">__NAME__</li>';
                         let html = '';
                         $.each(res.rows, function (i, v) {
-                            let lihtml = tpl.replace(/__NAME__/g, v.name);
-                            lihtml = lihtml.replace(/__CID__/g, v.adcode);
-                            html += lihtml;
+                            let city = $('.city-li-active').attr('data-id');
+                            if (v.parent == city) {
+                                let lihtml = tpl.replace(/__NAME__/g, v.name);
+                                lihtml = lihtml.replace(/__CID__/g, v.adcode);
+                                html += lihtml;
+                            }
+                            
                         });
                         target.empty();
                         target.append(html);

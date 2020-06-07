@@ -180,6 +180,51 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
             return View(entity);
         }
+        //需要OAuth登录
+        [HandlerWX2AuthorizeAttribute(LoginMode.Enforce)]
+        public ActionResult productJsApi(int? id, string Tel, string Price, string host)
+        {
+            TelphoneLiangEntity entity = tlbll.GetEntity(id);
+            OrdersEntity ordersEntity = new OrdersEntity()
+            {
+                TelphoneID = id,
+                Tel = Tel,
+                Price = Convert.ToDecimal(Price),
+                Host = host,
+                PayType = "JsApi"
+            };
+
+            //创建订单表
+            ordersEntity = ordersbll.SaveForm(ordersEntity);
+
+            var openId = (string)Session["OpenId"];
+            var sp_billno = ordersEntity.OrderSn;
+            var nonceStr = TenPayV3Util.GetNoncestr();
+            var timeStamp = TenPayV3Util.GetTimestamp();
+
+            //商品Id，用户自行定义
+            var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
+Convert.ToInt32(ordersEntity.Price * 100),
+Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId, tenPayV3Info.Key, nonceStr);
+            var result = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
+            LogHelper.AddLog(result.ResultXml);//记录日志
+            var package = string.Format("prepay_id={0}", result.prepay_id);
+            if (result.return_code == "SUCCESS")
+            {
+                WFTWxModel jsApiPayData = new WFTWxModel()
+                {
+                    appId = WeixinConfig.AppID2,
+                    timeStamp = timeStamp,
+                    nonceStr = nonceStr,
+                    package = package,
+                    paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
+                    callback_url = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
+                };
+                ViewBag.WxModel = jsApiPayData;
+                LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
+            }
+            return View(entity);
+        }
 
         [HttpPost]
         public ActionResult ajaxorder(OrdersEntity ordersEntity)
