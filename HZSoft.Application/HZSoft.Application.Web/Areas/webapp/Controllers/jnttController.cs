@@ -25,7 +25,7 @@ using System.Web.Mvc;
 namespace HZSoft.Application.Web.Areas.webapp.Controllers
 {
     /// <summary>
-    /// 济南头条https://www.jnlxsm.net:447/webapp/jntt/Index
+    /// 济南头条https://ghdh.digitdance.cn:8069/webapp/jntt/Index
     /// 二跳shop.jnlxsm.net
     /// </summary>
     public class jnttController : Controller
@@ -248,7 +248,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         model.TotalAmount = ordersEntity.Price.ToString();// 付款金额"0.01"
                         model.OutTradeNo = sp_billno;// 外部订单号，商户网站订单系统中唯一的订单号
                         model.ProductCode = "QUICK_WAP_WAY";
-                        model.QuitUrl = "https://www.jnlxsm.net:447/webapp/jntt/Index";// 支付中途退出返回商户网站地址
+                        model.QuitUrl = "https://ghdh.digitdance.cn:8069/webapp/jntt/Index";// 支付中途退出返回商户网站地址
                         model.TimeoutExpress = "90m";
                         AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
                         //设置支付完成同步回调地址
