@@ -79,6 +79,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// <returns></returns>
         public string Package { get; set; }
         /// <summary>
+        /// 品牌运营商
+        /// </summary>
+        /// <returns></returns>
+        public string Brand { get; set; }
+        /// <summary>
         /// 状态标识
         /// </summary>
         /// <returns></returns>

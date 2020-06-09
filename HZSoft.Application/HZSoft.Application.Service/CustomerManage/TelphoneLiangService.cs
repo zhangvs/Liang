@@ -1216,12 +1216,12 @@ namespace HZSoft.Application.Service.CustomerManage
             int rowsCount = dtSource.Rows.Count;
             //判断号码上限
             string greaterMsg = IsGreater(rowsCount);
-
-            IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
             if (!string.IsNullOrEmpty(greaterMsg))
             {
                 return greaterMsg;
             }
+
+            IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
 
             int columns = dtSource.Columns.Count;
             string cf = "";
@@ -1240,7 +1240,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
                         //根据前7位确定城市和运营商
                         string Number7 = telphone.Substring(0, 7);
-                        string City = "",CityId = "", Operator = "";
+                        string City = "",CityId = "", Operator = "", Brand = "";
                         var TelphoneData = db.FindEntity<TelphoneDataEntity>(t => t.Number7 == Number7);
                         if (TelphoneData != null)
                         {
@@ -1253,6 +1253,7 @@ namespace HZSoft.Application.Service.CustomerManage
                                 City = TelphoneData.City.Replace("市", "");
                                 CityId = TelphoneData.CityId;
                                 Operator = TelphoneData.Operate;
+                                Brand = TelphoneData.Brand;
                             }
                         }
                         else
@@ -1350,6 +1351,7 @@ namespace HZSoft.Application.Service.CustomerManage
                             Operator = Operator,
                             Grade = itemNCode,
                             Package = Package,
+                            Brand = Brand,
                             ExistMark = existMark,
                             SellMark = 0,
                             DeleteMark = 0,

@@ -2023,6 +2023,10 @@
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Import.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Index.cshtml" />
     <Content Include="Areas\webapp\Views\Shop\productJsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\mwd2\productJsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\jinan2\productJsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\jinan\productJsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\gm\productJsApi.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

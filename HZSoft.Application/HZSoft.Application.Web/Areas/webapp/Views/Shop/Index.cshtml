@@ -860,32 +860,32 @@
 
                     </ul>*@
                 @*<div class="tit">数字较多</div>
-                    <ul class="clearfix moreNumber">
+                        <ul class="clearfix moreNumber">
 
-                        <li data-val="">全部</li>
+                            <li data-val="">全部</li>
 
-                        <li data-val="n9">9较多</li>
+                            <li data-val="n9">9较多</li>
 
-                        <li data-val="n8">8较多</li>
+                            <li data-val="n8">8较多</li>
 
-                        <li data-val="n7">7较多</li>
+                            <li data-val="n7">7较多</li>
 
-                        <li data-val="n6">6较多</li>
+                            <li data-val="n6">6较多</li>
 
-                        <li data-val="n5">5较多</li>
+                            <li data-val="n5">5较多</li>
 
-                        <li data-val="n4">4较多</li>
+                            <li data-val="n4">4较多</li>
 
-                        <li data-val="n3">3较多</li>
+                            <li data-val="n3">3较多</li>
 
-                        <li data-val="n2">2较多</li>
+                            <li data-val="n2">2较多</li>
 
-                        <li data-val="n1">1较多</li>
+                            <li data-val="n1">1较多</li>
 
-                        <li data-val="n0">0较多</li>
+                            <li data-val="n0">0较多</li>
 
-                    </ul>
-                <div style="height:40px;"></div>*@
+                        </ul>
+                    <div style="height:40px;"></div>*@
                 <div class="filter-more-btn" style="bottom: 40px;">
                     <div class="reset">重置</div>
                     <div class="submit">确定</div>
@@ -895,8 +895,8 @@
         </div>
         <!--new filter pop end-->
         @*<a class="search-reset-m" href="/webapp/Shop/Index">
-            <img src="~/webapp/img/icon/ref3.png" />
-        </a>*@
+                <img src="~/webapp/img/icon/ref3.png" />
+            </a>*@
     </div>
     <div class="mask hide"></div>
 
@@ -971,7 +971,7 @@
         var orderType = '';
         var mid = 0;
 
-        
+
         city = request('city');
         keyword = request('keyword');
         orderType = request('orderType');
@@ -1465,5 +1465,24 @@
         });
     </script>
 
+    <script type="text/javascript">
+        function toInfo(id,host) {
+            if (isWeiXin()) {
+                location.href = 'https://shop.jnlxsm.net/webapp/shop/productJsApi/' + id + '?host=' + host;
+            }
+            else {
+                location.href = 'https://shop.jnlxsm.net/webapp/shop/product/' + id + '?host=' + host;
+            }
+        }
+
+        function isWeiXin() {
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>

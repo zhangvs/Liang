@@ -387,7 +387,7 @@ namespace HZSoft.Application.Service.CustomerManage
 
                         //根据前7位确定城市和运营商
                         string Number7 = telphone.Substring(0, 7);
-                        string City = "", CityId = "", Operator = "";
+                        string City = "", CityId = "", Operator = "", Brand = "";
                         var TelphoneData = db.FindEntity<TelphoneDataEntity>(t => t.Number7 == Number7);
                         if (TelphoneData != null)
                         {
@@ -400,6 +400,7 @@ namespace HZSoft.Application.Service.CustomerManage
                                 City = TelphoneData.City.Replace("市", "");
                                 CityId = TelphoneData.CityId;
                                 Operator = TelphoneData.Operate;
+                                Brand = TelphoneData.Brand;
                             }
                         }
                         else
@@ -495,6 +496,7 @@ namespace HZSoft.Application.Service.CustomerManage
                             City = City,
                             CityId = CityId,
                             Operator = Operator,
+                            Brand = Brand,
                             Grade = itemNCode,
                             Package = Package,
                             ExistMark = existMark,

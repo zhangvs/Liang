@@ -195,7 +195,11 @@ namespace HZSoft.Application.Service.CustomerManage
             }
 
             entity.Create();
-            entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
+            if (string.IsNullOrEmpty(entity.OrderSn))
+            {
+                //jsapi会提前生成订单编号，直接用提生成的，保持提交微信的一致
+                entity.OrderSn = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));//,TenPayV3Util.BuildRandomStr(6)
+            }
             this.BaseRepository().Insert(entity);
             return entity;
         }

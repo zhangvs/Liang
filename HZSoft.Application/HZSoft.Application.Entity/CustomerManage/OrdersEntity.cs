@@ -99,6 +99,11 @@ namespace HZSoft.Application.Entity.CustomerManage
         /// <returns></returns>
         public string Address { get; set; }
         /// <summary>
+        /// 详细地址
+        /// </summary>
+        /// <returns></returns>
+        public string Remark { get; set; }
+        /// <summary>
         /// 发货人
         /// </summary>
         /// <returns></returns>

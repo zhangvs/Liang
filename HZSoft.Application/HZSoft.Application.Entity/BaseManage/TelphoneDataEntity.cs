@@ -59,6 +59,11 @@ namespace HZSoft.Application.Entity.BaseManage
         /// <returns></returns>
         public string Zipcode { get; set; }
         /// <summary>
+        /// 品牌运营商
+        /// </summary>
+        /// <returns></returns>
+        public string Brand { get; set; }
+        /// <summary>
         /// 排序码
         /// </summary>
         /// <returns></returns>

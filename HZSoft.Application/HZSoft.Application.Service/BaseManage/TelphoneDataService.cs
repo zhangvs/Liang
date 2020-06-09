@@ -1,5 +1,8 @@
 using HZSoft.Application.Entity.BaseManage;
+using HZSoft.Application.Entity.CustomerManage;
 using HZSoft.Application.IService.BaseManage;
+using HZSoft.Application.IService.CustomerManage;
+using HZSoft.Application.Service.CustomerManage;
 using HZSoft.Data.Repository;
 using HZSoft.Util;
 using HZSoft.Util.Extension;
@@ -18,6 +21,8 @@ namespace HZSoft.Application.Service.BaseManage
     /// </summary>
     public class TelphoneDataService : RepositoryFactory<TelphoneDataEntity>, TelphoneDataIService
     {
+        private TelphoneLiangH5IService telphoneLiangH5IService = new TelphoneLiangH5Service();
+        private TelphoneLiangIService telphoneLiangIService = new TelphoneLiangService();
         #region 获取数据
         /// <summary>
         /// 获取列表
@@ -76,8 +81,29 @@ namespace HZSoft.Application.Service.BaseManage
         {
             if (keyValue != null)
             {
+                IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
+                TelphoneDataEntity oldEntity = GetEntity(keyValue);
+                //添加品牌信息
+                if (oldEntity.Brand==null && entity.Brand!=null)
+                {
+                    //修改头条靓号库品牌
+                    var listH5 = db.FindList<TelphoneLiangH5Entity>(t => t.Telphone.Contains(entity.Number7) && t.DeleteMark!=1);
+                    foreach (var item in listH5)
+                    {
+                        item.Brand = entity.Brand;
+                        db.Update<TelphoneLiangH5Entity>(item);
+                    }
+                    //修改靓号库品牌
+                    var list = db.FindList<TelphoneLiangEntity>(t => t.Telphone.Contains(entity.Number7) && t.DeleteMark != 1);
+                    foreach (var item in list)
+                    {
+                        item.Brand = entity.Brand;
+                        db.Update<TelphoneLiangEntity>(item);
+                    }
+                }
                 entity.Modify(keyValue);
-                this.BaseRepository().Update(entity);
+                db.Update<TelphoneDataEntity>(entity);
+                db.Commit();
             }
             else
             {

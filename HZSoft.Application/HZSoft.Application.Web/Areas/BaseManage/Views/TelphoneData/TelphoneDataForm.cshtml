@@ -9,17 +9,6 @@
     });
     //初始化控件
     function initControl() {
-        //获取表单
-        if (!!keyValue) {
-            $.SetForm({
-                url: "../../BaseManage/TelphoneData/GetFormJson",
-                param: { keyValue: keyValue },
-                success: function (data) {
-                    $("#form1").SetWebControls(data);
-                }
-            })
-        }
-
         //省份
         $("#ProvinceId").ComboBox({
             url: "../../SystemManage/Area/GetAreaListJson",
@@ -58,6 +47,18 @@
             description: "==请选择==",
             height: "200px"
         });
+        //获取表单
+        if (!!keyValue) {
+            $.SetForm({
+                url: "../../BaseManage/TelphoneData/GetFormJson",
+                param: { keyValue: keyValue },
+                success: function (data) {
+                    $("#form1").SetWebControls(data);
+                    $("#ProvinceId").trigger("change");
+                    $("#CityId").ComboBoxSetValue(data.CityId)
+                }
+            })
+        }
     }
     //保存表单;
     function AcceptClick() {
@@ -88,8 +89,8 @@
             <td class="formValue">
                 <div id="ProvinceId" type="select" class="ui-select" style="float: left; width: 180px; margin-right: 1px;"></div>
                 <div id="CityId" type="select" class="ui-select" style="float: left; width: 180px; margin-right: 1px;"></div>
-                <input id="Province" type="hidden" class="form-control"  isvalid="yes" checkexpession="NotNull"/>
-                <input id="City" type="hidden" class="form-control"  isvalid="yes" checkexpession="NotNull"/>
+                <input id="Province" type="hidden" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                <input id="City" type="hidden" class="form-control" isvalid="yes" checkexpession="NotNull" />
             </td>
         </tr>
         <tr>
@@ -97,6 +98,12 @@
             <td class="formValue">
                 @*<input id="Operate" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />*@
                 <div id="Operate" type="select" class="ui-select" isvalid="yes" checkexpession="NotNull"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="formTitle">品牌<font face="宋体">*</font></td>
+            <td class="formValue">
+                <input id="Brand" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
             </td>
         </tr>
         @*<tr>
