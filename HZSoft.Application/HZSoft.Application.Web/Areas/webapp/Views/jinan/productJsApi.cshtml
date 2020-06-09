@@ -408,50 +408,32 @@
                             //头条推广转化（点击支付）
                             //埋点
                             meteor.track("form", { convert_id: "1668438784652296" })
-                            //不做处理，跳转
-                            if (resObj.data.target) {
-                                location.href = resObj.data.gotoUrl;
-                                return false;
-                            }
-                            //支付宝
-                            if (gateway == 'alipay') {
-                                //输出提交表单
-                                $("body").append(resObj.data.form);
-                            }
-                            //微信
-                            if (gateway == 'wechat') {
-                                //H5支付
-                                if (typeof (resObj.data.mweb_url) != "undefined" && resObj.data.mweb_url != null) {
-                                    location.href = resObj.data.mweb_url + '&redirect_url=' + encodeURIComponent(resObj.data.wx_query_over);
-                                    return false;
-                                }
-                                //扫码支付
-                                var qrsrc = '<img src="/WeChatManage/user_index/getPageqr/?pageurl=' + encodeURIComponent(resObj.data.code_url) + '" style="max-width:100%;" />';
-                                $.modal({
-                                    text: qrsrc,
-                                    buttons: [
-                                        { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
-                                        { text: "支付完成", onClick: function () { location.href = '/webapp/jinan/paymentFinish/' + resObj.data.payid; } }
-                                    ]
-                                });
-                                //检测付款状态
-                                setInterval(function () {
-                                    $.ajax({
-                                        type: "post",
-                                        url: resObj.data.wx_query_href,
-                                        data: '',
-                                        dataType: 'json',
-                                        success: function (result) {
-                                            if (result.status) {
-                                                //支付成功
-                                                location.href = resObj.data.wx_query_over;
-                                            } else {
-                                                console.log("等待付款");
-                                            }
-                                        }
+                            //JSApi支付
+                            WeixinJSBridge.invoke(
+                            'getBrandWCPayRequest', {
+                                "appId":"@wxModel.appId",     //公众号名称，由商户传入
+                                "timeStamp": "@wxModel.timeStamp",         //时间戳，自1970年以来的秒数
+                                "nonceStr": "@wxModel.nonceStr", //随机串
+                                "package": "@wxModel.package",
+                                "signType": "MD5",         //微信签名方式：
+                                "paySign": "@wxModel.paySign" //微信签名
+                            },
+                            function (res) {
+                                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                                    //支付成功，后续自行处理
+                                    $.toast("支付成功", function () {
+                                        document.location.href = '@wxModel.callback_url';
                                     });
-                                }, 2000);
-                            }
+                                }
+                                else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+                                    //支付取消，或者其他错误，自行处理
+                                    $.toast("支付取消", "cancel");
+                                }
+                                else {
+                                    alert(res.err_msg);
+                                    $.toast("支付失败", "forbidden");
+                                }
+                            });
                         } else {
                             $.hideLoading();
                             //状态显示
