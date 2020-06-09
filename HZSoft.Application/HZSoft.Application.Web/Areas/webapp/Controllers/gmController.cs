@@ -476,10 +476,10 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
 
         //需要OAuth登录
         [HandlerWX2AuthorizeAttribute(LoginMode.Enforce)]
-        public ActionResult productJsApi(int? id, string Tel, string Price, string host)
+        public ActionResult productJsApi(int? id, string host)
         {
             TelphoneLiangEntity entity = tlbll.GetEntity(id);
-            entity.Price = Convert.ToDecimal(Price);
+            entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
             var sp_billno = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));
             var openId = (string)Session["OpenId"];
             var nonceStr = TenPayV3Util.GetNoncestr();
@@ -487,7 +487,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
 
             //商品Id，用户自行定义
             var xmlDataInfoH5 = new TenPayV3UnifiedorderRequestData(WeixinConfig.AppID2, tenPayV3Info.MchId, "JSAPI购买靓号", sp_billno,
-Convert.ToInt32(Convert.ToDecimal(Price) * 100),
+Convert.ToInt32(Convert.ToDecimal(entity.Price) * 100),
 Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId, tenPayV3Info.Key, nonceStr);
             var result = TenPayV3.Unifiedorder(xmlDataInfoH5);//调用统一订单接口
             LogHelper.AddLog(result.ResultXml);//记录日志

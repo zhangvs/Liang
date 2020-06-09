@@ -274,6 +274,7 @@
     <Compile Include="Areas\webapp\Controllers\jinanController.cs" />
     <Compile Include="Areas\webapp\Controllers\mwd2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\jnttController.cs" />
+    <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\CodeRuleController.cs" />
@@ -349,6 +350,15 @@
     <Content Include="Areas\webapp\Views\mwd2\mobileinfo.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\mobileorder.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\express.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\product.cshtml" />
+    <Content Include="Areas\webapp\Views\Shop\productJsApi.cshtml" />
     <Content Include="assets\image\1585294223_SxcUpg.png" />
     <Content Include="assets\wap\css\iconfont.svg" />
     <Content Include="assets\wap\css\user.css" />
