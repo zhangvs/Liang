@@ -473,47 +473,6 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
             }
         }
 
-        public ActionResult express(string mobile)
-        {
-            string display = "none";
-            if (!string.IsNullOrEmpty(mobile))
-            {
-                var ordersEntity = ordersbll.GetEntityByTel(mobile);
-                if (ordersEntity != null)
-                {
-                    string msg = "";
-                    //0 待付款 1 待发货 2 待开卡 3 已完成
-                    switch (ordersEntity.Status)
-                    {
-                        case 0:
-                            msg = "待付款";
-                            break;
-                        case 1:
-                            msg = "待发货";
-                            break;
-                        case 2:
-                            msg = "已发货待开卡，" + ordersEntity.ExpressCompany + "：" + ordersEntity.ExpressSn;
-                            break;
-                        case 3:
-                            msg = "已完成";
-                            break;
-                        default:
-                            break;
-                    }
-                    ViewBag.msg = msg;
-                }
-                else
-                {
-                    ViewBag.msg = "暂无信息";
-                }
-                display = "block";
-
-            }
-            ViewBag.display = display;
-            return View();
-        }
-
-
 
         //需要OAuth登录
         [HandlerWX2AuthorizeAttribute(LoginMode.Enforce)]
@@ -542,7 +501,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     nonceStr = nonceStr,
                     package = package,
                     paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                    callback_url = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + id
+                    callback_url = "https://shop.jnlxsm.net/webapp/gm/paymentFinish/" + id
                 };
                 ViewBag.WxModel = jsApiPayData;
                 LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
@@ -598,6 +557,47 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                 return Content(msg);
             }
         }
+
+        public ActionResult express(string mobile)
+        {
+            string display = "none";
+            if (!string.IsNullOrEmpty(mobile))
+            {
+                var ordersEntity = ordersbll.GetEntityByTel(mobile);
+                if (ordersEntity != null)
+                {
+                    string msg = "";
+                    //0 待付款 1 待发货 2 待开卡 3 已完成
+                    switch (ordersEntity.Status)
+                    {
+                        case 0:
+                            msg = "待付款";
+                            break;
+                        case 1:
+                            msg = "待发货";
+                            break;
+                        case 2:
+                            msg = "已发货待开卡，" + ordersEntity.ExpressCompany + "：" + ordersEntity.ExpressSn;
+                            break;
+                        case 3:
+                            msg = "已完成";
+                            break;
+                        default:
+                            break;
+                    }
+                    ViewBag.msg = msg;
+                }
+                else
+                {
+                    ViewBag.msg = "暂无信息";
+                }
+                display = "block";
+
+            }
+            ViewBag.display = display;
+            return View();
+        }
+
 
         public decimal? GetJG(decimal? price, string grade, int? existMark)
         {

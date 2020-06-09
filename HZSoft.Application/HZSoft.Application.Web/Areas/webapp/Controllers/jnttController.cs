@@ -316,8 +316,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "NATIVE",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://shop.jnlxsm.net/webapp/shop/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/jntt/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/jntt/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u5fae\u4fe1\u626b\u7801\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -352,8 +352,8 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                                 trade_type = "H5",
                                 trade_no = sp_billno,
                                 payid = ordersEntity.Id.ToString(),
-                                wx_query_href = "https://shop.jnlxsm.net/webapp/shop/queryWx/" + ordersEntity.Id,
-                                wx_query_over = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
+                                wx_query_href = "https://shop.jnlxsm.net/webapp/jntt/queryWx/" + ordersEntity.Id,
+                                wx_query_over = "https://shop.jnlxsm.net/webapp/jntt/paymentFinish/" + ordersEntity.Id
                             };
 
                             root = new H5Response { code = true, status = true, msg = "\u5fae\u4fe1\u0048\u0035\u63d0\u4ea4\u6210\u529f\uff01", data = h5PayData };
@@ -413,7 +413,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     nonceStr = nonceStr,
                     package = package,
                     paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                    callback_url = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + ordersEntity.Id
+                    callback_url = "https://shop.jnlxsm.net/webapp/jntt/paymentFinish/" + ordersEntity.Id
                 };
                 ViewBag.WxModel = jsApiPayData;
                 LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
@@ -496,7 +496,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     nonceStr = nonceStr,
                     package = package,
                     paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                    callback_url = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + id
+                    callback_url = "https://shop.jnlxsm.net/webapp/jntt/paymentFinish/" + id
                 };
                 ViewBag.WxModel = jsApiPayData;
                 LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
@@ -720,7 +720,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                 string body = "我是测试数据";
 
                 // 支付中途退出返回商户网站地址
-                string quit_url = "/webapp/shop/index";
+                string quit_url = "/webapp/jntt/index";
 
                 // 组装业务参数model
                 AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();

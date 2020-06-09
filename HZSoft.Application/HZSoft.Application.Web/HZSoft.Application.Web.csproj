@@ -274,7 +274,6 @@
     <Compile Include="Areas\webapp\Controllers\jinanController.cs" />
     <Compile Include="Areas\webapp\Controllers\mwd2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\jnttController.cs" />
-    <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
     <Compile Include="Areas\SystemManage\Controllers\CodeRuleController.cs" />

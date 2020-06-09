@@ -388,7 +388,7 @@
                 }
                 $('.mask_dl').show();
                 $.ajax({
-                    url: "/webapp/shop/ajaxorder",
+                    url: "/webapp/jntt/ajaxorder",
                     type: 'post',
                     dataType: 'json',
                     data: {
@@ -431,7 +431,7 @@
                                     text: qrsrc,
                                     buttons: [
                                         { text: "取消支付", className: "default", onClick: function () { $.hideLoading(); } },
-                                        { text: "支付完成", onClick: function () { location.href = '/webapp/shop/paymentFinish/' + resObj.data.payid; } }
+                                        { text: "支付完成", onClick: function () { location.href = '/webapp/jntt/paymentFinish/' + resObj.data.payid; } }
                                     ]
                                 });
                                 //检测付款状态

@@ -500,7 +500,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
                     nonceStr = nonceStr,
                     package = package,
                     paySign = TenPayV3.GetJsPaySign(WeixinConfig.AppID2, timeStamp, nonceStr, package, WeixinConfig.Key),
-                    callback_url = "https://shop.jnlxsm.net/webapp/shop/paymentFinish/" + id
+                    callback_url = "https://shop.jnlxsm.net/webapp/jinan2/paymentFinish/" + id
                 };
                 ViewBag.WxModel = jsApiPayData;
                 LogHelper.AddLog(JsonConvert.SerializeObject(jsApiPayData));//记录日志
