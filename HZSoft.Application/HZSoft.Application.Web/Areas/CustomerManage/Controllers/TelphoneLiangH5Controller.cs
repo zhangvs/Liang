@@ -107,9 +107,9 @@ namespace HZSoft.Application.Web.Areas.CustomerManage.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult RemoveForm(int? keyValue)
+        public ActionResult RemoveForm(string keyValues)
         {
-            telphoneliangh5bll.RemoveForm(keyValue);
+            telphoneliangh5bll.RemoveForm(keyValues);
             return Success("É¾³ý³É¹¦¡£");
         }
         /// <summary>

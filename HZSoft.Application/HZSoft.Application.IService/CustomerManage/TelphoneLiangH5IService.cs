@@ -42,7 +42,7 @@ namespace HZSoft.Application.IService.CustomerManage
         /// 删除数据
         /// </summary>
         /// <param name="keyValue">主键</param>
-        void RemoveForm(int? keyValue);
+        void RemoveForm(string keyValues);
         /// <summary>
         /// 保存表单（新增、修改）
         /// </summary>

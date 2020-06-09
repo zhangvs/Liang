@@ -273,6 +273,7 @@
     <Compile Include="Areas\webapp\Controllers\jinan2Controller.cs" />
     <Compile Include="Areas\webapp\Controllers\jinanController.cs" />
     <Compile Include="Areas\webapp\Controllers\mwd2Controller.cs" />
+    <Compile Include="Areas\webapp\Controllers\jnttController.cs" />
     <Compile Include="Areas\webapp\Controllers\ShopController.cs" />
     <Compile Include="Areas\webapp\LXAreaRegistration.cs" />
     <Compile Include="Areas\SystemManage\Controllers\AreaController.cs" />
@@ -2027,6 +2028,15 @@
     <Content Include="Areas\webapp\Views\jinan2\productJsApi.cshtml" />
     <Content Include="Areas\webapp\Views\jinan\productJsApi.cshtml" />
     <Content Include="Areas\webapp\Views\gm\productJsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\express.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\Index.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\info2.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\JsApi.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\mobileinfo.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\mobileorder.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\paymentFinish.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\product.cshtml" />
+    <Content Include="Areas\webapp\Views\jntt\productJsApi.cshtml" />
     <None Include="Properties\PublishProfiles\165.pubxml" />
     <None Include="Properties\PublishProfiles\6.1.pubxml" />
     <Content Include="Areas\FlowManage\Views\FlowLaunch\Index.cshtml" />

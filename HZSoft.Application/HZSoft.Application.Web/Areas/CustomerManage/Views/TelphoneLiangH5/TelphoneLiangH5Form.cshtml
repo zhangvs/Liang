@@ -50,7 +50,7 @@
         //获取表单
         if (!!keyValue) {
             $.SetForm({
-                url: "../../CustomerManage/TelphoneLiang/GetFormJson",
+                url: "../../CustomerManage/TelphoneLiangH5/GetFormJson",
                 param: { keyValue: keyValue },
                 success: function (data) {
                     $("#form1").SetWebControls(data);
@@ -68,7 +68,7 @@
         var postData = $("#form1").GetWebControls(keyValue);
 
         $.SaveForm({
-            url: "../../CustomerManage/TelphoneLiang/SaveForm?keyValue=" + keyValue + "&organizeId=" + organizeId,
+            url: "../../CustomerManage/TelphoneLiangH5/SaveForm?keyValue=" + keyValue + "&organizeId=" + organizeId,
             param: postData,
             loading: "正在保存数据...",
             success: function () {

@@ -328,10 +328,21 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <summary>
         /// 删除数据
         /// </summary>
-        /// <param name="keyValue">主键</param>
-        public void RemoveForm(int? keyValue)
+        /// <param name="keyValues">主键</param>
+        public void RemoveForm(string keyValues)
         {
-            this.BaseRepository().Delete(keyValue);
+            //this.BaseRepository().Delete(keyValues);
+            IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
+            if (!string.IsNullOrEmpty(keyValues))
+            {
+                string[] custIds = keyValues.Split(',');
+                for (int i = 0; i < custIds.Length; i++)
+                {
+                    int? id = Convert.ToInt32(custIds[i]);
+                    this.BaseRepository().Delete(id);
+                }
+                db.Commit();
+            }
         }
         /// <summary>
         /// 保存表单（新增、修改）

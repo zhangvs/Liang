@@ -59,11 +59,11 @@ namespace HZSoft.Application.Busines.CustomerManage
         /// É¾³ýÊý¾Ý
         /// </summary>
         /// <param name="keyValue">Ö÷¼ü</param>
-        public void RemoveForm(int? keyValue)
+        public void RemoveForm(string keyValues)
         {
             try
             {
-                service.RemoveForm(keyValue);
+                service.RemoveForm(keyValues);
             }
             catch (Exception)
             {

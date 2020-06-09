@@ -1,0 +1,71 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title>快递查询 - 号运来靓号网</title>
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="/themes/simplebootx_mobile/Public/css/css.css">
+    <meta name="__hash__" content="7b0f3a2a9f377f891467cd68e53fed46_24979016d770f6070b4ecf6b2782af30" />
+    <!-- Bytedance Tracking -->
+    <script>
+        var baseUrl = '';
+        (function (r, d, s, l) {
+            var meteor = r.meteor = r.meteor || []; meteor.methods = ["track", "off", "on"]; meteor.factory = function (method) {
+                return function () {
+                    var args = Array.prototype.slice.call(arguments); args.unshift(method); meteor.push(args); return meteor
+                }
+            }; for (var i = 0; i < meteor.methods.length; i++) {
+                var key = meteor.methods[i]; meteor[key] = meteor.factory(key)
+            } meteor.load = function () {
+                var js, fjs = d.getElementsByTagName(s)[0]; js = d.createElement(s);
+                js.src = "https://analytics.snssdk.com/meteor.js/v1/" + l + "/sdk"; fjs.parentNode.insertBefore(js, fjs)
+            }; meteor.load(); if (meteor.invoked) { return }
+            meteor.invoked = true; meteor.track("pageview")
+        })(window, document, "script", "1664007157743627");
+    </script>
+    <!-- End Bytedance Tracking -->
+</head>
+<body>
+    <div class="express">
+        <div class="express-back">
+            <a href="https://www.jnlxsm.net:447/webapp/Shop/Index"></a>
+        </div>
+        <h1 class="express-h1">快递查询</h1>
+        <div class="express-box">
+            <input placeholder="请输入购买的手机号" id="mobile" type="number" value="" class="land-input phone">
+            <div class="page-btn" style="padding: 0; margin-top: 10px;">
+                <a href="#" data-url="/webapp/shop/express?mobile=mobileval" id="search-submit" class="weui-btn" style="background: #ee5246;">立即查询</a>
+            </div>
+            <div class='jieguo' style="display:@ViewBag.display"><p><strong>查询结果</strong></p><p>@ViewBag.msg</p></div>
+
+            <div class="tip">
+                <p>
+                    <strong>温馨提示</strong>
+                </p>
+                <p>
+                    手机号为您选择购买的手机号
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery.min.js"></script>
+    <script src="/themes/simplebootx_mobile/Public/js/jquery-weui.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#search-submit').bind('click', function () {
+                var url = $(this).data('url');
+                var mobile = $('#mobile').val();
+                if (mobile) {
+                    url = url.replace('mobileval', mobile);
+                    window.location.href = url;
+                } else {
+                    $.alert('请输入手机号');
+                }
+            });
+        })
+    </script>
+</body>
+</html>

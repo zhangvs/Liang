@@ -37,7 +37,7 @@
         $gridTable.jqGrid({
             autowidth: true,
             height: $(window).height() - 136.5,
-            url: "../../CustomerManage/TelphoneLiang/GetPageListJson",
+            url: "../../CustomerManage/TelphoneLiangH5/GetPageListJson",
             datatype: "json",
             colModel: [
                 { label: '编号', name: 'TelphoneID', index: 'TelphoneID', width: 100, align: 'left', sortable: true, hidden: true },
@@ -145,7 +145,7 @@
         dialogOpen({
             id: 'Form',
             title: '添加靓号库',
-            url: '/CustomerManage/TelphoneLiang/TelphoneLiangForm',
+            url: '/CustomerManage/TelphoneLiangH5/TelphoneLiangH5Form',
             width: '600px',
             height: '450px',
             callBack: function (iframeId) {
@@ -170,7 +170,7 @@
             dialogOpen({
                 id: 'Form',
                 title: '编辑靓号库',
-                url: '/CustomerManage/TelphoneLiang/TelphoneLiangForm?keyValue=' + keyValue,
+                url: '/CustomerManage/TelphoneLiangH5/TelphoneLiangH5Form?keyValue=' + keyValue,
                 width: '600px',
                 height: '450px',
                 callBack: function (iframeId) {
@@ -199,7 +199,7 @@
             }
             if (keyValues) {
                 $.RemoveForm({
-                    url: '../../CustomerManage/TelphoneLiang/RemoveForm',
+                    url: '../../CustomerManage/TelphoneLiangH5/RemoveForm',
                     param: { keyValues: keyValues },
                     success: function (data) {
                         $('#gridTable').trigger('reloadGrid');
@@ -220,7 +220,7 @@
             shade: false,
             maxmin: true, //开启最大化最小化按钮
             area: ['650px', '450px'],
-            content: '/CustomerManage/TelphoneLiang/TelphoneLiangImport'
+            content: '/CustomerManage/TelphoneLiangH5/TelphoneLiangH5Import'
         });
     }
     //导出
