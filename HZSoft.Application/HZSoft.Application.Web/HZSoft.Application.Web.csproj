@@ -1992,15 +1992,8 @@
     <Content Include="Areas\H5\Views\HomePage\mobileorder.cshtml" />
     <Content Include="Areas\H5\Views\HomePage\express.cshtml" />
     <Content Include="Areas\webapp\Views\Web.config" />
-    <Content Include="Areas\webapp\Views\Shop\express.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\Index.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\info2.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\mobileinfo.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\paymentFinish.cshtml" />
     <Content Include="Areas\WeChatManage\Views\WeiXinHome\ReturnUrl.cshtml" />
     <Content Include="Areas\WeChatManage\Views\Liang\HaoDan.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\JsApi.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\paymentFinish.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\express.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\Index.cshtml" />
@@ -2015,7 +2008,6 @@
     <Content Include="Areas\webapp\Views\jinan\JsApi.cshtml" />
     <Content Include="Areas\webapp\Views\jinan\mobileinfo.cshtml" />
     <Content Include="Areas\webapp\Views\jinan\mobileorder.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\product.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\product.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\product.cshtml" />
     <Content Include="Areas\webapp\Views\jinan\product.cshtml" />
@@ -2023,7 +2015,6 @@
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Form.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Import.cshtml" />
     <Content Include="Areas\CustomerManage\Views\TelphoneLiangH5\TelphoneLiangH5Index.cshtml" />
-    <Content Include="Areas\webapp\Views\Shop\productJsApi.cshtml" />
     <Content Include="Areas\webapp\Views\mwd2\productJsApi.cshtml" />
     <Content Include="Areas\webapp\Views\jinan2\productJsApi.cshtml" />
     <Content Include="Areas\webapp\Views\jinan\productJsApi.cshtml" />

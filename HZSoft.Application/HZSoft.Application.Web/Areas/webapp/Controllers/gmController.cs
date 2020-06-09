@@ -40,9 +40,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
         private static TenPayV3Info tenPayV3Info = new TenPayV3Info(WeixinConfig.AppID2, WeixinConfig.AppSecret2, WeixinConfig.MchId
             , WeixinConfig.Key, WeixinConfig.TenPayV3Notify);
-
-        //
-        // GET: /webapp/Shop/
+        
         public ActionResult Index()
         {
             return View();
