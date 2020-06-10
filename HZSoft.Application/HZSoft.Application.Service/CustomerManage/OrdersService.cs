@@ -68,6 +68,12 @@ namespace HZSoft.Application.Service.CustomerManage
                 string Tel = queryParam["Tel"].ToString();
                 strSql += " and Tel like '%" + Tel + "%'";
             }
+            //域名
+            if (!queryParam["Host"].IsEmpty())
+            {
+                string Host = queryParam["Host"].ToString();
+                strSql += " and Host like '%" + Host + "%'";
+            }
 
             //收件人
             if (!queryParam["Receiver"].IsEmpty())
