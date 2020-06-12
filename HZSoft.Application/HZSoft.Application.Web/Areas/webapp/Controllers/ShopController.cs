@@ -31,7 +31,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
     public class ShopController : Controller
     {
 
-        private TelphoneLiangBLL tlbll = new TelphoneLiangBLL();
+        private TelphoneLiangH5BLL tlbll = new TelphoneLiangH5BLL();
         private OrdersBLL ordersbll = new OrdersBLL();
         private OrganizeBLL organizebll = new OrganizeBLL();
 
@@ -113,7 +113,7 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
                         string hou = item.Telphone.Substring(7, 4);
                         string telphone = "<font color='#E33F23'>" + qian + "</font><font color='#3A78F3'>" + zhong + "</font><font color='#E33F23'>" + hou + "</font>";
                         //利新价格调整规则，这是需要单独写代码的价格调整：
-                        decimal? jg = GetJG(item.Price, item.Grade, item.ExistMark);
+                        decimal? jg = item.Price;
 
                         styleStr +=
                         $" <li> " +
@@ -141,11 +141,9 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
         public ActionResult mobileinfo(int? id, string host)
         {
-            TelphoneLiangEntity entity = tlbll.GetEntity(id);
+            TelphoneLiangH5Entity entity = tlbll.GetEntity(id);
             if (entity != null)
             {
-                //利新价格调整规则，这是需要单独写代码的价格调整：
-                entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
                 entity.MaxPrice = entity.Price * 2;
                 ViewBag.host = host;
             }
@@ -167,11 +165,9 @@ namespace HZSoft.Application.Web.Areas.webapp.Controllers
 
         public ActionResult product(int? id, string host)
         {
-            TelphoneLiangEntity entity = tlbll.GetEntity(id);
+            TelphoneLiangH5Entity entity = tlbll.GetEntity(id);
             if (entity != null)
             {
-                //利新价格调整规则，这是需要单独写代码的价格调整：
-                entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
                 entity.MaxPrice = entity.Price * 2;
                 ViewBag.host = host;
             }
@@ -471,8 +467,7 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
         [HandlerWX2AuthorizeAttribute(LoginMode.Enforce)]
         public ActionResult productJsApi(int? id, string host)
         {
-            TelphoneLiangEntity entity = tlbll.GetEntity(id);
-            entity.Price = GetJG(entity.Price, entity.Grade, entity.ExistMark);
+            TelphoneLiangH5Entity entity = tlbll.GetEntity(id);
             var sp_billno = string.Format("{0}{1}", "LX-", DateTime.Now.ToString("yyyyMMddHHmmss"));
             var openId = (string)Session["OpenId"];
             var nonceStr = TenPayV3Util.GetNoncestr();
@@ -592,55 +587,6 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
             return View();
         }
 
-        public decimal? GetJG(decimal? price, string grade, int? existMark)
-        {
-            //秒杀号码不同步
-            //8001以上价位不变
-            //0 - 100价格改成 399元
-            //101 - 200加318元
-            //201 - 300加308元
-            //301 - 600加258
-            //601 - 800加208
-            //801 - 2500加199
-            //2501 - 8000四连号加599 三连号以及其他号码价格不动
-
-            decimal? jg = price;
-            if (existMark == 2)
-            {
-                return jg;//秒杀价格不变
-            }
-            if (jg > 0 && jg <= 100)
-            {
-                jg = 399;
-            }
-            else if (jg > 101 && jg <= 200)
-            {
-                jg = jg + 318;
-            }
-            else if (jg > 201 && jg <= 300)
-            {
-                jg = jg + 308;
-            }
-            else if (jg > 301 && jg <= 600)
-            {
-                jg = jg + 258;
-            }
-            else if (jg > 601 && jg <= 800)
-            {
-                jg = jg + 208;
-            }
-            else if (jg > 801 && jg <= 2500)
-            {
-                jg = jg + 199;
-            }
-            else if (jg > 2501 && jg <= 8000 && grade == "3")
-            {
-                jg = jg + 599;
-            }
-            return jg;
-        }
-
-
         public ActionResult queryWx(int? id)
         {
             OrdersEntity ordersEntity = ordersbll.GetEntity(id);
@@ -688,84 +634,5 @@ Request.UserHostAddress, tenPayV3Info.TenPayV3Notify, TenPayV3Type.JSAPI, openId
             ViewBag.Host = ordersEntity.Host;
             return View();
         }
-
-
-        /// <summary>
-        /// 订单编号
-        /// </summary>
-        /// <param name="oidStr"></param>
-        /// <returns></returns>
-        public void AliPay()
-        {
-
-            #region 统一下单
-            try
-            {
-
-                DefaultAopClient client = new DefaultAopClient(WeixinConfig.serviceUrl, WeixinConfig.aliAppId, WeixinConfig.privateKey, "json", "1.0",
-                    WeixinConfig.signType, WeixinConfig.publicKey, WeixinConfig.charset, false);
-
-                // 外部订单号，商户网站订单系统中唯一的订单号
-                string out_trade_no = DateTime.Now.ToString("yyyyMMddHHmmss");
-
-                // 订单名称
-                string subject = "App支付测试DoNet";
-
-                // 付款金额
-                string total_amout = "0.01";
-
-                // 商品描述
-                string body = "我是测试数据";
-
-                // 支付中途退出返回商户网站地址
-                string quit_url = "/webapp/shop/index";
-
-                // 组装业务参数model
-                AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
-                model.Body = body;
-                model.Subject = subject;
-                model.TotalAmount = total_amout;
-                model.OutTradeNo = out_trade_no;
-                model.ProductCode = "QUICK_WAP_WAY";
-                model.QuitUrl = quit_url;
-
-                AlipayTradeWapPayRequest request = new AlipayTradeWapPayRequest();
-                // 设置支付完成同步回调地址
-                // request.SetReturnUrl("");
-                // 设置支付完成异步通知接收地址
-                // request.SetNotifyUrl("");
-                // 将业务model载入到request
-                request.SetBizModel(model);
-
-                AlipayTradeWapPayResponse response = null;
-                try
-                {
-                    response = client.pageExecute(request, null, "post");
-                    Response.Write(response.Body);
-                }
-                catch (Exception exp)
-                {
-                    throw exp;
-                }
-            }
-            catch (Exception ex)
-            {
-                //return Json(new { Result = false, msg = "缺少参数" });
-            }
-            #endregion
-        }
     }
 }
-//H5支付点击按钮返回报文
-//<xml>
-//  <return_code><![CDATA[SUCCESS]]></return_code>
-//  <return_msg><![CDATA[OK]]></return_msg>
-//  <appid><![CDATA[wx288f944166a4bdc6]]></appid>
-//  <mch_id><![CDATA[1582948931]]></mch_id>
-//  <nonce_str><![CDATA[N8M3gWuQWTFU4GB7]]></nonce_str>
-//  <sign><![CDATA[9BDF874BB44D75ECBED699BCCA55ADB7]]></sign>
-//  <result_code><![CDATA[SUCCESS]]></result_code>
-//  <prepay_id><![CDATA[wx0821504501009699fc47ba7d1821679000]]></prepay_id>
-//  <trade_type><![CDATA[MWEB]]></trade_type>
-//  <mweb_url><![CDATA[https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx0821504501009699fc47ba7d1821679000&package=3205204241]]></mweb_url>
-//</xml>

@@ -189,30 +189,30 @@ namespace HZSoft.Application.Service.CustomerManage
         {
             var queryParam = queryJson.ToJObject();
             string strSql = "select * from TelphoneLiangH5 where DeleteMark <> 1 and EnabledMark <> 1";
-            //机构后台
-            if (!queryParam["OrganizeId"].IsEmpty())
-            {
-                string OrganizeId = queryParam["OrganizeId"].ToString();
-                strSql += " and OrganizeId = '" + OrganizeId + "'";
-            }
-            else
-            {
-                if (!OperatorProvider.Provider.Current().IsSystem)
-                {
-                    string companyId = OperatorProvider.Provider.Current().CompanyId;
-                    var organizeData = orgService.GetEntity(companyId);
-                    if (!string.IsNullOrEmpty(organizeData.OrganizeId))
-                    {
-                        //string inOrg = GetInOrg(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
-                        List<string> vipList = vipService.GetVipOrgList(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
-                        string inOrg = GetOtherOrg(vipList);//自定义优先，共享平台其次
-                        if (!string.IsNullOrEmpty(inOrg))
-                        {
-                            strSql += " and OrganizeId IN(" + inOrg + ")";
-                        }
-                    }
-                }
-            }
+            ////机构后台
+            //if (!queryParam["OrganizeId"].IsEmpty())
+            //{
+            //    string OrganizeId = queryParam["OrganizeId"].ToString();
+            //    strSql += " and OrganizeId = '" + OrganizeId + "'";
+            //}
+            //else
+            //{
+            //    if (!OperatorProvider.Provider.Current().IsSystem)
+            //    {
+            //        string companyId = OperatorProvider.Provider.Current().CompanyId;
+            //        var organizeData = orgService.GetEntity(companyId);
+            //        if (!string.IsNullOrEmpty(organizeData.OrganizeId))
+            //        {
+            //            //string inOrg = GetInOrg(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
+            //            List<string> vipList = vipService.GetVipOrgList(companyId, organizeData.ParentId, organizeData.TopOrganizeId);
+            //            string inOrg = GetOtherOrg(vipList);//自定义优先，共享平台其次
+            //            if (!string.IsNullOrEmpty(inOrg))
+            //            {
+            //                strSql += " and OrganizeId IN(" + inOrg + ")";
+            //            }
+            //        }
+            //    }
+            //}
             strSql += GetSql(queryJson);
             return this.BaseRepository().FindList(strSql.ToString(), pagination);
         }
@@ -226,14 +226,8 @@ namespace HZSoft.Application.Service.CustomerManage
         /// <returns></returns>
         public IEnumerable<TelphoneLiangH5Entity> GetPageListH5LX(Pagination pagination, string queryJson)
         {
-            //机构前台H5
-            List<string> viplist = null;
             //本机构sql
-            string vipOrg = "";
             string ownOrgSql = "";//默认为空
-            //分享平台机构sql
-            string shareOrg = "";
-            string shareOrgSql = "";//默认为空
 
             var queryParam = queryJson.ToJObject();
             if (queryParam["OrganizeIdH5"].IsEmpty())
@@ -242,64 +236,16 @@ namespace HZSoft.Application.Service.CustomerManage
             }
 
             string organizeId = queryParam["OrganizeIdH5"].ToString();
-            string pid = queryParam["pid"].ToString();
-            string top = queryParam["top"].ToString();
-
-            string allOrg = "";
-            //过滤出vip机构
-            viplist = vipService.GetVipOrgList(organizeId, pid, top);
-            foreach (var item in viplist)
-            {
-                vipOrg += "'" + item + "',";
-            }
-            //本身机构判断为空，返回null，vip全部过期不查了
-            if (vipOrg == "")
-            {
-                return null;
-            }
-
-            //1.自身机构体系
-            vipOrg = vipOrg.Trim(',');
-            ownOrgSql = " and OrganizeId IN(" + vipOrg + ")";
+            ownOrgSql = " and OrganizeId ='" + organizeId + "'";
             string ownWhere = ownOrgSql + GetSql(queryJson);
-
-            //2.共享平台，限制类型
-            string shareSql = "";
-            shareOrg = GetOtherOrg(viplist);
-            if (!shareOrg.IsEmpty())
-            {
-                allOrg = vipOrg + "," + shareOrg;
-                shareOrgSql = " and OrganizeId IN(" + shareOrg + ")";
-                string shareWhere = shareOrgSql + GetSql(queryJson);
-                shareSql = @" UNION all
- SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '平台秒杀' WHEN '1' THEN '平台现卡' ELSE '平台预售' END Description,Package,EnabledMark,OrganizeId OrganizeId FROM TelphoneLiangH5
- WHERE  SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 and ExistMark=1 "//平台只卖现卡的
-    + shareWhere;
-            }
-            else
-            {
-                allOrg = vipOrg;
-            }
-
+            
             //自身，父，0级
             string strSql = @" SELECT * FROM (
- SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,Package,EnabledMark,OrganizeId FROM TelphoneLiangH5 
- WHERE SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 " + ownWhere//自身可以卖秒杀，现卡，预售
-                                                                      //+ otherOrgSql//代售功能省略
-+ shareSql
+ SELECT TelphoneID,Telphone,City,Operator,Price,MaxPrice,Grade,ExistMark,CASE ExistMark WHEN '2' THEN '自营秒杀' WHEN '1' THEN '自营现卡' ELSE '自营预售' END Description,
+Package,EnabledMark,OrganizeId FROM TelphoneLiangH5 
+ WHERE SellMark<>1 AND DeleteMark<>1 and EnabledMark <> 1 " + ownWhere
                 + " )t ";
-
-
-            //按照机构排序
-            string[] orderbyOrg = allOrg.Split(',');
-            string orderbySql = " case ";
-            for (int i = 0; i < orderbyOrg.Length; i++)
-            {
-                orderbySql += " when OrganizeId=" + orderbyOrg[i] + " then " + i;
-            }
-            orderbySql += " end ASC,";
-            pagination.sidx = orderbySql + pagination.sidx + " " + pagination.sord;
-
+            
             return this.BaseRepository().FindList(strSql.ToString(), pagination);
         }
 
