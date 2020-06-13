@@ -87,13 +87,6 @@ namespace HZSoft.Application.Web.Controllers
                 ViewBag.organizeCount = 7143;
                 ViewBag.liangCount =403816;
             }
-
-            //var dtCount = dmsBLL.GetDateHome_Count();
-            //ViewBag.seeCount = dtCount.Rows[0][0];
-            //ViewBag.shareCount = dtCount.Rows[1][0];
-            //ViewBag.joinCount = dtCount.Rows[2][0];
-            //ViewBag.organizeCount = dtCount.Rows[3][0];
-            //ViewBag.liangCount = dtCount.Rows[4][0];
             return View();
         }
         public ActionResult AdminLTEDesktop()

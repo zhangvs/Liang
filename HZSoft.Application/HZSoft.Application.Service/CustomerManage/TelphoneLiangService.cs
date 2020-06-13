@@ -1152,9 +1152,17 @@ namespace HZSoft.Application.Service.CustomerManage
                 var TelphoneData = db.FindEntity<TelphoneDataEntity>(t => t.Number7 == Number7);
                 if (TelphoneData != null)
                 {
-                    entity.City = TelphoneData.City.Replace("市", "");
-                    entity.CityId = TelphoneData.CityId;
-                    entity.Operator = TelphoneData.Operate;
+                    if (string.IsNullOrEmpty(TelphoneData.City))
+                    {
+                        throw new Exception("号段城市为空：" + Number7);
+                    }
+                    else
+                    {
+                        entity.City = TelphoneData.City.Replace("市", "");
+                        entity.CityId = TelphoneData.CityId;
+                        entity.Operator = TelphoneData.Operate;
+                        entity.Brand = TelphoneData.Brand;
+                    }
                 }
                 else
                 {
@@ -1224,7 +1232,7 @@ namespace HZSoft.Application.Service.CustomerManage
             IRepository db = new RepositoryFactory().BaseRepository().BeginTrans();
 
             int columns = dtSource.Columns.Count;
-            string cf = "";
+            int cf = 0, zx = 0;
             for (int i = 0; i < rowsCount; i++)
             {
                 try
@@ -1235,7 +1243,8 @@ namespace HZSoft.Application.Service.CustomerManage
                         var liang_Data = db.FindEntity<TelphoneLiangEntity>(t => t.Telphone == telphone && t.DeleteMark!=1);//删除过的可以再次导入
                         if (liang_Data != null)
                         {
-                            cf+= telphone + ",";
+                            ++cf;
+                            continue;
                         }
 
                         //根据前7位确定城市和运营商
@@ -1359,6 +1368,7 @@ namespace HZSoft.Application.Service.CustomerManage
                         };
                         entity.Create();
                         db.Insert(entity);
+                        ++zx;
                     }
 
                 }
@@ -1370,16 +1380,16 @@ namespace HZSoft.Application.Service.CustomerManage
 
             }
             db.Commit();
-            if (cf!="")
+            if (cf != 0)
             {
-                LogHelper.AddLog("跳过重复导入号码：" + cf);
-                return "跳过重复导入号码：" + cf;
+                LogHelper.AddLog("跳过重复导入号码：" + cf + "个，导入：" + zx + "个");
+                return "跳过重复导入号码：" + cf + "个，导入：" + zx + "个";
             }
             else
             {
                 return "导入成功";
             }
-            
+
         }
 
         /// <summary>
