@@ -52,7 +52,7 @@ namespace HZSoft.Util
                 message.Subject = subject;
                 message.IsBodyHtml = isBodyHtml;
 
-                SmtpClient smtpclient = new SmtpClient(MailServer, 25);
+                SmtpClient smtpclient = new SmtpClient(MailServer, 587);
                 smtpclient.Credentials = new System.Net.NetworkCredential(MailUserName, MailPassword);
                 //SSL连接
                 smtpclient.EnableSsl = enableSsl;

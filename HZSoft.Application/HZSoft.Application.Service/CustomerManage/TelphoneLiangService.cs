@@ -1222,6 +1222,18 @@ namespace HZSoft.Application.Service.CustomerManage
         public string BatchAddEntity(DataTable dtSource)
         {
             int rowsCount = dtSource.Rows.Count;
+            //先检验当前文件是否存在重复号码
+            List<string> ts = new List<string>();
+            for (int i = 0; i < rowsCount; i++)
+            {
+                string telphone = dtSource.Rows[i][0].ToString();
+                if (ts.Contains(telphone))
+                {
+                    return "上传文件存在重复号码，导入失败，请先去重再导入！";
+                }
+                ts.Add(telphone);
+            }
+
             //判断号码上限
             string greaterMsg = IsGreater(rowsCount);
             if (!string.IsNullOrEmpty(greaterMsg))
