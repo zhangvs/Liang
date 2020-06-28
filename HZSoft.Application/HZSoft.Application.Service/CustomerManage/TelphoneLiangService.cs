@@ -213,7 +213,14 @@ namespace HZSoft.Application.Service.CustomerManage
             if (!queryParam["ExistMark"].IsEmpty())
             {
                 string ExistMark = queryParam["ExistMark"].ToString();
-                strSql += " and ExistMark = " + ExistMark;
+                if (ExistMark == "2")
+                {
+                    strSql += " and (ExistMark = " + ExistMark + " or Grade in (1301,1302,1303,1304,1305,1306,1307,1308,1309,1310))";
+                }
+                else
+                {
+                    strSql += " and ExistMark = " + ExistMark;
+                }
             }
 
             //ÍøÂç
